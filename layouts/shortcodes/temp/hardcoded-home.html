@@ -1,0 +1,32 @@
+{{- $link := .Get "link" -}}
+{{- $external := hasPrefix $link "http" -}}
+{{- $href := cond (hasPrefix $link "/") ($link | relURL) $link -}}
+{{- $class := .Get "class" }}
+{{- $style := .Get "style" -}}
+
+<div class="home-content">
+  <section class="text-gray-600 dark:text-gray-400 body-font">
+      <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="Documentaciones sobre Desarrollo de Software" src="/assets/home/header-programmer.jpg"/>
+          <div class="text-center lg:w-2/3 w-full">
+              <h1 class="title-font sm:text-4xl text-3xl mb-8 font-medium text-gray-900 dark:text-white">Docs Archive of Open Source Technologies</h1>
+              <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-3">
+                  ¿WHAT IS DOCS ARCHIVE?
+              </h2>
+              <p class="mb-14 leading-relaxed">It would be ideal for all our developments to always have updated dependencies, but this does not always happen. We repeatedly need to consult old documentation to maintain our systems. We need a docs archive.</p>
+              <div class="flex justify-center">
+                  <!-- <a href="/bootstrap/5.3/getting-started/introduction" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                      <span class="sm:hidden">Docs de <strong>Bootstrap</strong></span>
+                      <span class="hidden sm:block">Documentación de <strong>Bootstrap</strong></span>
+                  </a> -->
+                  <!-- <a href="/momentjs/use-it" class="ml-6 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                      <span class="sm:hidden">Docs de <strong>Moment.js</strong></span>
+                      <span class="hidden sm:block">Documentación de <strong>Moment.js</strong></span>
+                  </a> -->
+              </div>
+          </div>
+      </div>
+  </section>
+
+</div>
+

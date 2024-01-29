@@ -1,0 +1,10 @@
+{{ define "main" }}
+  <div class='mx-auto flex'>
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
+    <div class="w-full break-words min-w-0">
+      <div class="flex flex-col">
+        {{ .Content }}
+      </div>
+    </div>
+  </div>
+{{ end }}

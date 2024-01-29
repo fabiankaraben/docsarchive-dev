@@ -1,0 +1,30 @@
+{{- $path := .Get "path" | default (.Get 0) -}}
+{{- $iframeId := $path | anchorize -}}
+
+<div class="mt-5 px-2 pt-1 rounded-md border border-gray-500 border-opacity-25">
+    <div class="my-3 p-2 bg-white rounded-md">        
+        <!-- <IframeResizer
+            // log
+            inPageLinks
+            forwardRef={ref}
+            src={path}
+            width="100%"
+            scrolling={false}
+        /> -->
+        <style>
+            iframe {
+              width: 1px;
+              min-width: 100%;
+            }
+        </style>
+        <iframe id="{{ $iframeId }}" src="{{ $path }}"></iframe>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                iFrameResize({ log: false }, '#{{ $iframeId }}');
+            });
+        </script>
+    </div>
+    <div>
+        {{ .Inner | markdownify }}
+    </div>
+</div>

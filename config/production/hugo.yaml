@@ -1,0 +1,5 @@
+services:
+  googleAnalytics:
+    ID: G-ZMSV7VMDMC
+params:
+  showAds: false
