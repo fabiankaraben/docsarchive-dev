@@ -84,7 +84,11 @@
           {{- $active := eq $pageURL .RelPermalink -}}
           {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
           <li class="{{ if $shouldOpen }}open{{ end }}">
-            {{- template "sidebar-item-link" dict "context" . "active" $active "title" .LinkTitle "link" .RelPermalink -}}
+            {{- if .Params.launchUrl -}}
+              {{- template "sidebar-item-link" dict "active" false "title" .LinkTitle "link" (.Params.launchUrl | relLangURL) -}}
+            {{- else -}}
+              {{- template "sidebar-item-link" dict "context" . "active" $active "title" .LinkTitle "link" .RelPermalink -}}
+            {{- end -}}
             {{- if and $toc $active -}}
               {{- template "sidebar-toc" dict "page" . -}}
             {{- end -}}
