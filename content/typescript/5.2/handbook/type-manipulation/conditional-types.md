@@ -12,7 +12,7 @@ At the heart of most useful programs, we have to make decisions based on input.
 JavaScript programs are no different, but given the fact that values can be easily introspected, those decisions are also based on the types of the inputs.
 *Conditional types* help describe the relation between the types of inputs and outputs.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgIImAWzgG2QbwChlkdgA3CACgEoAuZcge2ABMBuQgX0NElkQoAIkwDmyCAA9IIVgGc0GbHiIkA7kyYxaDZm049CYAJ4AHFAFFJcTKZwQAjMgC8yEeKkz5irLmQB+ZBAAV0wAI2hkBjkwKFBRTgB6RJJkAD1-QiMzS2tbewAmF2QAJQhRK1MJaQhZBXRfPECQ8Mjo2PiklJIMoA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgIImAWzgG2QbwChlkdgA3CACgEoAuZcge2ABMBuQgX0NElkQoAIkwDmyCAA9IIVgGc0GbHiIkA7kyYxaDZm049CYAJ4AHFAFFJcTKZwQAjMgC8yEeKkz5irLmQB+ZBAAV0wAI2hkBjkwKFBRTgB6RJJkAD1-QiMzS2tbewAmF2QAJQhRK1MJaQhZBXRfPECQ8Mjo2PiklJIMoA)
 
 ```ts
 interface Animal {
@@ -33,7 +33,7 @@ type Example2 = string
 
 Conditional types take a form that looks a little like conditional expressions (`condition ? trueExpression : falseExpression`) in JavaScript:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAyg9gWwgFXNAvFAhgOxAbgChRIoB5YACwgCdVTNcDi0pkaBXFVxvIk6ADEsAGwDO3Btj4tSMYBwBmiqOkJQoAek1QAtPoDGHYPt3rYiSdAgAPYBBwATMeSq160APxtOVqAC4oYXErfCA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAyg9gWwgFXNAvFAhgOxAbgChRIoB5YACwgCdVTNcDi0pkaBXFVxvIk6ADEsAGwDO3Btj4tSMYBwBmiqOkJQoAek1QAtPoDGHYPt3rYiSdAgAPYBBwATMeSq160APxtOVqAC4oYXErfCA)
 
 ```ts
   SomeType extends OtherType ? TrueType : FalseType;
@@ -46,7 +46,7 @@ But the power of conditional types comes from using them with generics.
 
 For example, let’s take the following `createLabel` function:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgJIBMAycBGEA2yA3gFDLLDoBcyIArgLZ5TID0AVMgM4D2DKMYAXRdk7VgG4SAXxKhIsRCgBycftjyFS5EGog0uYKKADmbTjzAALaMkHDR4qbJIw6IBGGA8QyBFAg4SA0CAApKGnomaABKGgwQ-Ck3Dy8fPwCgiETQ3X4DI1M45FV1XAJk909vX39A4PL8XL0AeSgMAuMQMwAfWkZmYoTG5D7S7MbK1JqM+onNZv42ju5C7tH+6KghrBGxvUTiMmRrKB4Ad2QAIndgBgAHfAh+cAh0K+cgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgJIBMAycBGEA2yA3gFDLLDoBcyIArgLZ5TID0AVMgM4D2DKMYAXRdk7VgG4SAXxKhIsRCgBycftjyFS5EGog0uYKKADmbTjzAALaMkHDR4qbJIw6IBGGA8QyBFAg4SA0CAApKGnomaABKGgwQ-Ck3Dy8fPwCgiETQ3X4DI1M45FV1XAJk909vX39A4PL8XL0AeSgMAuMQMwAfWkZmYoTG5D7S7MbK1JqM+onNZv42ju5C7tH+6KghrBGxvUTiMmRrKB4Ad2QAIndgBgAHfAh+cAh0K+cgA)
 
 ```ts
 interface IdLabel {
@@ -71,7 +71,7 @@ These overloads for createLabel describe a single JavaScript function that makes
 
 Instead, we can encode that logic in a conditional type:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgJIBMAycBGEA2yA3gFDLLDoBcyIArgLZ5TID0AVMgM4D2DKMYAXRdk7VgG4SAXxKhIsRCgBycftjyFS5EGog0uYKKADmbTjzAALaMkHDR4qbNatkAWk8I6YT+5JgAJ4ADip6APJQGAA8ACrIEAAekCAitIzMyAA+3EamAHzIALzI8UkpafRM0GTIAPxoWLgEtTSq6s34EkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgJIBMAycBGEA2yA3gFDLLDoBcyIArgLZ5TID0AVMgM4D2DKMYAXRdk7VgG4SAXxKhIsRCgBycftjyFS5EGog0uYKKADmbTjzAALaMkHDR4qbNatkAWk8I6YT+5JgAJ4ADip6APJQGAA8ACrIEAAekCAitIzMyAA+3EamAHzIALzI8UkpafRM0GTIAPxoWLgEtTSq6s34EkA)
 
 ```ts
 type NameOrId<T extends number | string> = T extends number
@@ -81,7 +81,7 @@ type NameOrId<T extends number | string> = T extends number
 
 We can then use that conditional type to simplify our overloads down to a single function with no overloads.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgJIBMAycBGEA2yA3gFDLLDoBcyIArgLZ5TID0AVMgM4D2DKMYAXRdk7VgG4SAXxKhIsRCgBycftjyFS5EGog0uYKKADmbTjzAALaMkHDR4qbLABPAA4q9AeSgYAPAAqyBAAHpAgIrSMzMgAPtxGpgB8yAC8yMFhEVH0TNBkyAD8aFi4BIU0qurl+FKsrMgAtC0IdGAtTSQwdCAIYMA8IMgIUBBwkBoEQSHhEJGiebEJhsYgJskAFJS+1fqZAJRVPn7oQanayNZQPADuyABEvcAM7vgQ-OAQ6A-OJCTvMDIODpEZjCYQKb4TYPNyeLijYDuMAPA71RrIAB6RX+gOQOFBo3Gk1qmwATAA6AAcaJIDXI2NxECBCEJ4JJmk2AFkJlYKVA4JE+JsDsVHjZ8PgeA9kDQACxk2n0rFFIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgJIBMAycBGEA2yA3gFDLLDoBcyIArgLZ5TID0AVMgM4D2DKMYAXRdk7VgG4SAXxKhIsRCgBycftjyFS5EGog0uYKKADmbTjzAALaMkHDR4qbLABPAA4q9AeSgYAPAAqyBAAHpAgIrSMzMgAPtxGpgB8yAC8yMFhEVH0TNBkyAD8aFi4BIU0qurl+FKsrMgAtC0IdGAtTSQwdCAIYMA8IMgIUBBwkBoEQSHhEJGiebEJhsYgJskAFJS+1fqZAJRVPn7oQanayNZQPADuyABEvcAM7vgQ-OAQ6A-OJCTvMDIODpEZjCYQKb4TYPNyeLijYDuMAPA71RrIAB6RX+gOQOFBo3Gk1qmwATAA6AAcaJIDXI2NxECBCEJ4JJmk2AFkJlYKVA4JE+JsDsVHjZ8PgeA9kDQACxk2n0rFFIA)
 
 ```ts
 function createLabel<T extends number | string>(idOrName: T): NameOrId<T> {
@@ -108,7 +108,7 @@ Just like narrowing with type guards can give us a more specific type, the true 
 
 For example, let’s take the following:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwFYDMA2AUAC4CeADpKALKSKICGA5pAPIBmAPACoB8oAvKBwDaAIgC21Oo2EBdANxA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwFYDMA2AUAC4CeADpKALKSKICGA5pAPIBmAPACoB8oAvKBwDaAIgC21Oo2EBdANxA)
 
 ```ts
 type MessageOf<T> = T["message"];
@@ -121,7 +121,7 @@ Type '"message"' cannot be used to index type 'T'.
 In this example, TypeScript errors because `T` isn’t known to have a property called `message`.
 We could constrain `T`, and TypeScript would no longer complain:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAshDO8CGBzCB5AZgHgCpQgA9gIA7AE3igG8oBbBZNALigFdSBrUgewHdSUAL4A+KAF4ouANoAiBolQRZAXQDcAKA0BLUiQBOmJAGNoAUTpJtAGxoao9Rktbxg+3Sk1CtoSFAtW1nCKaADCPHpkwFSSwUwYOAE2IpoA9KkOUAB6APxAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAshDO8CGBzCB5AZgHgCpQgA9gIA7AE3igG8oBbBZNALigFdSBrUgewHdSUAL4A+KAF4ouANoAiBolQRZAXQDcAKA0BLUiQBOmJAGNoAUTpJtAGxoao9Rktbxg+3Sk1CtoSFAtW1nCKaADCPHpkwFSSwUwYOAE2IpoA9KkOUAB6APxAA)
 
 ```ts
 type MessageOf<T extends { message: unknown }> = T["message"];
@@ -138,7 +138,7 @@ type EmailMessageContents = string
 However, what if we wanted `MessageOf` to take any type, and default to something like `never` if a `message` property isn’t available?
 We can do this by moving the constraint out and introducing a conditional type:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAshDO8CGBzCB5AZgHgCoD4oBeKXKCAD2AgDsATeKAbygFsFk0AuKAVxoDWNAPYB3GlAC+UAPykA2gCJ2iVBEUBdKDxoQAbhABOAbgBQpgJY1qhzEgDG0AKKskFgDbNTUNhzU94YEMrFDNJcysbO0coABFhFC8fACMkQwEACgBKHj1hCzow81BIKBc3dzhVNABhYWtaYEYSKs4MHHKPfDMAeh6fKAA9GWLwaHiUVrU6hutm2D80LGwJ7tM+geGgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAshDO8CGBzCB5AZgHgCoD4oBeKXKCAD2AgDsATeKAbygFsFk0AuKAVxoDWNAPYB3GlAC+UAPykA2gCJ2iVBEUBdKDxoQAbhABOAbgBQpgJY1qhzEgDG0AKKskFgDbNTUNhzU94YEMrFDNJcysbO0coABFhFC8fACMkQwEACgBKHj1hCzow81BIKBc3dzhVNABhYWtaYEYSKs4MHHKPfDMAeh6fKAA9GWLwaHiUVrU6hutm2D80LGwJ7tM+geGgA)
 
 ```ts
 type MessageOf<T> = T extends { message: unknown } ? T["message"] : never;
@@ -164,7 +164,7 @@ Within the true branch, TypeScript knows that `T`*will* have a `message` propert
 
 As another example, we could also write a type called `Flatten` that flattens array types to their element types, but leaves them alone otherwise:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAYgNgQ2MCA7APAFQHxQLxSZQQAeKqAJgM5QKogDaAulAPyEOoCuAtgEYQATiwBchANwAoSQHoZUAKJlBCAMbAaAey7AowABbQIcCDzS7QkAHSTL0AMrBB+WImRp0VJwEtUAc2ZsKTkoUIA9VmkQgBkIBAA3CBoDaDtaOE1UCBs0gDleF3gkcnRufiEg2Xlw1iA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAYgNgQ2MCA7APAFQHxQLxSZQQAeKqAJgM5QKogDaAulAPyEOoCuAtgEYQATiwBchANwAoSQHoZUAKJlBCAMbAaAey7AowABbQIcCDzS7QkAHSTL0AMrBB+WImRp0VJwEtUAc2ZsKTkoUIA9VmkQgBkIBAA3CBoDaDtaOE1UCBs0gDleF3gkcnRufiEg2Xlw1iA)
 
 ```ts
 type Flatten<T> = T extends any[] ? T[number] : T;
@@ -191,7 +191,7 @@ This ends up being such a common operation that conditional types make it easier
 Conditional types provide us with a way to infer from types we compare against in the true branch using the `infer` keyword.
 For example, we could have inferred the element type in `Flatten` instead of fetching it out “manually” with an indexed access type:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAYgNgQ2MCA7APAFXBAfFAXim0iggA8VUATAZygEEAnJhEdAS1QDMImoAkigC2+APyCRUAFzEcAbiA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAYgNgQ2MCA7APAFXBAfFAXim0iggA8VUATAZygEEAnJhEdAS1QDMImoAkigC2+APyCRUAFzEcAbiA)
 
 ```ts
 type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
@@ -203,7 +203,7 @@ This frees us from having to think about how to dig through and probing apart th
 We can write some useful helper type aliases using the `infer` keyword.
 For example, for simple cases, we can extract the return type out from function types:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBA4hwCV4FcBOA7AKuCAebkAfFALxQHQQAewE6AJgM5QAUAdBwIaoDmjAXFHQQAbhFQBtALoBKUsQCW6AGbioSYGnQAoKFAD86lBl1RBwsagDc27aEhQAcsgC2pWPA1aKuFnJLE6K4ARuKENgD0EXpQAHr6tvbQAMrAqO5wiMZYOL5UgoxpSjz+xIWoxeHaUTHxiThQAEIA9s0ANsxkmV4YPiycgsGtbRCc6AA0UMGDw6PopVOzY9JVNXrxQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBA4hwCV4FcBOA7AKuCAebkAfFALxQHQQAewE6AJgM5QAUAdBwIaoDmjAXFHQQAbhFQBtALoBKUsQCW6AGbioSYGnQAoKFAD86lBl1RBwsagDc27aEhQAcsgC2pWPA1aKuFnJLE6K4ARuKENgD0EXpQAHr6tvbQAMrAqO5wiMZYOL5UgoxpSjz+xIWoxeHaUTHxiThQAEIA9s0ANsxkmV4YPiycgsGtbRCc6AA0UMGDw6PopVOzY9JVNXrxQA)
 
 ```ts
 type GetReturnType<Type> = Type extends (...args: never[]) => infer Return
@@ -225,7 +225,7 @@ type Bools = boolean[]
 
 When inferring from a type with multiple call signatures (such as the type of an overloaded function), inferences are made from the *last* signature (which, presumably, is the most permissive catch-all case). It is not possible to perform overload resolution based on a list of argument types.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXwGcMYtUBzAeRgDlkBbACgA8AuQ40sgSjdXoCMQMANwAoUJFgIU6bHnYlyVWo1bw+dQTB4LOYidDhI0mXPiKLKNeszYXO8AD7qBQnffJOXmoWNEYATwAHBAAVAEZ4AF54ACUQDGQYVFDgkAAeQJCcRF0lazoAPjEAehL4CoA9AH4gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXwGcMYtUBzAeRgDlkBbACgA8AuQ40sgSjdXoCMQMANwAoUJFgIU6bHnYlyVWo1bw+dQTB4LOYidDhI0mXPiKLKNeszYXO8AD7qBQnffJOXmoWNEYATwAHBAAVAEZ4AF54ACUQDGQYVFDgkAAeQJCcRF0lazoAPjEAehL4CoA9AH4gA)
 
 ```ts
 declare function stringOrNum(x: string): number;
@@ -242,7 +242,7 @@ type T1 = string | number
 When conditional types act on a generic type, they become *distributive* when given a union type.
 For example, take the following:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAKg9gQQE5IIYgDw3BAfFAXlhyggA9gIA7AEwGcpUqQoB+YyAbQF0oAuKFQgA3CEgDcQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAKg9gQQE5IIYgDw3BAfFAXlhyggA9gIA7AEwGcpUqQoB+YyAbQF0oAuKFQgA3CEgDcQA)
 
 ```ts
 type ToArray<Type> = Type extends any ? Type[] : never;
@@ -250,7 +250,7 @@ type ToArray<Type> = Type extends any ? Type[] : never;
 
 If we plug a union type into `ToArray`, then the conditional type will be applied to each member of that union.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAKg9gQQE5IIYgDw3BAfFAXlhyggA9gIA7AEwGcpUqQoB+YyAbQF0oAuKFQgA3CEgDcAKEmhIUAMrAkyJAHkkAOQCuAWxWFYiFOgx0lASyoBzKAB9BugEZjcUgPRuoXgHqsgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAKg9gQQE5IIYgDw3BAfFAXlhyggA9gIA7AEwGcpUqQoB+YyAbQF0oAuKFQgA3CEgDcAKEmhIUAMrAkyJAHkkAOQCuAWxWFYiFOgx0lASyoBzKAB9BugEZjcUgPRuoXgHqsgA)
 
 ```ts
 type ToArray<Type> = Type extends any ? Type[] : never;
@@ -262,7 +262,7 @@ type StrArrOrNumArr = string[] | number[]
 
 What happens here is that `ToArray` distributes on:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAysBOBBe8Dy8ByBXAts+UAvAFBRQD05UAtLQMZbC3WlQDOCAlgHYDmUAHyjdcAIwjwA3EA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAysBOBBe8Dy8ByBXAts+UAvAFBRQD05UAtLQMZbC3WlQDOCAlgHYDmUAHyjdcAIwjwA3EA)
 
 ```ts
   string | number;
@@ -270,7 +270,7 @@ What happens here is that `ToArray` distributes on:
 
 and maps over each member type of the union, to what is effectively:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAKg9gQQE5IIYgDw3BAfFAXlhyggA9gIA7AEwGcpUqQoB+YyAbQF0oAuKFQgA3CEgDcAKFCQoAZWBJkSAPJIAcgFcAtssKSoUAPRGoAWgsBjTcAtmDsRCnQY6igJZUA5vgA+j5RcqHQAjMVxxIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAKg9gQQE5IIYgDw3BAfFAXlhyggA9gIA7AEwGcpUqQoB+YyAbQF0oAuKFQgA3CEgDcAKFCQoAZWBJkSAPJIAcgFcAtssKSoUAPRGoAWgsBjTcAtmDsRCnQY6igJZUA5vgA+j5RcqHQAjMVxxIA)
 
 ```ts
   ToArray<string> | ToArray<number>;
@@ -278,7 +278,7 @@ and maps over each member type of the union, to what is effectively:
 
 which leaves us with:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAysBOBBe8Dy8ByBXAts+UAvAFBRQD05UAtLQMZbC3WlQDOCAlgHYDmA2gF0oAHyjdcAIwjwhAbiA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAysBOBBe8Dy8ByBXAts+UAvAFBRQD05UAtLQMZbC3WlQDOCAlgHYDmA2gF0oAHyjdcAIwjwhAbiA)
 
 ```ts
   string[] | number[];
@@ -287,7 +287,7 @@ which leaves us with:
 Typically, distributivity is the desired behavior.
 To avoid that behavior, you can surround each side of the `extends` keyword with square brackets.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAKg9gQQE5IIYgHJwHYBECWAzsADwzgQB8UAvFANrmQC6UEAHsBNgCaEOpsIVgH5YFeqwBcUbBABuEJAG4AUKoD0GqAHJkSAPIAzAMrBDSDAFcAtjqhFZcKABscAcyVRUUK9nw4AHSqoJBQ+sZmFtY2tLCIKOhYeESkxEj42O5QAD6ytgBGSpRqWlDlAHoiQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAKg9gQQE5IIYgHJwHYBECWAzsADwzgQB8UAvFANrmQC6UEAHsBNgCaEOpsIVgH5YFeqwBcUbBABuEJAG4AUKoD0GqAHJkSAPIAzAMrBDSDAFcAtjqhFZcKABscAcyVRUUK9nw4AHSqoJBQ+sZmFtY2tLCIKOhYeESkxEj42O5QAD6ytgBGSpRqWlDlAHoiQA)
 
 ```ts
 type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never;

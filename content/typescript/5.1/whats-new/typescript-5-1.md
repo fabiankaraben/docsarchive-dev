@@ -4,7 +4,7 @@ title: "TypeScript: Documentation - TypeScript 5.1"
 description: "TypeScript 5.1 Release Notes"
 weight: 1
 type: docs
-prev: /typescript/5.1/tutorials/using-babel-with-typescript
+prev: /typescript/5.1/tutorials/babel-with-typescript
 ---
 
 # TypeScript 5.1

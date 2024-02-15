@@ -14,7 +14,7 @@ In JavaScript, it’s pretty common for APIs to convert values that are passed i
 This often happens with getters and setters too.
 For example, let’s imagine we’ve got a class with a setter that always converts a value into a `number` before saving it in a private field.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYGwhgzhAEAqAWBLAdgc2gbwFDWgYgkQC8BTaAXmgAYBuLHaVEgF2kNIAoBKTB3AJxYBXfsmjMkEAHQFiJOrgC+DCCzZyOANzAghJHtly4Qa5EIC2FaADkLAIxL8tOvVzp9oAek-QAIgHtkAHJWHRB-AHcbMGtoMGQAEzZmIQAzVKkPRFToDgBCW3MHfilECAAxFERmEg4zcy4DD1wJMpl2MkpaZuhBFNEFI2UPVulZUit6weVFIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAEAqAWBLAdgc2gbwFDWgYgkQC8BTaAXmgAYBuLHaVEgF2kNIAoBKTB3AJxYBXfsmjMkEAHQFiJOrgC+DCCzZyOANzAghJHtly4Qa5EIC2FaADkLAIxL8tOvVzp9oAek-QAIgHtkAHJWHRB-AHcbMGtoMGQAEzZmIQAzVKkPRFToDgBCW3MHfilECAAxFERmEg4zcy4DD1wJMpl2MkpaZuhBFNEFI2UPVulZUit6weVFIA)
 
 ```js
 class Thing {
@@ -57,7 +57,7 @@ If we really want to model APIs that convert values, previous versions of TypeSc
 
 That’s why TypeScript 4.3 allows you to specify types for reading and writing to properties.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYGwhgzhAEAqAWBLAdgc2gbwFDWgYgkQC8BTaAXmgAYBuLHaVEgF2kNIAoBKALmmQCuAWwBGJAE6YGucSwHjk0ZkggA6AsRJ1cAX3q4ILNpo4A3MCAEk+EZuJToAPv2FjJzkQHtPIEmGRcUri4vqyCQhTQAHKuEmYWVlx00tAA9KnQACKeyADkrBYgngDu0WBR0P4AJmzMAgBm9aopiPXQHACEMaISqogQAGIoiMwkHOFcgdjBwcr96uxklLQpMnIK2sF6KXNqGqSR4Zt6OkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAEAqAWBLAdgc2gbwFDWgYgkQC8BTaAXmgAYBuLHaVEgF2kNIAoBKALmmQCuAWwBGJAE6YGucSwHjk0ZkggA6AsRJ1cAX3q4ILNpo4A3MCAEk+EZuJToAPv2FjJzkQHtPIEmGRcUri4vqyCQhTQAHKuEmYWVlx00tAA9KnQACKeyADkrBYgngDu0WBR0P4AJmzMAgBm9aopiPXQHACEMaISqogQAGIoiMwkHOFcgdjBwcr96uxklLQpMnIK2sF6KXNqGqSR4Zt6OkA)
 
 ```ts
 class Thing {
@@ -84,7 +84,7 @@ class Thing {
 In the above example, our `set` accessor takes a broader set of types (`string`s, `boolean`s, and `number`s), but our `get` accessor always guarantees it will be a `number`.
 Now we can finally assign other types to these properties with no errors!
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYGwhgzhAEAqAWBLAdgc2gbwFDWgYgkQC8BTaAXmgAYBuLHaVEgF2kNIAoBKALmmQCuAWwBGJAE6YGucSwHjk0ZkggA6AsRJ1cAX3q4ILNpo4A3MCAEk+EZuJToAPv2FjJzkQHtPIEmGRcUri4vqyCQhTQAHKuEmYWVlx00tAA9KnQACKeyADkrBYgngDu0WBR0P4AJmzMAgBm9aopiPXQHACEMaISqogQAGIoiMwkHOFcgdjBwcr96uxklLQpMnIK2sF6KXNqGqSR4Zt6eunQALSXwALMl+dYoUpIaIckpQgO3MlnAIJQiKhkA5oJ5lBIlABPAAOJBgzE80AABnM0KpFojoMVPOIANYQDpYFGoNGaSIAIngJBARTJdCJJIOlDsVjpz2Ji0iABYAEzfDIAJT8VWByLZDJIGIsxTAEJgUPEniqAmAsMqLh64gJjyEEIAypo+OE3JF6YsaEA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAEAqAWBLAdgc2gbwFDWgYgkQC8BTaAXmgAYBuLHaVEgF2kNIAoBKALmmQCuAWwBGJAE6YGucSwHjk0ZkggA6AsRJ1cAX3q4ILNpo4A3MCAEk+EZuJToAPv2FjJzkQHtPIEmGRcUri4vqyCQhTQAHKuEmYWVlx00tAA9KnQACKeyADkrBYgngDu0WBR0P4AJmzMAgBm9aopiPXQHACEMaISqogQAGIoiMwkHOFcgdjBwcr96uxklLQpMnIK2sF6KXNqGqSR4Zt6eunQALSXwALMl+dYoUpIaIckpQgO3MlnAIJQiKhkA5oJ5lBIlABPAAOJBgzE80AABnM0KpFojoMVPOIANYQDpYFGoNGaSIAIngJBARTJdCJJIOlDsVjpz2Ji0iABYAEzfDIAJT8VWByLZDJIGIsxTAEJgUPEniqAmAsMqLh64gJjyEEIAypo+OE3JF6YsaEA)
 
 ```ts
 let thing = new Thing();
@@ -214,7 +214,7 @@ class SpecializedComponent extends SomeComponent {
 
 When a method is marked with `override`, TypeScript will always make sure that a method with the same name exists in a the base class.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEDsHsEkFsAOAbAlgY1QFwPIDcBTAJyNQBMCAoECYo6IgZwC5QAWARg4GZL1kAho0agAytHgEAwhMTRIBSFlABvSqA2hGBLADVUjVACNkBABR4ByAK4FWR6NFMDIASlXrNXmgDo-njQBfSmD+IRFRRAJMK1QALwIyGSR5RWUCAA8sRTIIiWlZVKUPL2hCEnICLQALaAB3M3c1ANBgwKA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEDsHsEkFsAOAbAlgY1QFwPIDcBTAJyNQBMCAoECYo6IgZwC5QAWARg4GZL1kAho0agAytHgEAwhMTRIBSFlABvSqA2hGBLADVUjVACNkBABR4ByAK4FWR6NFMDIASlXrNXmgDo-njQBfSmD+IRFRRAJMK1QALwIyGSR5RWUCAA8sRTIIiWlZVKUPL2hCEnICLQALaAB3M3c1ANBgwKA)
 
 ```ts
 class SomeComponent {

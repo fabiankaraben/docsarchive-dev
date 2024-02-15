@@ -11,18 +11,18 @@ prev: /typescript/5.1/whats-new/typescript-1-1
 
 The Declaration Files section is designed to teach you how to write a high-quality TypeScript Declaration File. We need to assume basic familiarity with the TypeScript language in order to get started.
 
-If you haven’t already, you should read the [TypeScript Handbook](/typescript/5.1/handbook/the-basics)
+If you haven’t already, you should read the [TypeScript Handbook](/typescript/5.1/handbook/basic-types)
 to familiarize yourself with basic concepts, especially types and modules.
 
 The most common case for learning how .d.ts files work is that you’re typing an npm package with no types.
-In that case, you can jump straight to [Modules .d.ts](/typescript/5.1/declaration-files/d-ts-templates/modules-d-ts).
+In that case, you can jump straight to [Modules .d.ts](/typescript/5.1/declaration-files/d-ts-templates/module-d-ts).
 
 The Declaration Files section is broken down into the following sections.
 
-## [Declaration Reference](/typescript/5.1/declaration-files/declaration-reference) {#declaration-reference}
+## [Declaration Reference](/typescript/5.1/declaration-files/by-example) {#declaration-reference}
 
 We are often faced with writing a declaration file when we only have examples of the underlying library to guide us.
-The [Declaration Reference](/typescript/5.1/declaration-files/declaration-reference) section shows many common API patterns and how to write declarations for each of them.
+The [Declaration Reference](/typescript/5.1/declaration-files/by-example) section shows many common API patterns and how to write declarations for each of them.
 This guide is aimed at the TypeScript novice who may not yet be familiar with every language construct in TypeScript.
 
 ## [Library Structures](/typescript/5.1/declaration-files/library-structures) {#library-structures}
@@ -34,10 +34,10 @@ Authors of new declaration files are strongly encouraged to read this section to
 In the Template section you’ll find a number of declaration files that serve as a useful starting point
 when writing a new file. If you already know what your structure is, see the d.ts Template section in the sidebar.
 
-## [Do’s and Don’ts](/typescript/5.1/declaration-files/dos-and-donts) {#dos-and-donts}
+## [Do’s and Don’ts](/typescript/5.1/declaration-files/do-s-and-don-ts) {#dos-and-donts}
 
 Many common mistakes in declaration files can be easily avoided.
-The [Do’s and Don’ts](/typescript/5.1/declaration-files/dos-and-donts) section identifies common errors,
+The [Do’s and Don’ts](/typescript/5.1/declaration-files/do-s-and-don-ts) section identifies common errors,
 describes how to detect them,
 and how to fix them.
 Everyone should read this section to help themselves avoid common mistakes.

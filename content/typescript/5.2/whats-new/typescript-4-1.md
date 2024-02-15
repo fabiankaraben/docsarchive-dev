@@ -12,7 +12,7 @@ type: docs
 
 String literal types in TypeScript allow us to model functions and APIs that expect a set of specific strings.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAGYCuAdgMYAuAlnCaIpBQGozVkCGANgIKdUDmJALaQSFABSc4HarVQAiCnAAO80AB9Q8oVQAmuzpDWb5AIzgUlQ+QEpQAbzyhQIUADoPeAL548DZqxUHDx8giJi4tp6upCctgDcQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAGYCuAdgMYAuAlnCaIpBQGozVkCGANgIKdUDmJALaQSFABSc4HarVQAiCnAAO80AB9Q8oVQAmuzpDWb5AIzgUlQ+QEpQAbzyhQIUADoPeAL548DZqxUHDx8giJi4tp6upCctgDcQA)
 
 ```ts
 function setVerticalAlignment(location: "top" | "middle" | "bottom") {
@@ -49,7 +49,7 @@ That’s why TypeScript 4.1 brings the template literal string type.
 It has the same syntax as [template literal strings in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), but is used in type positions.
 When you use it with concrete literal types, it produces a new string literal type by concatenating the contents.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBA6g9gJwDYBMoF4oCIDujVYDcAUMaJFAOIIQTACWAdgOYZQAGAFhEknFABIA3vGQoAvuxIB6aVHkA9APxA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBA6g9gJwDYBMoF4oCIDujVYDcAUMaJFAOIIQTACWAdgOYZQAGAFhEknFABIA3vGQoAvuxIB6aVHkA9APxA)
 
 ```ts
 type World = "world";
@@ -62,7 +62,7 @@ type Greeting = "hello world"
 What happens when you have unions in substitution positions?
 It produces the set of every possible string literal that could be represented by each union member.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAwg9gGzgJygXigImRAJpqAHywCMEBXCTAbgChRIoBFcgQwDtgBLUdLOdlSJZgAdzg1a9cNADKEcgGdFAMS6KAFnwAGAEgDeLDt17F4SZAF8oAM3UbtdAPROobgHoB+IA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAwg9gGzgJygXigImRAJpqAHywCMEBXCTAbgChRIoBFcgQwDtgBLUdLOdlSJZgAdzg1a9cNADKEcgGdFAMS6KAFnwAGAEgDeLDt17F4SZAF8oAM3UbtdAPROobgHoB+IA)
 
 ```ts
 type Color = "red" | "blue";
@@ -77,7 +77,7 @@ This can be used beyond cute examples in release notes.
 For example, several libraries for UI components have a way to specify both vertical and horizontal alignment in their APIs, often with both at once using a single string like `"bottom-right"`.
 Between vertically aligning with `"top"`, `"middle"`, and `"bottom"`, and horizontally aligning with `"left"`, `"center"`, and `"right"`, there are 9 possible strings where each of the former strings is connected with each of the latter strings using a dash.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAC4CeADpKAGowECWAxgIYA2AgkzQOYB2AtpFwVABeUACICcEqNAAfMTxoATRU0jS5ogEZwCEnqIDchUuQASCGgC84A5m069+gkaNUAzAurF0nML6OhOAAtPIzwQUAAVBgBrSERwsFBZMQkSAFp3T2TkjTT0nwE-HJTxSXTAjhDRRJyNBWVVTMgPfwaVSALfaDalDorgz1rcsW1dOB5m1tKxvS6inpmdOcrqvDxFSDomBmhyNwBXLjpaG1BESAJ7bj4BAAoAN2YDyFQAAwASAG8qaFpGVjsG5OAC+6W+5kC1lsgIctwIILeAEpUA84EowhcrkDHPcyhksqIkQYchEAO4IGKIACEeCx11xBDu+PS7UgTCJJIiMHg0Fp9Jx8OZ+RIOk5JW5sAQ1NAmgOgg4cDgilAijgByqXHliFANDcoCI6oA5HtQJAHjBdVxQABlSAMXSqIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAC4CeADpKAGowECWAxgIYA2AgkzQOYB2AtpFwVABeUACICcEqNAAfMTxoATRU0jS5ogEZwCEnqIDchUuQASCGgC84A5m069+gkaNUAzAurF0nML6OhOAAtPIzwQUAAVBgBrSERwsFBZMQkSAFp3T2TkjTT0nwE-HJTxSXTAjhDRRJyNBWVVTMgPfwaVSALfaDalDorgz1rcsW1dOB5m1tKxvS6inpmdOcrqvDxFSDomBmhyNwBXLjpaG1BESAJ7bj4BAAoAN2YDyFQAAwASAG8qaFpGVjsG5OAC+6W+5kC1lsgIctwIILeAEpUA84EowhcrkDHPcyhksqIkQYchEAO4IGKIACEeCx11xBDu+PS7UgTCJJIiMHg0Fp9Jx8OZ+RIOk5JW5sAQ1NAmgOgg4cDgilAijgByqXHliFANDcoCI6oA5HtQJAHjBdVxQABlSAMXSqIA)
 
 ```ts
 type VerticalAlignment = "top" | "middle" | "bottom";
@@ -133,7 +133,7 @@ declare function makeWatchedObject<T>(obj: T): T & PropEventSource<T>;
 
 With this, we can build something that errors when we give the wrong property!
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAC4CeADpKAArwkCiAbpAHYEDKcArtAMaQA8AKgD5QAXlABvPKGmg4jABSQGzAHIBDALaRUAAwAk4xAWgBLRgHNQAMlABrSETgAzUPwC+AYQAWai5AAmOgA0oFxqADbhAEZqXLao8gCUosJ0cCb+iahpGQDceG75-pBc4WrQ5E7sjFwEJnKgGmr2AOpqBFxeAQDyUQBWJQQCgvJw-aj8Wa7WlNT0TKwc3HxC+eGQBKBkSA1iTa3tnT39g-KS0k4mSATqWqgARAAScFrQ90FSoGrm2qBYaCEQKBzCYGABaBBggjNSCfcJwMJ1OQPFgkUwWS6QcL+d4FRL5PBAsHErjsAjEsGEsAweDQACEeG2iDkADo5PJ7pdrrdIO9QEkUhI3Pi8FTQDSEAymaz2ZzuZpIN5fD8cSEBSJhOJhbkgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAC4CeADpKAArwkCiAbpAHYEDKcArtAMaQA8AKgD5QAXlABvPKGmg4jABSQGzAHIBDALaRUAAwAk4xAWgBLRgHNQAMlABrSETgAzUPwC+AYQAWai5AAmOgA0oFxqADbhAEZqXLao8gCUosJ0cCb+iahpGQDceG75-pBc4WrQ5E7sjFwEJnKgGmr2AOpqBFxeAQDyUQBWJQQCgvJw-aj8Wa7WlNT0TKwc3HxC+eGQBKBkSA1iTa3tnT39g-KS0k4mSATqWqgARAAScFrQ90FSoGrm2qBYaCEQKBzCYGABaBBggjNSCfcJwMJ1OQPFgkUwWS6QcL+d4FRL5PBAsHErjsAjEsGEsAweDQACEeG2iDkADo5PJ7pdrrdIO9QEkUhI3Pi8FTQDSEAymaz2ZzuZpIN5fD8cSEBSJhOJhbkgA)
 
 ```ts
 // error!
@@ -151,7 +151,7 @@ Argument of type '"firstName"' is not assignable to parameter of type '"firstNam
 We can also do something special in template literal types: we can *infer* from substitution positions.
 We can make our last example generic to infer from parts of the `eventName` string to figure out the associated property.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBACgTgezAUQG4QHbAMoIK5wDGEAPACoB8UAvFAN4BQUzUCGJA0lBAB7CYATAM5QhwOAEsMAcygAyKAGsIIBADMolJix0AKCOiwA5AIYBbCAC4oAAwAkdDgF8AwgAsTMiAJsAaKIQmADZBAEYmhIrWuhgQAO4AasF4VpoA2hwAugCUNFSoCBICUNnWBUUA3AxOVQwCEIRBJnDQangYhMASbFBmJsoA6ibAhG7eAPKhAFYNwOQUugjT1mSlmvKwiCiGOPhEpJS1QRDAUJBwQj20fYPDoxPTs7qMOmoSF8CmFtYARAASCAscB+vm0zBM0lSABYAEygnRBBCBLpsX7YMCSGRvCBBAQg6rZWoAeiJUDiCDgiiEAEIoAByWJxL4QOlQCQiUCQYomER0sSY6R0hjnS4YAB0bF0PzeH2Z7k8kLx-kZzLy9DBUBJ9JV5hZUA8HLGUE50HU9JlYmZQp0hDYl2OYsR0l0NkZUAwurZIgcOosYuACAAqmBzi4eRBdNknDZCQTiaTyZSadr4gBBSGs9nG8DeKA87V4MyhCBwIUitgSjBSiEQeVeJXutOQtUvFgSDQxJvQEhQAAMuVbOmYtow9ogjoQzp+cWaGCk0lpsWkwwk6DzkJ+sZ0TgJQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBACgTgezAUQG4QHbAMoIK5wDGEAPACoB8UAvFAN4BQUzUCGJA0lBAB7CYATAM5QhwOAEsMAcygAyKAGsIIBADMolJix0AKCOiwA5AIYBbCAC4oAAwAkdDgF8AwgAsTMiAJsAaKIQmADZBAEYmhIrWuhgQAO4AasF4VpoA2hwAugCUNFSoCBICUNnWBUUA3AxOVQwCEIRBJnDQangYhMASbFBmJsoA6ibAhG7eAPKhAFYNwOQUugjT1mSlmvKwiCiGOPhEpJS1QRDAUJBwQj20fYPDoxPTs7qMOmoSF8CmFtYARAASCAscB+vm0zBM0lSABYAEygnRBBCBLpsX7YMCSGRvCBBAQg6rZWoAeiJUDiCDgiiEAEIoAByWJxL4QOlQCQiUCQYomER0sSY6R0hjnS4YAB0bF0PzeH2Z7k8kLx-kZzLy9DBUBJ9JV5hZUA8HLGUE50HU9JlYmZQp0hDYl2OYsR0l0NkZUAwurZIgcOosYuACAAqmBzi4eRBdNknDZCQTiaTyZSadr4gBBSGs9nG8DeKA87V4MyhCBwIUitgSjBSiEQeVeJXutOQtUvFgSDQxJvQEhQAAMuVbOmYtow9ogjoQzp+cWaGCk0lpsWkwwk6DzkJ+sZ0TgJQA)
 
 ```ts
 type PropEventSource<T> = {
@@ -190,7 +190,7 @@ Similarly, when we call with `"ageChanged"`, it finds the type for the property 
 Inference can be combined in different ways, often to deconstruct strings, and reconstruct them in different ways.
 In fact, to help with modifying these string literal types, we’ve added a few new utility type aliases for modifying casing in letters (i.e. converting to lowercase and uppercase characters).
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAogdsAFgVwM4EsCGrjoMYDiAThBLnAOYA8AKlBAB7ARwAmqUOR6lAfFAF4oAAwAkAbwCqYSETzYItXgF9hAKDWhIUABIwAMvoDyg2AhQZsuQiTI9qAIkQQANi4D2D3gG41Aej8oIIA9AH4gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAogdsAFgVwM4EsCGrjoMYDiAThBLnAOYA8AKlBAB7ARwAmqUOR6lAfFAF4oAAwAkAbwCqYSETzYItXgF9hAKDWhIUABIwAMvoDyg2AhQZsuQiTI9qAIkQQANi4D2D3gG41Aej8oIIA9AH4gA)
 
 ```ts
 type EnthusiasticGreeting<T extends string> = `${Uppercase<T>}`
@@ -244,7 +244,7 @@ type MappedTypeWithNewKeys<T> = {
 
 With this new `as` clause, you can leverage features like template literal types to easily create property names based off of old ones.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBA4hzAgJwM4B4AqA+KBeKA3gFBSlQDaA0lAJYB2UA1hCAPYBmUGUAhilAAMA5vAAkBAMI8wNYDwA2NAF4Q0KYEnpCoAMiiUsAXwEBdAFxQAFAEo8ODFRNFDAbiJF6iJOx4BjaAAKyCisDMRkUHQ8ALYQFuqadEJuETwiFnQArtEARsgpZPKsvjzANKHxGlpuhu6gkFAAMjxKIEGooXiw8F7o7SF0WG4A9MNkAHoA-EA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBA4hzAgJwM4B4AqA+KBeKA3gFBSlQDaA0lAJYB2UA1hCAPYBmUGUAhilAAMA5vAAkBAMI8wNYDwA2NAF4Q0KYEnpCoAMiiUsAXwEBdAFxQAFAEo8ODFRNFDAbiJF6iJOx4BjaAAKyCisDMRkUHQ8ALYQFuqadEJuETwiFnQArtEARsgpZPKsvjzANKHxGlpuhu6gkFAAMjxKIEGooXiw8F7o7SF0WG4A9MNkAHoA-EA)
 
 ```ts
 type Getters<T> = {
@@ -269,7 +269,7 @@ type LazyPerson = {
 and you can even filter out keys by producing `never`.
 That means you don’t have to use an extra `Omit` helper type in some cases.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAECUFMFsHsDdKgC4AskHIDWBLAdgCYagAOATrCZGcgJ4BQdVEMCkA0vgQGI6QA2BADwAVAHygAvKADe9UAtABtdqHygskWrABmoEaACGAZ1ABRAB4BjfgFcCkIewA0oAES5CbsQF0AXPoqPvQAvgDc9PT4yNQ6hlZIAMI4ZDZIcooaXAFuVilpbhGZZIYEOLbGAXi20ABG1BEhkUxInIT8kMbGyakdUixwiG08fIJCPWliESCKAHoA-EA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAECUFMFsHsDdKgC4AskHIDWBLAdgCYagAOATrCZGcgJ4BQdVEMCkA0vgQGI6QA2BADwAVAHygAvKADe9UAtABtdqHygskWrABmoEaACGAZ1ABRAB4BjfgFcCkIewA0oAES5CbsQF0AXPoqPvQAvgDc9PT4yNQ6hlZIAMI4ZDZIcooaXAFuVilpbhGZZIYEOLbGAXi20ABG1BEhkUxInIT8kMbGyakdUixwiG08fIJCPWliESCKAHoA-EA)
 
 ```ts
 // Remove the 'kind' property
@@ -347,7 +347,7 @@ See more [at the implementation](https://github.com/microsoft/TypeScript/pull/40
 TypeScript has a feature called *index signatures*.
 These signatures are a way to signal to the type system that users can access arbitrarily-named properties.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgPIAczAPYgM7IDeAUMsunGABYBcyeYUoA5gNynnQC2weeO+OiACuXAEbR2HAPTTkAUQAejOOSjZ00LBAJwoKBHGHMqYZGICeyar2SgAJhEX1gzEJWH6AdBwDa6dXQAOTguCDoGJhBmAF0IxhZkAB9kEXFJYgBfYmIYYRAELFxkBCoIBABrDCL8AAoNMDw6aoE8AEoiDga8LwpqVmRZegTorswezSgePlaBobSJKByyIYAVMrwUPS2AGx3kOD3sAHcIe2tsbABCGTl1iCsqOAA3FGo3i01kAHJIxJSFtBvj4yN0vBY4PZ7HAvGBsABlEbMWptdig8a+ABEMEu5j0eIAXpiYrCEUiUWjkN1fABZShULxQOAgezYLgoklwxFRZGorJAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgPIAczAPYgM7IDeAUMsunGABYBcyeYUoA5gNynnQC2weeO+OiACuXAEbR2HAPTTkAUQAejOOSjZ00LBAJwoKBHGHMqYZGICeyar2SgAJhEX1gzEJWH6AdBwDa6dXQAOTguCDoGJhBmAF0IxhZkAB9kEXFJYgBfYmIYYRAELFxkBCoIBABrDCL8AAoNMDw6aoE8AEoiDga8LwpqVmRZegTorswezSgePlaBobSJKByyIYAVMrwUPS2AGx3kOD3sAHcIe2tsbABCGTl1iCsqOAA3FGo3i01kAHJIxJSFtBvj4yN0vBY4PZ7HAvGBsABlEbMWptdig8a+ABEMEu5j0eIAXpiYrCEUiUWjkN1fABZShULxQOAgezYLgoklwxFRZGorJAA)
 
 ```ts
 interface Options {
@@ -380,7 +380,7 @@ Under this new mode, every property access (like `foo.bar`) or indexed access (l
 That means that in our last example, `opts.yadda` will have the type `string | number | undefined` as opposed to just `string | number`.
 If you need to access that property, you’ll either have to check for its existence first or use a non-null assertion operator (the postfix `!` character).
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwFYDMbQEYAOABgBYCAoECAOzgFVqBjAC0kYGtIATASWq8gAPbgEFGjSIkTkAltQAuMAGYBDCaADyAB3ky41RKADe5UKC0r5zVInnQ5AcwDcp8zAC2MqXoOpqAV3cAIxgXVyoAUUE7FXN4LRhdSVAVaEhQRhV-B2Z5UCCAT1ArL1A5AUFQRBkHakt-NIA6VwBtLXiAORV3SBs7RwBdPvtqB1AAH1AA4NDyAF9KMABaFcZ-eRWl8iV-Jl19DNYObX2DAAo4HRRNHR9EAEpjV0v5REaLKydQKlsRh2eru8PF5qvpEF8qNMQtByOEwAAVViIdKpdK0PIqAA2mLgAHduKBcTIrFN6EwjpxePwhKJxJJpGYXm8CiouFwVI15HAAMr9UZne4uRlXFoAIiUcDg+VS0oAXqKBpyeXyHAKhaAmS0ALKWZiNaAqfhwdwCxVc3l-NWwsxUADCFMcZSUZXkAHJDGksZiilYYOklDIkPJmmYZM6LoCWWyVI8TGYzIwwXBMZBGjjVUzGlH2UqLY4BYLXAs4aAAEIqaqZbFFRAqAqO0V2fy2UA9UA8UDsWi4wnMSzt13uUBcOCOUUlokk32gV0AQldpOoSwC2JSUkSPg1CQNXOgIa3ryzrPZs9zKqtcyAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwFYDMbQEYAOABgBYCAoECAOzgFVqBjAC0kYGtIATASWq8gAPbgEFGjSIkTkAltQAuMAGYBDCaADyAB3ky41RKADe5UKC0r5zVInnQ5AcwDcp8zAC2MqXoOpqAV3cAIxgXVyoAUUE7FXN4LRhdSVAVaEhQRhV-B2Z5UCCAT1ArL1A5AUFQRBkHakt-NIA6VwBtLXiAORV3SBs7RwBdPvtqB1AAH1AA4NDyAF9KMABaFcZ-eRWl8iV-Jl19DNYObX2DAAo4HRRNHR9EAEpjV0v5REaLKydQKlsRh2eru8PF5qvpEF8qNMQtByOEwAAVViIdKpdK0PIqAA2mLgAHduKBcTIrFN6EwjpxePwhKJxJJpGYXm8CiouFwVI15HAAMr9UZne4uRlXFoAIiUcDg+VS0oAXqKBpyeXyHAKhaAmS0ALKWZiNaAqfhwdwCxVc3l-NWwsxUADCFMcZSUZXkAHJDGksZiilYYOklDIkPJmmYZM6LoCWWyVI8TGYzIwwXBMZBGjjVUzGlH2UqLY4BYLXAs4aAAEIqaqZbFFRAqAqO0V2fy2UA9UA8UDsWi4wnMSzt13uUBcOCOUUlokk32gV0AQldpOoSwC2JSUkSPg1CQNXOgIa3ryzrPZs9zKqtcyAA)
 
 ```ts
 function checkOptions(opts: Options) {
@@ -409,7 +409,7 @@ Object is possibly 'undefined'.2532Object is possibly 'undefined'. 
 
 One consequence of using [`noUncheckedIndexedAccess` ↗](https://www.typescriptlang.org/tsconfig.html#noUncheckedIndexedAccess) is that indexing into an array is also more strictly checked, even in a bounds-checked loop.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwFYDMbQEYAOABgBYCAoECAOzgFVqBjAC0kYGtIATASWq8gAPbgEFGjSIkTkAZgFcmAFwCWcaqESNokAIYBbADLLqkgBSJFSVBejGA5gG0AugEpQAb3KhQVACrNlRFAAd2UAGzDQZh0AN0hQQMQ5SS9QGQRQUzDIRQTQAF5QIgBuPIAeDUtEADps6jtFZlLlAGoWt09vb0Y1RDhs2rg7cyqHZSdqxXoAB2mYAGEdREhTFxdi1IBfck2gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwFYDMbQEYAOABgBYCAoECAOzgFVqBjAC0kYGtIATASWq8gAPbgEFGjSIkTkAZgFcmAFwCWcaqESNokAIYBbADLLqkgBSJFSVBejGA5gG0AugEpQAb3KhQVACrNlRFAAd2UAGzDQZh0AN0hQQMQ5SS9QGQRQUzDIRQTQAF5QIgBuPIAeDUtEADps6jtFZlLlAGoWt09vb0Y1RDhs2rg7cyqHZSdqxXoAB2mYAGEdREhTFxdi1IBfck2gA)
 
 ```ts
 function screamLines(strs: string[]) {
@@ -426,7 +426,7 @@ Object is possibly 'undefined'.
 
 If you don’t need the indexes, you can iterate over individual elements by using a `for`-`of` loop or a `forEach` call.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEDsHsFVIMYAsCmCDWKAmBJSWUAPbAQQQRQGdKAoAMwFdEAXAS2klEoQCcUBDALYAZVpCoAKSsx6UAXFxliA5gG0AugEpQAbxqhQIUABUkrSqADu0Hugt0xKfaDo3QEhB2mKeoaHR9KbT0DA09ISmgAGxQAOijoZSkZWOY4AAd0lB4AYX5KFAlNTQBuZwBfGmcjU3MrGzsXR2dpWVjXHgBRfmQJZJ5tAF4APl1nMK9ouISk1tSMrNz8wuKyg3LSmnKgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEDsHsFVIMYAsCmCDWKAmBJSWUAPbAQQQRQGdKAoAMwFdEAXAS2klEoQCcUBDALYAZVpCoAKSsx6UAXFxliA5gG0AugEpQAbxqhQIUABUkrSqADu0Hugt0xKfaDo3QEhB2mKeoaHR9KbT0DA09ISmgAGxQAOijoZSkZWOY4AAd0lB4AYX5KFAlNTQBuZwBfGmcjU3MrGzsXR2dpWVjXHgBRfmQJZJ5tAF4APl1nMK9ouISk1tSMrNz8wuKyg3LSmnKgA)
 
 ```ts
 function screamLines(strs: string[]) {

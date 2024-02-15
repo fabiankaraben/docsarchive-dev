@@ -322,7 +322,7 @@ A ”✓” indicates a combination that is compatible only when [`strictNullChe
 |never →|✓|✓|✓|✓|✓|✓||
 
 
-Reiterating [The Basics](/typescript/5.1/handbook/the-basics):
+Reiterating [The Basics](/typescript/5.1/handbook/basic-types):
 
 - Everything is assignable to itself.
 - `any` and `unknown` are the same in terms of what is assignable to them, different in that `unknown` is not assignable to anything except `any`.

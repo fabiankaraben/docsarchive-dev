@@ -78,7 +78,7 @@ let b: [string, number, boolean] = ["hello", 42, true];
 Over time, TypeScript’s tuple types have become more and more sophisticated, since they’re also used to model things like parameter lists in JavaScript.
 As a result, they can have optional elements and rest elements, and can even have labels for tooling and readability.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEEFQFwVwBwDYFNoAsCGVQYM6iQJZSpIBOoA9gHYoXlQDuFoOUpBVA5jgHQBQyLAGMAXKADardlwA0LNh04B+ALqgAvBIBEJBAgpaVAbj5CN23fq1ytTUggAmhk3xARQCdACMkyB9HhkNExsdDxCYjJKGkp6Jnlpbn5BUAcxcQAzAlJWMSlFORwkIWoHJTyFLjVNcR1fK2M+fxq6vQMbO0dnPlcwSFhEFAYiVFB0UAAqUiRWfGQAWyQqKAnQAFpsCkc8EOQwrAAmBMUdrEjQDNJqKBlesap-dCoAT1AqGHmfcgoM0C8KLZIJ6nNAoLzoIQAa2SSCwSHS+VkxyRPFR-0BT3EKkafBQLUs7VAtjoXUaeIs9UJxPsTjkGXQCCKZPMtQJ1iJnVp0FIMCQdIZRTkbF5xiAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEEFQFwVwBwDYFNoAsCGVQYM6iQJZSpIBOoA9gHYoXlQDuFoOUpBVA5jgHQBQyLAGMAXKADardlwA0LNh04B+ALqgAvBIBEJBAgpaVAbj5CN23fq1ytTUggAmhk3xARQCdACMkyB9HhkNExsdDxCYjJKGkp6Jnlpbn5BUAcxcQAzAlJWMSlFORwkIWoHJTyFLjVNcR1fK2M+fxq6vQMbO0dnPlcwSFhEFAYiVFB0UAAqUiRWfGQAWyQqKAnQAFpsCkc8EOQwrAAmBMUdrEjQDNJqKBlesap-dCoAT1AqGHmfcgoM0C8KLZIJ6nNAoLzoIQAa2SSCwSHS+VkxyRPFR-0BT3EKkafBQLUs7VAtjoXUaeIs9UJxPsTjkGXQCCKZPMtQJ1iJnVp0FIMCQdIZRTkbF5xiAA)
 
 ```ts
 // A tuple that has either one or two strings.
@@ -103,7 +103,7 @@ In prior versions, TypeScript only allowed `...rest` elements at the very last p
 
 However, now rest elements can occur *anywhere* within a tuple - with only a few restrictions.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/DYUwLgBAZg9jBcEDaA6NBnMAnAlgOwHMkBdAGgjwFcBbAIxC2IG4AoF2GCAXmQEYAmAMzN2cbsgBEACxDBgMCeQHDWHcUmmz5AQkURNcmLvIGde5SJahItAIZZESWnFC285NCky5CJcs5hXPEs7LHVsShByKFtgdBARUPCsSJN0GGoQCDAQAA8wPRi4hNYkniQIqP10zL0JeIAHe1scgBM6nPzC2PjmIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/DYUwLgBAZg9jBcEDaA6NBnMAnAlgOwHMkBdAGgjwFcBbAIxC2IG4AoF2GCAXmQEYAmAMzN2cbsgBEACxDBgMCeQHDWHcUmmz5AQkURNcmLvIGde5SJahItAIZZESWnFC285NCky5CJcs5hXPEs7LHVsShByKFtgdBARUPCsSJN0GGoQCDAQAA8wPRi4hNYkniQIqP10zL0JeIAHe1scgBM6nPzC2PjmIA)
 
 ```ts
 let foo: [...string[], number];
@@ -122,7 +122,7 @@ bar = [true, "some", "separated", "text", false];
 The only restriction is that a rest element can be placed anywhere in a tuple, so long as it’s not followed by another optional element or rest element.
 In other words, only one rest element per tuple, and no optional elements after rest elements.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygIwCYBsBWd2sAoASwDsAXGAMwEMBjSUAYQBs4B3U0Ab0NFGAAqAHSjBwQgF8SFavUYApOAGsYPPgJFiJ0wi0jlQAZUo19SAOoALSJBaoA2qOGsOpBwF0ANKABEAW0hfH2clVWhPDwBuQj0DY3JoMgBzRABBUgATAFkaAE8AI0gAITg4fRpSR2dERJTPHwKyitIAfmigA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygIwCYBsBWd2sAoASwDsAXGAMwEMBjSUAYQBs4B3U0Ab0NFGAAqAHSjBwQgF8SFavUYApOAGsYPPgJFiJ0wi0jlQAZUo19SAOoALSJBaoA2qOGsOpBwF0ANKABEAW0hfH2clVWhPDwBuQj0DY3JoMgBzRABBUgATAFkaAE8AI0gAITg4fRpSR2dERJTPHwKyitIAfmigA)
 
 ```ts
 interface Clown {
@@ -144,7 +144,7 @@ A rest element cannot follow another rest element.
 
 These non-trailing rest elements can be used to model functions that take any number of leading arguments, followed by a few fixed ones.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/CYUwxgNghgTiAEAzArgOzAFwJYHtX2BwGUNlFEAKAOhtgHMBnALngG0arUoBbEZ+BhhhZUdVgF0ANAIAWOZBGABhKAAcsGKBCwAvECwBGOHBBBRU4gJQsAbjizAA3AChnhEmUoB6AFQM5CspqGlq6+j5eSFoMIJZuxKTkFABEiCAgydKpWJnwqTi5qcjcub7+8ooq6praekwR8ELIsY5AA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/CYUwxgNghgTiAEAzArgOzAFwJYHtX2BwGUNlFEAKAOhtgHMBnALngG0arUoBbEZ+BhhhZUdVgF0ANAIAWOZBGABhKAAcsGKBCwAvECwBGOHBBBRU4gJQsAbjizAA3AChnhEmUoB6AFQM5CspqGlq6+j5eSFoMIJZuxKTkFABEiCAgydKpWJnwqTi5qcjcub7+8ooq6praekwR8ELIsY5AA)
 
 ```ts
 declare function doStuff(...args: [...names: string[], shouldCapitalize: boolean]): void;
@@ -163,7 +163,7 @@ For more details, [see the original pull request](https://github.com/microsoft/T
 In JavaScript, it is a runtime error to use a non-object type on the right side of the `in` operator.
 TypeScript 4.2 ensures this can be caught at design-time.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYBsBGdG00AoAIgDM44TQBLAO1ABY0BuIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYBsBGdG00AoAIgDM44TQBLAO1ABY0BuIA)
 
 ```ts
 "foo" in 42;
@@ -181,7 +181,7 @@ A big thanks to our external contributor [Jonas Hübotter](https://github.com/jo
 
 Back when TypeScript first introduced index signatures, you could only get properties declared by them with “bracketed” element access syntax like `person["name"]`.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgMoHsC2EAqBPABxQG8AoZZAegCprkcALYAZ2ReThDZABMIAPZM2ABzEHDABXKBAB0yapXLIA2gSjoCAOTjYAXELBRQIgLoHOeANykAvqVIxJIBGGDouPdKikwYACgA3OAAbSQgDDGx8IgBKZDIKEIgwZEEAXmRgsIgVACJmLAgABQ0iKDA8PNMbWyA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgMoHsC2EAqBPABxQG8AoZZAegCprkcALYAZ2ReThDZABMIAPZM2ABzEHDABXKBAB0yapXLIA2gSjoCAOTjYAXELBRQIgLoHOeANykAvqVIxJIBGGDouPdKikwYACgA3OAAbSQgDDGx8IgBKZDIKEIgwZEEAXmRgsIgVACJmLAgABQ0iKDA8PNMbWyA)
 
 ```ts
 interface SomeType {
@@ -197,7 +197,7 @@ function doStuff(value: SomeType) {
 This ended up being cumbersome in situations where we need to work with objects that have arbitrary properties.
 For example, imagine an API where it’s common to misspell a property name by adding an extra `s` character at the end.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgPIAczAPYgM7IDeAUMsgPQBUlyAYsADYrpxiRT7JjbIBGKEAB4IGAVwAmEcQDpklcqWRCREiAH4AXMjxgooAOYBtALoBuYoqqVFc5AEkwyABZwQ4pgVcBPJYN1xkdChsdGgsCAIwF0cAdxQXADcIEAByR0kROCgpZDhIr1DkFO8U6Rt5RUNBLR09EH1jLW9zAF8LGFEQBCxcQOCkPDwMHvwAChCwPC1hnHwASiJLcmQAOWwsJGQ4lOy5UEhwWbgGBi8aRAG8A2QAA2UxSTwbgBpkEHXb+9UbxWAYZHGmDw0i+jwWJDIZAQuDw2CYIKgwSgoxskIARAAVJwoCazT7CB4RG7IYAEd6OBLHYAyZAAEWpyC82FEyAAthBXPiVJIbmo0ai5uYyG0WkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgPIAczAPYgM7IDeAUMsgPQBUlyAYsADYrpxiRT7JjbIBGKEAB4IGAVwAmEcQDpklcqWRCREiAH4AXMjxgooAOYBtALoBuYoqqVFc5AEkwyABZwQ4pgVcBPJYN1xkdChsdGgsCAIwF0cAdxQXADcIEAByR0kROCgpZDhIr1DkFO8U6Rt5RUNBLR09EH1jLW9zAF8LGFEQBCxcQOCkPDwMHvwAChCwPC1hnHwASiJLcmQAOWwsJGQ4lOy5UEhwWbgGBi8aRAG8A2QAA2UxSTwbgBpkEHXb+9UbxWAYZHGmDw0i+jwWJDIZAQuDw2CYIKgwSgoxskIARAAVJwoCazT7CB4RG7IYAEd6OBLHYAyZAAEWpyC82FEyAAthBXPiVJIbmo0ai5uYyG0WkA)
 
 ```ts
 interface Options {
@@ -225,7 +225,7 @@ This also made it easier to transition existing JavaScript code over to TypeScri
 
 However, loosening the restriction also meant that misspelling an explicitly declared property became much easier.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgPIAczAPYgM7IDeAUMsgPQBUlyAYsADYrpxiRT7JjbIBGKEAB4IGAVwAmEcQDpklcqWRCREiAH4AXMjxgooAOYBtALoBuYoqqVFc5AEkwyABZwQ4pgVcBPJYN1xkdChsdGgsCAIwF0cAdxQXADcIEAByR0kROCgpZDhIr1DkFO8U6Rt5RUNBLR09EH1jLW9zAF9icnJkAFoehFEwHq7iGFEQBCxcQOCkPDwMCfwAChCwPC15nHwASiJLTukDizIO5AA5bCwkZDiU7LlEBGBJcDgGBi8aB4i8A2QAA2UYkkeD+XCcwEiwAAthAysdOqgQngAITIAAqF1e72QCVeTzhyBg2CgyEWCFwOl8KkkAAVWOwQMhsDAmZg8NJAao8DsSGR4cgDgS2i0gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgPIAczAPYgM7IDeAUMsgPQBUlyAYsADYrpxiRT7JjbIBGKEAB4IGAVwAmEcQDpklcqWRCREiAH4AXMjxgooAOYBtALoBuYoqqVFc5AEkwyABZwQ4pgVcBPJYN1xkdChsdGgsCAIwF0cAdxQXADcIEAByR0kROCgpZDhIr1DkFO8U6Rt5RUNBLR09EH1jLW9zAF9icnJkAFoehFEwHq7iGFEQBCxcQOCkPDwMCfwAChCwPC15nHwASiJLTukDizIO5AA5bCwkZDiU7LlEBGBJcDgGBi8aB4i8A2QAA2UYkkeD+XCcwEiwAAthAysdOqgQngAITIAAqF1e72QCVeTzhyBg2CgyEWCFwOl8KkkAAVWOwQMhsDAmZg8NJAao8DsSGR4cgDgS2i0gA)
 
 ```ts
 function processOptions(opts: Options) {
@@ -253,7 +253,7 @@ We’d also like to extend a big thanks to [Wenlu Wang](https://github.com/Kingw
 TypeScript allows us to mark a class as *abstract*.
 This tells TypeScript that the class is only meant to be extended from, and that certain members need to be filled in by any subclass to actually create an instance.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwFYCMWBQBDAI0QBdp8BjE0CgG30UVAGUALfAB0lAG9dRQRUuSqgA5pBIBBaJHwAKAJSoAdgFcAtoRgBuXAF9cuFZADuLdlyV7cdBk2YBHNflmhIADxKQVAEweW3HwCAMSIAJa+kAAyPmIkrKqa2tA2AhRwKsJqVAjyEVGxKvGJoOpaMIq8-AKgiGpc0NY1AgnhiAB0YZExcQmgALx1PUUlegKGNRLSsgpVwbWyJGrQKqBtnd2FfaygAFR76OOghpMgoADqCADWTABm4SYdxmYszq6Q8gAsaIo6QA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwFYCMWBQBDAI0QBdp8BjE0CgG30UVAGUALfAB0lAG9dRQRUuSqgA5pBIBBaJHwAKAJSoAdgFcAtoRgBuXAF9cuFZADuLdlyV7cdBk2YBHNflmhIADxKQVAEweW3HwCAMSIAJa+kAAyPmIkrKqa2tA2AhRwKsJqVAjyEVGxKvGJoOpaMIq8-AKgiGpc0NY1AgnhiAB0YZExcQmgALx1PUUlegKGNRLSsgpVwbWyJGrQKqBtnd2FfaygAFR76OOghpMgoADqCADWTABm4SYdxmYszq6Q8gAsaIo6QA)
 
 ```ts
 abstract class Shape {
@@ -285,7 +285,7 @@ Cannot create an instance of an abstract class.
 
 To make sure this restriction in `new`-ing up `abstract` classes is consistently applied, you can’t assign an `abstract` class to anything that expects a construct signature.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGY1oFAEMAjRAF2jwGNjRyAbPRRUAZQAs8AHSUAbx1FEIkylUAHNIxAILRIeABQBKVADsArgFsCMANw4AvjhCgAtKfKrip4zgCWy4jABmFLgAl602Tz5iJn+Uqgapo6+jg4NBKgAMLECCqQAO6giqAAvAB8oO6I-unMbJzaQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGY1oFAEMAjRAF2jwGNjRyAbPRRUAZQAs8AHSUAbx1FEIkylUAHNIxAILRIeABQBKVADsArgFsCMANw4AvjhCgAtKfKrip4zgCWy4jABmFLgAl602Tz5iJn+Uqgapo6+jg4NBKgAMLECCqQAO6giqAAvAB8oO6I-unMbJzaQA)
 
 ```ts
 interface HasArea {
@@ -302,7 +302,7 @@ Type 'typeof Shape' is not assignable to type 'new () => HasArea'.
 
 This does the right thing in case we intend to run code like `new Ctor`, but it’s overly-restrictive in case we want to write a subclass of `Ctor`.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAIYBGiALtAQMamiUA2BiioAygBYEAOkoA3nqFDEyFaqADmkUgEFokAgAoAlKgB2AVwC2RGAG48AXzx4AlqtIwAZlR4AJRrPl8BEqY8UrQG7XsPHL6qrUJnCqoJoEANaQLOpE9IyIAOompGzuCgDCpAhqkADuoMqgALwAfKD2iO5KzoJypOrQYQlMoJAAHhaqACbM2Qh1gq4ych5Dw6ANTWFYaC6CRov6Rnh0UqAAsgCe7Fw8JeFRMXGtyanpYwp73Eq6QA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAIYBGiALtAQMamiUA2BiioAygBYEAOkoA3nqFDEyFaqADmkUgEFokAgAoAlKgB2AVwC2RGAG48AXzx4AlqtIwAZlR4AJRrPl8BEqY8UrQG7XsPHL6qrUJnCqoJoEANaQLOpE9IyIAOompGzuCgDCpAhqkADuoMqgALwAfKD2iO5KzoJypOrQYQlMoJAAHhaqACbM2Qh1gq4ych5Dw6ANTWFYaC6CRov6Rnh0UqAAsgCe7Fw8JeFRMXGtyanpYwp73Eq6QA)
 
 ```ts
 abstract class Shape {
@@ -331,7 +331,7 @@ Argument of type 'typeof Shape' is not assignable to parameter of type 'new () =
 
 It also doesn’t work well with built-in helper types like `InstanceType`.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsWBQBDAI0QBdp8BjE0CgG30UVAGUALfAB0lAG9dRQRUuSqgA5pBIBBaJHwAKAJSoAdgFcAtoRgBuXAF9cIUAFozFNSTMncJAJ5dQAWTsBJFaXwqK3ALyh3T29IABUHSAAeey44ADMWdi4APh0gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsWBQBDAI0QBdp8BjE0CgG30UVAGUALfAB0lAG9dRQRUuSqgA5pBIBBaJHwAKAJSoAdgFcAtoRgBuXAF9cIUAFozFNSTMncJAJ5dQAWTsBJFaXwqK3ALyh3T29IABUHSAAeey44ADMWdi4APh0gA)
 
 ```ts
 type MyInstance = InstanceType<typeof Shape>;
@@ -339,7 +339,7 @@ type MyInstance = InstanceType<typeof Shape>;
 
 That’s why TypeScript 4.2 allows you to specify an `abstract` modifier on constructor signatures.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/IYIwzgLgTsDGEAJYBthjAgygC2ABwFMEBvAKAQVEhngQHMCIBBKA4ACgEoAuBAOwCuAWxAEoAblIBfUgHpZCALTLYAiMsWkAlnwhiAZnCIAJNCzYlyFeo3Mce-YaInTSchQHUA9lADWYAEJSZEYEAGEIH14qaDhEPgIAdwQuBABeAD4EUzA7dKxcQnEgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/IYIwzgLgTsDGEAJYBthjAgygC2ABwFMEBvAKAQVEhngQHMCIBBKA4ACgEoAuBAOwCuAWxAEoAblIBfUgHpZCALTLYAiMsWkAlnwhiAZnCIAJNCzYlyFeo3Mce-YaInTSchQHUA9lADWYAEJSZEYEAGEIH14qaDhEPgIAdwQuBABeAD4EUzA7dKxcQnEgA)
 
 ```ts
 interface HasArea {
@@ -356,7 +356,7 @@ It doesn’t stop you from passing in other classes/constructor functions that a
 This feature allows us to write *mixin factories* in a way that supports abstract classes.
 For example, in the following code snippet, we’re able to use the mixin function `withStyles` with the `abstract` class `SuperClass`.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/IYIwzgLgTsDGEAJYBthjAgygVwA4FMoBhVdBAbwCgEaFRIZ4EwB7AW3wFl8IALFgCYAKAJQAuBADcWASwEBuarRDABA4KIoBfSjsoQAngQQBBcNDgQiLAHYNs8FlAA8AFQB8CALx1zjRDb4AO4IQgB0EcBQAOZgEsA2BgDaALoi3p6ulJQAZtg28DK2CEEyfJiGyPhgbgj4AB4Q+DYCGGYMltZ20A4QTs4sIABW+PDu7kJEfVASrulUtL4dTChoGBUGVQIka3WNza0IU04USos00TwbVWCaC+cPAPSPCBFhZ+c6i1+0UDzYUBsWEq+G2pDAij0qzIOBAOzIDSaLQwpXKINuOAIxHB8w+rA43D4gjuH0WfBkYDC+K4PH4whEHx0WiAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/IYIwzgLgTsDGEAJYBthjAgygVwA4FMoBhVdBAbwCgEaFRIZ4EwB7AW3wFl8IALFgCYAKAJQAuBADcWASwEBuarRDABA4KIoBfSjsoQAngQQBBcNDgQiLAHYNs8FlAA8AFQB8CALx1zjRDb4AO4IQgB0EcBQAOZgEsA2BgDaALoi3p6ulJQAZtg28DK2CEEyfJiGyPhgbgj4AB4Q+DYCGGYMltZ20A4QTs4sIABW+PDu7kJEfVASrulUtL4dTChoGBUGVQIka3WNza0IU04USos00TwbVWCaC+cPAPSPCBFhZ+c6i1+0UDzYUBsWEq+G2pDAij0qzIOBAOzIDSaLQwpXKINuOAIxHB8w+rA43D4gjuH0WfBkYDC+K4PH4whEHx0WiAA)
 
 ```ts
 abstract class SuperClass {
@@ -481,7 +481,7 @@ For more details, take a look at [the full change](https://github.com/microsoft/
 
 String index signatures are a way of typing dictionary-like objects, where you want to allow access with arbitrary keys:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYewdgzgLgBAtiAbgSwKYHUCGVgAsDCIArmFAFwwDeMA2gNaoCeF0ATsmAOYC6FYRcAEapWMAL4wAvFTEBuAFDyAZiWBRk4GAHdseALJI0ACnVQANqhZR2XAJRV5MeIYy6CxUjVMXuUmEYQUVxx3EigvZHNUXwB+GJgABnsAahgARgUxIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYewdgzgLgBAtiAbgSwKYHUCGVgAsDCIArmFAFwwDeMA2gNaoCeF0ATsmAOYC6FYRcAEapWMAL4wAvFTEBuAFDyAZiWBRk4GAHdseALJI0ACnVQANqhZR2XAJRV5MeIYy6CxUjVMXuUmEYQUVxx3EigvZHNUXwB+GJgABnsAahgARgUxIA)
 
 ```ts
 const movieWatchCount: { [key: string]: number } = {};
@@ -494,7 +494,7 @@ function watchMovie(title: string) {
 Of course, for any movie title not yet in the dictionary, `movieWatchCount[title]` will be `undefined` (TypeScript 4.1 added the option [`noUncheckedIndexedAccess` ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#checked-indexed-accesses---nouncheckedindexedaccess) to include `undefined` when reading from an index signature like this).
 Even though it’s clear that there must be some strings not present in `movieWatchCount`, previous versions of TypeScript treated optional object properties as unassignable to otherwise compatible index signatures, due to the presence of `undefined`.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBA6hDOBBAdgEwgJ3ge2TAhsAMYAWAwtgK7LBQC8UA3gFBRQBEAYvjfvMAEsiUALIYAdFE7YAHuwD8ALijJKAWwBGmANysOAFRLQASthD4ANlH0RktjfnXwFy1Zp172I7LgwD40ADSAsgA5qjYai4q6loYumzshtAA4hg8qFAAQpSo+JD8UAAS2MAQFtFucboAvrrM6EQW+BjQRLiFAO4IKOhYuATE5FQ0ynBIaJg4eISkFNTAuu3IhWrYAG4CEINzI8DKjFAA2gDWECDK-H5hALqusZhQNfRQ3RN90zvDC7oA9L9sNgAPxBoLB4KgmAw2AwAEJmP9rOBoAByca9KYDWbfGgoqD+FSlKB8eACULIfAaCzQYDYKCgSBQFGHU7nS7Aa6hO4xdzxJ4o8QIgGAgAK0MgGFATK4PGAfEEwjEkmkcjxBJC7TUYEIAip0E6AmAJHxkxkUFJ5MIlFagsRgLY+mRTKqjwAPlBqOgAGYhCCoNXwQm0Elkil6+l0hmol0YAVC+32x2MlGeiA+uz+-GB5BEkOW8O0+lOlExgVQAAUACYAMyVysASiAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBA6hDOBBAdgEwgJ3ge2TAhsAMYAWAwtgK7LBQC8UA3gFBRQBEAYvjfvMAEsiUALIYAdFE7YAHuwD8ALijJKAWwBGmANysOAFRLQASthD4ANlH0RktjfnXwFy1Zp172I7LgwD40ADSAsgA5qjYai4q6loYumzshtAA4hg8qFAAQpSo+JD8UAAS2MAQFtFucboAvrrM6EQW+BjQRLiFAO4IKOhYuATE5FQ0ynBIaJg4eISkFNTAuu3IhWrYAG4CEINzI8DKjFAA2gDWECDK-H5hALqusZhQNfRQ3RN90zvDC7oA9L9sNgAPxBoLB4KgmAw2AwAEJmP9rOBoAByca9KYDWbfGgoqD+FSlKB8eACULIfAaCzQYDYKCgSBQFGHU7nS7Aa6hO4xdzxJ4o8QIgGAgAK0MgGFATK4PGAfEEwjEkmkcjxBJC7TUYEIAip0E6AmAJHxkxkUFJ5MIlFagsRgLY+mRTKqjwAPlBqOgAGYhCCoNXwQm0Elkil6+l0hmol0YAVC+32x2MlGeiA+uz+-GB5BEkOW8O0+lOlExgVQAAUACYAMyVysASiAA)
 
 ```ts
 type WesAndersonWatchCount = {
@@ -515,7 +515,7 @@ const movieWatchCount: { [key: string]: number } = wesAndersonWatchCount;
 
 TypeScript 4.2 allows this assignment. However, it does *not* allow the assignment of non-optional properties with `undefined` in their types, nor does it allow writing `undefined` to a specific key:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGY1oFABcBPAB0lACEBDPAWwoDsB1KgYwAsBhOAVzr1AF5QAbxyhQAIko165SAHMAlnUTjUdLtQBGMUAB9QPACaQAZksiGA3KIkAVVqQAiFaAGtQAaToK5rPKtB1LR19I1NzKxtxeycXdy8fP1AAJQVESBU1DW1oPQM6YzM6C2sAX2scY2YAGxdSZjhlPk0qWkYWDm5eVCk2pjw2Th48CpBQAGU8BWrq0BkYeFylUFtiSHHmaAUiPgAWADo0fZwGptBqOAA3BUh+wa68VCFQAG1XSAJURDwtujkAXSywVypQEoBa0naA06w1GYEm01m81gCFAy1WJA2Wx2oAORxwYwAkgVIAAPUCIHx0KhcaAZUCGRoAcj4CmoRGqCmYCjw1QIcxmcAA7qAyRyuTzQAADMJFCxS44Xa63DpDXgvcSEvBMxCgPAOUAAcTpVFAAAUNERXEoADSgdisFyc0hkeBCujif5g2URSxAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGY1oFABcBPAB0lACEBDPAWwoDsB1KgYwAsBhOAVzr1AF5QAbxyhQAIko165SAHMAlnUTjUdLtQBGMUAB9QPACaQAZksiGA3KIkAVVqQAiFaAGtQAaToK5rPKtB1LR19I1NzKxtxeycXdy8fP1AAJQVESBU1DW1oPQM6YzM6C2sAX2scY2YAGxdSZjhlPk0qWkYWDm5eVCk2pjw2Th48CpBQAGU8BWrq0BkYeFylUFtiSHHmaAUiPgAWADo0fZwGptBqOAA3BUh+wa68VCFQAG1XSAJURDwtujkAXSywVypQEoBa0naA06w1GYEm01m81gCFAy1WJA2Wx2oAORxwYwAkgVIAAPUCIHx0KhcaAZUCGRoAcj4CmoRGqCmYCjw1QIcxmcAA7qAyRyuTzQAADMJFCxS44Xa63DpDXgvcSEvBMxCgPAOUAAcTpVFAAAUNERXEoADSgdisFyc0hkeBCujif5g2URSxAA)
 
 ```ts
 type BatmanWatchCount = {
@@ -544,7 +544,7 @@ Type 'BatmanWatchCount' is not assignable to type '{ [key: string]: number; }'.
 
 The new rule also does not apply to number index signatures, since they are assumed to be array-like and dense:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGY1oFABNIBjAGwENpJRjIAXURBGgeQDMBBWUgTwEtEALVAG9QAbQDWkLqgB2AVwC2AIxgBdVIhrQeMgOagAvgG58RMhSq1Q85TADSUlKBEAWNAH4NWnfuM4cDNDM7Jy8AqAAvNaKKtAOXIhGQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGY1oFABNIBjAGwENpJRjIAXURBGgeQDMBBWUgTwEtEALVAG9QAbQDWkLqgB2AVwC2AIxgBdVIhrQeMgOagAvgG58RMhSq1Q85TADSUlKBEAWNAH4NWnfuM4cDNDM7Jy8AqAAvNaKKtAOXIhGQA)
 
 ```ts
 declare let sortOfArrayish: { [key: number]: string };
@@ -582,7 +582,7 @@ There are various changes, though `Intl` and `ResizeObserver`’s may end up bei
 
 When the value of a `yield` expression is captured, but TypeScript can’t immediately figure out what type you intend for it to receive (i.e. the `yield` expression isn’t contextually typed), TypeScript will now issue an implicit `any` error.
 
-[Try this code](/play/#code/PTAEAEFMCdoe2gZwFygOwAYCsaBQAzAVwDsBjAFwEs5iAqUAcwEYAKASlAG9dRRSbE5UADcAhgBtCkUAF5QAT0qRxAE1BMA3LgC+uAiQrU6jAEzsuPUCFAA5OKBjxoAOkvWAKgAtp0SIkLiQnD4oAAGispqTKGglIigJISIkCquvBGq6lq6+mRUNPQMAMzm3LzWdg6wCGlWYOFKmdGx8fzE5JAAHuSEEuLyoOTyAA4poABGAwDkgtCUxAxTtW2CIhJSqLPzDLIKjVHZekR5RoUALOyoAOKQxDCi5AgAPMSEALbjMAA0InCUKj8tgsAHwWcpgSqOGpuMDuEaQADKpDmwyEpFExFA+EoDEIvlAcEIQnI3kG8IJIQakXUoRhWPgb0GpK6w3ElFIlCEvh60ExQ1GFLCDDOoWWAiEYkk0jkGQOOiAA)
+[Try this code](/play#code/PTAEAEFMCdoe2gZwFygOwAYCsaBQAzAVwDsBjAFwEs5iAqUAcwEYAKASlAG9dRRSbE5UADcAhgBtCkUAF5QAT0qRxAE1BMA3LgC+uAiQrU6jAEzsuPUCFAA5OKBjxoAOkvWAKgAtp0SIkLiQnD4oAAGispqTKGglIigJISIkCquvBGq6lq6+mRUNPQMAMzm3LzWdg6wCGlWYOFKmdGx8fzE5JAAHuSEEuLyoOTyAA4poABGAwDkgtCUxAxTtW2CIhJSqLPzDLIKjVHZekR5RoUALOyoAOKQxDCi5AgAPMSEALbjMAA0InCUKj8tgsAHwWcpgSqOGpuMDuEaQADKpDmwyEpFExFA+EoDEIvlAcEIQnI3kG8IJIQakXUoRhWPgb0GpK6w3ElFIlCEvh60ExQ1GFLCDDOoWWAiEYkk0jkGQOOiAA)
 
 ```ts
 function* g1() {

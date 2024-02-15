@@ -15,7 +15,7 @@ The [`strictFunctionTypes` ↗](https://www.typescriptlang.org/tsconfig.html#str
 You can opt-out by setting `--strictFunctionTypes false` on your command line or in your tsconfig.json.
 
 Under [`strictFunctionTypes` ↗](https://www.typescriptlang.org/tsconfig.html#strictFunctionTypes) function type parameter positions are checked *contravariantly* instead of *bivariantly*.
-For some background on what variance means for function types check out [What are covariance and contravariance?](https://web.archive.org/web/20220823104433/https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance).
+For some background on what variance means for function types check out [What are covariance and contravariance?](https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance).
 
 The stricter checking applies to all function types, *except* those originating in method or constructor declarations.
 Methods are excluded specifically to ensure generic classes and interfaces (such as `Array<T>`) continue to mostly relate covariantly.
@@ -246,7 +246,7 @@ The watcher logic has been completely rewritten to respond faster to change even
 
 ## Write-only references now flagged as unused {#write-only-references-now-flagged-as-unused}
 
-TypeScript 2.6 adds revised implementation the [`noUnusedLocals` ↗](https://www.typescriptlang.org/tsconfig.html#noUnusedLocals) and [`noUnusedParameters` ↗](https://www.typescriptlang.org/tsconfig.html#noUnusedParameters)[compiler options](/typescript/5.2/project-configuration/tsc-cli-options).
+TypeScript 2.6 adds revised implementation the [`noUnusedLocals` ↗](https://www.typescriptlang.org/tsconfig.html#noUnusedLocals) and [`noUnusedParameters` ↗](https://www.typescriptlang.org/tsconfig.html#noUnusedParameters)[compiler options](/typescript/5.2/project-configuration/compiler-options).
 Declarations are only written to but never read from are now flagged as unused.
 
 ##### Example {#example-4}

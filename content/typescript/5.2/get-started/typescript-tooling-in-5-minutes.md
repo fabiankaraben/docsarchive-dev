@@ -4,7 +4,7 @@ title: "TypeScript: Documentation - TypeScript Tooling in 5 minutes"
 description: "A tutorial to understand how to create a small website with TypeScript"
 weight: 5
 type: docs
-next: /typescript/5.2/handbook/the-typescript-handbook
+next: /typescript/5.2/handbook/intro
 ---
 
 # TypeScript Tooling in 5 minutes
@@ -19,7 +19,7 @@ There are two main ways to add TypeScript to your project:
 - By installing TypeScript’s Visual Studio plugins
 
 Visual Studio 2017 and Visual Studio 2015 Update 3 include TypeScript language support by default but does not include the TypeScript compiler, `tsc`.
-If you didn’t install TypeScript with Visual Studio, you can still [download it ↗](https://www.typescriptlang.org/download.html).
+If you didn’t install TypeScript with Visual Studio, you can still [download it ↗](https://www.typescriptlang.org/download).
 
 For npm users:
 
@@ -31,7 +31,7 @@ For npm users:
 
 In your editor, type the following JavaScript code in `greeter.ts`:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEDsHsEkFsAOAbAlgY1QFwIKQJ4BcoAZgIbIDOApgFAkCuk6Wq0koA5gE7XVbVuACkSDK7AJSgA3rVCheWBtw4AiABLVkyaABpQq0AGpQo7uMgBuWgF9atZP1AMa3UAF4DAKTKRqoAFVXVWtaABNodAZ4akgsADoAI2gw-HiBAA8sAGF2ATiPLl5+QSEXQQlLIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEDsHsEkFsAOAbAlgY1QFwIKQJ4BcoAZgIbIDOApgFAkCuk6Wq0koA5gE7XVbVuACkSDK7AJSgA3rVCheWBtw4AiABLVkyaABpQq0AGpQo7uMgBuWgF9atZP1AMa3UAF4DAKTKRqoAFVXVWtaABNodAZ4akgsADoAI2gw-HiBAA8sAGF2ATiPLl5+QSEXQQlLIA)
 
 ```ts
 function greeter(person) {
@@ -60,7 +60,7 @@ We’re up and running using TypeScript in our JavaScript app!
 Now we can start taking advantage of some of the new tools TypeScript offers.
 Add a `: string` type annotation to the ‘person’ function argument as shown here:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABAcwE4FN1XagFABxwGcEAuRIqVGMZASkQG8AoRRDKEVJAIgAl0AG0FwANIh6IA1IkKoSYANzMAvs2aCsiEERyIAvBIBSAQzDpEAVV2oey5gBM4EEAFt0YKADoARnAcAnl7YAB5QAMII2J4GKBhYOLg6OHSKQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABAcwE4FN1XagFABxwGcEAuRIqVGMZASkQG8AoRRDKEVJAIgAl0AG0FwANIh6IA1IkKoSYANzMAvs2aCsiEERyIAvBIBSAQzDpEAVV2oey5gBM4EEAFt0YKADoARnAcAnl7YAB5QAMII2J4GKBhYOLg6OHSKQA)
 
 ```ts
 function greeter(person: string) {
@@ -78,7 +78,7 @@ Type annotations in TypeScript are lightweight ways to record the intended contr
 In this case, we intend the greeter function to be called with a single string parameter.
 We can try changing the call greeter to pass an array instead:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAGYCuAdgMYAuAlnCaAObSSQUwAUADjIraohdCol6ASlABvPKFBMKRaHQBEACUgAbNXAA0oRaADUoLkloBuPAF88eNS1BFEMUAF5QAbQAMOgIw60AXXM8ABM4MiIAW0gSCgA6ACM4YIBPWNYADwoAYVpWGJcGJhZ2BxgRUyA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAGYCuAdgMYAuAlnCaAObSSQUwAUADjIraohdCol6ASlABvPKFBMKRaHQBEACUgAbNXAA0oRaADUoLkloBuPAF88eNS1BFEMUAF5QAbQAMOgIw60AXXM8ABM4MiIAW0gSCgA6ACM4YIBPWNYADwoAYVpWGJcGJhZ2BxgRUyA)
 
 ```ts
 function greeter(person: string) {
@@ -113,7 +113,7 @@ Let’s develop our sample further. Here we use an interface that describes obje
 In TypeScript, two types are compatible if their internal structure is compatible.
 This allows us to implement an interface just by having the shape the interface requires, without an explicit `implements` clause.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgArQM4HsTIN4BQyyMwUGYAcnALYQBcyFUoA5gNxHIA2cF1dRszacAvgQIwAriARhgOZKygQIkKAAoADphyN05HAEp8XFWClRcAIgASEbtywAaZNeQBqZDsMgAdKTkVLQoXu7uXj7Y-rz8IWIS3GrIUhjQyAC8+CRkcYJuAFJwIBDWrrHB+dYAqmlQ7qKcBAAmWAhSdOB+AEZYzQCefpAAHmAAwjiQ4JlKKmrQGqnQRuxAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgArQM4HsTIN4BQyyMwUGYAcnALYQBcyFUoA5gNxHIA2cF1dRszacAvgQIwAriARhgOZKygQIkKAAoADphyN05HAEp8XFWClRcAIgASEbtywAaZNeQBqZDsMgAdKTkVLQoXu7uXj7Y-rz8IWIS3GrIUhjQyAC8+CRkcYJuAFJwIBDWrrHB+dYAqmlQ7qKcBAAmWAhSdOB+AEZYzQCefpAAHmAAwjiQ4JlKKmrQGqnQRuxAA)
 
 ```ts
 interface Person {
@@ -140,7 +140,7 @@ Notice that classes and interfaces play well together, letting the programmer de
 
 Also of note, the use of `public` on arguments to the constructor is a shorthand that allows us to automatically create properties with that name.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYGwhgzhAEDKAuBXAJgUwHb2gbwFDWgDNEQQA5MAW1QC5oJ4AnAS3QHMBufaYAe3QaNEweL0YAKbgQAOiAEYhmwIs0YMK1OoNZsANFOiyFS6JWbJkIVAEl0zeMzAgtTHfoIz5i5eHVVa9K7s3ACUOAbwABbMEAB0xKQaqNAAvCpq8EnQANTQAET5OabmljZ2Dk5FBQW5vpn+XAQAvrgtuKzwqIyEYMDJAApdEPzhBISqfpqBLOyN0HVJLjOcrbi4xOgizCNsjKionRLSQ-x0g2r8YXgEe0iM6PkAEqikvLqFuccX6PET9dRVD6GE4-BYNVa4KxYRAQLqpaDoVAAdzgSDQmHEeQAUmBEXl3nkALKxfH5ACqsMYeRCXFwyF4wEQ1EwsTkvGQAE9Yp0AB7wADC-E6mHhu32h3EMK6NKAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAEDKAuBXAJgUwHb2gbwFDWgDNEQQA5MAW1QC5oJ4AnAS3QHMBufaYAe3QaNEweL0YAKbgQAOiAEYhmwIs0YMK1OoNZsANFOiyFS6JWbJkIVAEl0zeMzAgtTHfoIz5i5eHVVa9K7s3ACUOAbwABbMEAB0xKQaqNAAvCpq8EnQANTQAET5OabmljZ2Dk5FBQW5vpn+XAQAvrgtuKzwqIyEYMDJAApdEPzhBISqfpqBLOyN0HVJLjOcrbi4xOgizCNsjKionRLSQ-x0g2r8YXgEe0iM6PkAEqikvLqFuccX6PET9dRVD6GE4-BYNVa4KxYRAQLqpaDoVAAdzgSDQmHEeQAUmBEXl3nkALKxfH5ACqsMYeRCXFwyF4wEQ1EwsTkvGQAE9Yp0AB7wADC-E6mHhu32h3EMK6NKAA)
 
 ```ts
 class Student {

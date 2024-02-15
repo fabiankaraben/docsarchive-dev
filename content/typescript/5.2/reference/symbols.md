@@ -58,7 +58,7 @@ let className = c[getClassNameSymbol ↗](https://www.typescriptlang.org); // "C
 
 To enable treating symbols as unique literals a special type `unique symbol` is available. `unique symbol` is a subtype of `symbol`, and are produced only from calling `Symbol()` or `Symbol.for()`, or from explicit type annotations. This type is only allowed on `const` declarations and `readonly static` properties, and in order to reference a specific unique symbol, you’ll have to use the `typeof` operator. Each reference to a unique symbol implies a completely unique identity that’s tied to a given declaration.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygIwGYMCYBQATSAYwBsBDaSUIuAO0QBdREBPAWzVQFdaBLARy5VWbAEZwSAbly4QzdtmplaoOiRahRVMtTqNlTSgDMYkWkUgA6XCUhMR2bn0HD24kqAC8oAMpuJABQAlNKyYADqCADWiKAAtKDGMLEMcKA6PAJC8mISADSaXEy8DLG8hLQMJRq8KbyQ+KCpoADkImgt1rb27BioDCwADpBwRjloXuOhcgCCJIhpAO7RiNakZIixAMKgAN64oMwMZFVEiZBk+GoaPsenfrkkTlmuj5MP7sHSAL5AA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygIwGYMCYBQATSAYwBsBDaSUIuAO0QBdREBPAWzVQFdaBLARy5VWbAEZwSAbly4QzdtmplaoOiRahRVMtTqNlTSgDMYkWkUgA6XCUhMR2bn0HD24kqAC8oAMpuJABQAlNKyYADqCADWiKAAtKDGMLEMcKA6PAJC8mISADSaXEy8DLG8hLQMJRq8KbyQ+KCpoADkImgt1rb27BioDCwADpBwRjloXuOhcgCCJIhpAO7RiNakZIixAMKgAN64oMwMZFVEiZBk+GoaPsenfrkkTlmuj5MP7sHSAL5AA)
 
 ```ts
 declare const sym1: unique symbol;
@@ -81,7 +81,7 @@ A variable whose type is a 'unique symbol' type must be 'const'.
 
 Because each `unique symbol` has a completely separate identity, no two `unique symbol` types are assignable or comparable to each other.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYBsB2AUAMZwB2iALqIgJ4C2aoAvKAMq0BGcANgBQCUA3IRLlKtDIxbsufQXgCWAM1DdqdRgyaqMvUAG88oUCFAA6M3gC+QA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYBsB2AUAMZwB2iALqIgJ4C2aoAvKAMq0BGcANgBQCUA3IRLlKtDIxbsufQXgCWAM1DdqdRgyaqMvUAG88oUCFAA6M3gC+QA)
 
 ```ts
 const sym2 = Symbol();

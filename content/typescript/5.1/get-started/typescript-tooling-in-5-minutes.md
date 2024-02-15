@@ -4,7 +4,7 @@ title: "TypeScript: Documentation - TypeScript Tooling in 5 minutes"
 description: "A tutorial to understand how to create a small website with TypeScript"
 weight: 5
 type: docs
-next: /typescript/5.1/handbook/the-typescript-handbook
+next: /typescript/5.1/handbook/intro
 ---
 
 # TypeScript Tooling in 5 minutes
@@ -19,7 +19,7 @@ There are two main ways to add TypeScript to your project:
 - By installing TypeScript’s Visual Studio plugins
 
 Visual Studio 2017 and Visual Studio 2015 Update 3 include TypeScript language support by default but does not include the TypeScript compiler, `tsc`.
-If you didn’t install TypeScript with Visual Studio, you can still [download it ↗](https://www.typescriptlang.org/download.html).
+If you didn’t install TypeScript with Visual Studio, you can still [download it ↗](https://www.typescriptlang.org/download).
 
 For npm users:
 

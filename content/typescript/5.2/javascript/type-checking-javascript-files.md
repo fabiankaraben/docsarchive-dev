@@ -19,7 +19,7 @@ The type of a property is the type given in the constructor, unless it’s not d
 In that case, the type is the union of the types of all the right-hand values in these assignments.
 Properties defined in the constructor are always assumed to exist, whereas ones defined just in methods, getters, or setters are considered optional.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGMAsFNINYCkDOAoEFYCdsHtsUAuUAJgGZTS1IAbAQxRVAGFQBvNUUSPAOxQAXbAFdIgggAoAlBy7dQg6AEsUAOl4DhYidgDyfWgE9QAXlAAGANzzuS1Rv5DR4ggFU+CPngDufM6AifAAmsABmynywwTbcAL7yALawSnjBMnIKiirqms46BAbGAWH0tCiwsQr2uU7artgeXr7+5gBEAA60QQgARvSCbVagmHgIADQ8dS66Td5+oKqgzpEA5qAAPoEh4ZHRttkOyanBRSbtY0MjYGOTvSKCoMfQaWdTIrTBoGUoeKC9sG2oQiUWC8gS3GeaVIGU4WRqaihp0M50Uokq12+5Twk1uTxSL2RxgA5MxBEYOoClis+Ostr08HhaLB6P4tkFgXswfE0HEgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGMAsFNINYCkDOAoEFYCdsHtsUAuUAJgGZTS1IAbAQxRVAGFQBvNUUSPAOxQAXbAFdIgggAoAlBy7dQg6AEsUAOl4DhYidgDyfWgE9QAXlAAGANzzuS1Rv5DR4ggFU+CPngDufM6AifAAmsABmynywwTbcAL7yALawSnjBMnIKiirqms46BAbGAWH0tCiwsQr2uU7artgeXr7+5gBEAA60QQgARvSCbVagmHgIADQ8dS66Td5+oKqgzpEA5qAAPoEh4ZHRttkOyanBRSbtY0MjYGOTvSKCoMfQaWdTIrTBoGUoeKC9sG2oQiUWC8gS3GeaVIGU4WRqaihp0M50Uokq12+5Twk1uTxSL2RxgA5MxBEYOoClis+Ostr08HhaLB6P4tkFgXswfE0HEgA)
 
 ```js
 class C {
@@ -46,7 +46,7 @@ If properties are never set in the class body, they are considered unknown.
 If your class has properties that are only read from, add and then annotate a declaration in the constructor with JSDoc to specify the type.
 You don’t even have to give a value if it will be initialized later:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGMAsFNINYCkDOAoEFYCdsHtsUAuUAJgGZTS1IAbAQxRVAGFQBvNUUSPAOxQAXbAFdIgggAoAlBy7dQwAFRKIggJ4AHWBz4iAtgCMcoAD6gRfACawAZgEs+sKwF9QS4PO6Do9lADpNfE1QAF4LaztHZwBuL0UVNS0ddj0jE3NLGwcnV3dPBVAfP39eS0E47hc0arRaWEEeMNAnAHdWGTjIQODmgAYYxTAAeQBpGlK8cuaAIiFsRwBzGZigA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGMAsFNINYCkDOAoEFYCdsHtsUAuUAJgGZTS1IAbAQxRVAGFQBvNUUSPAOxQAXbAFdIgggAoAlBy7dQwAFRKIggJ4AHWBz4iAtgCMcoAD6gRfACawAZgEs+sKwF9QS4PO6Do9lADpNfE1QAF4LaztHZwBuL0UVNS0ddj0jE3NLGwcnV3dPBVAfP39eS0E47hc0arRaWEEeMNAnAHdWGTjIQODmgAYYxTAAeQBpGlK8cuaAIiFsRwBzGZigA)
 
 ```js
 class C {
@@ -73,7 +73,7 @@ Before ES2015, JavaScript used constructor functions instead of classes.
 The compiler supports this pattern and understands constructor functions as equivalent to ES2015 classes.
 The property inference rules described above work exactly the same way.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGMAsFNINYCkDOAoEFYCdsHtsUAuUAJgDYAOAZjOtNLQDMBXAO0gBcBLPN0AMIAKAJSgA3mlChO0bigB0kPik7YWXAgHk2AGwCeoALygADAG4pMuYuVtV6zdgCqbBGzwB3fifYATWCZuNlg-SwBfNAEFAAd8TjxOfRjYBQBbWFk8P2NQVg4ePlBRCStZeSUVNQ0E7B0DXKYAQ10UWEtpctsqx1rXdy8fUAAiGN12BAAjJs5h81BMLQBpABprWBlkjflQB2CAc1AAH1B-QODQtHDzIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGMAsFNINYCkDOAoEFYCdsHtsUAuUAJgDYAOAZjOtNLQDMBXAO0gBcBLPN0AMIAKAJSgA3mlChO0bigB0kPik7YWXAgHk2AGwCeoALygADAG4pMuYuVtV6zdgCqbBGzwB3fifYATWCZuNlg-SwBfNAEFAAd8TjxOfRjYBQBbWFk8P2NQVg4ePlBRCStZeSUVNQ0E7B0DXKYAQ10UWEtpctsqx1rXdy8fUAAiGN12BAAjJs5h81BMLQBpABprWBlkjflQB2CAc1AAH1B-QODQtHDzIA)
 
 ```js
 function C() {
@@ -114,7 +114,7 @@ Most combinations of assignments and declarations are supported.
 Classes are namespaces in `.js` files.
 This can be used to nest classes, for example:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYGwhgzhAEDC0G8C+AoWA6AItAvNUkMyA3EA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAEDC0G8C+AoWA6AItAvNUkMyA3EA)
 
 ```js
 class C {}
@@ -123,7 +123,7 @@ C.D = class {};
 
 And, for pre-ES2015 code, it can be used to simulate static methods:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABAeRFApgJwBQEpEDeAUIolABYwDOAdAJ6IC8iATANxEC+RRqGmNAJJgwWJolCRYCRHkIkylWnQbN2XDrzRYhIrHjZA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABAeRFApgJwBQEpEDeAUIolABYwDOAdAJ6IC8iATANxEC+RRqGmNAJJgwWJolCRYCRHkIkylWnQbN2XDrzRYhIrHjZA)
 
 ```js
 function Outer() {
@@ -139,7 +139,7 @@ Outer.Inner();
 
 It can also be used to create simple namespaces:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/G4QwTgBAdgzhC8EDeBfA3AKFgOgMIIgGMAbEGOVTHAMwFcpCC6GAXASwHsoIAKASmToMWGGiA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/G4QwTgBAdgzhC8EDeBfA3AKFgOgMIIgGMAbEGOVTHAMwFcpCC6GAXASwHsoIAKASmToMWGGiA)
 
 ```js
 var ns = {};
@@ -151,7 +151,7 @@ ns;
 
 Other variants are allowed as well:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEElwMQUQKAG4EMBOoB2BnUBeUAKAMwFd0BjAFwEsB7dA9ASlAG85RQUBTC4le+gB9BrAL4BuOKMb5GkrADoAwgHkAcgGUAKrlABGSXBCgAJl0JJiAG2roA5qAo1QdqzQBGSK4lSgkmTCo7ehx2PwCgoUEwknJqOgJmNg4OYzIaMxcaLmwACy5uMIk4f0DghS4ADwoUJF0DIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEElwMQUQKAG4EMBOoB2BnUBeUAKAMwFd0BjAFwEsB7dA9ASlAG85RQUBTC4le+gB9BrAL4BuOKMb5GkrADoAwgHkAcgGUAKrlABGSXBCgAJl0JJiAG2roA5qAo1QdqzQBGSK4lSgkmTCo7ehx2PwCgoUEwknJqOgJmNg4OYzIaMxcaLmwACy5uMIk4f0DghS4ADwoUJF0DIA)
 
 ```js
 // IIFE
@@ -176,7 +176,7 @@ No new members can be added that were not specified in the original literal.
 This rule is relaxed in a `.js` file; object literals have an open-ended type (an index signature) that allows adding and looking up properties that were not defined originally.
 For instance:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/G4QwTgBA9gRgVhAvBA3hEAuCBGCBfAbgChY4A6GJCAJgIgHp6IBBAG1agHcBTAEyA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/G4QwTgBA9gRgVhAvBA3hEAuCBGCBfAbgChY4A6GJCAJgIgHp6IBBAG1agHcBTAEyA)
 
 ```js
 var obj = { a: 1 };
@@ -187,7 +187,7 @@ Object literals behave as if they have an index signature `[x:string]: any` that
 
 Like other special JS checking behaviors, this behavior can be changed by specifying a JSDoc type for the variable. For example:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGMAsFNINYCkDOAoEFYCdsHtsUAuUAJgGZyBODAKlogBcBPAB1lAG9OBDEgOwCuAWwBGOAL4TQtYGgBuPbKDyiAVqAC8XUH1ABGUBIDcaVWoB0orWWNA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGMAsFNINYCkDOAoEFYCdsHtsUAuUAJgGZyBODAKlogBcBPAB1lAG9OBDEgOwCuAWwBGOAL4TQtYGgBuPbKDyiAVqAC8XUH1ABGUBIDcaVWoB0orWWNA)
 
 ```js
 /** @type {{a: number}} */
@@ -205,7 +205,7 @@ Any variable, parameter or property that is initialized with null or undefined w
 Any variable, parameter or property that is initialized with [] will have type any[], even if strict null checks is turned on.
 The only exception is for properties that have multiple initializers as described above.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABAMTnAFDRBeRYQA2BAlIgN4BQiiMwi6AhDKVrgIwDcViAbgIYAnRACscicABMApsBhgpErtVG4ATEsRQAFjADOAOgJiA2gF0uAXwoV+Q4GjHyA7ijTpiXe3EP6ADiF0tdC99Zk80H39A9AAiKTAJGI8gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABAMTnAFDRBeRYQA2BAlIgN4BQiiMwi6AhDKVrgIwDcViAbgIYAnRACscicABMApsBhgpErtVG4ATEsRQAFjADOAOgJiA2gF0uAXwoV+Q4GjHyA7ijTpiXe3EP6ADiF0tdC99Zk80H39A9AAiKTAJGI8gA)
 
 ```js
 function Foo(i = null) {
@@ -229,7 +229,7 @@ It is important to note that it is an error to call a function with too many arg
 
 For instance:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGMAsFNINYCkDOAoEEUBcBOBLSbALlADMBDAGxVgzHFl1wHtcVSB2ABm4DZQPfqABMAVjEAWNGQCuAOyL4W80ACMKuABQUANOoCUoAN5pQoSCpQsqsAHRUWAcx2gA1KABEX94YDcaAC+aGga2gCMBn6gmADyANL6tJbyACagmk6yALaw8tgWVvipTLDpLAAO2Mry1KGaWuH6IlH1Ec36AMxRMWAAosxs+tgsLKDZFPIAnhm4Wbn5KEA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGMAsFNINYCkDOAoEEUBcBOBLSbALlADMBDAGxVgzHFl1wHtcVSB2ABm4DZQPfqABMAVjEAWNGQCuAOyL4W80ACMKuABQUANOoCUoAN5pQoSCpQsqsAHRUWAcx2gA1KABEX94YDcaAC+aGga2gCMBn6gmADyANL6tJbyACagmk6yALaw8tgWVvipTLDpLAAO2Mry1KGaWuH6IlH1Ec36AMxRMWAAosxs+tgsLKDZFPIAnhm4Wbn5KEA)
 
 ```js
 function bar(a, b) {
@@ -248,7 +248,7 @@ Expected 0-2 arguments, but got 3.
 JSDoc annotated functions are excluded from this rule.
 Use JSDoc optional parameter syntax (`[``]`) to express optionality. e.g.:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PQKhCgAIUgBAHAhgJ0QW0gbwM4BdkCWAdgOYC+kA2tgPZoCmARjQCYCeAupALSQDKdJqzYBybJCLp6AOighg4AGYBXIgGNcBGkUjZEbABL0ANsZoAKWg2bsAlFiiQCiyOYCEVoXYeRfuwTZskAC8kABEAFI0ABY6ACI09GEA3I5kjmratMYyZiTmYUamNOGQANT+1sK2qengeoYmZuY1QA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PQKhCgAIUgBAHAhgJ0QW0gbwM4BdkCWAdgOYC+kA2tgPZoCmARjQCYCeAupALSQDKdJqzYBybJCLp6AOighg4AGYBXIgGNcBGkUjZEbABL0ANsZoAKWg2bsAlFiiQCiyOYCEVoXYeRfuwTZskAC8kABEAFI0ABY6ACI09GEA3I5kjmratMYyZiTmYUamNOGQANT+1sK2qengeoYmZuY1QA)
 
 ```js
 /**
@@ -268,7 +268,7 @@ sayHello();
 
 A function whose body has a reference to the `arguments` reference is implicitly considered to have a var-arg parameter (i.e. `(...arg: any[]) => any`). Use JSDoc var-arg syntax to specify the type of the arguments.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PQKhAIAEAcEMCdYFtwG8B0mB2BXJAjAU3gF9wEBzAZ3BGACgAzHLAYwBcBLAey3CrwAKUOFwFiNOgEo09cOABuCcO27tYAG3ABecAAYA3HPCNu8cIKXnOO-QfA2APOXgU8hLOyroNHiuwALe04AahCZVGN5VXUtEN1Kd08qAG1OAF0jeRJjeEJ2HHg+GM0jEiA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PQKhAIAEAcEMCdYFtwG8B0mB2BXJAjAU3gF9wEBzAZ3BGACgAzHLAYwBcBLAey3CrwAKUOFwFiNOgEo09cOABuCcO27tYAG3ABecAAYA3HPCNu8cIKXnOO-QfA2APOXgU8hLOyroNHiuwALe04AahCZVGN5VXUtEN1Kd08qAG1OAF0jeRJjeEJ2HHg+GM0jEiA)
 
 ```js
 /** @param {...number} args */
@@ -319,7 +319,7 @@ class MyComponent extends Component {
 
 An unspecified type argument in JSDoc defaults to any:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PQKhAIAEBcE8AcCmBvAggJ3QQ1gX3CMAFABuW64AHuALzgDaAugNxFGUB08ArgM4AWACgCMASmbhgwcAHkA0uy58hAIl7R0ASwB2AcxXjJ0+QBoq4Tb3AB7AGbg4ScBmywAPFm2wAfG1AQYBBQXHA43bW4AWwAjRHRvfEJScnBYWgYWNlglARFDKVkFbJ5ctQ0dfXzpAFFMa3QzdS09Cytta2hwLF5eTV1tLGiAG0QHa3AImLigA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PQKhAIAEBcE8AcCmBvAggJ3QQ1gX3CMAFABuW64AHuALzgDaAugNxFGUB08ArgM4AWACgCMASmbhgwcAHkA0uy58hAIl7R0ASwB2AcxXjJ0+QBoq4Tb3AB7AGbg4ScBmywAPFm2wAfG1AQYBBQXHA43bW4AWwAjRHRvfEJScnBYWgYWNlglARFDKVkFbJ5ctQ0dfXzpAFFMa3QzdS09Cytta2hwLF5eTV1tLGiAG0QHa3AImLigA)
 
 ```js
 /** @type{Array} */
@@ -347,4 +347,4 @@ var p = new Promise((resolve, reject) => {
 p; // Promise<any>;
 ```
 
-To learn all of the features available in JSDoc, see [the reference](/typescript/5.2/javascript/jsdoc-reference).
+To learn all of the features available in JSDoc, see [the reference](/typescript/5.2/javascript/jsdoc-supported-types).

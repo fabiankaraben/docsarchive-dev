@@ -347,4 +347,4 @@ var p = new Promise((resolve, reject) => {
 p; // Promise<any>;
 ```
 
-To learn all of the features available in JSDoc, see [the reference](/typescript/5.1/javascript/jsdoc-reference).
+To learn all of the features available in JSDoc, see [the reference](/typescript/5.1/javascript/jsdoc-supported-types).

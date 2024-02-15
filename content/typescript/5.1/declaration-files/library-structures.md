@@ -86,11 +86,11 @@ They will rarely have:
 #### Templates For Modules {#templates-for-modules}
 
 There are four templates available for modules,
-[`module.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/modules-d-ts), [`module-class.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-class), [`module-function.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-function) and [`module-plugin.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-plugin).
+[`module.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-d-ts), [`module-class.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-class-d-ts), [`module-function.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-function-d-ts) and [`module-plugin.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-plugin-d-ts).
 
-You should first read [`module.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/modules-d-ts) for an overview on the way they all work.
+You should first read [`module.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-d-ts) for an overview on the way they all work.
 
-Then use the template [`module-function.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-function) if your module can be *called* like a function:
+Then use the template [`module-function.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-function-d-ts) if your module can be *called* like a function:
 
 ```js
 const x = require("foo");
@@ -98,7 +98,7 @@ const x = require("foo");
 const y = x(42);
 ```
 
-Use the template [`module-class.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-class) if your module can be *constructed* using `new`:
+Use the template [`module-class.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-class-d-ts) if your module can be *constructed* using `new`:
 
 ```js
 const x = require("bar");
@@ -106,7 +106,7 @@ const x = require("bar");
 const y = new x("hello");
 ```
 
-If you have a module which when imported, makes changes to other modules use template [`module-plugin.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-plugin):
+If you have a module which when imported, makes changes to other modules use template [`module-plugin.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-plugin-d-ts):
 
 ```js
 const jest = require("jest");
@@ -234,7 +234,7 @@ Examples include [jQuery](https://jquery.com/), [Moment.js](https://momentjs.com
 
 #### Template {#template}
 
-Use the [`module-plugin.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-plugin) template.
+Use the [`module-plugin.d.ts`](/typescript/5.1/declaration-files/d-ts-templates/module-plugin-d-ts) template.
 
 ## Consuming Dependencies {#consuming-dependencies}
 
@@ -323,4 +323,4 @@ the top-level module object can *never* be callable.
 
 The most common solution here is to define a `default` export for a callable/constructable object;
 module loaders commonly detect this situation automatically and replace the top-level object with the `default` export.
-TypeScript can handle this for you, if you have [`"esModuleInterop": true` ↗](https://www.typescriptlang.org/tsconfig#esModuleInterop) in your tsconfig.json.
+TypeScript can handle this for you, if you have [`"esModuleInterop": true` ↗](https://www.typescriptlang.org/tsconfig.html#esModuleInterop) in your tsconfig.json.

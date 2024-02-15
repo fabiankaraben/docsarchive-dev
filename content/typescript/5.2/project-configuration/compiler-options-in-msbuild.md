@@ -16,7 +16,7 @@ When you have an MSBuild based project which utilizes TypeScript such as an ASP.
 
 We recommend using a `tsconfig.json` for your project when possible. To add one to an existing project, add a new item to your project which is called a “TypeScript JSON Configuration File” in modern versions of Visual Studio.
 
-The new `tsconfig.json` will then be used as the source of truth for TypeScript-specific build information like files and configuration. You can learn [about how TSConfigs works here](/typescript/5.2/project-configuration/what-is-a-tsconfig-json) and there is a [comprehensive reference here](/typescript/5.2/project-configuration/tsconfig-reference).
+The new `tsconfig.json` will then be used as the source of truth for TypeScript-specific build information like files and configuration. You can learn [about how TSConfigs works here](/typescript/5.2/project-configuration/tsconfig-json) and there is a [comprehensive reference here](/typescript/5.2/project-configuration/tsconfig).
 
 ## Using Project Settings {#using-project-settings}
 
@@ -29,137 +29,137 @@ You can also define the configuration for TypeScript inside you project’s sett
 </PropertyGroup>
 ```
 
-There is a series of mappings for common TypeScript settings, these are settings which map directly to [TypeScript cli options](/typescript/5.2/project-configuration/tsc-cli-options) and are used to help you write a more understandable project file. You can use the [TSConfig reference](/typescript/5.2/project-configuration/tsconfig-reference) to get more information on what values and defaults are for each mapping.
+There is a series of mappings for common TypeScript settings, these are settings which map directly to [TypeScript cli options](/typescript/5.2/project-configuration/compiler-options) and are used to help you write a more understandable project file. You can use the [TSConfig reference](/typescript/5.2/project-configuration/tsconfig) to get more information on what values and defaults are for each mapping.
 
 ### CLI Mappings
 
 |MSBuild Config Name|TSC Flag|
 |---|---|
-|`<TypeScriptAllowJS>`|`[--allowJs ↗](https://www.typescriptlang.org/tsconfig/.html#allowJs)`|
+|`<TypeScriptAllowJS>`|`[--allowJs ↗](https://www.typescriptlang.org/tsconfig.html#allowJs)`|
 |Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files.<br>|
-|`<TypeScriptRemoveComments>`|`[--removeComments ↗](https://www.typescriptlang.org/tsconfig/.html#removeComments)`|
+|`<TypeScriptRemoveComments>`|`[--removeComments ↗](https://www.typescriptlang.org/tsconfig.html#removeComments)`|
 |Disable emitting comments.<br>|
-|`<TypeScriptNoImplicitAny>`|`[--noImplicitAny ↗](https://www.typescriptlang.org/tsconfig/.html#noImplicitAny)`|
+|`<TypeScriptNoImplicitAny>`|`[--noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)`|
 |Enable error reporting for expressions and declarations with an implied `any` type..<br>|
-|`<TypeScriptGeneratesDeclarations>`|`[--declaration ↗](https://www.typescriptlang.org/tsconfig/.html#declaration)`|
+|`<TypeScriptGeneratesDeclarations>`|`[--declaration ↗](https://www.typescriptlang.org/tsconfig.html#declaration)`|
 |Generate .d.ts files from TypeScript and JavaScript files in your project.<br>|
-|`<TypeScriptModuleKind>`|`[--module ↗](https://www.typescriptlang.org/tsconfig/.html#module)`|
+|`<TypeScriptModuleKind>`|`[--module ↗](https://www.typescriptlang.org/tsconfig.html#module)`|
 |Specify what module code is generated.<br>|
-|`<TypeScriptJSXEmit>`|`[--jsx ↗](https://www.typescriptlang.org/tsconfig/.html#jsx)`|
+|`<TypeScriptJSXEmit>`|`[--jsx ↗](https://www.typescriptlang.org/tsconfig.html#jsx)`|
 |Specify what JSX code is generated.<br>|
-|`<TypeScriptOutDir>`|`[--outDir ↗](https://www.typescriptlang.org/tsconfig/.html#outDir)`|
+|`<TypeScriptOutDir>`|`[--outDir ↗](https://www.typescriptlang.org/tsconfig.html#outDir)`|
 |Specify an output folder for all emitted files.<br>|
-|`<TypeScriptSourceMap>`|`[--sourcemap ↗](https://www.typescriptlang.org/tsconfig/.html#sourcemap)`|
+|`<TypeScriptSourceMap>`|`[--sourcemap ↗](https://www.typescriptlang.org/tsconfig.html#sourcemap)`|
 |Create source map files for emitted JavaScript files.<br>|
-|`<TypeScriptTarget>`|`[--target ↗](https://www.typescriptlang.org/tsconfig/.html#target)`|
+|`<TypeScriptTarget>`|`[--target ↗](https://www.typescriptlang.org/tsconfig.html#target)`|
 |Set the JavaScript language version for emitted JavaScript and include compatible library declarations.<br>|
-|`<TypeScriptNoResolve>`|`[--noResolve ↗](https://www.typescriptlang.org/tsconfig/.html#noResolve)`|
+|`<TypeScriptNoResolve>`|`[--noResolve ↗](https://www.typescriptlang.org/tsconfig.html#noResolve)`|
 |Disallow `import`s, `require`s or `<reference>`s from expanding the number of files TypeScript should add to a project.<br>|
-|`<TypeScriptMapRoot>`|`[--mapRoot ↗](https://www.typescriptlang.org/tsconfig/.html#mapRoot)`|
+|`<TypeScriptMapRoot>`|`[--mapRoot ↗](https://www.typescriptlang.org/tsconfig.html#mapRoot)`|
 |Specify the location where debugger should locate map files instead of generated locations.<br>|
-|`<TypeScriptSourceRoot>`|`[--sourceRoot ↗](https://www.typescriptlang.org/tsconfig/.html#sourceRoot)`|
+|`<TypeScriptSourceRoot>`|`[--sourceRoot ↗](https://www.typescriptlang.org/tsconfig.html#sourceRoot)`|
 |Specify the root path for debuggers to find the reference source code.<br>|
-|`<TypeScriptCharset>`|`[--charset ↗](https://www.typescriptlang.org/tsconfig/.html#charset)`|
+|`<TypeScriptCharset>`|`[--charset ↗](https://www.typescriptlang.org/tsconfig.html#charset)`|
 |No longer supported. In early versions, manually set the text encoding for reading files.<br>|
-|`<TypeScriptEmitBOM>`|`[--emitBOM ↗](https://www.typescriptlang.org/tsconfig/.html#emitBOM)`|
+|`<TypeScriptEmitBOM>`|`[--emitBOM ↗](https://www.typescriptlang.org/tsconfig.html#emitBOM)`|
 |Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.<br>|
-|`<TypeScriptNoLib>`|`[--noLib ↗](https://www.typescriptlang.org/tsconfig/.html#noLib)`|
+|`<TypeScriptNoLib>`|`[--noLib ↗](https://www.typescriptlang.org/tsconfig.html#noLib)`|
 |Disable including any library files, including the default lib.d.ts.<br>|
-|`<TypeScriptPreserveConstEnums>`|`[--preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig/.html#preserveConstEnums)`|
+|`<TypeScriptPreserveConstEnums>`|`[--preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)`|
 |Disable erasing `const enum` declarations in generated code.<br>|
-|`<TypeScriptSuppressImplicitAnyIndexErrors>`|`[--suppressImplicitAnyIndexErrors ↗](https://www.typescriptlang.org/tsconfig/.html#suppressImplicitAnyIndexErrors)`|
+|`<TypeScriptSuppressImplicitAnyIndexErrors>`|`[--suppressImplicitAnyIndexErrors ↗](https://www.typescriptlang.org/tsconfig.html#suppressImplicitAnyIndexErrors)`|
 |Suppress `noImplicitAny` errors when indexing objects that lack index signatures.<br>|
-|`<TypeScriptNoEmitHelpers>`|`[--noEmitHelpers ↗](https://www.typescriptlang.org/tsconfig/.html#noEmitHelpers)`|
+|`<TypeScriptNoEmitHelpers>`|`[--noEmitHelpers ↗](https://www.typescriptlang.org/tsconfig.html#noEmitHelpers)`|
 |Disable generating custom helper functions like `__extends` in compiled output.<br>|
-|`<TypeScriptInlineSourceMap>`|`[--inlineSourceMap ↗](https://www.typescriptlang.org/tsconfig/.html#inlineSourceMap)`|
+|`<TypeScriptInlineSourceMap>`|`[--inlineSourceMap ↗](https://www.typescriptlang.org/tsconfig.html#inlineSourceMap)`|
 |Include sourcemap files inside the emitted JavaScript.<br>|
-|`<TypeScriptInlineSources>`|`[--inlineSources ↗](https://www.typescriptlang.org/tsconfig/.html#inlineSources)`|
+|`<TypeScriptInlineSources>`|`[--inlineSources ↗](https://www.typescriptlang.org/tsconfig.html#inlineSources)`|
 |Include source code in the sourcemaps inside the emitted JavaScript.<br>|
-|`<TypeScriptNewLine>`|`[--newLine ↗](https://www.typescriptlang.org/tsconfig/.html#newLine)`|
+|`<TypeScriptNewLine>`|`[--newLine ↗](https://www.typescriptlang.org/tsconfig.html#newLine)`|
 |Set the newline character for emitting files.<br>|
-|`<TypeScriptIsolatedModules>`|`[--isolatedModules ↗](https://www.typescriptlang.org/tsconfig/.html#isolatedModules)`|
+|`<TypeScriptIsolatedModules>`|`[--isolatedModules ↗](https://www.typescriptlang.org/tsconfig.html#isolatedModules)`|
 |Ensure that each file can be safely transpiled without relying on other imports.<br>|
-|`<TypeScriptEmitDecoratorMetadata>`|`[--emitDecoratorMetadata ↗](https://www.typescriptlang.org/tsconfig/.html#emitDecoratorMetadata)`|
+|`<TypeScriptEmitDecoratorMetadata>`|`[--emitDecoratorMetadata ↗](https://www.typescriptlang.org/tsconfig.html#emitDecoratorMetadata)`|
 |Emit design-type metadata for decorated declarations in source files.<br>|
-|`<TypeScriptRootDir>`|`[--rootDir ↗](https://www.typescriptlang.org/tsconfig/.html#rootDir)`|
+|`<TypeScriptRootDir>`|`[--rootDir ↗](https://www.typescriptlang.org/tsconfig.html#rootDir)`|
 |Specify the root folder within your source files.<br>|
-|`<TypeScriptExperimentalDecorators>`|`[--experimentalDecorators ↗](https://www.typescriptlang.org/tsconfig/.html#experimentalDecorators)`|
+|`<TypeScriptExperimentalDecorators>`|`[--experimentalDecorators ↗](https://www.typescriptlang.org/tsconfig.html#experimentalDecorators)`|
 |Enable experimental support for TC39 stage 2 draft decorators.<br>|
-|`<TypeScriptModuleResolution>`|`[--moduleResolution ↗](https://www.typescriptlang.org/tsconfig/.html#moduleResolution)`|
+|`<TypeScriptModuleResolution>`|`[--moduleResolution ↗](https://www.typescriptlang.org/tsconfig.html#moduleResolution)`|
 |Specify how TypeScript looks up a file from a given module specifier.<br>|
-|`<TypeScriptSuppressExcessPropertyErrors>`|`[--suppressExcessPropertyErrors ↗](https://www.typescriptlang.org/tsconfig/.html#suppressExcessPropertyErrors)`|
+|`<TypeScriptSuppressExcessPropertyErrors>`|`[--suppressExcessPropertyErrors ↗](https://www.typescriptlang.org/tsconfig.html#suppressExcessPropertyErrors)`|
 |Disable reporting of excess property errors during the creation of object literals.<br>|
-|`<TypeScriptReactNamespace>`|`[--reactNamespace ↗](https://www.typescriptlang.org/tsconfig/.html#reactNamespace)`|
+|`<TypeScriptReactNamespace>`|`[--reactNamespace ↗](https://www.typescriptlang.org/tsconfig.html#reactNamespace)`|
 |Specify the object invoked for `createElement`. This only applies when targeting `react` JSX emit.<br>|
-|`<TypeScriptSkipDefaultLibCheck>`|`[--skipDefaultLibCheck ↗](https://www.typescriptlang.org/tsconfig/.html#skipDefaultLibCheck)`|
+|`<TypeScriptSkipDefaultLibCheck>`|`[--skipDefaultLibCheck ↗](https://www.typescriptlang.org/tsconfig.html#skipDefaultLibCheck)`|
 |Skip type checking .d.ts files that are included with TypeScript.<br>|
-|`<TypeScriptAllowUnusedLabels>`|`[--allowUnusedLabels ↗](https://www.typescriptlang.org/tsconfig/.html#allowUnusedLabels)`|
+|`<TypeScriptAllowUnusedLabels>`|`[--allowUnusedLabels ↗](https://www.typescriptlang.org/tsconfig.html#allowUnusedLabels)`|
 |Disable error reporting for unused labels.<br>|
-|`<TypeScriptNoImplicitReturns>`|`[--noImplicitReturns ↗](https://www.typescriptlang.org/tsconfig/.html#noImplicitReturns)`|
+|`<TypeScriptNoImplicitReturns>`|`[--noImplicitReturns ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitReturns)`|
 |Enable error reporting for codepaths that do not explicitly return in a function.<br>|
-|`<TypeScriptNoFallthroughCasesInSwitch>`|`[--noFallthroughCasesInSwitch ↗](https://www.typescriptlang.org/tsconfig/.html#noFallthroughCasesInSwitch)`|
+|`<TypeScriptNoFallthroughCasesInSwitch>`|`[--noFallthroughCasesInSwitch ↗](https://www.typescriptlang.org/tsconfig.html#noFallthroughCasesInSwitch)`|
 |Enable error reporting for fallthrough cases in switch statements.<br>|
-|`<TypeScriptAllowUnreachableCode>`|`[--allowUnreachableCode ↗](https://www.typescriptlang.org/tsconfig/.html#allowUnreachableCode)`|
+|`<TypeScriptAllowUnreachableCode>`|`[--allowUnreachableCode ↗](https://www.typescriptlang.org/tsconfig.html#allowUnreachableCode)`|
 |Disable error reporting for unreachable code.<br>|
-|`<TypeScriptForceConsistentCasingInFileNames>`|`[--forceConsistentCasingInFileNames ↗](https://www.typescriptlang.org/tsconfig/.html#forceConsistentCasingInFileNames)`|
+|`<TypeScriptForceConsistentCasingInFileNames>`|`[--forceConsistentCasingInFileNames ↗](https://www.typescriptlang.org/tsconfig.html#forceConsistentCasingInFileNames)`|
 |Ensure that casing is correct in imports.<br>|
-|`<TypeScriptAllowSyntheticDefaultImports>`|`[--allowSyntheticDefaultImports ↗](https://www.typescriptlang.org/tsconfig/.html#allowSyntheticDefaultImports)`|
+|`<TypeScriptAllowSyntheticDefaultImports>`|`[--allowSyntheticDefaultImports ↗](https://www.typescriptlang.org/tsconfig.html#allowSyntheticDefaultImports)`|
 |Allow 'import x from y' when a module doesn't have a default export.<br>|
-|`<TypeScriptNoImplicitUseStrict>`|`[--noImplicitUseStrict ↗](https://www.typescriptlang.org/tsconfig/.html#noImplicitUseStrict)`|
+|`<TypeScriptNoImplicitUseStrict>`|`[--noImplicitUseStrict ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitUseStrict)`|
 |Disable adding 'use strict' directives in emitted JavaScript files.<br>|
-|`<TypeScriptLib>`|`[--lib ↗](https://www.typescriptlang.org/tsconfig/.html#lib)`|
+|`<TypeScriptLib>`|`[--lib ↗](https://www.typescriptlang.org/tsconfig.html#lib)`|
 |Specify a set of bundled library declaration files that describe the target runtime environment.<br>|
-|`<TypeScriptBaseUrl>`|`[--baseUrl ↗](https://www.typescriptlang.org/tsconfig/.html#baseUrl)`|
+|`<TypeScriptBaseUrl>`|`[--baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)`|
 |Specify the base directory to resolve bare specifier module names.<br>|
-|`<TypeScriptDeclarationDir>`|`[--declarationDir ↗](https://www.typescriptlang.org/tsconfig/.html#declarationDir)`|
+|`<TypeScriptDeclarationDir>`|`[--declarationDir ↗](https://www.typescriptlang.org/tsconfig.html#declarationDir)`|
 |Specify the output directory for generated declaration files.<br>|
-|`<TypeScriptNoImplicitThis>`|`[--noImplicitThis ↗](https://www.typescriptlang.org/tsconfig/.html#noImplicitThis)`|
+|`<TypeScriptNoImplicitThis>`|`[--noImplicitThis ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitThis)`|
 |Enable error reporting when `this` is given the type `any`.<br>|
-|`<TypeScriptSkipLibCheck>`|`[--skipLibCheck ↗](https://www.typescriptlang.org/tsconfig/.html#skipLibCheck)`|
+|`<TypeScriptSkipLibCheck>`|`[--skipLibCheck ↗](https://www.typescriptlang.org/tsconfig.html#skipLibCheck)`|
 |Skip type checking all .d.ts files.<br>|
-|`<TypeScriptStrictNullChecks>`|`[--strictNullChecks ↗](https://www.typescriptlang.org/tsconfig/.html#strictNullChecks)`|
+|`<TypeScriptStrictNullChecks>`|`[--strictNullChecks ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks)`|
 |When type checking, take into account `null` and `undefined`.<br>|
-|`<TypeScriptNoUnusedLocals>`|`[--noUnusedLocals ↗](https://www.typescriptlang.org/tsconfig/.html#noUnusedLocals)`|
+|`<TypeScriptNoUnusedLocals>`|`[--noUnusedLocals ↗](https://www.typescriptlang.org/tsconfig.html#noUnusedLocals)`|
 |Enable error reporting when a local variables aren't read.<br>|
-|`<TypeScriptNoUnusedParameters>`|`[--noUnusedParameters ↗](https://www.typescriptlang.org/tsconfig/.html#noUnusedParameters)`|
+|`<TypeScriptNoUnusedParameters>`|`[--noUnusedParameters ↗](https://www.typescriptlang.org/tsconfig.html#noUnusedParameters)`|
 |Raise an error when a function parameter isn't read<br>|
-|`<TypeScriptAlwaysStrict>`|`[--alwaysStrict ↗](https://www.typescriptlang.org/tsconfig/.html#alwaysStrict)`|
+|`<TypeScriptAlwaysStrict>`|`[--alwaysStrict ↗](https://www.typescriptlang.org/tsconfig.html#alwaysStrict)`|
 |Ensure 'use strict' is always emitted.<br>|
-|`<TypeScriptImportHelpers>`|`[--importHelpers ↗](https://www.typescriptlang.org/tsconfig/.html#importHelpers)`|
+|`<TypeScriptImportHelpers>`|`[--importHelpers ↗](https://www.typescriptlang.org/tsconfig.html#importHelpers)`|
 |Allow importing helper functions from tslib once per project, instead of including them per-file.<br>|
-|`<TypeScriptJSXFactory>`|`[--jsxFactory ↗](https://www.typescriptlang.org/tsconfig/.html#jsxFactory)`|
+|`<TypeScriptJSXFactory>`|`[--jsxFactory ↗](https://www.typescriptlang.org/tsconfig.html#jsxFactory)`|
 |Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'<br>|
-|`<TypeScriptStripInternal>`|`[--stripInternal ↗](https://www.typescriptlang.org/tsconfig/.html#stripInternal)`|
+|`<TypeScriptStripInternal>`|`[--stripInternal ↗](https://www.typescriptlang.org/tsconfig.html#stripInternal)`|
 |Disable emitting declarations that have `@internal` in their JSDoc comments.<br>|
-|`<TypeScriptCheckJs>`|`[--checkJs ↗](https://www.typescriptlang.org/tsconfig/.html#checkJs)`|
+|`<TypeScriptCheckJs>`|`[--checkJs ↗](https://www.typescriptlang.org/tsconfig.html#checkJs)`|
 |Enable error reporting in type-checked JavaScript files.<br>|
-|`<TypeScriptDownlevelIteration>`|`[--downlevelIteration ↗](https://www.typescriptlang.org/tsconfig/.html#downlevelIteration)`|
+|`<TypeScriptDownlevelIteration>`|`[--downlevelIteration ↗](https://www.typescriptlang.org/tsconfig.html#downlevelIteration)`|
 |Emit more compliant, but verbose and less performant JavaScript for iteration.<br>|
-|`<TypeScriptStrict>`|`[--strict ↗](https://www.typescriptlang.org/tsconfig/.html#strict)`|
+|`<TypeScriptStrict>`|`[--strict ↗](https://www.typescriptlang.org/tsconfig.html#strict)`|
 |Enable all strict type checking options.<br>|
-|`<TypeScriptNoStrictGenericChecks>`|`[--noStrictGenericChecks ↗](https://www.typescriptlang.org/tsconfig/.html#noStrictGenericChecks)`|
+|`<TypeScriptNoStrictGenericChecks>`|`[--noStrictGenericChecks ↗](https://www.typescriptlang.org/tsconfig.html#noStrictGenericChecks)`|
 |Disable strict checking of generic signatures in function types.<br>|
-|`<TypeScriptPreserveSymlinks>`|`[--preserveSymlinks ↗](https://www.typescriptlang.org/tsconfig/.html#preserveSymlinks)`|
+|`<TypeScriptPreserveSymlinks>`|`[--preserveSymlinks ↗](https://www.typescriptlang.org/tsconfig.html#preserveSymlinks)`|
 |Disable resolving symlinks to their realpath. This correlates to the same flag in node.<br>|
-|`<TypeScriptStrictFunctionTypes>`|`[--strictFunctionTypes ↗](https://www.typescriptlang.org/tsconfig/.html#strictFunctionTypes)`|
+|`<TypeScriptStrictFunctionTypes>`|`[--strictFunctionTypes ↗](https://www.typescriptlang.org/tsconfig.html#strictFunctionTypes)`|
 |When assigning functions, check to ensure parameters and the return values are subtype-compatible.<br>|
-|`<TypeScriptStrictPropertyInitialization>`|`[--strictPropertyInitialization ↗](https://www.typescriptlang.org/tsconfig/.html#strictPropertyInitialization)`|
+|`<TypeScriptStrictPropertyInitialization>`|`[--strictPropertyInitialization ↗](https://www.typescriptlang.org/tsconfig.html#strictPropertyInitialization)`|
 |Check for class properties that are declared but not set in the constructor.<br>|
-|`<TypeScriptESModuleInterop>`|`[--esModuleInterop ↗](https://www.typescriptlang.org/tsconfig/.html#esModuleInterop)`|
+|`<TypeScriptESModuleInterop>`|`[--esModuleInterop ↗](https://www.typescriptlang.org/tsconfig.html#esModuleInterop)`|
 |Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility.<br>|
-|`<TypeScriptEmitDeclarationOnly>`|`[--emitDeclarationOnly ↗](https://www.typescriptlang.org/tsconfig/.html#emitDeclarationOnly)`|
+|`<TypeScriptEmitDeclarationOnly>`|`[--emitDeclarationOnly ↗](https://www.typescriptlang.org/tsconfig.html#emitDeclarationOnly)`|
 |Only output d.ts files and not JavaScript files.<br>|
-|`<TypeScriptKeyofStringsOnly>`|`[--keyofStringsOnly ↗](https://www.typescriptlang.org/tsconfig/.html#keyofStringsOnly)`|
+|`<TypeScriptKeyofStringsOnly>`|`[--keyofStringsOnly ↗](https://www.typescriptlang.org/tsconfig.html#keyofStringsOnly)`|
 |Make keyof only return strings instead of string, numbers or symbols. Legacy option.<br>|
-|`<TypeScriptUseDefineForClassFields>`|`[--useDefineForClassFields ↗](https://www.typescriptlang.org/tsconfig/.html#useDefineForClassFields)`|
+|`<TypeScriptUseDefineForClassFields>`|`[--useDefineForClassFields ↗](https://www.typescriptlang.org/tsconfig.html#useDefineForClassFields)`|
 |Emit ECMAScript-standard-compliant class fields.<br>|
-|`<TypeScriptDeclarationMap>`|`[--declarationMap ↗](https://www.typescriptlang.org/tsconfig/.html#declarationMap)`|
+|`<TypeScriptDeclarationMap>`|`[--declarationMap ↗](https://www.typescriptlang.org/tsconfig.html#declarationMap)`|
 |Create sourcemaps for d.ts files.<br>|
-|`<TypeScriptResolveJsonModule>`|`[--resolveJsonModule ↗](https://www.typescriptlang.org/tsconfig/.html#resolveJsonModule)`|
+|`<TypeScriptResolveJsonModule>`|`[--resolveJsonModule ↗](https://www.typescriptlang.org/tsconfig.html#resolveJsonModule)`|
 |Enable importing .json files<br>|
-|`<TypeScriptStrictBindCallApply>`|`[--strictBindCallApply ↗](https://www.typescriptlang.org/tsconfig/.html#strictBindCallApply)`|
+|`<TypeScriptStrictBindCallApply>`|`[--strictBindCallApply ↗](https://www.typescriptlang.org/tsconfig.html#strictBindCallApply)`|
 |Check that the arguments for `bind`, `call`, and `apply` methods match the original function.<br>|
-|`<TypeScriptNoEmitOnError>`|`[--noEmitOnError ↗](https://www.typescriptlang.org/tsconfig/.html#noEmitOnError)`|
+|`<TypeScriptNoEmitOnError>`|`[--noEmitOnError ↗](https://www.typescriptlang.org/tsconfig.html#noEmitOnError)`|
 |Disable emitting files if any type checking errors are reported.<br>|
 
 

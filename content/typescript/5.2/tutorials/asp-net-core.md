@@ -4,7 +4,7 @@ title: "TypeScript: Documentation - ASP.NET Core"
 description: "Using TypeScript in ASP.NET Core"
 weight: 1
 type: docs
-prev: /typescript/5.2/modules-reference/appendices/esmcjs-interoperability
+prev: /typescript/5.2/modules-reference/appendices/esm-cjs-interop
 ---
 
 # ASP.NET Core

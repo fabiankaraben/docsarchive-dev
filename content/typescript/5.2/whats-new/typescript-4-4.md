@@ -16,7 +16,7 @@ Instead of having to convince TypeScript of a variable’s type whenever we use 
 
 For example, we can write something like
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABMOcAUBDATgcwFyLgDWYcA7mAJSIDeAUIojMImlAJ4AOApnC9jkQBeEYgBEAZyhYYYHGOr1GjCAglwANtwB0GuDky5tUOAFVOPLAGEME7mkqUA3A2UB6N8q9eAegH5XAF86QKA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABMOcAUBDATgcwFyLgDWYcA7mAJSIDeAUIojMImlAJ4AOApnC9jkQBeEYgBEAZyhYYYHGOr1GjCAglwANtwB0GuDky5tUOAFVOPLAGEME7mkqUA3A2UB6N8q9eAegH5XAF86QKA)
 
 ```ts
 function foo(arg: unknown) {
@@ -59,7 +59,7 @@ If that type guard operates on a `const`, a `readonly` property, or an un-modifi
 Different sorts of type guard conditions are preserved - not just `typeof` checks.
 For example, checks on discriminated unions work like a charm.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAygFgQ0lAvAKClAPlA3lAawEsA7AEwC4oAiAYyICdaAbCagbigYTKIFcAzlRJ8AtgCMIDKAF8M2PIVKUaAgI58EDNpwFEyEADIQSAc2BxhYydJns0aAGZ8StYEQD2JKFogIAFAKIkFTwSBAAlFYSUnjytF4CwFBEAgDCjCzQKFBB4QB0xOSoKDl0mawc8kSOUP6pGUysEXGYmAD07VAA6tAEJB4A7lCD0IgAbtAIUPRNY1IQAITymNrAfAzeALIIFvkACgCSUABUucEQ+dy8gqdnAEz2mDJQEMwC0LgrUJ09fQPDUYAcm0UFYjmSgyIFh8uQ0vigcAWyzaXAg6025wKegMxjMMJODyesjQMiAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAygFgQ0lAvAKClAPlA3lAawEsA7AEwC4oAiAYyICdaAbCagbigYTKIFcAzlRJ8AtgCMIDKAF8M2PIVKUaAgI58EDNpwFEyEADIQSAc2BxhYydJns0aAGZ8StYEQD2JKFogIAFAKIkFTwSBAAlFYSUnjytF4CwFBEAgDCjCzQKFBB4QB0xOSoKDl0mawc8kSOUP6pGUysEXGYmAD07VAA6tAEJB4A7lCD0IgAbtAIUPRNY1IQAITymNrAfAzeALIIFvkACgCSUABUucEQ+dy8gqdnAEz2mDJQEMwC0LgrUJ09fQPDUYAcm0UFYjmSgyIFh8uQ0vigcAWyzaXAg6025wKegMxjMMJODyesjQMiAA)
 
 ```ts
 type Shape =
@@ -80,7 +80,7 @@ function area(shape: Shape): number {
 
 Analysis on discriminants in 4.4 also goes a little bit deeper - we can now extract out discriminants and TypeScript can narrow the original object.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAygFgQ0lAvAKClAPlA3lAawEsA7AEwC4oAiAYyICdaAbCagbigYTKIFcAzlRJ8AtgCMIDKAF8M2PIVKUaAgI58EDNpwFEyEADIQSAc2BxhYydJns0aAGZ8StYEQD2JKFogIAFAKIkFTwSBAAlFYSUnjyAPTxUACiAB7A3G5QHnzAUBbQAOTE5IVQjkQQzGTljALAAHTytF71iiU1MqhQQeH28kSOUP4dqCgoNPRMrNQRcZiYiVAA6tAEJB4A7lCb0IgAbtAIUFMse1IQAITymNrAfAzeALIIFg0ACgCSUABUPcEQBrcXiCX5-ABM9kwXSqAmguBuUCWq0IG22u0K2igrEceU2RAsPh6Gl8UDgF2uCy4EHuj3+4QaegMxjMhJ+EKhsjQMiAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAygFgQ0lAvAKClAPlA3lAawEsA7AEwC4oAiAYyICdaAbCagbigYTKIFcAzlRJ8AtgCMIDKAF8M2PIVKUaAgI58EDNpwFEyEADIQSAc2BxhYydJns0aAGZ8StYEQD2JKFogIAFAKIkFTwSBAAlFYSUnjyAPTxUACiAB7A3G5QHnzAUBbQAOTE5IVQjkQQzGTljALAAHTytF71iiU1MqhQQeH28kSOUP4dqCgoNPRMrNQRcZiYiVAA6tAEJB4A7lCb0IgAbtAIUFMse1IQAITymNrAfAzeALIIFg0ACgCSUABUPcEQBrcXiCX5-ABM9kwXSqAmguBuUCWq0IG22u0K2igrEceU2RAsPh6Gl8UDgF2uCy4EHuj3+4QaegMxjMhJ+EKhsjQMiAA)
 
 ```ts
 type Shape =
@@ -103,7 +103,7 @@ function area(shape: Shape): number {
 
 As another example, here’s a function that checks whether two of its inputs have contents.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABAEzgZTgWwKYGEAW2EA1gM4AUAUIojGAA4hQCCAXIqVAE50DmiAH0Thk2YHWzIANNVoMmAIXaceYfkJFiJ02aXxwQAG2QAROAFEAHtwCGAdThdi7AEZw4h7DbCUAlIgBvWQgETkRMEE4zBydEAF45RhZEADIUxMVU9L0DYzMrWxjiAG5ZGGBEcgiouCL-IJoaAHomxDtsRAhvRBsICGxSUkQAchU+YcR6Ljh6bC5YAcQERDcofBG6JOYJ72QN+SgFYYBCWRoQsDCQelmuZniMlgA6KDgAVRu53BtSbHJfUqNTqhKDCT5cBQPTaKF7vcHfX7-QGNFqIJ7o2QAX0omKAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABAEzgZTgWwKYGEAW2EA1gM4AUAUIojGAA4hQCCAXIqVAE50DmiAH0Thk2YHWzIANNVoMmAIXaceYfkJFiJ02aXxwQAG2QAROAFEAHtwCGAdThdi7AEZw4h7DbCUAlIgBvWQgETkRMEE4zBydEAF45RhZEADIUxMVU9L0DYzMrWxjiAG5ZGGBEcgiouCL-IJoaAHomxDtsRAhvRBsICGxSUkQAchU+YcR6Ljh6bC5YAcQERDcofBG6JOYJ72QN+SgFYYBCWRoQsDCQelmuZniMlgA6KDgAVRu53BtSbHJfUqNTqhKDCT5cBQPTaKF7vcHfX7-QGNFqIJ7o2QAX0omKAA)
 
 ```ts
 function doSomeChecks(
@@ -127,7 +127,7 @@ That means we don’t have to write a non-null assertion like `inputA!` to convi
 One neat feature here is that this analysis works transitively.
 TypeScript will hop through constants to understand what sorts of checks you’ve already performed.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABMAFADwFyIM5QE4xgDmiAPomCALYBGApnmYjXHADZ0CGYAlIgN4AoRIggJciGNgDK+QiQC8iKAE8ADnTjBEaRAv2IARLgLFDAbmGjxUSdgBy1eoyWqNWnXoOHKtBhasxMAkpWVMiAHk8Rz8XOzD5MnIpGOdLERhtFFC5YijUhj4hERE0SwB6cpEAPQB+KwBfRDo2bDoBK1KKqsQ6xsEGoA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABMAFADwFyIM5QE4xgDmiAPomCALYBGApnmYjXHADZ0CGYAlIgN4AoRIggJciGNgDK+QiQC8iKAE8ADnTjBEaRAv2IARLgLFDAbmGjxUSdgBy1eoyWqNWnXoOHKtBhasxMAkpWVMiAHk8Rz8XOzD5MnIpGOdLERhtFFC5YijUhj4hERE0SwB6cpEAPQB+KwBfRDo2bDoBK1KKqsQ6xsEGoA)
 
 ```ts
 function f(x: string | number | boolean) {
@@ -159,7 +159,7 @@ This allows us to use these objects as dictionary-like types, where we can use s
 For example, we can write a type with an index signature that takes `string` keys and maps to `boolean` values.
 If we try to assign anything other than a `boolean` value, we’ll get an error.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGY1vRg7AKwBQAlgHYAuMAZgIYDGkoAQnHADaS1kAiJ9FEnDK1oAT1ABvIqFABtANaQxqRBWjkA5gF1UAIzaduAbiIBfIkQAmkeu1FNOFUAFsxfAalYcuvfoOFRMVMiEFAANVp2EitQCjhQWkREEk0yUAMfblAANyiAV0hEIjcPCjkAImo2Cu1QAF446ELTUv9KvVFahtA6dkRIELCAUVgEABpQCrYAB0QK0BJEMgByZ1oMw18S93aKzoAvbsbpuDmK4yA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGY1vRg7AKwBQAlgHYAuMAZgIYDGkoAQnHADaS1kAiJ9FEnDK1oAT1ABvIqFABtANaQxqRBWjkA5gF1UAIzaduAbiIBfIkQAmkeu1FNOFUAFsxfAalYcuvfoOFRMVMiEFAANVp2EitQCjhQWkREEk0yUAMfblAANyiAV0hEIjcPCjkAImo2Cu1QAF446ELTUv9KvVFahtA6dkRIELCAUVgEABpQCrYAB0QK0BJEMgByZ1oMw18S93aKzoAvbsbpuDmK4yA)
 
 ```ts
 interface BooleanDictionary {
@@ -211,7 +211,7 @@ TypeScript 4.4 addresses these limitations, and allows index signatures for `sym
 
 For example, TypeScript now allows us to declare a type that can be keyed on arbitrary `symbol`s.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGY1vRg7AKwBQAlgHYAuMAZgIYDGkoAwnADYKKgDeRooAbUQBPALaoRogEbsAuqjIBXaTADcRAL5Ei9OGUQVQ0SABNQAXlABlMTLYAKAETGTjgJTrd+wwHNjkMgtrW3YnP0gA9089A1ApNkUmSxtpUMd4xKjtNkhDXQ4kVFYCrktuDXUiEFAAQUREEh8yUQDDOGpQWlAlFWhQEi5aNg4Ad1Mddk4BF1kgtAICdRzDFwA1IaD8qZn1atAAPQB+bS2kAQzIWctHEy6pLpMIx1UgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGY1vRg7AKwBQAlgHYAuMAZgIYDGkoAwnADYKKgDeRooAbUQBPALaoRogEbsAuqjIBXaTADcRAL5Ei9OGUQVQ0SABNQAXlABlMTLYAKAETGTjgJTrd+wwHNjkMgtrW3YnP0gA9089A1ApNkUmSxtpUMd4xKjtNkhDXQ4kVFYCrktuDXUiEFAAQUREEh8yUQDDOGpQWlAlFWhQEi5aNg4Ad1Mddk4BF1kgtAICdRzDFwA1IaD8qZn1atAAPQB+bS2kAQzIWctHEy6pLpMIx1UgA)
 
 ```ts
 interface Colors {
@@ -318,7 +318,7 @@ however, for some, manually specifying `: unknown` on every `catch` clause was a
 That’s why TypeScript 4.4 introduces a new flag called [`useUnknownInCatchVariables` ↗](https://www.typescriptlang.org/tsconfig.html#useUnknownInCatchVariables).
 This flag changes the default type of `catch` clause variables from `any` to `unknown`.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwFYDsBGUOAOABgBYA2AKABNIBjAGwENpJQAzAVwDtaAXASzhdQkAB50OvSAGU4AW0gAVABb9oVAArNeATwDCcGgAoAlKgBucflQDcFEKAC0z2pOeOKvaDtABvCqAi4q5Ssgoqapra+oaQpnYAvqC0jLy0yqBGMNAmfgGgDtmo3ADWXHAA7lwU+Q4AorAIAISgGvAADjC6oADkCoiIjADmkD2gVHCQiKDlvEH8iHNCoLqdvaXlVT0AdPm0Qohw9JDb2QhZsNv9gyMmdrVgAOoIJYgtj6wpwlzM8BW92TGbHgcnWXDKlS4Y14cF6DXg0B2+X4bEy2VA-C4i0YPEgcFR8IQuX8gUC+yxRxOZ2gF2gVymN0gd3yCQoCSAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwFYDsBGUOAOABgBYA2AKABNIBjAGwENpJQAzAVwDtaAXASzhdQkAB50OvSAGU4AW0gAVABb9oVAArNeATwDCcGgAoAlKgBucflQDcFEKAC0z2pOeOKvaDtABvCqAi4q5Ssgoqapra+oaQpnYAvqC0jLy0yqBGMNAmfgGgDtmo3ADWXHAA7lwU+Q4AorAIAISgGvAADjC6oADkCoiIjADmkD2gVHCQiKDlvEH8iHNCoLqdvaXlVT0AdPm0Qohw9JDb2QhZsNv9gyMmdrVgAOoIJYgtj6wpwlzM8BW92TGbHgcnWXDKlS4Y14cF6DXg0B2+X4bEy2VA-C4i0YPEgcFR8IQuX8gUC+yxRxOZ2gF2gVymN0gd3yCQoCSAA)
 
 ```ts
 try {
@@ -352,7 +352,7 @@ Property 'stack' does not exist on type 'unknown'.
 
 In cases where we don’t want to deal with an `unknown` variable in a `catch` clause, we can always add an explicit `: any` annotation so that we can opt *out* of stricter types.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXxAA9xkMQBlHAWxABUALLGYABVgwE8BhHUACgCUALngA3HFmABuAFAB6OfAC0KsKRVKZGGB3gBvGfALE1ZSjQZNW7brxCDZAX3hgoGMPXh8QMGCKioHAL6hi54AM44ECAAdD4wODDevjE04eFQAOYgAlLwCvAA6okA1uHwWVBYqACEMo5AA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXxAA9xkMQBlHAWxABUALLGYABVgwE8BhHUACgCUALngA3HFmABuAFAB6OfAC0KsKRVKZGGB3gBvGfALE1ZSjQZNW7brxCDZAX3hgoGMPXh8QMGCKioHAL6hi54AM44ECAAdD4wODDevjE04eFQAOYgAlLwCvAA6okA1uHwWVBYqACEMo5AA)
 
 ```ts
 try {
@@ -403,7 +403,7 @@ In the case of our `Person` example, this could potentially lead to runtime erro
 
 In TypeScript 4.4, the new flag [`exactOptionalPropertyTypes` ↗](https://www.typescriptlang.org/tsconfig.html#exactOptionalPropertyTypes) specifies that optional property types should be interpreted exactly as written, meaning that `| undefined` is not added to the type:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMA8EMGMAuB5ADoglgewHawDYAKATlqpMYgJ4AqV5AzgFAgQWnEMBcoATAMy9effgHYArEww5EFAGYJIoQhQa5QAbyahQeALaQeDRMWkBzANzbQsM5AD8PHAFc9AIwpWAvizABaAPhnRAC-X1AAdQxEAAtQAHIYBBR0bDwiUnJKWnpIBnjQXC4meFxjUFQeFU51AF5Na31DUAAiABFYHAxIfBaAGmtbZuccABNIOWlIUb7QVgBRYg4AQlAR8cmcadAMBhx4xBtdVw9iJi8LIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMA8EMGMAuB5ADoglgewHawDYAKATlqpMYgJ4AqV5AzgFAgQWnEMBcoATAMy9effgHYArEww5EFAGYJIoQhQa5QAbyahQeALaQeDRMWkBzANzbQsM5AD8PHAFc9AIwpWAvizABaAPhnRAC-X1AAdQxEAAtQAHIYBBR0bDwiUnJKWnpIBnjQXC4meFxjUFQeFU51AF5Na31DUAAiABFYHAxIfBaAGmtbZuccABNIOWlIUb7QVgBRYg4AQlAR8cmcadAMBhx4xBtdVw9iJi8LIA)
 
 ```ts
 // With 'exactOptionalPropertyTypes' on:
@@ -429,7 +429,7 @@ For more information, you can [take a look at the implementing pull request here
 
 TypeScript 4.4 brings support for [`static` blocks in classes](https://github.com/tc39/proposal-class-static-block#ecmascript-class-static-initialization-blocks), an upcoming ECMAScript feature that can help you write more-complex initialization code for static members.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXwGccBbEAYT2C2zwAoBKALngCMccIQpUAoAej7wAtCLDIMIoT0hQCBeADF28AN494GwhijYw8MDjQZ4AXngAGANw91mgfAAqACyzzX8KFp1Y9LCDjAAa0ZbDQJtXVVQzQ0sRHhaIlIKVCoaVAZ6KJiczSUcADoDIwBqEutcjQBfaJqqoA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXwGccBbEAYT2C2zwAoBKALngCMccIQpUAoAej7wAtCLDIMIoT0hQCBeADF28AN494GwhijYw8MDjQZ4AXngAGANw91mgfAAqACyzzX8KFp1Y9LCDjAAa0ZbDQJtXVVQzQ0sRHhaIlIKVCoaVAZ6KJiczSUcADoDIwBqEutcjQBfaJqqoA)
 
 ```ts
 class Foo {
@@ -447,7 +447,7 @@ class Foo {
 These static blocks allow you to write a sequence of statements with their own scope that can access private fields within the containing class.
 That means that we can write initialization code with all the capabilities of writing statements, no leakage of variables, and full access to our class’s internals.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXwhymABkoBnDASVUqnRHIAoBKALnnoE8BtAXQBQAeiHwAtBLDIMEsQMgVy8AGI4c8AN4D4O+HWxh4AYjA40GeAF54ABgDcA7boDmIC6fOtNT3brgZkGHxVHAA6EzNUDAdfAF9HX30sQy1fXwwYLm80nPhTWgtoSho6BiVrQmIyYoL6MEZWGNzfEPCPKPgAagqKalqy0IgQVGcMAAsmnPjmsCgMMDHNad142KA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXwhymABkoBnDASVUqnRHIAoBKALnnoE8BtAXQBQAeiHwAtBLDIMEsQMgVy8AGI4c8AN4D4O+HWxh4AYjA40GeAF54ABgDcA7boDmIC6fOtNT3brgZkGHxVHAA6EzNUDAdfAF9HX30sQy1fXwwYLm80nPhTWgtoSho6BiVrQmIyYoL6MEZWGNzfEPCPKPgAagqKalqy0IgQVGcMAAsmnPjmsCgMMDHNad142KA)
 
 ```ts
 class Foo {
@@ -471,7 +471,7 @@ Without `static` blocks, writing the code above was possible, but often involved
 
 Note that a class can have multiple `static` blocks, and they’re run in the same order in which they’re written.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAUCcEsDsBcDOAuAUCUnQEZ1iwEx5agDMqAxgDYCGiioAYgPbOgDeqJi8N80FUAAdIzIaAC8OLlh58BHGSUwVmsRMyoBTAHRVmAcwAULZjpFiA1JYCUAbiWgAvo7n9BnZVlXrNu-cam5qJC1vaOLty87opeKmoa2nqGJqzBVrYOJC5OQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAUCcEsDsBcDOAuAUCUnQEZ1iwEx5agDMqAxgDYCGiioAYgPbOgDeqJi8N80FUAAdIzIaAC8OLlh58BHGSUwVmsRMyoBTAHRVmAcwAULZjpFiA1JYCUAbiWgAvo7n9BnZVlXrNu-cam5qJC1vaOLty87opeKmoa2nqGJqzBVrYOJC5OQA)
 
 ```ts
 // Prints:

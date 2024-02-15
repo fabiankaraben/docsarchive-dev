@@ -4,7 +4,7 @@ title: "TypeScript: Documentation - ASP.NET Core"
 description: "Using TypeScript in ASP.NET Core"
 weight: 1
 type: docs
-prev: /typescript/5.1/reference/variable-declaration
+prev: /typescript/5.1/reference/variable-declarations
 ---
 
 # ASP.NET Core

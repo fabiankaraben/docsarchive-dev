@@ -22,7 +22,7 @@ You can think of this in a similar way to the `echo` command.
 
 Without generics, we would either have to give the identity function a specific type:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAFAQwCcBzALkTBAFsAjNQgSnMtvsQG8AoRRQtKEISRFiAbk4BfIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAFAQwCcBzALkTBAFsAjNQgSnMtvsQG8AoRRQtKEISRFiAbk4BfIA)
 
 ```ts
 function identity(arg: number): number {
@@ -32,7 +32,7 @@ function identity(arg: number): number {
 
 Or, we could describe the identity function using the `any` type:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAFAQwCcBzALkXzGwEpzLtEBvAKEUULShEKSOIG5mAXyA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAFAQwCcBzALkXzGwEpzLtEBvAKEUULShEKSOIG5mAXyA)
 
 ```ts
 function identity(arg: any): any {
@@ -46,7 +46,7 @@ If we passed in a number, the only information we have is that any type could be
 Instead, we need a way of capturing the type of the argument in such a way that we can also use it to denote what is being returned.
 Here, we will use a *type variable*, a special kind of variable that works on types rather than values.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8AvkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8AvkA)
 
 ```ts
 function identity<Type>(arg: Type): Type {
@@ -65,7 +65,7 @@ Unlike using `any`, it’s also just as precise (i.e., it doesn’t lose any inf
 Once we’ve written the generic identity function, we can call it in one of two ways.
 The first way is to pass all of the arguments, including the type argument, to the function:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8AvjwD0cxAFoVEEFBVKeAGyGI46ousQBeZOkwwcuAM5RqMMLQoAiALbYAyvce0XLKQV+YP4APQB+IA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8AvjwD0cxAFoVEEFBVKeAGyGI46ousQBeZOkwwcuAM5RqMMLQoAiALbYAyvce0XLKQV+YP4APQB+IA)
 
 ```ts
 let output = identity<string>("myString");
@@ -77,7 +77,7 @@ Here we explicitly set `Type` to be `string` as one of the arguments to the func
 
 The second way is also perhaps the most common. Here we use *type argument inference* — that is, we want the compiler to set the value of `Type` for us automatically based on the type of the argument we pass in:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8AvjwD0cxAFoVEEFBVKeAGyGI46ousQBeZOkwwc5AEQBbbAGUo1GGFo2WUhf1-8AegD8QA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8AvjwD0cxAFoVEEFBVKeAGyGI46ousQBeZOkwwc5AEQBbbAGUo1GGFo2WUhf1-8AegD8QA)
 
 ```ts
 let output = identity("myString");
@@ -95,7 +95,7 @@ That is, that you actually treat these parameters as if they could be any and al
 
 Let’s take our `identity` function from earlier:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8AvkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8AvkA)
 
 ```ts
 function identity<Type>(arg: Type): Type {
@@ -106,7 +106,7 @@ function identity<Type>(arg: Type): Type {
 What if we want to also log the length of the argument `arg` to the console with each call?
 We might be tempted to write this:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYME4BQAzAVwDsBjAFwEs5jQAbOAc0cuMYEkATSYq8gTwA8AFX4AHSAD4AFAENojVKIkBKJeMigA3rlChSNRHDqQAdA0ZyF5no3IALFQG5doaJHKFoteYxcBfIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYME4BQAzAVwDsBjAFwEs5jQAbOAc0cuMYEkATSYq8gTwA8AFX4AHSAD4AFAENojVKIkBKJeMigA3rlChSNRHDqQAdA0ZyF5no3IALFQG5doaJHKFoteYxcBfIA)
 
 ```ts
 function loggingIdentity<Type>(arg: Type): Type {
@@ -125,7 +125,7 @@ Remember, we said earlier that these type variables stand in for any and all typ
 Let’s say that we’ve actually intended this function to work on arrays of `Type` rather than `Type` directly. Since we’re working with arrays, the `.length` member should be available.
 We can describe this just like we would create arrays of other types:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABAGzgczTMaCSATAUzFigE8AeAFVIAcCA+ACgEMAnNALkWroG0BdAJRceBAYgDeAKESIICAM5xkBAHSo0LduqJooAC0EBuGYlYEoIVkjZoTAXyA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABAGzgczTMaCSATAUzFigE8AeAFVIAcCA+ACgEMAnNALkWroG0BdAJRceBAYgDeAKESIICAM5xkBAHSo0LduqJooAC0EBuGYlYEoIVkjZoTAXyA)
 
 ```ts
 function loggingIdentity<Type>(arg: Type[]): Type[] {
@@ -140,7 +140,7 @@ This allows us to use our generic type variable `Type` as part of the types we�
 
 We can alternatively write the sample example this way:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABAGzgczTMaCSATAUzFigE8AeAFVIAcCA+ACgEMAnNALkQEFXXmK1OvQCUXXv0G0GiAN4AoRIggIAznGQEAdKjQt2OomigALEQG5EAeis8+AxCearEzRIeymANInWIwcIgAtnCsBIgEfKGKiGFQIKxIbGjm8gC+QA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABAGzgczTMaCSATAUzFigE8AeAFVIAcCA+ACgEMAnNALkQEFXXmK1OvQCUXXv0G0GiAN4AoRIggIAznGQEAdKjQt2OomigALEQG5EAeis8+AxCearEzRIeymANInWIwcIgAtnCsBIgEfKGKiGFQIKxIbGjm8gC+QA)
 
 ```ts
 function loggingIdentity<Type>(arg: Array<Type>): Array<Type> {
@@ -159,7 +159,7 @@ In this section, we’ll explore the type of the functions themselves and how to
 
 The type of generic functions is just like those of non-generic functions, with the type parameters listed first, similarly to function declarations:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8Avjx4AbIYgC22AJLpMMHIwLEyVOu30tEAXlJN955JqzYJQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8Avjx4AbIYgC22AJLpMMHIwLEyVOu30tEAXlJN955JqzYJQA)
 
 ```ts
 function identity<Type>(arg: Type): Type {
@@ -171,7 +171,7 @@ let myIdentity: <Type>(arg: Type) => Type = identity;
 
 We could also have used a different name for the generic type parameter in the type, so long as the number of type variables and how the type variables are used line up.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAPASTAAcQoA+ACgEMAnAcwC5FCSoBKJl0xAbwChEiGmiggaSWnQDcfAL58+AGxGIAttnzpMMHEwLFSlSZwPtEAXjLNTF5FqzYpQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAPASTAAcQoA+ACgEMAnAcwC5FCSoBKJl0xAbwChEiGmiggaSWnQDcfAL58+AGxGIAttnzpMMHEwLFSlSZwPtEAXjLNTF5FqzYpQA)
 
 ```ts
 function identity<Input>(arg: Input): Input {
@@ -183,7 +183,7 @@ let myIdentity: <Input>(arg: Input) => Input = identity;
 
 We can also write the generic type as a call signature of an object literal type:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8Avjx4AbIYgC22AJLpMMHIy6ICxMlTrtDbJocTTEAXmSas2CUA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABDAJgUzLKBPAPAFWwAc0A+ACgEMAnAcwC5FCSBKR5tRAbwChFFqaKCGpIatANw8Avjx4AbIYgC22AJLpMMHIy6ICxMlTrtDbJocTTEAXmSas2CUA)
 
 ```ts
 function identity<Type>(arg: Type): Type {
@@ -196,7 +196,7 @@ let myIdentity: { <Type>(arg: Type): Type } = identity;
 Which leads us to writing our first generic interface.
 Let’s take the object literal from the previous example and move it to an interface:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgOIRNYCCSATDMYMATwDERkBvAKGWQB4AVEgBwgD4AKOKAcwBcyFuwCUQkRADcNAL40aMAK4gERAPaVgBcMRLM2nHvwmHxww9TrIoEMEqiVefGfJoAbO8gC2JfIT0hdEwobH9dUgpkAF5kbQDSKSA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgOIRNYCCSATDMYMATwDERkBvAKGWQB4AVEgBwgD4AKOKAcwBcyFuwCUQkRADcNAL40aMAK4gERAPaVgBcMRLM2nHvwmHxww9TrIoEMEqiVefGfJoAbO8gC2JfIT0hdEwobH9dUgpkAF5kbQDSKSA)
 
 ```ts
 interface GenericIdentityFn {
@@ -214,7 +214,7 @@ In a similar example, we may want to move the generic parameter to be a paramete
 This lets us see what type(s) we’re generic over (e.g. `Dictionary<string>` rather than just `Dictionary`).
 This makes the type parameter visible to all the other members of the interface.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgOIRNYCCSATDMYMATwDEQAeAFRIAcIA+ZAbwChlkAKOKAcwBcyWgwCUQkRADcbAL5s2MAK4gERAPYhkwAuGIka9Jj34Sj44UdYdkUCGCVQtvPjPlsANveQBbEvkJ9IXRMKGwAvVIKShAlHwAjaGYAXm1dIlIpIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgOIRNYCCSATDMYMATwDEQAeAFRIAcIA+ZAbwChlkAKOKAcwBcyWgwCUQkRADcbAL5s2MAK4gERAPYhkwAuGIka9Jj34Sj44UdYdkUCGCVQtvPjPlsANveQBbEvkJ9IXRMKGwAvVIKShAlHwAjaGYAXm1dIlIpIA)
 
 ```ts
 interface GenericIdentityFn<Type> {
@@ -241,7 +241,7 @@ Note that it is not possible to create generic enums and namespaces.
 A generic class has a similar shape to a generic interface.
 Generic classes have a generic type parameter list in angle brackets (`<>`) following the name of the class.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGcBcCcEsDG0BcoBmBDANpApgFCLaaSSgDieAdngogHICuAtgEZ0A8zLAKgJ4AHPAD5QAbwKhQALzoB7AGo4meNDwHCA3FNCYAJvrQAKAB7rWmvABpQ-C3yF4AlKAC8YjU50BfAgWw8aFAWfipaeh4OWHdQWgB3Sho6JCiualZokWNnHVDwlMZMugA6OVglFTxYgAY8sOTI4tgSg31Y9CZqZHh5alAzW35XSWlYIKZYftNQAGo7Xy0gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGcBcCcEsDG0BcoBmBDANpApgFCLaaSSgDieAdngogHICuAtgEZ0A8zLAKgJ4AHPAD5QAbwKhQALzoB7AGo4meNDwHCA3FNCYAJvrQAKAB7rWmvABpQ-C3yF4AlKAC8YjU50BfAgWw8aFAWfipaeh4OWHdQWgB3Sho6JCiualZokWNnHVDwlMZMugA6OVglFTxYgAY8sOTI4tgSg31Y9CZqZHh5alAzW35XSWlYIKZYftNQAGo7Xy0gA)
 
 ```ts
 class GenericNumber<NumType> {
@@ -259,7 +259,7 @@ myGenericNumber.add = function (x, y) {
 This is a pretty literal use of the `GenericNumber` class, but you may have noticed that nothing is restricting it to only use the `number` type.
 We could have instead used `string` or even more complex objects.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGcBcCcEsDG0BcoBmBDANpApgFCLaaSSgDieAdngogHICuAtgEZ0A8zLAKgJ4AHPAD5QAbwKhQALzoB7AGo4meNDwHCA3FNCYAJvrQAKAB7rWmvABpQ-C3yF4AlKAC8YjU50BfAiFAAWmDEJmhgwIJsPGhQGARqAHMeOiR3UFoAd0oaVMZWDlhOePgkkWNnHRKklPoAOjlYJRU8dIAiNqq4UuTWPLqDfXT0JmpkeHlqUDNbfldJaVgYplgp01AAajtfHSJJyHlouux5RONq3pZ+wfPumr76xubsVVs26DwYNudKoA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGcBcCcEsDG0BcoBmBDANpApgFCLaaSSgDieAdngogHICuAtgEZ0A8zLAKgJ4AHPAD5QAbwKhQALzoB7AGo4meNDwHCA3FNCYAJvrQAKAB7rWmvABpQ-C3yF4AlKAC8YjU50BfAiFAAWmDEJmhgwIJsPGhQGARqAHMeOiR3UFoAd0oaVMZWDlhOePgkkWNnHRKklPoAOjlYJRU8dIAiNqq4UuTWPLqDfXT0JmpkeHlqUDNbfldJaVgYplgp01AAajtfHSJJyHlouux5RONq3pZ+wfPumr76xubsVVs26DwYNudKoA)
 
 ```ts
 let stringNumeric = new GenericNumber<string>();
@@ -281,7 +281,7 @@ Generic classes are only generic over their instance side rather than their stat
 If you remember from an earlier example, you may sometimes want to write a generic function that works on a set of types where you have *some* knowledge about what capabilities that set of types will have.
 In our `loggingIdentity` example, we wanted to be able to access the `.length` property of `arg`, but the compiler could not prove that every type had a `.length` property, so it warns us that we can’t make this assumption.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYME4BQAzAVwDsBjAFwEs5jQAbOAc0cuMYEkATSYq8gTwA8AFX4AHSAD4AFAENojVKIkBKJeMigA3rlChSNRHDqQAdA0ZyF5no3IALFQG5doaJHKFoteYxcBfIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYME4BQAzAVwDsBjAFwEs5jQAbOAc0cuMYEkATSYq8gTwA8AFX4AHSAD4AFAENojVKIkBKJeMigA3rlChSNRHDqQAdA0ZyF5no3IALFQG5doaJHKFoteYxcBfIA)
 
 ```ts
 function loggingIdentity<Type>(arg: Type): Type {
@@ -301,7 +301,7 @@ To do so, we must list our requirement as a constraint on what `Type` can be.
 To do so, we’ll create an interface that describes our constraint.
 Here, we’ll create an interface that has a single `.length` property and then we’ll use this interface and the `extends` keyword to denote our constraint:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgDIRAczACwO7ADOKA3gFDLIA2G2OAXMiAK4C2ARtANxkC+ZZGMxAIwwAPYhq4zJlCYAkgBMMYsAE8APABV1ABxQQAHpBBLCaWrgLEAfAAo4UTI10GAlK-2kKyBJMJxGgA6KhlHZ1CrHHcuZAB6eOQAOXE8ZDwUAGsQNORgMGQcOAs4ZCisXGQ9KHEDKA0AGmRApnFkVnEoQyhaqF9usGYoKSdMHl4gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgDIRAczACwO7ADOKA3gFDLIA2G2OAXMiAK4C2ARtANxkC+ZZGMxAIwwAPYhq4zJlCYAkgBMMYsAE8APABV1ABxQQAHpBBLCaWrgLEAfAAo4UTI10GAlK-2kKyBJMJxGgA6KhlHZ1CrHHcuZAB6eOQAOXE8ZDwUAGsQNORgMGQcOAs4ZCisXGQ9KHEDKA0AGmRApnFkVnEoQyhaqF9usGYoKSdMHl4gA)
 
 ```ts
 interface Lengthwise {
@@ -316,7 +316,7 @@ function loggingIdentity<Type extends Lengthwise>(arg: Type): Type {
 
 Because the generic function is now constrained, it will no longer work over any and all types:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAJYB2ALjAGYCGAxpKADKREDmJAFgO4GJ0DeeoUABsmrNqiIBXALYAjGAG48AXzx5ykotRIE4RYXGbNizAJIATJjpIBPADwAVGwAc6kAB5ki5xA1HsuHgA+AApKaGZUJ1cASiiXPgFQaj1EOBEAOiFDMIis-zYYpUFoSBJJaH1w5iVVEFAAWibqSRImhrxsoxMLKwJbEIwioA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAJYB2ALjAGYCGAxpKADKREDmJAFgO4GJ0DeeoUABsmrNqiIBXALYAjGAG48AXzx5ykotRIE4RYXGbNizAJIATJjpIBPADwAVGwAc6kAB5ki5xA1HsuHgA+AApKaGZUJ1cASiiXPgFQaj1EOBEAOiFDMIis-zYYpUFoSBJJaH1w5iVVEFAAWibqSRImhrxsoxMLKwJbEIwioA)
 
 ```ts
 loggingIdentity(3);
@@ -328,7 +328,7 @@ Argument of type 'number' is not assignable to parameter of type 'Lengthwise'.
 
 Instead, we need to pass in values whose type has all the required properties:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/JYOwLgpgTgZghgYwgAgDIRAczACwO7ADOKA3gFDLIA2G2OAXMiAK4C2ARtANxkC+ZZGMxAIwwAPYhq4zJlCYAkgBMMYsAE8APABV1ABxQQAHpBBLCaWrgLEAfAAo4UTI10GAlK-2kKyBJMJxGgA6KhlHZ1CrHHceSigIMGYoKSdMHn4AekzkAFp8hGYwfNyyMNl5ZVVgDXsSamjGAEYABgAaZAA3OCpmCEYAZmReWKA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/JYOwLgpgTgZghgYwgAgDIRAczACwO7ADOKA3gFDLIA2G2OAXMiAK4C2ARtANxkC+ZZGMxAIwwAPYhq4zJlCYAkgBMMYsAE8APABV1ABxQQAHpBBLCaWrgLEAfAAo4UTI10GAlK-2kKyBJMJxGgA6KhlHZ1CrHHceSigIMGYoKSdMHn4AekzkAFp8hGYwfNyyMNl5ZVVgDXsSamjGAEYABgAaZAA3OCpmCEYAZmReWKA)
 
 ```ts
 loggingIdentity({ length: 10, value: 3 });
@@ -340,7 +340,7 @@ You can declare a type parameter that is constrained by another type parameter.
 For example, here we’d like to get a property from an object given its name.
 We’d like to ensure that we’re not accidentally grabbing a property that does not exist on the `obj`, so we’ll place a constraint between the two types:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAGYCuAdgMYAuAlnCaAOaQUAK8ADjBQJ4A8AKlw4AaUAGlIXUJAAeFSCQAmiUAGsJcAqAEcAfAAo4AIwBWqbZBFquqcVwCUoAN55QoaEyLQ6R4wG0rALoA3HgAvnh4ADZMoNKgALxOoACGqACMIoaoaCJkqBgiCqhYoKEheIws7JxcetIiAETJDXYhlaxwHNDcdY0Ati1BQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAGYCuAdgMYAuAlnCaAOaQUAK8ADjBQJ4A8AKlw4AaUAGlIXUJAAeFSCQAmiUAGsJcAqAEcAfAAo4AIwBWqbZBFquqcVwCUoAN55QoaEyLQ6R4wG0rALoA3HgAvnh4ADZMoNKgALxOoACGqACMIoaoaCJkqBgiCqhYoKEheIws7JxcetIiAETJDXYhlaxwHNDcdY0Ati1BQA)
 
 ```ts
 function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
@@ -361,7 +361,7 @@ Argument of type '"m"' is not assignable to parameter of type '"a" | "b" | "c" |
 
 When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions. For example,
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABBATgUwIZTQHgCoCeADmgHwAUEAXIgN6JhoDui5AlDYSYgL4eJc0dAFCJE6KCBRJGLCOwDcwnkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABBATgUwIZTQHgCoCeADmgHwAUEAXIgN6JhoDui5AlDYSYgL4eJc0dAFCJE6KCBRJGLCOwDcwnkA)
 
 ```ts
 function create<Type>(c: { new (): Type }): Type {
@@ -371,7 +371,7 @@ function create<Type>(c: { new (): Type }): Type {
 
 A more advanced example uses the prototype property to infer and constrain relationships between the constructor function and the instance side of class types.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGcBcCcEsDG0BcoBmBDANpApgFCLaaSSgBCeeA0tQA56ygDeBooAFqQLKkDWaAEYB7EdjyYAdqAC8oOAFc8AbgIBfAkRJlQALTF08jZmw5TMAWzzRMAczQwEUu3NAAiHvH4T3azdqk5ACCUvCWOKzsoFKKlgAyeHaQaLGWQkxuACz+WsRBlNSgeAAe0HhSACYhYRHYUeZxicluAGxqHPwMTGhUtN3M8lJ4AO6F-cZMABQAlLmBuvHwIjKl5VU14ZFmoF2TsGgGIkYmbsNjRyfTcxpa6IpSyMsyiLCS5QCSUjDSiHgAPMFimUKtVQKEttgAHxTRCpUagWZyKHgmZoIE7N7QRSwGTnUCIWbzV7vPBfH6PPBTJYrGYAOj2JjpFmstjsahJmE+31slKmfXpjKYdO4kD4kH4KiAA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGcBcCcEsDG0BcoBmBDANpApgFCLaaSSgBCeeA0tQA56ygDeBooAFqQLKkDWaAEYB7EdjyYAdqAC8oOAFc8AbgIBfAkRJlQALTF08jZmw5TMAWzzRMAczQwEUu3NAAiHvH4T3azdqk5ACCUvCWOKzsoFKKlgAyeHaQaLGWQkxuACz+WsRBlNSgeAAe0HhSACYhYRHYUeZxicluAGxqHPwMTGhUtN3M8lJ4AO6F-cZMABQAlLmBuvHwIjKl5VU14ZFmoF2TsGgGIkYmbsNjRyfTcxpa6IpSyMsyiLCS5QCSUjDSiHgAPMFimUKtVQKEttgAHxTRCpUagWZyKHgmZoIE7N7QRSwGTnUCIWbzV7vPBfH6PPBTJYrGYAOj2JjpFmstjsahJmE+31slKmfXpjKYdO4kD4kH4KiAA)
 
 ```ts
 class BeeKeeper {
@@ -409,7 +409,7 @@ This pattern is used to power the [mixins](/typescript/5.2/reference/mixins) des
 
 By declaring a default for a generic type parameter, you make it optional to specify the corresponding type argument. For example, a function which creates a new `HTMLElement`. Calling the function with no arguments generates a `HTMLDivElement`; calling the function with an element as the first argument generates an element of the argument’s type. You can optionally pass a list of children as well. Previously you would have to define the function as:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAwg9gO2AQwJYIgJwDwBUA0UAqgHxQC8UA3gFBRQQA2EAthEgFxS4DcdUAYwAWqRgBNM7LkT4BfPjQD0iqAFp1AgK7B1qmmIgDGySVABmmhAOCpEgycmAQAFAEou8JGgw4AErgBZABkAEVQANwBRZjYkQn9gsKiY9mAAbQBdEj4DIxNoCysbOwEHJzwGAA8nBDEAZygEoOjWVJJnJlbObndYRBR0LDxCXEzs-UNjU0LrWwR7CEcICohq9nrGwOaUuOIqmo2mltjgdv5Ok64CfmFRCSliTJpezwGfYcesniA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAwg9gO2AQwJYIgJwDwBUA0UAqgHxQC8UA3gFBRQQA2EAthEgFxS4DcdUAYwAWqRgBNM7LkT4BfPjQD0iqAFp1AgK7B1qmmIgDGySVABmmhAOCpEgycmAQAFAEou8JGgw4AErgBZABkAEVQANwBRZjYkQn9gsKiY9mAAbQBdEj4DIxNoCysbOwEHJzwGAA8nBDEAZygEoOjWVJJnJlbObndYRBR0LDxCXEzs-UNjU0LrWwR7CEcICohq9nrGwOaUuOIqmo2mltjgdv5Ok64CfmFRCSliTJpezwGfYcesniA)
 
 ```ts
 declare function create(): Container<HTMLDivElement, HTMLDivElement[]>;
@@ -422,7 +422,7 @@ declare function create<T extends HTMLElement, U extends HTMLElement>(
 
 With generic parameter defaults we can reduce it to:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAwg9gO2AQwJYIgJwDwBUA0UAqgHxQC8UA3gFBRQQA2EAthEgFxS4DcdUAYwAWqRgBNM7LkT4BfPjQD0iqAFp1AgK7B1qmmIgDGySVABmmhAOCpEgycmAQ8DAB5OEYgM5QAErgBZABkAUWY2JAo-QKCAEVQANzDWdmBCIijcAG0AXRIACn4mFKQAfi4CfmFRCXZy4hoASi54JDQMHAJiEgUBRC9gKDFEqIEHJ3zGvmV6egA9UpoaPoQBqDBR8Yh8jAB3aOCABRNkAHNMZDAhZIjgSamlFVmFoA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAwg9gO2AQwJYIgJwDwBUA0UAqgHxQC8UA3gFBRQQA2EAthEgFxS4DcdUAYwAWqRgBNM7LkT4BfPjQD0iqAFp1AgK7B1qmmIgDGySVABmmhAOCpEgycmAQ8DAB5OEYgM5QAErgBZABkAUWY2JAo-QKCAEVQANzDWdmBCIijcAG0AXRIACn4mFKQAfi4CfmFRCXZy4hoASi54JDQMHAJiEgUBRC9gKDFEqIEHJ3zGvmV6egA9UpoaPoQBqDBR8Yh8jAB3aOCABRNkAHNMZDAhZIjgSamlFVmFoA)
 
 ```ts
 declare function create<T extends HTMLElement = HTMLDivElement, U = T[]>(

@@ -75,7 +75,7 @@ When generic spreads are instantiated (or, replaced with a real type) in these t
 
 For example, that means we can type function like `tail`, without our “death by a thousand overloads” issue.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABFAhjANgHgCqIKYAeUeYAJgM6IpgCeA2gLoB8AFCgE7sBci7eKpBOhqI61GgBpEAOlnYGASkQBvAFCJEEBOSiiA+jADmYOH1JTZ0vjoaIAvFU4BudbzxQQ7JNaguAvqqqWmA6iAC2NNggAA7oePaiAIxSAExSAMxSACy2KJTBOi4FuhEAgpwoIg50AEQAFnjo6HA1UjUA7qbopDUMLkHauuyJCagYLBFRsXgKLgD0cxoaAHoA-IHFvCmjaOgsdJaTMXEWsmUVNLn5g7OqC0uIa0A)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABFAhjANgHgCqIKYAeUeYAJgM6IpgCeA2gLoB8AFCgE7sBci7eKpBOhqI61GgBpEAOlnYGASkQBvAFCJEEBOSiiA+jADmYOH1JTZ0vjoaIAvFU4BudbzxQQ7JNaguAvqqqWmA6iAC2NNggAA7oePaiAIxSAExSAMxSACy2KJTBOi4FuhEAgpwoIg50AEQAFnjo6HA1UjUA7qbopDUMLkHauuyJCagYLBFRsXgKLgD0cxoaAHoA-IHFvCmjaOgsdJaTMXEWsmUVNLn5g7OqC0uIa0A)
 
 ```ts
 function tail<T extends any[]>(arr: readonly [any, ...T]) {
@@ -123,7 +123,7 @@ type Unbounded = [...Strings, ...Numbers, boolean];
 
 By combining both of these behaviors together, we can write a single well-typed signature for `concat`:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAggTnKBeKcIEMAmB7AdgGxCnVxAG0BdAbgCgaAzAV1wGNgBLPKFvF9YADwAVKBAAewCLkwBnWAgA0UAKqiJU2fLgA+ABToEARgBcUIUoNwATKeUBKU2QB0L81BdPlFKAG8aUVAhgRjhcKGcXS0MlD0srahoAXyA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAggTnKBeKcIEMAmB7AdgGxCnVxAG0BdAbgCgaAzAV1wGNgBLPKFvF9YADwAVKBAAewCLkwBnWAgA0UAKqiJU2fLgA+ABToEARgBcUIUoNwATKeUBKU2QB0L81BdPlFKAG8aUVAhgRjhcKGcXS0MlD0srahoAXyA)
 
 ```ts
 type Arr = readonly any[];
@@ -148,7 +148,7 @@ function partialCall(f, ...headArgs) {
 
 TypeScript 4.0 improves the inference process for rest parameters and rest tuple elements so that we can type this and have it “just work”.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/C4TwDgpgBAggTnKBeKcIEMAmB7AdgGxCgFdcBrXbAd1wG0BdAbgChmAzUgY2AEs8ow6OL3T4AwqPwAeACpQIAD2ARcmAM6wEAGigBVeUpXrNcHQCUAfAApmUKGwBcUKwDo3QgOZqntNy5k6frr0AJTIFlBmWrZQfgAWGJjwXk4yzGEA3jFowMRwuM5+wOg8+MneemFIEWyubglY5YFuxaXlISwAvkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAggTnKBeKcIEMAmB7AdgGxCgFdcBrXbAd1wG0BdAbgChmAzUgY2AEs8ow6OL3T4AwqPwAeACpQIAD2ARcmAM6wEAGigBVeUpXrNcHQCUAfAApmUKGwBcUKwDo3QgOZqntNy5k6frr0AJTIFlBmWrZQfgAWGJjwXk4yzGEA3jFowMRwuM5+wOg8+MneemFIEWyubglY5YFuxaXlISwAvkA)
 
 ```ts
 type Arr = readonly unknown[];
@@ -163,7 +163,7 @@ function partialCall<T extends Arr, U extends Arr, R>(
 
 In this case, `partialCall` understands which parameters it can and can’t initially take, and returns functions that appropriately accept and reject anything left over.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWdOct9D1scAoAFwE8AHSUAQVlAF5RpIBDAEzgDsANtVABXfgGt+cAO78A2gF0A3OXIAzcQGNKASwGhaXaHq6CAwmcEAeACqhIAD0qR+PRE1gAaUAFUHzq7untA+AEoAfAAU5KCg6qhRAHQpxgDmKKDyKUm2Pjm+igCUbBGgYV6xoDkAFtw8zBmotuQlAN5VnJSi0PygySmUXLqCjZm+Jaxl6gNJdbxj+YPDo9AZRaoAvuQgoAC0B1qilAd75FoCiJTxcHBs-Y6oV9C6-Gk+1Kj8ogC2AEYwHwAL1Qf1ugm4-EmZTam1U50u13UAEZ7kYTLozJZBIIoupbj5kQAGIkbNQXfhXeJoNHGUwWKx4gmgABEdRxcBZhJJPko0FEkB8LNutEQLLJOzAthqug8MgQEkQAEIEZSkRhaRisYz8XAhezBJyybs4qAAHoAfjUuwA6jUuNctFw+jIGHxQDJdJQavENdIZFbJaAbQrlRoMFFkZhefzIBL1BH4xGoxh9ZAOeLlEA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYAsBWdOct9D1scAoAFwE8AHSUAQVlAF5RpIBDAEzgDsANtVABXfgGt+cAO78A2gF0A3OXIAzcQGNKASwGhaXaHq6CAwmcEAeACqhIAD0qR+PRE1gAaUAFUHzq7untA+AEoAfAAU5KCg6qhRAHQpxgDmKKDyKUm2Pjm+igCUbBGgYV6xoDkAFtw8zBmotuQlAN5VnJSi0PygySmUXLqCjZm+Jaxl6gNJdbxj+YPDo9AZRaoAvuQgoAC0B1qilAd75FoCiJTxcHBs-Y6oV9C6-Gk+1Kj8ogC2AEYwHwAL1Qf1ugm4-EmZTam1U50u13UAEZ7kYTLozJZBIIoupbj5kQAGIkbNQXfhXeJoNHGUwWKx4gmgABEdRxcBZhJJPko0FEkB8LNutEQLLJOzAthqug8MgQEkQAEIEZSkRhaRisYz8XAhezBJyybs4qAAHoAfjUuwA6jUuNctFw+jIGHxQDJdJQavENdIZFbJaAbQrlRoMFFkZhefzIBL1BH4xGoxh9ZAOeLlEA)
 
 ```ts
 const foo = (x: string, y: number, z: boolean) => {};
@@ -219,7 +219,7 @@ function foo(arg0: string, arg1: number): void {
 
 …for any caller of `foo`.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwFYMBYBQAzAVwDsBjAFwEs5jR844AKAQ2gHMAGVRc6S4tgBpQrNgEZUxQgFsARjACUqAG5xKAE1ABvXKFAhQAOmO4AvrgMBaa6ULlrlgg0YAiABaQANp7gvh2NAUAblwnJncvHz9QAOFeQkhgsNcPb19goA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwFYMBYBQAzAVwDsBjAFwEs5jR844AKAQ2gHMAGVRc6S4tgBpQrNgEZUxQgFsARjACUqAG5xKAE1ABvXKFAhQAOmO4AvrgMBaa6ULlrlgg0YAiABaQANp7gvh2NAUAblwnJncvHz9QAOFeQkhgsNcPb19goA)
 
 ```ts
 foo("hello", 42);
@@ -252,7 +252,7 @@ type Foo = [first: number, second?: string, ...rest: any[]];
 There are a few rules when using labeled tuples.
 For one, when labeling a tuple element, all other elements in the tuple must also be labeled.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygKwAYAcAWAUAC4CeADpKAEICG0oAvKANoBmAlkgaogdKwHYBzADSg+AVwC2AIxgBdANxA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygKwAYAcAWAUAC4CeADpKAEICG0oAvKANoBmAlkgaogdKwHYBzADSg+AVwC2AIxgBdANxA)
 
 ```ts
 type Bar = [first: string, number];
@@ -265,7 +265,7 @@ Tuple members must all have names or all not have names.
 It’s worth noting - labels don’t require us to name our variables differently when destructuring.
 They’re purely there for documentation and tooling.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/GYVwdgxgLglg9mABMOcAUAPAXIg2sGAJwGcodTCYwBzAGkWIFMIEATHMEAWwCNHCAugEpEAbwBQiKYgD0MxADol4ydLmIwcKIxwB3RolYxWYAORQNjRq0RQ4GgIZcDUABaMmiUwRJRTiBzAbUyYWINNVKTDSPAd6HgFEAF5EDABuSIDxdUQAPQB+TJ5s+TzCgF8gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABMOcAUAPAXIg2sGAJwGcodTCYwBzAGkWIFMIEATHMEAWwCNHCAugEpEAbwBQiKYgD0MxADol4ydLmIwcKIxwB3RolYxWYAORQNjRq0RQ4GgIZcDUABaMmiUwRJRTiBzAbUyYWINNVKTDSPAd6HgFEAF5EDABuSIDxdUQAPQB+TJ5s+TzCgF8gA)
 
 ```ts
 function foo(x: [first: string, second: number]) {
@@ -293,7 +293,7 @@ To learn more, check out [the pull request](https://github.com/microsoft/TypeScr
 
 TypeScript 4.0 can now use control flow analysis to determine the types of properties in classes when [`noImplicitAny`](/tsconfig.html#noImplicitAny) is enabled.
 
-[Try this code](/play/#code/MYGwhgzhAEDKCOBXMAnAptA3gKGtA9PtAAroBuAlgPaIQgCe0ARlQC4AW0VAZtB2hAwB3NOmhgAdvVzj0YANzZC0AHoB+GRAoATNABk0EgOYdFy9TOBUJEVikTBWVFAAotug8Y4AuaBMQAtkyiAJRYMngcFBAAdO76hiacALzQ8Z5JiniR7NExqGhg0KnpiRzQAFQV0ABMWdAAvtgNQA)
+[Try this code](/play#code/MYGwhgzhAEDKCOBXMAnAptA3gKGtA9PtAAroBuAlgPaIQgCe0ARlQC4AW0VAZtB2hAwB3NOmhgAdvVzj0YANzZC0AHoB+GRAoATNABk0EgOYdFy9TOBUJEVikTBWVFAAotug8Y4AuaBMQAtkyiAJRYMngcFBAAdO76hiacALzQ8Z5JiniR7NExqGhg0KnpiRzQAFQV0ABMWdAAvtgNQA)
 
 ```ts
 class Square {
@@ -313,7 +313,7 @@ class Square {
 
 In cases where not all paths of a constructor assign to an instance member, the property is considered to potentially be `undefined`.
 
-[Try this code](/play/#code/PTAEAEFMCdoe2gZwFygEwFYDMbQEYAOABgBYCAoAYwBsBDRRUAZQEcBXW6SUAb3NFCIAlgBNIAGUgA7AOYAXABYBuciFAA9APzl+oSnCmI50NpTkIAFMLGTZi1FLYBbAEYwAlL10ChAM1AWALK0igB00LRSInBOFu6efAJJoIpCiKHWEtLyCqAAvIKiWXbK3qAAvrqVujKQcqCckLRxXslccmzQUikKaRlFtjmgAFTD6CoCleVAA)
+[Try this code](/play#code/PTAEAEFMCdoe2gZwFygEwFYDMbQEYAOABgBYCAoAYwBsBDRRUAZQEcBXW6SUAb3NFCIAlgBNIAGUgA7AOYAXABYBuciFAA9APzl+oSnCmI50NpTkIAFMLGTZi1FLYBbAEYwAlL10ChAM1AWALK0igB00LRSInBOFu6efAJJoIpCiKHWEtLyCqAAvIKiWXbK3qAAvrqVujKQcqCckLRxXslccmzQUikKaRlFtjmgAFTD6CoCleVAA)
 
 ```ts
 class Square {
@@ -339,7 +339,7 @@ Object is possibly 'undefined'.
 
 In cases where you know better (e.g. you have an `initialize` method of some sort), you’ll still need an explicit type annotation along with a definite assignment assertion (`!`) if you’re in [`strictPropertyInitialization`](/tsconfig.html#strictPropertyInitialization).
 
-[Try this code](/play/#code/MYGwhgzhAEDKCOBXMAnAptA3gKGtA9PtACZoBmAlgHYUAuGkEFA5lQLZpW3SNoq0UA9lVwEieCXgBuopqQAynZrQAWAQgBc0KojYAjPgG5RhSWYB6lq5ZNFaATwAODKlUG0wA4dlHBhEWhREYFpBFAAKOTRFKmUVLR19PgBKLFE8VQoIADpqOgowEAoALzRIigUlVWTjPABfHzw8gUKSsqiYuITdAxRUnElMnI6qlWgAXmgR2NVa6AbRZjRuVDQwcP706HRaRBQqaCHs6bjoACoz6AAmOYa6oA)
+[Try this code](/play#code/MYGwhgzhAEDKCOBXMAnAptA3gKGtA9PtACZoBmAlgHYUAuGkEFA5lQLZpW3SNoq0UA9lVwEieCXgBuopqQAynZrQAWAQgBc0KojYAjPgG5RhSWYB6lq5ZNFaATwAODKlUG0wA4dlHBhEWhREYFpBFAAKOTRFKmUVLR19PgBKLFE8VQoIADpqOgowEAoALzRIigUlVWTjPABfHzw8gUKSsqiYuITdAxRUnElMnI6qlWgAXmgR2NVa6AbRZjRuVDQwcP706HRaRBQqaCHs6bjoACoz6AAmOYa6oA)
 
 ```ts
 class Square {
@@ -447,7 +447,7 @@ if (!obj.prop) {
 
 [Try running the following example](/play#code/MYewdgzgLgBCBGArGBeGBvAsAKBnmA5gKawAOATiKQBQCUGO+TMokIANkQHTsgHUAiYlChFyMABYBDCDHIBXMANoBuHI2Z4A9FpgAlIqXZTgRGAFsiAQg2byJeeTAwAslKgSu5KWAAmIczoYAB4YAAYuAFY1XHwAXwAaWxgIEhgKKmoAfQA3KXYALhh4EA4iH3osWM1WCDKePkFUkTFJGTlFZRimOJw4mJwAM0VgKABLcBhB0qCqplr63n4BcjGCCVgIMd8zIjz2eXciXy7k+yhHZygFIhje7BwFzgblgBUJMdlwM3yAdykAJ6yBSQGAeMzNUTkU7YBCILgZUioOBIBGUJEAHwxUxmqnU2Ce3CWgnenzgYDMACo6pZxpYIJSOqDwSkSFCYXC0VQYFi0NMQHQVEA) to see how that differs from *always* performing the assignment.
 
-[Try this code](/play/#code/MYewdgzgLgBCBGArGBeGBvAUDHMDmAprAA4BOIxAFAJQba4OiQgA2BAdCyHpQESFQoBUjAAWAQwgxSAVzC9qAbkz0GOAPTqYAJQLEW44ARgBbAgEJVa0kRmkwMALLioo9qXFgAJiBM0YADwwAAzsAKzKDAC+ADRWEEQwZBSUAPoAbuIsAFww8CCsBJ60WGq4TBCFnNx8CYLCYpLScgqRuFGYUcqYAGZywFAAluAwPQX+peXglWzVPLykg3iisBCDXsYEmSwyLgRerVY2UHYOULIEyh2YFVVc8wAqooNS4MZZAO7iAJ5SspAwVzGOpCUiHBCIdjJYioOBIKHkGEAHyRo3GShUt1m9z4TxecDAxgAVJUzEMzBAic0AUCYCDhOD4dCYCi0GMQDRFEA)
+[Try this code](/play#code/MYewdgzgLgBCBGArGBeGBvAUDHMDmAprAA4BOIxAFAJQba4OiQgA2BAdCyHpQESFQoBUjAAWAQwgxSAVzC9qAbkz0GOAPTqYAJQLEW44ARgBbAgEJVa0kRmkwMALLioo9qXFgAJiBM0YADwwAAzsAKzKDAC+ADRWEEQwZBSUAPoAbuIsAFww8CCsBJ60WGq4TBCFnNx8CYLCYpLScgqRuFGYUcqYAGZywFAAluAwPQX+peXglWzVPLykg3iisBCDXsYEmSwyLgRerVY2UHYOULIEyh2YFVVc8wAqooNS4MZZAO7iAJ5SspAwVzGOpCUiHBCIdjJYioOBIKHkGEAHyRo3GShUt1m9z4TxecDAxgAVJUzEMzBAic0AUCYCDhOD4dCYCi0GMQDRFEA)
 
 ```ts
 const obj = {
@@ -484,7 +484,7 @@ You can also [check out TC39’s proposal repository for this feature](https://g
 Since the beginning days of TypeScript, `catch` clause variables have always been typed as `any`.
 This meant that TypeScript allowed you to do anything you wanted with them.
 
-[Try this code](/play/#code/PTAEAEFcGcFMFUB2BrRB7A7ogkogwgIYAuAxgBYBqBATgJYEBGANrNAFygBmBTcAUEWoBPUAG8+oUCFAARNKGhoAtrFAY01ZHwC+oEsXKgAFAA8AlGIlSwJ0GQLRQRIQAdVAcgKIh70AFo7AgA3VU5IRABCKxI0REUWADomNABzUwSVaGgCFNgzAG5o2PjYJNT0ojR4FzdqQjgjMwKrEwBqVsLJEwShAgATPoIe-sHhgYJGwu0gA)
+[Try this code](/play#code/PTAEAEFcGcFMFUB2BrRB7A7ogkogwgIYAuAxgBYBqBATgJYEBGANrNAFygBmBTcAUEWoBPUAG8+oUCFAARNKGhoAtrFAY01ZHwC+oEsXKgAFAA8AlGIlSwJ0GQLRQRIQAdVAcgKIh70AFo7AgA3VU5IRABCKxI0REUWADomNABzUwSVaGgCFNgzAG5o2PjYJNT0ojR4FzdqQjgjMwKrEwBqVsLJEwShAgATPoIe-sHhgYJGwu0gA)
 
 ```ts
 try {
@@ -504,7 +504,7 @@ Because these variables have the type `any` by default, they lack any type-safet
 That’s why TypeScript 4.0 now lets you specify the type of `catch` clause variables as `unknown` instead.
 `unknown` is safer than `any` because it reminds us that we need to perform some sorts of type-checks before operating on our values.
 
-[Try this code](/play/#code/PTAEAEFMCdoe2gZwFygEwFYDsBGUOAOABgBYA2AKABdoBPUAbwtFBFADpOKBfUAYwCGVPgAtQACkioArgDsA1rLgB3WQEpGzVmADCA2QHIqoAXz6REiUADcBAG2kXQcWaDmKVsxFr4vEcO0h2OzgAc0l2KjgAVQAHWJg9REhxNTUAbgotAEsAMwkqWgS4fMhQAF5K0AAiRBps2VDqjSYWFjYAdUgDazLZAVgVSAATUANu0GHPUCiZkTLChLG66AbQg3YtFl8vAKCQ8KCouIToJJS0zJZuHiA)
+[Try this code](/play#code/PTAEAEFMCdoe2gZwFygEwFYDsBGUOAOABgBYA2AKABdoBPUAbwtFBFADpOKBfUAYwCGVPgAtQACkioArgDsA1rLgB3WQEpGzVmADCA2QHIqoAXz6REiUADcBAG2kXQcWaDmKVsxFr4vEcO0h2OzgAc0l2KjgAVQAHWJg9REhxNTUAbgotAEsAMwkqWgS4fMhQAF5K0AAiRBps2VDqjSYWFjYAdUgDazLZAVgVSAATUANu0GHPUCiZkTLChLG66AbQg3YtFl8vAKCQ8KCouIToJJS0zJZuHiA)
 
 ```ts
 try {
@@ -554,7 +554,7 @@ As an example, the following `tsconfig.json` file tells TypeScript to transform 
 In cases where you need to have a different JSX factory on a per-file basis, you can take advantage of the new `/** @jsxFrag */` pragma comment.
 For example, the following…
 
-[Try this code](/play/#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wCgB6cuAWlrQFcZbqKqABAOwgFEocoAzqzgA5CDCQAuODAAWSAUjhgoKAOYgUcNLhBIOMAXA5IkAExkQ4AIyUB3KMBgSOwu09lwtAKQDKAEQg0agEYAE8AGyUQegiYYAjgEzgBMIMUAA9LGRQAayUkTEwkDAA6UgoAKkq4NgArASzPSvIqmvrGgDFVNThu9T0DOBaK0EhYOABvOFkAGj6ewfgAXzhsXDgAIhViGE2AbgqkDPH4HQ5QuAAJVDMkKDgAXjgAClI4OAAeAD53j6-ZABGb4AdSQER0ek+5CBvw+0N+AEp9kA)
+[Try this code](/play#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wCgB6cuAWlrQFcZbqKqABAOwgFEocoAzqzgA5CDCQAuODAAWSAUjhgoKAOYgUcNLhBIOMAXA5IkAExkQ4AIyUB3KMBgSOwu09lwtAKQDKAEQg0agEYAE8AGyUQegiYYAjgEzgBMIMUAA9LGRQAayUkTEwkDAA6UgoAKkq4NgArASzPSvIqmvrGgDFVNThu9T0DOBaK0EhYOABvOFkAGj6ewfgAXzhsXDgAIhViGE2AbgqkDPH4HQ5QuAAJVDMkKDgAXjgAClI4OAAeAD53j6-ZABGb4AdSQER0ek+5CBvw+0N+AEp9kA)
 
 ```tsx
 // Note: these pragma comments need to be written
@@ -574,7 +574,7 @@ export const Header = (
 
 …will get transformed to this output JavaScript…
 
-[Try this code](/play/#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wCgB6cuAWlrQFcZbqKqABAOwgFEocoAzqzhsBACwgB3biGAxhAOQgwkALjgwxSAUjhgoKAOYgUcNLhBIOMAXA5IkAEw0Q4AI12SoclR2GS5MThTACkAZQARCDRqARgATwAbXRB6RJhgROB7OAF46xQADxcNFABrXSRMTCQMADpSCgAqJpEAKwFioKbyZta2DsKAMQNDOBGjS2s4HsbQSFg4AG84MQAacdGp+ABfOGxcOAAifWIYI4BuRqRChfhzDji4AAlURyQoOABeOAAKUjgcAAPAA+AGA4FiACMIIA6khEuZLEDyNCwYCUWCAJQXIA)
+[Try this code](/play#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wCgB6cuAWlrQFcZbqKqABAOwgFEocoAzqzhsBACwgB3biGAxhAOQgwkALjgwxSAUjhgoKAOYgUcNLhBIOMAXA5IkAEw0Q4AI12SoclR2GS5MThTACkAZQARCDRqARgATwAbXRB6RJhgROB7OAF46xQADxcNFABrXSRMTCQMADpSCgAqJpEAKwFioKbyZta2DsKAMQNDOBGjS2s4HsbQSFg4AG84MQAacdGp+ABfOGxcOAAifWIYI4BuRqRChfhzDji4AAlURyQoOABeOAAKUjgcAAPAA+AGA4FiACMIIA6khEuZLEDyNCwYCUWCAJQXIA)
 
 ```tsx
 import React from 'react';
@@ -686,7 +686,7 @@ For more details, you can see the [proposal issue](https://github.com/microsoft/
 
 ## Our New Website! {#our-new-website}
 
-[The TypeScript website](/.html) has recently been rewritten from the ground up and rolled out!
+[The TypeScript website](/) has recently been rewritten from the ground up and rolled out!
 
 ![A screenshot of the new TypeScript website](/assets/typescript/5.2/external/devblogs.microsoft.com/typescript/wp-content/uploads/sites/11/2020/08/ts-web.png)
 
@@ -705,7 +705,7 @@ MDN recommends moving to [`self.origin`](https://developer.mozilla.org/en-US/doc
 
 Previously, it was only an error for properties to override accessors, or accessors to override properties, when using [`useDefineForClassFields`](/tsconfig.html#useDefineForClassFields); however, TypeScript now always issues an error when declaring a property in a derived class that would override a getter or setter in the base class.
 
-[Try this code](/play/#code/PTAEAEFMCdoe2gZwFygIwAYAsBOUAmANkwCgBjAGwENFFQAhGyUAbxNFAHNIAXUAMzhwAFAEpW7DqGi8ArtAB26DBgDckgL6TEvAUOEA3KhVmRxbKaBCgAdHc0kt5arVAARGAEsDkACahIAA8eSAVfOkYdCQ5BOFAAXmV1DSA)
+[Try this code](/play#code/PTAEAEFMCdoe2gZwFygIwAYAsBOUAmANkwCgBjAGwENFFQAhGyUAbxNFAHNIAXUAMzhwAFAEpW7DqGi8ArtAB26DBgDckgL6TEvAUOEA3KhVmRxbKaBCgAdHc0kt5arVAARGAEsDkACahIAA8eSAVfOkYdCQ5BOFAAXmV1DSA)
 
 ```ts
 class Base {
@@ -726,7 +726,7 @@ class Derived extends Base {
 'foo' is defined as an accessor in class 'Base', but is overridden here in 'Derived' as an instance property.
 ```
 
-[Try this code](/play/#code/PTAEAEFMCdoe2gZwFygEwDYCMWBQBjAGwENFFQAhUyUAb11FAAd4nQBeULABgG5cAvrgIkyoACIwAlgDdIAE1CQAHgBdIAO3nkqiGvUYBzSKuasAFAEo6DRqGgmArtA1dufW0IFA)
+[Try this code](/play#code/PTAEAEFMCdoe2gZwFygEwDYCMWBQBjAGwENFFQAhUyUAb11FAAd4nQBeULABgG5cAvrgIkyoACIwAlgDdIAE1CQAHgBdIAO3nkqiGvUYBzSKuasAFAEo6DRqGgmArtA1dufW0IFA)
 
 ```ts
 class Base {
@@ -751,7 +751,7 @@ See more details on [the implementing pull request](https://github.com/microsoft
 When using the `delete` operator in [`strictNullChecks`](/tsconfig.html#strictNullChecks), the operand must now be `any`, `unknown`, `never`, or be optional (in that it contains `undefined` in the type).
 Otherwise, use of the `delete` operator is an error.
 
-[Try this code](/play/#code/PTAEAEFMCdoe2gZwFygEwHYCcAGAUAJYB2ALjAGYCGAxpKACoAWxA5qAN56igAO8PqRCWisA3HgC+ePOQCuRaiQJwiocgAoAHqiasAlBy6gAJpAA2kMqE0A6PnB7iJQA)
+[Try this code](/play#code/PTAEAEFMCdoe2gZwFygEwHYCcAGAUAJYB2ALjAGYCGAxpKACoAWxA5qAN56igAO8PqRCWisA3HgC+ePOQCuRaiQJwiocgAoAHqiasAlBy6gAJpAA2kMqE0A6PnB7iJQA)
 
 ```ts
 interface Thing {

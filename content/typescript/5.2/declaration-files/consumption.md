@@ -4,7 +4,7 @@ title: "TypeScript: Documentation - Consumption"
 description: "How to download d.ts files for your project"
 weight: 8
 type: docs
-next: /typescript/5.2/javascript/js-projects-utilizing-typescript
+next: /typescript/5.2/javascript/intro-to-js-ts
 ---
 
 # Consumption

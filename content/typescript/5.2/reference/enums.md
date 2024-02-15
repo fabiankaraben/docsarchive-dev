@@ -19,7 +19,7 @@ TypeScript provides both numeric and string-based enums.
 We’ll first start off with numeric enums, which are probably more familiar if you’re coming from other languages.
 An enum can be defined using the `enum` keyword.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADlALxQCMANAbBgO4h2EAywAZqq1AEpwA5gAseeAL5A)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADlALxQCMANAbBgO4h2EAywAZqq1AEpwA5gAseeAL5A)
 
 ```ts
 enum Direction {
@@ -36,7 +36,7 @@ In other words, `Direction.Up` has the value `1`, `Down` has `2`, `Left` has `3`
 
 If we wanted, we could leave off the initializers entirely:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADgDQGwYDuIFhAMsAGar1QBKcA5gBZt4AvkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADgDQGwYDuIFhAMsAGar1QBKcA5gBZt4AvkA)
 
 ```ts
 enum Direction {
@@ -52,7 +52,7 @@ This auto-incrementing behavior is useful for cases where we might not care abou
 
 Using an enum is simple: just access any member as a property off of the enum itself, and declare types using the name of the enum:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAqgzsATgJWHADgexAqBvAKCigDlMoBeKABgBoioBNNSqARnoF8CCAzMEAGMALgEtsURGiwgAJgAopg0elGhhALihxhiUSADmtKBDRwAhgeBb4SVBmwIAlFoBumUbPwMA9D6gAdEEE3ARSDnLyAEQACnpCZlAAwuaImAA2+sBRxrYo0o7AAcxwTgDcQA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAqgzsATgJWHADgexAqBvAKCigDlMoBeKABgBoioBNNSqARnoF8CCAzMEAGMALgEtsURGiwgAJgAopg0elGhhALihxhiUSADmtKBDRwAhgeBb4SVBmwIAlFoBumUbPwMA9D6gAdEEE3ARSDnLyAEQACnpCZlAAwuaImAA2+sBRxrYo0o7AAcxwTgDcQA)
 
 ```ts
 enum UserResponse {
@@ -71,7 +71,7 @@ Numeric enums can be mixed in [computed and constant members (see below) ↗](ht
 The short story is, enums without initializers either need to be first, or have to come after numeric enums initialized with numeric constants or other constant enum members.
 In other words, the following isn’t allowed:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygIwAYBsaBQBjOAO0QBdQBzSUgZTgFtIA1AQwBsBXSUAXlAAoAlLwB8oAEwBmANy4QoALRL8HUkoW5IRDvVABRUAG9coUAEFelanUatOkIQBoToAELOAvkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygIwAYBsaBQBjOAO0QBdQBzSUgZTgFtIA1AQwBsBXSUAXlAAoAlLwB8oAEwBmANy4QoALRL8HUkoW5IRDvVABRUAG9coUAEFelanUatOkIQBoToAELOAvkA)
 
 ```ts
 enum E {
@@ -89,7 +89,7 @@ Enum member must have initializer.
 String enums are a similar concept, but have some subtle [runtime differences ↗](https://www.typescriptlang.org/docs/handbook/enums.html#enums-at-runtime) as documented below.
 In a string enum, each member has to be constant-initialized with a string literal, or with another string enum member.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADlALxQBERAClQDQGwYDu2lVMA8gOoByjZgBlgAM1QVqwgKIAxACpDCAJTgBzABaTOKgJIBxABJKmAXyA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADlALxQBERAClQDQGwYDu2lVMA8gOoByjZgBlgAM1QVqwgKIAxACpDCAJTgBzABaTOKgJIBxABJKmAXyA)
 
 ```ts
 enum Direction {
@@ -107,7 +107,7 @@ In other words, if you were debugging and had to read the runtime value of a num
 
 Technically enums can be mixed with string and numeric members, but it’s not clear why you would ever want to do so:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAQg9nANsAhiAMgSwNbABLAAuwATnAOajBxgDOAouNAN4BQUUAcnFALxQAGADTsoATWC0+UAERj6AZRkiAvkA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAQg9nANsAhiAMgSwNbABLAAuwATnAOajBxgDOAouNAN4BQUUAcnFALxQAGADTsoATWC0+UAERj6AZRkiAvkA)
 
 ```ts
 enum BooleanLikeHeterogeneousEnum {
@@ -124,7 +124,7 @@ Each enum member has a value associated with it which can be either *constant* o
 An enum member is considered constant if:
 
 - It is the first member in the enum and it has no initializer, in which case it’s assigned the value `0`:
-  [Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEFEDoA1QSwM6gMYHsB2CAuBDdWAuAKAFN0BXAWwlAG8jRRoAaIgXyA)
+  [Try this code ↗](https://www.typescriptlang.org/play#code/PTAEFEDoA1QSwM6gMYHsB2CAuBDdWAuAKAFN0BXAWwlAG8jRRoAaIgXyA)
 
 
   ```ts
@@ -136,7 +136,7 @@ An enum member is considered constant if:
 
 - It does not have an initializer and the preceding enum member was a *numeric* constant.
   In this case the value of the current enum member will be the value of the preceding enum member plus one.
-  [Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEEEBtNBTA7ArgW1M2yBGsBOBnUAS3lAHIBRARlNAEN4ATM8gJhtp1lAGMB7ePABd6ggHQAocQhSgqoAN7jQoABoAaJaACaG5QC0NAX0nTUrBZvCgAvKEq7QAIQcBhI0A)
+  [Try this code ↗](https://www.typescriptlang.org/play#code/PTAEEEBtNBTA7ArgW1M2yBGsBOBnUAS3lAHIBRARlNAEN4ATM8gJhtp1lAGMB7ePABd6ggHQAocQhSgqoAN7jQoABoAaJaACaG5QC0NAX0nTUrBZvCgAvKEq7QAIQcBhI0A)
 
 
   ```ts
@@ -167,7 +167,7 @@ An enum member is considered constant if:
 
 In all other cases enum member is considered computed.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAYglgG2AQQMauAZ01A3gKCigHpipUB7ETAFwEMQaoJgIAjYAJ00KgDkqwADS8ASsDoATKAF4oARigAeJQpFEA6pzg1gshctUAmdVHFStOvXPPSAPlEu7TpchQgAHMLukt2XXgBxfQAieSMAZhCAOiQQAHMaAAsRAF8gA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAYglgG2AQQMauAZ01A3gKCigHpipUB7ETAFwEMQaoJgIAjYAJ00KgDkqwADS8ASsDoATKAF4oARigAeJQpFEA6pzg1gshctUAmdVHFStOvXPPSAPlEu7TpchQgAHMLukt2XXgBxfQAieSMAZhCAOiQQAHMaAAsRAF8gA)
 
 ```ts
 enum FileAccess {
@@ -195,7 +195,7 @@ When all members in an enum have literal enum values, some special semantics com
 The first is that enum members also become types as well!
 For example, we can say that certain members can *only* have the value of an enum member:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGY1oFCQHYCuAtqAMoAWAhgA6QDSAlvgCagDeOooAwo9AGMANpAA0XcgEdCVaGJwBfHDmYAXGADMqAyL37DdnbgGtmLVJVoMzAOj6CRAbgnQqLRoRSgixAEYxnJRV8dWgtHSkZOQ4JU1YLajomVhsyaVlIZ25ERhZIABkCAHNVClQff2hA5RFVUAFUewNQAF4YkzMEq2SWVPS5cW5Xd09UAEYABgnxBUcgA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGY1oFCQHYCuAtqAMoAWAhgA6QDSAlvgCagDeOooAwo9AGMANpAA0XcgEdCVaGJwBfHDmYAXGADMqAyL37DdnbgGtmLVJVoMzAOj6CRAbgnQqLRoRSgixAEYxnJRV8dWgtHSkZOQ4JU1YLajomVhsyaVlIZ25ERhZIABkCAHNVClQff2hA5RFVUAFUewNQAF4YkzMEq2SWVPS5cW5Xd09UAEYABgnxBUcgA)
 
 ```ts
 enum ShapeKind {
@@ -228,7 +228,7 @@ With union enums, the type system is able to leverage the fact that it knows the
 Because of that, TypeScript can catch bugs where we might be comparing values incorrectly.
 For example:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYBsB2AUJAHYCuAtqAKKgDeeooAYnHADR2gBCAhtGwL548AM2KEAxgBcAlnEKghACgAeqCgEoa7KUNDLQAQgC8hygDomcUAB8roJQeNnu0DbXr0Q7AXyA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwGYBsB2AUJAHYCuAtqAKKgDeeooAYnHADR2gBCAhtGwL548AM2KEAxgBcAlnEKghACgAeqCgEoa7KUNDLQAQgC8hygDomcUAB8roJQeNnu0DbXr0Q7AXyA)
 
 ```ts
 enum E {
@@ -256,7 +256,7 @@ However, if the check didn’t succeed, then `x` can *only* be `E.Foo`, so it do
 Enums are real objects that exist at runtime.
 For example, the following enum
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAolDeAoKUAaAaZUCamUC1MBfIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAolDeAoKUAaAaZUCamUC1MBfIA)
 
 ```ts
 enum E {
@@ -268,7 +268,7 @@ enum E {
 
 can actually be passed around to functions
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAolDeAoKUAaAaZUCamUC1MBfRRAMzBAGMAXASwHsQoyAKBgIwCsAuBNPuAgdgAJyhEAlAiyjgNMKOacuAOlQBuRCUQB6XVADqDUQGsAzuijm61YFADkMB1AAWAQ3NR3UAA6iGXzEaAE8oEHcIYAATR1QXAHdXOipXKDovHyERUVVyVhhJDSA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAolDeAoKUAaAaZUCamUC1MBfRRAMzBAGMAXASwHsQoyAKBgIwCsAuBNPuAgdgAJyhEAlAiyjgNMKOacuAOlQBuRCUQB6XVADqDUQGsAzuijm61YFADkMB1AAWAQ3NR3UAA6iGXzEaAE8oEHcIYAATR1QXAHdXOipXKDovHyERUVVyVhhJDSA)
 
 ```ts
 enum E {
@@ -289,7 +289,7 @@ f(E);
 
 Even though Enums are real objects that exist at runtime, the `keyof` keyword works differently than you might expect for typical objects. Instead, use `keyof typeof` to get a Type that represents all Enum keys as strings.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAMg9gcxsAbsANlA3gKClAUQCUiB5IgGjygHUBBIgOSvwElGAxUlqAEQIBCAVQDiVAL44cAegBUsvLKgAVABYBLAM5QtUYAEcw6lAEN0oAC5QLcAFyLrATwAOwWImRp0AZQsAndRAEbQBeKAByYjIicKgAHwj6JliE8PYuFIj+YRFwgG5FaRwLFzd4JFQMXwCg0KgAa2BHOAAzJ1dW9wqvApwWsBAAYwt1OBAoZxqLVghnOD8LExALAApGx1suzyr-QOCKKAhgTU0TBGBNzV2ggEpsakGxq6hwaDDy7fQAbXWAXQL8Oo2itXlAADzvDyVdAAOiSjDuuHw+EeIE0cHMMPQiBWACJylBzF4Gk0dJpbLiDusbgDkaj0ZjsQg8QSiRgoKZ0GA3FoKQdXjTqCinhjgFicfjEIToYdjqdzmS+bKTmdgIL8JJJJNAtNZvNFss8VFyJSoLi1LpdCZlfLgLiaUA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAMg9gcxsAbsANlA3gKClAUQCUiB5IgGjygHUBBIgOSvwElGAxUlqAEQIBCAVQDiVAL44cAegBUsvLKgAVABYBLAM5QtUYAEcw6lAEN0oAC5QLcAFyLrATwAOwWImRp0AZQsAndRAEbQBeKAByYjIicKgAHwj6JliE8PYuFIj+YRFwgG5FaRwLFzd4JFQMXwCg0KgAa2BHOAAzJ1dW9wqvApwWsBAAYwt1OBAoZxqLVghnOD8LExALAApGx1suzyr-QOCKKAhgTU0TBGBNzV2ggEpsakGxq6hwaDDy7fQAbXWAXQL8Oo2itXlAADzvDyVdAAOiSjDuuHw+EeIE0cHMMPQiBWACJylBzF4Gk0dJpbLiDusbgDkaj0ZjsQg8QSiRgoKZ0GA3FoKQdXjTqCinhjgFicfjEIToYdjqdzmS+bKTmdgIL8JJJJNAtNZvNFss8VFyJSoLi1LpdCZlfLgLiaUA)
 
 ```ts
 enum LogLevel {
@@ -321,7 +321,7 @@ printImportant("ERROR", "This is a message");
 In addition to creating an object with property names for members, numeric enums members also get a *reverse mapping* from enum values to enum names.
 For example, in this example:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/KYOwrgtgBAou0G8BQUoEEA0SC+SkBtgAXKAQygF5Z4A6NAbgOKhFImAHkAzNS6yANqkAuvSgB6cVABEaaUA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAou0G8BQUoEEA0SC+SkBtgAXKAQygF5Z4A6NAbgOKhFImAHkAzNS6yANqkAuvSgB6cVABEaaUA)
 
 ```ts
 enum Enum {
@@ -334,7 +334,7 @@ let nameOfA = Enum[a]; // "A"
 
 TypeScript compiles this down to the following JavaScript:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGcAsHsHcCiBbAlgFwFAFMB2BXZURAogb01FAEEAaTAX00wBtt1QBDUAXmNIB01ANyt2oXJ2TYA8gDNqvfoQDanALrDQIUACJquoA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGcAsHsHcCiBbAlgFwFAFMB2BXZURAogb01FAEEAaTAX00wBtt1QBDUAXmNIB01ANyt2oXJ2TYA8gDNqvfoQDanALrDQIUACJquoA)
 
 ```ts
 "use strict";
@@ -359,7 +359,7 @@ However sometimes requirements are tighter.
 To avoid paying the cost of extra generated code and additional indirection when accessing enum values, it’s possible to use `const` enums.
 Const enums are defined using the `const` modifier on our enums:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYewdgzgLgBApmArgWxgUSag3gKBjAQRgF4YBGAGjxgCETCYAqGAJioF8g)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYewdgzgLgBApmArgWxgUSag3gKBjAQRgF4YBGAGjxgCETCYAqGAJioF8g)
 
 ```ts
 const enum Enum {
@@ -372,7 +372,7 @@ Const enums can only use constant enum expressions and unlike regular enums they
 Const enum members are inlined at use sites.
 This is possible since const enums cannot have computed members.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYewdgzgLgBApmArgWxgEQJYCc7Ch8GAbwCgYYBVABwBoz0QB3MO8gGTgDMpWYAlDAHMAFjxIBfEiQA2cWABNsufOAgwAvDADa9TDjwEwAOmq89yw0bRMWupQfBGO3M-ZXGBIsQF0A3EA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYewdgzgLgBApmArgWxgEQJYCc7Ch8GAbwCgYYBVABwBoz0QB3MO8gGTgDMpWYAlDAHMAFjxIBfEiQA2cWABNsufOAgwAvDADa9TDjwEwAOmq89yw0bRMWupQfBGO3M-ZXGBIsQF0A3EA)
 
 ```ts
 const enum Direction {
@@ -392,7 +392,7 @@ let directions = [
 
 in generated code will become
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/PTAEAEGcAsHsHcCiBbAlgFwFAGNYDtJ1QBTPAV2VABFUAnY7dVfUAb01FAFUAHAGg7UEeAZwAyxAGbpRoAEqoA5tBmYAvpkwAbYkQAmdBk3yRQAXlABtQTXqNmeAHS9Ztow8dVhrw-fyOJaR87YycFZVUAXQBuIA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEGcAsHsHcCiBbAlgFwFAGNYDtJ1QBTPAV2VABFUAnY7dVfUAb01FAFUAHAGg7UEeAZwAyxAGbpRoAEqoA5tBmYAvpkwAbYkQAmdBk3yRQAXlABtQTXqNmeAHS9Ztow8dVhrw-fyOJaR87YycFZVUAXQBuIA)
 
 ```ts
 "use strict";
@@ -435,7 +435,7 @@ Here are two approaches to avoiding these pitfalls:
 
 Ambient enums are used to describe the shape of already existing enum types.
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/CYUwxgNghgTiAEIB2BXAtvAoqjBvAUPPAILwC88AjADSHwBCtRAwufAEy0C+QA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/CYUwxgNghgTiAEIB2BXAtvAoqjBvAUPPAILwC88AjADSHwBCtRAwufAEy0C+QA)
 
 ```ts
 declare enum Enum {
@@ -452,7 +452,7 @@ By contrast, an ambient (and non-const) enum member that does not have an initia
 
 In modern TypeScript, you may not need an enum when an object with `as const` could suffice:
 
-[Try this code ↗](https://www.typescriptlang.org/play/#code/MYewdgzgLgBApmArgWxgUQCIEsBOdhRbgwDeAUDDAKoAOANBTBiAO5gOUAycAZlBzABKWAOYALfmQC+ZMqEiwA8tjwEiYGAF5SjWgC4YABgHM2BgIwDufAwCYBw8VAMBmBlJgBDCDHnQA3LKYuPiE4AB0tIEA9NGU8QkAegD8ssohahFRZLEJeSmyuVQQWGAiMFBicPBIqN5eMDSeOJ7IcFBwOGQ8iGCZGiyeADYA1gAUACa4BsGqYWAAlKQyOXEAkrB4AI6IIT6eGnAAHlAtMEOl1VAgjYhDQzAgiLCV1QBuw4hwEGRQAJ40aoqULqLQVAFwEA8GDpObqADaIzgfyh4MBqNhIPAAF1Aj0+vMYDhepNpkwMvMliQVoNRmNZliwOFrFAFoFiWAxpj+uFHBI2UA)
+[Try this code ↗](https://www.typescriptlang.org/play#code/MYewdgzgLgBApmArgWxgUQCIEsBOdhRbgwDeAUDDAKoAOANBTBiAO5gOUAycAZlBzABKWAOYALfmQC+ZMqEiwA8tjwEiYGAF5SjWgC4YABgHM2BgIwDufAwCYBw8VAMBmBlJgBDCDHnQA3LKYuPiE4AB0tIEA9NGU8QkAegD8ssohahFRZLEJeSmyuVQQWGAiMFBicPBIqN5eMDSeOJ7IcFBwOGQ8iGCZGiyeADYA1gAUACa4BsGqYWAAlKQyOXEAkrB4AI6IIT6eGnAAHlAtMEOl1VAgjYhDQzAgiLCV1QBuw4hwEGRQAJ40aoqULqLQVAFwEA8GDpObqADaIzgfyh4MBqNhIPAAF1Aj0+vMYDhepNpkwMvMliQVoNRmNZliwOFrFAFoFiWAxpj+uFHBI2UA)
 
 ```ts
 const enum EDirection {

@@ -1,6 +1,6 @@
 ---
 title: Latest version ↗
-weight: 4
+weight: 1
 type: docs
 launchUrl: https://www.typescriptlang.org/docs
 noindex: true

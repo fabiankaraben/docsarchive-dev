@@ -26,7 +26,7 @@ This approach had some downsides, especially as web pages grew larger and more c
 
 Any system that solves this problem by giving files their own scope while still providing a way to make bits of code available to other files can be called a “module system.” (It may sound obvious to say that each file in a module system is called a “module,” but the term is often used to contrast with *script* files, which run outside a module system, in a global scope.)
 
-> There are [many module systems](https://github.com/myshov/history-of-javascript/tree/master/4_evolution_of_js_modularity), and TypeScript [supports emitting several ↗](https://www.typescriptlang.org/tsconfig/.html#module), but this documentation will focus on the two most important systems today: ECMAScript modules (ESM) and CommonJS (CJS).
+> There are [many module systems](https://github.com/myshov/history-of-javascript/tree/master/4_evolution_of_js_modularity), and TypeScript [supports emitting several ↗](https://www.typescriptlang.org/tsconfig.html#module), but this documentation will focus on the two most important systems today: ECMAScript modules (ESM) and CommonJS (CJS).
 > ECMAScript Modules (ESM) is the module system built into the language, supported in modern browsers and in Node.js since v12. It uses dedicated `import` and `export` syntax:
 > ```js
 > // a.js

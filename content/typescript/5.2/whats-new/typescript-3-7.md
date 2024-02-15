@@ -10,7 +10,7 @@ type: docs
 
 ## Optional Chaining {#optional-chaining}
 
-[Playground ↗](https://www.typescriptlang.org/play/#example/optional-chaining)
+[Playground ↗](https://www.typescriptlang.org/play#example/optional-chaining)
 
 Optional chaining is [issue #16](https://github.com/microsoft/TypeScript/issues/16) on our issue tracker. For context, there have been over 23,000 issues on the TypeScript issue tracker since then.
 
@@ -116,7 +116,7 @@ More more details, you can [read up on the proposal](https://github.com/tc39/pro
 
 ## Nullish Coalescing {#nullish-coalescing}
 
-[Playground ↗](https://www.typescriptlang.org/play/#example/nullish-coalescing)
+[Playground ↗](https://www.typescriptlang.org/play#example/nullish-coalescing)
 
 The *nullish coalescing operator* is another upcoming ECMAScript feature that goes hand-in-hand with optional chaining, and which our team has been involved with championing in TC39.
 
@@ -156,7 +156,7 @@ For more details, [check out their pull request](https://github.com/microsoft/Ty
 
 ## Assertion Functions {#assertion-functions}
 
-[Playground ↗](https://www.typescriptlang.org/play/#example/assertion-functions)
+[Playground ↗](https://www.typescriptlang.org/play#example/assertion-functions)
 
 There’s a specific set of functions that `throw` an error if something unexpected happened.
 They’re called “assertion” functions.
@@ -335,7 +335,7 @@ As with assertion functions, you can [read up more at the same pull request](htt
 
 ## (More) Recursive Type Aliases {#more-recursive-type-aliases}
 
-[Playground ↗](https://www.typescriptlang.org/play/#example/recursive-type-references)
+[Playground ↗](https://www.typescriptlang.org/play#example/recursive-type-references)
 
 Type aliases have always had a limitation in how they could be “recursively” referenced.
 The reason is that any use of a type alias needs to be able to substitute itself with whatever it aliases.

@@ -4,7 +4,7 @@ title: "TypeScript: Documentation - Modules - Reference"
 description: "Module syntax and compiler options reference"
 weight: 4
 type: docs
-next: /typescript/5.2/modules-reference/appendices/esmcjs-interoperability
+next: /typescript/5.2/modules-reference/appendices/esm-cjs-interop
 ---
 
 # Modules - Reference
