@@ -9,11 +9,11 @@ next: /typescript/5.2/project-configuration/tsconfig-json
 
 # Creating .d.ts Files from .js files
 
-[With TypeScript 3.7 ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#--declaration-and---allowjs),
+[With TypeScript 3.7](/typescript/5.2/whats-new/typescript-3-7#--declaration-and---allowjs),
 TypeScript added support for generating .d.ts files from JavaScript using JSDoc syntax.
 
 This set up means you can own the editor experience of TypeScript-powered editors without porting your project to TypeScript, or having to maintain .d.ts files in your codebase.
-TypeScript supports most JSDoc tags, you can find [the reference here ↗](https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html#supported-jsdoc).
+TypeScript supports most JSDoc tags, you can find [the reference here](/typescript/5.2/javascript/type-checking-javascript-files#supported-jsdoc).
 
 ## Setting up your Project to emit .d.ts files {#setting-up-your-project-to-emit-dts-files}
 
@@ -35,30 +35,30 @@ In this case, you will want a file like the following:
 
 ```
 {
-  // Change this to match your project
-  "[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["src/**/*"],
+// Change this to match your project
+"[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["src/**/*"],
 
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    // Tells TypeScript to read JS files, as
-    // normally they are ignored as source files
-    "[allowJs ↗](https://www.typescriptlang.org/tsconfig.html#allowJs)": true,
-    // Generate d.ts files
-    "[declaration ↗](https://www.typescriptlang.org/tsconfig.html#declaration)": true,
-    // This compiler run should
-    // only output d.ts files
-    "[emitDeclarationOnly ↗](https://www.typescriptlang.org/tsconfig.html#emitDeclarationOnly)": true,
-    // Types should go into this directory.
-    // Removing this would place the .d.ts files
-    // next to the .js files
-    "[outDir ↗](https://www.typescriptlang.org/tsconfig.html#outDir)": "dist",
-    // go to js file when using IDE functions like
-    // "Go to Definition" in VSCode
-    "[declarationMap ↗](https://www.typescriptlang.org/tsconfig.html#declarationMap)": true
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+// Tells TypeScript to read JS files, as
+// normally they are ignored as source files
+"[allowJs ↗](https://www.typescriptlang.org/tsconfig.html#allowJs)": true,
+// Generate d.ts files
+"[declaration ↗](https://www.typescriptlang.org/tsconfig.html#declaration)": true,
+// This compiler run should
+// only output d.ts files
+"[emitDeclarationOnly ↗](https://www.typescriptlang.org/tsconfig.html#emitDeclarationOnly)": true,
+// Types should go into this directory.
+// Removing this would place the .d.ts files
+// next to the .js files
+"[outDir ↗](https://www.typescriptlang.org/tsconfig.html#outDir)": "dist",
+// go to js file when using IDE functions like
+// "Go to Definition" in VSCode
+"[declarationMap ↗](https://www.typescriptlang.org/tsconfig.html#declarationMap)": true
   }
 }
 ```
 
-You can learn more about the options in the [tsconfig reference](/typescript/5.2/project-configuration/tsconfig).
+You can learn more about the options in the [tsconfig reference ↗](https://www.typescriptlang.org/tsconfig.html).
 An alternative to using a TSConfig file is the CLI, this is the same behavior as a CLI command.
 
 ```sh
@@ -93,4 +93,4 @@ If absent, then “main” is used
 
 ## Tips {#tips}
 
-If you’d like to write tests for your .d.ts files, try [tsd](https://github.com/SamVerschueren/tsd).
+If you’d like to write tests for your .d.ts files, try [tsd ↗](https://github.com/SamVerschueren/tsd).

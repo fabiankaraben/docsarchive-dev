@@ -14,11 +14,11 @@ In the early days of JavaScript, when the language only ran in browsers, there w
 
 ```html
 <html>
-  <head>
-    <script src="a.js"></script>
-    <script src="b.js"></script>
-  </head>
-  <body></body>
+<head>
+<scriptsrc="a.js"></script>
+<scriptsrc="b.js"></script>
+</head>
+<body></body>
 </html>
 ```
 
@@ -26,15 +26,15 @@ This approach had some downsides, especially as web pages grew larger and more c
 
 Any system that solves this problem by giving files their own scope while still providing a way to make bits of code available to other files can be called a “module system.” (It may sound obvious to say that each file in a module system is called a “module,” but the term is often used to contrast with *script* files, which run outside a module system, in a global scope.)
 
-> There are [many module systems](https://github.com/myshov/history-of-javascript/tree/master/4_evolution_of_js_modularity), and TypeScript [supports emitting several ↗](https://www.typescriptlang.org/tsconfig.html#module), but this documentation will focus on the two most important systems today: ECMAScript modules (ESM) and CommonJS (CJS).
+> There are [many module systems ↗](https://github.com/myshov/history-of-javascript/tree/master/4_evolution_of_js_modularity), and TypeScript [supports emitting several ↗](https://www.typescriptlang.org/tsconfig.html#module), but this documentation will focus on the two most important systems today: ECMAScript modules (ESM) and CommonJS (CJS).
 > ECMAScript Modules (ESM) is the module system built into the language, supported in modern browsers and in Node.js since v12. It uses dedicated `import` and `export` syntax:
 > ```js
 > // a.js
-> export default "Hello from a.js";
+> exportdefault"Hello from a.js";
 > ```
 > ```js
 > // b.js
-> import a from "./a.js";
+> importafrom"./a.js";
 > console.log(a); // 'Hello from a.js'
 > ```
 > CommonJS (CJS) is the module system that originally shipped in Node.js, before ESM was part of the language specification. It’s still supported in Node.js alongside ESM. It uses plain JavaScript objects and functions named `exports` and `require`:
@@ -44,7 +44,7 @@ Any system that solves this problem by giving files their own scope while still 
 > ```
 > ```js
 > // b.js
-> const a = require("./a");
+> consta = require("./a");
 > console.log(a.message); // 'Hello from a.js'
 > ```
 > 
@@ -74,7 +74,7 @@ Notice that all of these questions depend on characteristics of the *host*—the
 
 The ECMAScript specification defines how ESM imports and exports link up with each other, but it doesn’t specify how the file lookup in (4), known as *module resolution*, happens, and it doesn’t say anything about other module systems like CommonJS. So runtimes and bundlers, especially those that want to support both ESM and CJS, have a lot of freedom to design their own rules. Consequently, the way TypeScript should answer the questions above can vary dramatically depending on where the code is intended to run. There’s no single right answer, so the compiler must be told the rules through configuration options.
 
-The other key idea to keep in mind is that TypeScript almost always thinks about these questions in terms of its *output* JavaScript files, not its *input* TypeScript (or JavaScript!) files. Today, some runtimes and bundlers support loading TypeScript files directly, and in those cases, it doesn’t make sense to think about separate input and output files. Most of this document discusses cases where TypeScript files are compiled to JavaScript files, which in turn are loaded by the runtime module system. Examining these cases is essential for building an understanding of the compiler’s options and behavior—it’s easier to start there and simplify when thinking about esbuild, Bun, and other [TypeScript-first runtimes and bundlers ↗](https://www.typescriptlang.org/docs/handbook/modules/theory.html#module-resolution-for-bundlers-typescript-runtimes-and-nodejs-loaders). So for now, we can summarize TypeScript’s job when it comes to modules in terms of output files:
+The other key idea to keep in mind is that TypeScript almost always thinks about these questions in terms of its *output* JavaScript files, not its *input* TypeScript (or JavaScript!) files. Today, some runtimes and bundlers support loading TypeScript files directly, and in those cases, it doesn’t make sense to think about separate input and output files. Most of this document discusses cases where TypeScript files are compiled to JavaScript files, which in turn are loaded by the runtime module system. Examining these cases is essential for building an understanding of the compiler’s options and behavior—it’s easier to start there and simplify when thinking about esbuild, Bun, and other [TypeScript-first runtimes and bundlers](/typescript/5.2/modules-reference/theory#module-resolution-for-bundlers-typescript-runtimes-and-nodejs-loaders). So for now, we can summarize TypeScript’s job when it comes to modules in terms of output files:
 
 Understand the **rules of the host** enough
 
@@ -101,15 +101,15 @@ The `module` compiler option provides this information to the compiler. Its prim
 
 The available `module` settings are
 
-- [**`node16`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#node16-nodenext): Reflects the module system of Node.js v16+, which supports ES modules and CJS modules side-by-side with particular interoperability and detection rules.
-- [**`nodenext`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#node16-nodenext): Currently identical to `node16`, but will be a moving target reflecting the latest Node.js versions as Node.js’s module system evolves.
-- [**`es2015`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#es2015-es2020-es2022-esnext): Reflects the ES2015 language specification for JavaScript modules (the version that first introduced `import` and `export` to the language).
-- [**`es2020`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#es2015-es2020-es2022-esnext): Adds support for `import.meta` and `export * as ns from "mod"` to `es2015`.
-- [**`es2022`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#es2015-es2020-es2022-esnext): Adds support for top-level `await` to `es2020`.
-- [**`esnext`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#es2015-es2020-es2022-esnext): Currently identical to `es2022`, but will be a moving target reflecting the latest ECMAScript specifications, as well as module-related Stage 3+ proposals that are expected to be included in upcoming specification versions.
-- **[`commonjs` ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#commonjs), [`system` ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#system), [`amd` ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#amd), and [`umd` ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#umd)**: Each emits everything in the module system named, and assumes everything can be successfully imported into that module system. These are no longer recommended for new projects and will not be covered in detail by this documentation.
+- [**`node16`**](/typescript/5.2/modules-reference/reference#node16-nodenext): Reflects the module system of Node.js v16+, which supports ES modules and CJS modules side-by-side with particular interoperability and detection rules.
+- [**`nodenext`**](/typescript/5.2/modules-reference/reference#node16-nodenext): Currently identical to `node16`, but will be a moving target reflecting the latest Node.js versions as Node.js’s module system evolves.
+- [**`es2015`**](/typescript/5.2/modules-reference/reference#es2015-es2020-es2022-esnext): Reflects the ES2015 language specification for JavaScript modules (the version that first introduced `import` and `export` to the language).
+- [**`es2020`**](/typescript/5.2/modules-reference/reference#es2015-es2020-es2022-esnext): Adds support for `import.meta` and `export * as ns from "mod"` to `es2015`.
+- [**`es2022`**](/typescript/5.2/modules-reference/reference#es2015-es2020-es2022-esnext): Adds support for top-level `await` to `es2020`.
+- [**`esnext`**](/typescript/5.2/modules-reference/reference#es2015-es2020-es2022-esnext): Currently identical to `es2022`, but will be a moving target reflecting the latest ECMAScript specifications, as well as module-related Stage 3+ proposals that are expected to be included in upcoming specification versions.
+- **[`commonjs`](/typescript/5.2/modules-reference/reference#commonjs), [`system`](/typescript/5.2/modules-reference/reference#system), [`amd`](/typescript/5.2/modules-reference/reference#amd), and [`umd`](/typescript/5.2/modules-reference/reference#umd)**: Each emits everything in the module system named, and assumes everything can be successfully imported into that module system. These are no longer recommended for new projects and will not be covered in detail by this documentation.
 
-> Node.js’s rules for module format detection and interoperability make it incorrect to specify `module` as `esnext` or `commonjs` for projects that run in Node.js, even if all files emitted by `tsc` are ESM or CJS, respectively. The only correct `module` settings for projects that intend to run in Node.js are `node16` and `nodenext`. While the emitted JavaScript for an all-ESM Node.js project might look identical between compilations using `esnext` and `nodenext`, the type checking can differ. See the [reference section on `nodenext` ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#node16-nodenext) for more details.
+> Node.js’s rules for module format detection and interoperability make it incorrect to specify `module` as `esnext` or `commonjs` for projects that run in Node.js, even if all files emitted by `tsc` are ESM or CJS, respectively. The only correct `module` settings for projects that intend to run in Node.js are `node16` and `nodenext`. While the emitted JavaScript for an all-ESM Node.js project might look identical between compilations using `esnext` and `nodenext`, the type checking can differ. See the [reference section on `nodenext`](/typescript/5.2/modules-reference/reference#node16-nodenext) for more details.
 > 
 
 ### Module format detection {#module-format-detection}
@@ -134,7 +134,7 @@ When the `module` compiler option is set to `node16` or `nodenext`, TypeScript a
 |`/node_modules/pkg/index.d.cts`|||CJS|File extension|
 
 
-When the input file extension is `.mts` or `.cts`, TypeScript knows to treat that file as an ES module or CJS module, respectively, because Node.js will treat the output `.mjs` file as an ES module or the output `.cjs` file as a CJS module. When the input file extension is `.ts`, TypeScript has to consult the nearest `package.json` file to determine the module format, because this is what Node.js will do when it encounters the output `.js` file. (Notice that the same rules apply to the `.d.cts` and `.d.ts` declaration files in the `pkg` dependency: though they will not produce an output file as part of this compilation, the presence of a `.d.ts` file *implies* the existence of a corresponding `.js` file—perhaps created when the author of the `pkg` library ran `tsc` on an input `.ts` file of their own—which Node.js must interpret as an ES module, due to its `.js` extension and the presence of the `"type": "module"` field in `/node_modules/pkg/package.json`. Declaration files are covered in more detail in a [later section ↗](https://www.typescriptlang.org/docs/handbook/modules/theory.html#the-role-of-declaration-files).)
+When the input file extension is `.mts` or `.cts`, TypeScript knows to treat that file as an ES module or CJS module, respectively, because Node.js will treat the output `.mjs` file as an ES module or the output `.cjs` file as a CJS module. When the input file extension is `.ts`, TypeScript has to consult the nearest `package.json` file to determine the module format, because this is what Node.js will do when it encounters the output `.js` file. (Notice that the same rules apply to the `.d.cts` and `.d.ts` declaration files in the `pkg` dependency: though they will not produce an output file as part of this compilation, the presence of a `.d.ts` file *implies* the existence of a corresponding `.js` file—perhaps created when the author of the `pkg` library ran `tsc` on an input `.ts` file of their own—which Node.js must interpret as an ES module, due to its `.js` extension and the presence of the `"type": "module"` field in `/node_modules/pkg/package.json`. Declaration files are covered in more detail in a [later section](/typescript/5.2/modules-reference/theory#the-role-of-declaration-files).)
 
 The detected module format of input files is used by TypeScript to ensure it emits the output syntax that Node.js expects in each output file. If TypeScript were to emit `/example.js` with `import` and `export` statements in it, Node.js would crash when parsing the file. If TypeScript were to emit `/main.mjs` with `require` calls, Node.js would crash during evaluation. Beyond emit, the module format is also used to determine rules for type checking and module resolution, which we’ll discuss in the following sections.
 
@@ -153,13 +153,13 @@ might be emitted in ESM format exactly as-is, or might be emitted as CommonJS:
 
 ```ts
 Object.defineProperty(exports, "__esModule", { value: true });
-const greetings_1 = require("greetings");
+constgreetings_1 = require("greetings");
 (0, greetings_1.sayHello)("world");
 ```
 
-depending on the `module` compiler option (and any applicable [module format detection ↗](https://www.typescriptlang.org/docs/handbook/modules/theory.html#module-format-detection) rules, if the `module` option supports more than one kind of module). In general, this means that looking at the contents of an input file isn’t enough to determine whether it’s an ES module or a CJS module.
+depending on the `module` compiler option (and any applicable [module format detection](/typescript/5.2/modules-reference/theory#module-format-detection) rules, if the `module` option supports more than one kind of module). In general, this means that looking at the contents of an input file isn’t enough to determine whether it’s an ES module or a CJS module.
 
-> Today, most TypeScript files are authored using ESM syntax (`import` and `export` statements) regardless of the output format. This is largely a legacy of the long road ESM has taken to widespread support. ECMAScript modules were standardized in 2015, were supported in most browsers by 2017, and landed in Node.js v12 in 2019. During much of this window, it was clear that ESM was the future of JavaScript modules, but very few runtimes could consume it. Tools like Babel made it possible for JavaScript to be authored in ESM and downleveled to another module format that could be used in Node.js or browsers. TypeScript followed suit, adding support for ES module syntax and softly discouraging the use of the original CommonJS-inspired `import fs = require("fs")` syntax in [the 1.5 release](https://devblogs.microsoft.com/typescript/announcing-typescript-1-5/).
+> Today, most TypeScript files are authored using ESM syntax (`import` and `export` statements) regardless of the output format. This is largely a legacy of the long road ESM has taken to widespread support. ECMAScript modules were standardized in 2015, were supported in most browsers by 2017, and landed in Node.js v12 in 2019. During much of this window, it was clear that ESM was the future of JavaScript modules, but very few runtimes could consume it. Tools like Babel made it possible for JavaScript to be authored in ESM and downleveled to another module format that could be used in Node.js or browsers. TypeScript followed suit, adding support for ES module syntax and softly discouraging the use of the original CommonJS-inspired `import fs = require("fs")` syntax in [the 1.5 release ↗](https://devblogs.microsoft.com/typescript/announcing-typescript-1-5/).
 > The upside of this “author ESM, output anything” strategy was that TypeScript could use standard JavaScript syntax, making the authoring experience familiar to newcomers, and (theoretically) making it easy for projects to start targeting ESM outputs in the future. There are three significant downsides, which became fully apparent only after ESM and CJS modules were allowed to coexist and interoperate in Node.js:
 > 1. Early assumptions about how ESM/CJS interoperability would work in Node.js turned out to be wrong, and today, interoperability rules differ between Node.js and bundlers. Consequently, the configuration space for modules in TypeScript is large.
 > 2. When the syntax in input files all looks like ESM, it’s easy for an author or code reviewer to lose track of what kind of module a file is at runtime. And because of Node.js’s interoperability rules, what kind of module each file is became very important.
@@ -175,7 +175,7 @@ Can an ES module `import` a CommonJS module? If so, does a default import link t
 2. **Bundler-like.** Before any major JavaScript engine could run ES modules, Babel allowed developers to write them by transpiling them to CommonJS. The way these ESM-transpiled-to-CJS files interacted with hand-written-CJS files implied a set of permissive interoperability rules that have become the de facto standard for bundlers and transpilers.
 3. **Node.js.** In Node.js, CommonJS modules cannot load ES modules synchronously (with `require`); they can only load them asynchronously with dynamic `import()` calls. ES modules can default-import CJS modules, which always binds to `exports`. (This means that a default import of a Babel-like CJS output with `__esModule` behaves differently between Node.js and some bundlers.)
 
-TypeScript needs to know which of these rule sets to assume in order to provide correct types on (particularly `default`) imports and to error on imports that will crash at runtime. When the `module` compiler option is set to `node16` or `nodenext`, Node.js’s rules are enforced. All other `module` settings, combined with the [`esModuleInterop` ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#esModuleInterop) option, result in bundler-like interop in TypeScript. (While using `--module esnext` does prevent you from *writing* CommonJS modules, it does not prevent you from *importing* them as dependencies. There’s currently no TypeScript setting that can guard against an ES module importing a CommonJS module, as would be appropriate for direct-to-browser code.)
+TypeScript needs to know which of these rule sets to assume in order to provide correct types on (particularly `default`) imports and to error on imports that will crash at runtime. When the `module` compiler option is set to `node16` or `nodenext`, Node.js’s rules are enforced. All other `module` settings, combined with the [`esModuleInterop`](/typescript/5.2/modules-reference/reference#esModuleInterop) option, result in bundler-like interop in TypeScript. (While using `--module esnext` does prevent you from *writing* CommonJS modules, it does not prevent you from *importing* them as dependencies. There’s currently no TypeScript setting that can guard against an ES module importing a CommonJS module, as would be appropriate for direct-to-browser code.)
 
 ### Module specifiers are not transformed {#module-specifiers-are-not-transformed}
 
@@ -204,7 +204,7 @@ depending on the `module` compiler option, but the module specifier will always 
 
 ## Module resolution {#module-resolution}
 
-Let’s return to our [first example ↗](https://www.typescriptlang.org/docs/handbook/modules/theory.html#typescripts-job-concerning-modules) and review what we’ve learned about it so far:
+Let’s return to our [first example](/typescript/5.2/modules-reference/theory#typescripts-job-concerning-modules) and review what we’ve learned about it so far:
 
 ```ts
 import sayHello from "greetings";
@@ -219,38 +219,38 @@ While the ECMAScript specification defines how to parse and interpret `import` a
 
 ```ts
 import monkey from "🐒"; // Looks for './eats/bananas.js'
-import cow from "🐄";    // Looks for './eats/grass.js'
-import lion from "🦁";   // Looks for './eats/you.js'
+importcowfrom"🐄";    // Looks for './eats/grass.js'
+importlionfrom"🦁";   // Looks for './eats/you.js'
 ```
 
 and still claim to implement “standards-compliant ESM.” Needless to say, TypeScript would have no idea what types to assign to `monkey`, `cow`, and `lion` without built-in knowledge of this runtime’s module resolution algorithm. Just as `module` informs the compiler about the host’s expected module format, `moduleResolution`, along with a few customization options, specify the algorithm the host uses to resolve module specifiers to files. This also clarifies why TypeScript doesn’t modify import specifiers during emit: the relationship between an import specifier and a file on disk (if one even exists) is host-defined, and TypeScript is not a host.
 
 The available `moduleResolution` options are:
 
-- [**`classic`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#classic): TypeScript’s oldest module resolution mode, this is unfortunately the default when `module` is set to anything other than `commonjs`, `node16`, or `nodenext`. It was probably made to provide best-effort resolution for a wide range of [RequireJS](https://requirejs.org/docs/api.html#packages) configurations. It should not be used for new projects (or even old projects that don’t use RequireJS or another AMD module loader), and is scheduled for deprecation in TypeScript 6.0.
-- [**`node10`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#node10-formerly-known-as-node): Formerly known as `node`, this is the unfortunate default when `module` is set to `commonjs`. It’s a pretty good model of Node.js versions older than v12, and sometimes it’s a passable approximation of how most bundlers do module resolution. It supports looking up packages from `node_modules`, loading directory `index.js` files, and omitting `.js` extensions in relative module specifiers. Because Node.js v12 introduced different module resolution rules for ES modules, though, it’s a very bad model of modern versions of Node.js. It should not be used for new projects.
-- [**`node16`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#node16-nodenext-1): This is the counterpart of `--module node16` and is set by default with that `module` setting. Node.js v12 and later support both ESM and CJS, each of which uses its own module resolution algorithm. In Node.js, module specifiers in import statements and dynamic `import()` calls are not allowed to omit file extensions or `/index.js` suffixes, while module specifiers in `require` calls are. This module resolution mode understands and enforces this restriction where necessary, as determined by the [module format detection rules ↗](https://www.typescriptlang.org/docs/handbook/modules/theory.html#module-format-detection) instated by `--module node16`. (For `node16` and `nodenext`, `module` and `moduleResolution` go hand-in-hand: setting one to `node16` or `nodenext` while setting the other to something else has unsupported behavior and may be an error in the future.)
-- [**`nodenext`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#node16-nodenext-1): Currently identical to `node16`, this is the counterpart of `--module nodenext` and is set by default with that `module` setting. It’s intended to be a forward-looking mode that will support new Node.js module resolution features as they’re added.
-- [**`bundler`** ↗](https://www.typescriptlang.org/docs/handbook/modules/reference.html#bundler): Node.js v12 introduced some new module resolution features for importing npm packages—the `"exports"` and `"imports"` fields of `package.json`—and many bundlers adopted those features without also adopting the stricter rules for ESM imports. This module resolution mode provides a base algorithm for code targeting a bundler. It supports `package.json``"exports"` and `"imports"` by default, but can be configured to ignore them. It requires setting `module` to `esnext`.
+- [**`classic`**](/typescript/5.2/modules-reference/reference#classic): TypeScript’s oldest module resolution mode, this is unfortunately the default when `module` is set to anything other than `commonjs`, `node16`, or `nodenext`. It was probably made to provide best-effort resolution for a wide range of [RequireJS ↗](https://requirejs.org/docs/api.html#packages) configurations. It should not be used for new projects (or even old projects that don’t use RequireJS or another AMD module loader), and is scheduled for deprecation in TypeScript 6.0.
+- [**`node10`**](/typescript/5.2/modules-reference/reference#node10-formerly-known-as-node): Formerly known as `node`, this is the unfortunate default when `module` is set to `commonjs`. It’s a pretty good model of Node.js versions older than v12, and sometimes it’s a passable approximation of how most bundlers do module resolution. It supports looking up packages from `node_modules`, loading directory `index.js` files, and omitting `.js` extensions in relative module specifiers. Because Node.js v12 introduced different module resolution rules for ES modules, though, it’s a very bad model of modern versions of Node.js. It should not be used for new projects.
+- [**`node16`**](/typescript/5.2/modules-reference/reference#node16-nodenext-1): This is the counterpart of `--module node16` and is set by default with that `module` setting. Node.js v12 and later support both ESM and CJS, each of which uses its own module resolution algorithm. In Node.js, module specifiers in import statements and dynamic `import()` calls are not allowed to omit file extensions or `/index.js` suffixes, while module specifiers in `require` calls are. This module resolution mode understands and enforces this restriction where necessary, as determined by the [module format detection rules](/typescript/5.2/modules-reference/theory#module-format-detection) instated by `--module node16`. (For `node16` and `nodenext`, `module` and `moduleResolution` go hand-in-hand: setting one to `node16` or `nodenext` while setting the other to something else has unsupported behavior and may be an error in the future.)
+- [**`nodenext`**](/typescript/5.2/modules-reference/reference#node16-nodenext-1): Currently identical to `node16`, this is the counterpart of `--module nodenext` and is set by default with that `module` setting. It’s intended to be a forward-looking mode that will support new Node.js module resolution features as they’re added.
+- [**`bundler`**](/typescript/5.2/modules-reference/reference#bundler): Node.js v12 introduced some new module resolution features for importing npm packages—the `"exports"` and `"imports"` fields of `package.json`—and many bundlers adopted those features without also adopting the stricter rules for ESM imports. This module resolution mode provides a base algorithm for code targeting a bundler. It supports `package.json``"exports"` and `"imports"` by default, but can be configured to ignore them. It requires setting `module` to `esnext`.
 
 ### TypeScript imitates the host’s module resolution, but with types {#typescript-imitates-the-hosts-module-resolution-but-with-types}
 
-Remember the three components of TypeScript’s [job ↗](https://www.typescriptlang.org/docs/handbook/modules/theory.html#typescripts-job-concerning-modules) concerning modules?
+Remember the three components of TypeScript’s [job](/typescript/5.2/modules-reference/theory#typescripts-job-concerning-modules) concerning modules?
 
 1. Compile files into a valid **output module format**
 2. Ensure that imports in those **outputs** will **resolve successfully**
 3. Know what **type** to assign to **imported names**.
 
-Module resolution is needed to accomplish last two. But when we spend most of our time working in input files, it can be easy to forget about (2)—that a key component of module resolution is validating that the imports or `require` calls in the output files, containing the [same module specifiers as the input files ↗](https://www.typescriptlang.org/docs/handbook/modules/theory.html#module-specifiers-are-not-transformed), will actually work at runtime. Let’s look at a new example with multiple files:
+Module resolution is needed to accomplish last two. But when we spend most of our time working in input files, it can be easy to forget about (2)—that a key component of module resolution is validating that the imports or `require` calls in the output files, containing the [same module specifiers as the input files](/typescript/5.2/modules-reference/theory#module-specifiers-are-not-transformed), will actually work at runtime. Let’s look at a new example with multiple files:
 
 ```ts
 // @Filename: math.ts
-export function add(a: number, b: number) {
-  return a + b;
+exportfunctionadd(a: number, b: number) {
+returna + b;
 }
 
 // @Filename: main.ts
-import { add } from "./math";
+import { add } from"./math";
 add(1, 2);
 ```
 
@@ -270,12 +270,12 @@ This model makes it clear that for TypeScript, module resolution is mostly a mat
 // @outDir: dist
 
 // @Filename: src/math.mts
-export function add(a: number, b: number) {
-  return a + b;
+exportfunctionadd(a: number, b: number) {
+returna + b;
 }
 
 // @Filename: src/main.mts
-import { add } from "./math.mjs";
+import { add } from"./math.mjs";
 add(1, 2);
 ```
 
@@ -317,12 +317,12 @@ So far, we’ve really emphasized the distinction between *input files* and *out
 
 ```ts
 // @Filename: src/math.ts
-export function add(a: number, b: number) {
-  return a + b;
+exportfunctionadd(a: number, b: number) {
+returna + b;
 }
 
 // @Filename: src/main.ts
-import { add } from "./math.ts";
+import { add } from"./math.ts";
 //                  ^^^^^^^^^^^
 // An import path can only end with a '.ts' extension when 'allowImportingTsExtensions' is enabled.
 ```

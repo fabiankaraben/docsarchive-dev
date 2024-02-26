@@ -12,11 +12,11 @@ type: docs
 
 A *global* library is one that can be accessed from the global scope (i.e. without using any form of `import`).
 Many libraries simply expose one or more global variables for use.
-For example, if you were using [jQuery](https://jquery.com/), the `$` variable can be used by simply referring to it:
+For example, if you were using [jQuery ↗](https://jquery.com/), the `$` variable can be used by simply referring to it:
 
 ```ts
 $(() => {
-  console.log("hello!");
+console.log("hello!");
 });
 ```
 
@@ -37,7 +37,7 @@ A global “Hello, world” library might look like this:
 
 ```js
 function createGreeting(s) {
-  return "Hello, " + s;
+return"Hello, " + s;
 }
 ```
 
@@ -45,7 +45,7 @@ or like this:
 
 ```js
 window.createGreeting = function (s) {
-  return "Hello, " + s;
+return"Hello, " + s;
 };
 ```
 
@@ -80,8 +80,8 @@ You can see an example DTS below:
  *~ include those call signatures here.
  *~ Otherwise, delete this section.
  */
-declare function myLib(a: string): string;
-declare function myLib(a: number): number;
+declarefunctionmyLib(a: string): string;
+declarefunctionmyLib(a: number): number;
 
 /*~ If you want the name of this library to be a valid type name,
  *~ you can do so here.
@@ -90,48 +90,48 @@ declare function myLib(a: number): number;
  *~ Be sure this actually makes sense! If it doesn't, just
  *~ delete this declaration and add types inside the namespace below.
  */
-interface myLib {
-  name: string;
-  length: number;
-  extras?: string[];
+interfacemyLib {
+name: string;
+length: number;
+extras?: string[];
 }
 
 /*~ If your library has properties exposed on a global variable,
  *~ place them here.
  *~ You should also place types (interfaces and type alias) here.
  */
-declare namespace myLib {
-  //~ We can write 'myLib.timeout = 50;'
-  let timeout: number;
+declarenamespacemyLib {
+//~ We can write 'myLib.timeout = 50;'
+lettimeout: number;
 
-  //~ We can access 'myLib.version', but not change it
-  const version: string;
+//~ We can access 'myLib.version', but not change it
+constversion: string;
 
-  //~ There's some class we can create via 'let c = new myLib.Cat(42)'
-  //~ Or reference e.g. 'function f(c: myLib.Cat) { ... }
-  class Cat {
-    constructor(n: number);
+//~ There's some class we can create via 'let c = new myLib.Cat(42)'
+//~ Or reference e.g. 'function f(c: myLib.Cat) { ... }
+classCat {
+constructor(n: number);
 
-    //~ We can read 'c.age' from a 'Cat' instance
-    readonly age: number;
+//~ We can read 'c.age' from a 'Cat' instance
+readonlyage: number;
 
-    //~ We can invoke 'c.purr()' from a 'Cat' instance
-    purr(): void;
+//~ We can invoke 'c.purr()' from a 'Cat' instance
+purr(): void;
   }
 
-  //~ We can declare a variable as
-  //~   'var s: myLib.CatSettings = { weight: 5, name: "Maru" };'
-  interface CatSettings {
-    weight: number;
-    name: string;
-    tailLength?: number;
+//~ We can declare a variable as
+//~   'var s: myLib.CatSettings = { weight: 5, name: "Maru" };'
+interfaceCatSettings {
+weight: number;
+name: string;
+tailLength?: number;
   }
 
-  //~ We can write 'const v: myLib.VetID = 42;'
-  //~  or 'const v: myLib.VetID = "bob";'
-  type VetID = string | number;
+//~ We can write 'const v: myLib.VetID = 42;'
+//~  or 'const v: myLib.VetID = "bob";'
+typeVetID = string | number;
 
-  //~ We can invoke 'myLib.checkCat(c)' or 'myLib.checkCat(c, v);'
-  function checkCat(c: Cat, s?: VetID);
+//~ We can invoke 'myLib.checkCat(c)' or 'myLib.checkCat(c, v);'
+functioncheckCat(c: Cat, s?: VetID);
 }
 ```

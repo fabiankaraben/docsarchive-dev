@@ -15,40 +15,40 @@ Note any tags which are not explicitly listed below (such as `@async`) are not y
 
 #### Types {#types}
 
-- [`@type` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#type)
-- [`@param` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#param-and-returns) (or [`@arg` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#param-and-returns) or [`@argument` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#param-and-returns))
-- [`@returns` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#param-and-returns) (or [`@return` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#param-and-returns))
-- [`@typedef` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param)
-- [`@callback` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param)
-- [`@template` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#template)
-- [`@satisfies` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#satisfies)
+- [`@type`](/typescript/5.2/javascript/jsdoc-supported-types#type)
+- [`@param`](/typescript/5.2/javascript/jsdoc-supported-types#param-and-returns) (or [`@arg`](/typescript/5.2/javascript/jsdoc-supported-types#param-and-returns) or [`@argument`](/typescript/5.2/javascript/jsdoc-supported-types#param-and-returns))
+- [`@returns`](/typescript/5.2/javascript/jsdoc-supported-types#param-and-returns) (or [`@return`](/typescript/5.2/javascript/jsdoc-supported-types#param-and-returns))
+- [`@typedef`](/typescript/5.2/javascript/jsdoc-supported-types#typedef-callback-and-param)
+- [`@callback`](/typescript/5.2/javascript/jsdoc-supported-types#typedef-callback-and-param)
+- [`@template`](/typescript/5.2/javascript/jsdoc-supported-types#template)
+- [`@satisfies`](/typescript/5.2/javascript/jsdoc-supported-types#satisfies)
 
 #### Classes {#classes}
 
-- [Property Modifiers ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#property-modifiers)`@public`, `@private`, `@protected`, `@readonly`
-- [`@override` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#override)
-- [`@extends` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#extends) (or [`@augments` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#extends))
-- [`@implements` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#implements)
-- [`@class` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#constructor) (or [`@constructor` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#constructor))
-- [`@this` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#this)
+- [Property Modifiers](/typescript/5.2/javascript/jsdoc-supported-types#property-modifiers)`@public`, `@private`, `@protected`, `@readonly`
+- [`@override`](/typescript/5.2/javascript/jsdoc-supported-types#override)
+- [`@extends`](/typescript/5.2/javascript/jsdoc-supported-types#extends) (or [`@augments`](/typescript/5.2/javascript/jsdoc-supported-types#extends))
+- [`@implements`](/typescript/5.2/javascript/jsdoc-supported-types#implements)
+- [`@class`](/typescript/5.2/javascript/jsdoc-supported-types#constructor) (or [`@constructor`](/typescript/5.2/javascript/jsdoc-supported-types#constructor))
+- [`@this`](/typescript/5.2/javascript/jsdoc-supported-types#this)
 
 #### Documentation {#documentation}
 
 Documentation tags work in both TypeScript and JavaScript.
 
-- [`@deprecated` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#deprecated)
-- [`@see` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#see)
-- [`@link` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#link)
+- [`@deprecated`](/typescript/5.2/javascript/jsdoc-supported-types#deprecated)
+- [`@see`](/typescript/5.2/javascript/jsdoc-supported-types#see)
+- [`@link`](/typescript/5.2/javascript/jsdoc-supported-types#link)
 
 #### Other {#other}
 
-- [`@enum` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#enum)
-- [`@author` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#author)
-- [Other supported patterns ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#other-supported-patterns)
-- [Unsupported patterns ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#unsupported-patterns)
-- [Unsupported tags ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#unsupported-tags)
+- [`@enum`](/typescript/5.2/javascript/jsdoc-supported-types#enum)
+- [`@author`](/typescript/5.2/javascript/jsdoc-supported-types#author)
+- [Other supported patterns](/typescript/5.2/javascript/jsdoc-supported-types#other-supported-patterns)
+- [Unsupported patterns](/typescript/5.2/javascript/jsdoc-supported-types#unsupported-patterns)
+- [Unsupported tags](/typescript/5.2/javascript/jsdoc-supported-types#unsupported-tags)
 
-The meaning is usually the same, or a superset, of the meaning of the tag given at [jsdoc.app](https://jsdoc.app/).
+The meaning is usually the same, or a superset, of the meaning of the tag given at [jsdoc.app ↗](https://jsdoc.app/).
 The code below describes the differences and gives some example usage of each tag.
 
 **Note:** You can use [the playground to explore JSDoc support ↗](https://www.typescriptlang.org/play#example/jsdoc-support).
@@ -61,7 +61,7 @@ You can reference types with the “@type” tag. The type can be:
 
 1. Primitive, like `string` or `number`.
 2. Declared in a TypeScript declaration, either global or imported.
-3. Declared in a JSDoc [`@typedef` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param) tag.
+3. Declared in a JSDoc [`@typedef`](/typescript/5.2/javascript/jsdoc-supported-types#typedef-callback-and-param) tag.
 
 You can use most JSDoc type syntax and any TypeScript syntax, from [the most basic like `string`](/typescript/5.2/handbook/basic-types) to [the most advanced, like conditional types](/typescript/5.2/handbook/type-manipulation/conditional-types).
 
@@ -69,19 +69,19 @@ You can use most JSDoc type syntax and any TypeScript syntax, from [the most bas
 
 ```js
 /**
- * @type {string}
+ * @type{string}
  */
-var s;
- 
-/** @type {Window} */
-var win;
- 
-/** @type {PromiseLike<string>} */
-var promisedString;
- 
+vars;
+
+/** @type{Window} */
+varwin;
+
+/** @type{PromiseLike<string>} */
+varpromisedString;
+
 // You can specify an HTML Element with DOM properties
-/** @type {HTMLElement} */
-var myElement = document.querySelector(selector);
+/** @type{HTMLElement} */
+varmyElement = document.querySelector(selector);
 element.dataset.myData = "";
 ```
 
@@ -91,9 +91,9 @@ element.dataset.myData = "";
 
 ```js
 /**
- * @type {string | boolean}
+ * @type{string | boolean}
  */
-var sb;
+varsb;
 ```
 
 You can specify array types using a variety of syntaxes:
@@ -102,11 +102,11 @@ You can specify array types using a variety of syntaxes:
 
 ```js
 /** @type {number[]} */
-var ns;
-/** @type {Array.<number>} */
-var jsdoc;
-/** @type {Array<number>} */
-var nas;
+varns;
+/** @type{Array.<number>} */
+varjsdoc;
+/** @type{Array<number>} */
+varnas;
 ```
 
 You can also specify object literal types.
@@ -116,7 +116,7 @@ For example, an object with properties ‘a’ (string) and ‘b’ (number) use
 
 ```js
 /** @type {{ a: string, b: number }} */
-var var9;
+varvar9;
 ```
 
 You can specify map-like and array-like objects using string and number index signatures, using either standard JSDoc syntax or TypeScript syntax.
@@ -127,12 +127,12 @@ You can specify map-like and array-like objects using string and number index si
 /**
  * A map-like object that maps arbitrary `string` properties to `number`s.
  *
- * @type {Object.<string, number>}
+ * @type{Object.<string, number>}
  */
-var stringToNumber;
- 
-/** @type {Object.<number, object>} */
-var arrayLike;
+varstringToNumber;
+
+/** @type{Object.<number, object>} */
+vararrayLike;
 ```
 
 The preceding two types are equivalent to the TypeScript types `{ [x: string]: number }` and `{ [x: number]: any }`. The compiler understands both syntaxes.
@@ -143,9 +143,9 @@ You can specify function types using either TypeScript or Google Closure syntax:
 
 ```js
 /** @type {function(string, boolean): number} Closure syntax */
-var sbn;
-/** @type {(s: string, b: boolean) => number} TypeScript syntax */
-var sbn2;
+varsbn;
+/** @type{(s: string, b: boolean) => number} TypeScript syntax */
+varsbn2;
 ```
 
 Or you can just use the unspecified `Function` type:
@@ -154,9 +154,9 @@ Or you can just use the unspecified `Function` type:
 
 ```js
 /** @type {Function} */
-var fn7;
-/** @type {function} */
-var fn6;
+varfn7;
+/** @type{function} */
+varfn6;
 ```
 
 Other types from Closure also work:
@@ -165,13 +165,13 @@ Other types from Closure also work:
 
 ```js
 /**
- * @type {*} - can be 'any' type
+ * @type{*} - can be 'any' type
  */
-var star;
+varstar;
 /**
- * @type {?} - unknown type (same as 'any')
+ * @type{?} - unknown type (same as 'any')
  */
-var question;
+varquestion;
 ```
 
 #### Casts {#casts}
@@ -183,10 +183,10 @@ This lets you cast types to other types by adding a `@type` tag before any paren
 
 ```js
 /**
- * @type {number | string}
+ * @type{number | string}
  */
-var numberOrString = Math.random() < 0.5 ? "hello" : 100;
-var typeAssertedNumber = /** @type {number} */ (numberOrString);
+varnumberOrString = Math.random() < 0.5 ? "hello" : 100;
+vartypeAssertedNumber = /** @type{number} */ (numberOrString);
 ```
 
 You can even cast to `const` just like TypeScript:
@@ -206,16 +206,16 @@ This syntax is TypeScript-specific and differs from the JSDoc standard:
 
 ```js
 // @filename: types.d.ts
-export type Pet = {
-  name: string,
+exporttypePet = {
+name: string,
 };
- 
+
 // @filename: main.js
 /**
- * @param {import("./types").Pet} p
+ * @param{import("./types").Pet}p
  */
-function walk(p) {
-  console.log(`Walking ${p.name}...`);
+functionwalk(p) {
+console.log(`Walking ${p.name}...`);
 }
 ```
 
@@ -225,13 +225,13 @@ import types can be used in type alias declarations:
 
 ```js
 /**
- * @typedef {import("./types").Pet} Pet
+ * @typedef{import("./types").Pet}Pet
  */
- 
+
 /**
- * @type {Pet}
+ * @type{Pet}
  */
-var myPet;
+varmyPet;
 myPet.name;
 ```
 
@@ -241,9 +241,9 @@ import types can be used to get the type of a value from a module if you don’t
 
 ```js
 /**
- * @type {typeof import("./accounts").userAccount}
+ * @type{typeof import("./accounts").userAccount}
  */
-var x = require("./accounts").userAccount;
+varx = require("./accounts").userAccount;
 ```
 
 ### `@param` and `@returns` {#param-and-returns}
@@ -256,14 +256,14 @@ The parameter may also be declared optional by surrounding the name with square 
 ```js
 // Parameters may be declared in a variety of syntactic forms
 /**
- * @param {string}  p1 - A string param.
- * @param {string=} p2 - An optional param (Google Closure syntax)
- * @param {string} [p3] - Another optional param (JSDoc syntax).
- * @param {string} [p4="test"] - An optional param with a default value
- * @returns {string} This is the result
+ * @param{string}p1 - A string param.
+ * @param{string=}p2 - An optional param (Google Closure syntax)
+ * @param{string}[p3] - Another optional param (JSDoc syntax).
+ * @param{string}[p4="test"] - An optional param with a default value
+ * @returns{string} This is the result
  */
-function stringsStringStrings(p1, p2, p3, p4) {
-  // TODO
+functionstringsStringStrings(p1, p2, p3, p4) {
+// TODO
 }
 ```
 
@@ -273,14 +273,14 @@ Likewise, for the return type of a function:
 
 ```js
 /**
- * @return {PromiseLike<string>}
+ * @return{PromiseLike<string>}
  */
-function ps() {}
- 
+functionps() {}
+
 /**
- * @returns {{ a: string, b: number }} - May use '@returns' as well as '@return'
+ * @returns{{ a: string, b: number }} - May use '@returns' as well as '@return'
  */
-function ab() {}
+functionab() {}
 ```
 
 ### `@typedef`, `@callback`, and `@param` {#typedef-callback-and-param}
@@ -292,16 +292,16 @@ Similar syntax works with `@param`.
 
 ```js
 /**
- * @typedef {Object} SpecialType - creates a new type named 'SpecialType'
- * @property {string} prop1 - a string property of SpecialType
- * @property {number} prop2 - a number property of SpecialType
- * @property {number=} prop3 - an optional number property of SpecialType
- * @prop {number} [prop4] - an optional number property of SpecialType
- * @prop {number} [prop5=42] - an optional number property of SpecialType with default
+ * @typedef{Object}SpecialType - creates a new type named 'SpecialType'
+ * @property{string}prop1 - a string property of SpecialType
+ * @property{number}prop2 - a number property of SpecialType
+ * @property{number=}prop3 - an optional number property of SpecialType
+ * @prop{number}[prop4] - an optional number property of SpecialType
+ * @prop{number}[prop5=42] - an optional number property of SpecialType with default
  */
- 
-/** @type {SpecialType} */
-var specialTypeObject;
+
+/** @type{SpecialType} */
+varspecialTypeObject;
 specialTypeObject.prop3;
 ```
 
@@ -311,14 +311,14 @@ You can use either `object` or `Object` on the first line.
 
 ```js
 /**
- * @typedef {object} SpecialType1 - creates a new type named 'SpecialType1'
- * @property {string} prop1 - a string property of SpecialType1
- * @property {number} prop2 - a number property of SpecialType1
- * @property {number=} prop3 - an optional number property of SpecialType1
+ * @typedef{object}SpecialType1 - creates a new type named 'SpecialType1'
+ * @property{string}prop1 - a string property of SpecialType1
+ * @property{number}prop2 - a number property of SpecialType1
+ * @property{number=}prop3 - an optional number property of SpecialType1
  */
- 
-/** @type {SpecialType1} */
-var specialTypeObject1;
+
+/** @type{SpecialType1} */
+varspecialTypeObject1;
 ```
 
 `@param` allows a similar syntax for one-off type specifications.
@@ -328,15 +328,15 @@ Note that the nested property names must be prefixed with the name of the parame
 
 ```js
 /**
- * @param {Object} options - The shape is the same as SpecialType above
- * @param {string} options.prop1
- * @param {number} options.prop2
- * @param {number=} options.prop3
- * @param {number} [options.prop4]
- * @param {number} [options.prop5=42]
+ * @param{Object}options - The shape is the same as SpecialType above
+ * @param{string}options.prop1
+ * @param{number}options.prop2
+ * @param{number=}options.prop3
+ * @param{number}[options.prop4]
+ * @param{number}[options.prop5=42]
  */
-function special(options) {
-  return (options.prop4 || 1001) + options.prop5;
+functionspecial(options) {
+return (options.prop4 || 1001) + options.prop5;
 }
 ```
 
@@ -346,21 +346,21 @@ function special(options) {
 
 ```js
 /**
- * @callback Predicate
- * @param {string} data
- * @param {number} [index]
- * @returns {boolean}
+ * @callbackPredicate
+ * @param{string}data
+ * @param{number}[index]
+ * @returns{boolean}
  */
- 
-/** @type {Predicate} */
-const ok = (s) => !(s.length % 2);
+
+/** @type{Predicate} */
+constok = (s) => !(s.length % 2);
 ```
 
 Of course, any of these types can be declared using TypeScript syntax in a single-line `@typedef`:
 
 ```js
 /** @typedef {{ prop1: string, prop2: string, prop3?: number }} SpecialType */
-/** @typedef {(data: string, index?: number) => boolean} Predicate */
+/** @typedef{(data: string, index?: number) => boolean}Predicate */
 ```
 
 ### `@template` {#template}
@@ -372,25 +372,25 @@ This lets you make functions, classes, or types that are generic:
 
 ```js
 /**
- * @template T
- * @param {T} x - A generic parameter that flows through to the return type
- * @returns {T}
+ * @templateT
+ * @param{T}x - A generic parameter that flows through to the return type
+ * @returns{T}
  */
-function id(x) {
-  return x;
+functionid(x) {
+returnx;
 }
- 
-const a = id("string");
-const b = id(123);
-const c = id({});
+
+consta = id("string");
+constb = id(123);
+constc = id({});
 ```
 
 Use comma or multiple tags to declare multiple type parameters:
 
 ```js
 /**
- * @template T,U,V
- * @template W,X
+ * @templateT,U,V
+ * @templateW,X
  */
 ```
 
@@ -403,11 +403,11 @@ Only the first type parameter in a list is constrained:
 /**
  * @template {string} K - K must be a string or string literal
  * @template {{ serious(): string }} Seriousalizable - must have a serious method
- * @param {K} key
- * @param {Seriousalizable} object
+ * @param{K}key
+ * @param{Seriousalizable}object
  */
-function seriousalize(key, object) {
-  // ????
+functionseriousalize(key, object) {
+// ????
 }
 ```
 
@@ -417,12 +417,12 @@ Finally, you can specify a default for a type parameter:
 
 ```js
 /** @template [T=object] */
-class Cache {
-    /** @param {T} initial */
-    constructor(initial) {
+classCache {
+/** @param{T}initial */
+constructor(initial) {
     }
 }
-let c = new Cache()
+letc = newCache()
 ```
 
 ### `@satisfies` {#satisfies}
@@ -434,20 +434,20 @@ let c = new Cache()
 ```js
 // @ts-check
 /**
- * @typedef {"hello world" | "Hello, world"} WelcomeMessage
+ * @typedef{"hello world" | "Hello, world"}WelcomeMessage
  */
- 
+
 /** @satisfies {WelcomeMessage} */
-const message = "hello world"
-        
+constmessage = "hello world"
+
 const message: "hello world"
- 
+
 /** @satisfies {WelcomeMessage} */
-const failingMessage = "Hello world!"
- 
-/** @type {WelcomeMessage} */
-const messageUsingType = "hello world"
-             
+constfailingMessage = "Hello world!"
+
+/** @type{WelcomeMessage} */
+constmessageUsingType = "hello world"
+
 const messageUsingType: WelcomeMessage
 ```
 
@@ -463,40 +463,40 @@ Classes can be declared as ES6 classes.
 
 ```js
 class C {
-  /**
-   * @param {number} data
+/**
+   * @param{number}data
    */
-  constructor(data) {
-    // property types can be inferred
-    this.name = "foo";
- 
-    // or set explicitly
-    /** @type {string | null} */
-    this.title = null;
- 
-    // or simply annotated, if they're set elsewhere
-    /** @type {number} */
-    this.size;
- 
-    this.initialize(data); // Should error, initializer expects a string
+constructor(data) {
+// property types can be inferred
+this.name = "foo";
+
+// or set explicitly
+/** @type{string | null} */
+this.title = null;
+
+// or simply annotated, if they're set elsewhere
+/** @type{number} */
+this.size;
+
+this.initialize(data); // Should error, initializer expects a string
   }
-  /**
-   * @param {string} s
+/**
+   * @param{string}s
    */
-  initialize = function (s) {
-    this.size = s.length;
+initialize = function (s) {
+this.size = s.length;
   };
 }
- 
-var c = new C(0);
- 
+
+varc = newC(0);
+
 // C should only be called with new, but
 // because it is JavaScript, this is allowed and
 // considered an 'any'.
-var result = C(1);
+varresult = C(1);
 ```
 
-They can also be declared as constructor functions; use [`@constructor` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#constructor) along with [`@this` ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#this) for this.
+They can also be declared as constructor functions; use [`@constructor`](/typescript/5.2/javascript/jsdoc-supported-types#constructor) along with [`@this`](/typescript/5.2/javascript/jsdoc-supported-types#this) for this.
 
 ### Property Modifiers {#property-modifiers}
 
@@ -508,19 +508,19 @@ They can also be declared as constructor functions; use [`@constructor` ↗](htt
 
 ```js
 // @ts-check
- 
-class Car {
-  constructor() {
-    /** @private */
-    this.identifier = 100;
+
+classCar {
+constructor() {
+/** @private */
+this.identifier = 100;
   }
- 
-  printIdentifier() {
-    console.log(this.identifier);
+
+printIdentifier() {
+console.log(this.identifier);
   }
 }
- 
-const c = new Car();
+
+constc = newCar();
 console.log(c.identifier);
 ```
 
@@ -542,19 +542,19 @@ The `@readonly` modifier ensures that a property is only ever written to during 
 
 ```js
 // @ts-check
- 
-class Car {
-  constructor() {
-    /** @readonly */
-    this.identifier = 100;
+
+classCar {
+constructor() {
+/** @readonly */
+this.identifier = 100;
   }
- 
-  printIdentifier() {
-    console.log(this.identifier);
+
+printIdentifier() {
+console.log(this.identifier);
   }
 }
- 
-const c = new Car();
+
+constc = newCar();
 console.log(c.identifier);
 ```
 
@@ -566,11 +566,11 @@ console.log(c.identifier);
 
 ```js
 export class C {
-  m() { }
+m() { }
 }
-class D extends C {
-  /** @override */
-  m() { }
+classDextendsC {
+/** @override */
+m() { }
 }
 ```
 
@@ -584,11 +584,11 @@ When JavaScript classes extend a generic base class, there is no JavaScript synt
 
 ```js
 /**
- * @template T
- * @extends {Set<T>}
+ * @templateT
+ * @extends{Set<T>}
  */
-class SortableSet extends Set {
-  // ...
+classSortableSetextendsSet {
+// ...
 }
 ```
 
@@ -602,9 +602,9 @@ In the same way, there is no JavaScript syntax for implementing a TypeScript int
 
 ```js
 /** @implements {Print} */
-class TextBook {
-  print() {
-    // TODO
+classTextBook {
+print() {
+// TODO
   }
 }
 ```
@@ -618,33 +618,33 @@ The compiler infers constructor functions based on this-property assignments, bu
 ```js
 /**
  * @constructor
- * @param {number} data
+ * @param{number}data
  */
-function C(data) {
-  // property types can be inferred
-  this.name = "foo";
- 
-  // or set explicitly
-  /** @type {string | null} */
-  this.title = null;
- 
-  // or simply annotated, if they're set elsewhere
-  /** @type {number} */
-  this.size;
- 
-  this.initialize(data);
+functionC(data) {
+// property types can be inferred
+this.name = "foo";
+
+// or set explicitly
+/** @type{string | null} */
+this.title = null;
+
+// or simply annotated, if they're set elsewhere
+/** @type{number} */
+this.size;
+
+this.initialize(data);
 }
 /**
- * @param {string} s
+ * @param{string}s
  */
 C.prototype.initialize = function (s) {
-  this.size = s.length;
+this.size = s.length;
 };
- 
-var c = new C(0);
+
+varc = newC(0);
 c.size;
- 
-var result = C(1);
+
+varresult = C(1);
 Value of type 'typeof C' is not callable. Did you mean to include 'new'?2348Value of type 'typeof C' is not callable. Did you mean to include 'new'?
 ```
 
@@ -667,11 +667,11 @@ The compiler can usually figure out the type of `this` when it has some context 
 
 ```js
 /**
- * @this {HTMLElement}
- * @param {*} e
+ * @this{HTMLElement}
+ * @param{*}e
  */
-function callbackForLater(e) {
-  this.clientHeight = parseInt(e); // should be fine!
+functioncallbackForLater(e) {
+this.clientHeight = parseInt(e); // should be fine!
 }
 ```
 
@@ -687,14 +687,12 @@ When a function, method, or property is deprecated you can let users know by mar
 
 ```js
 /** @deprecated */
-const apiV1 = {};
-const apiV2 = {};
- 
+constapiV1 = {};
+constapiV2 = {};
+
 apiV;
-   - apiV1
+- apiV1
 - apiV2
- 
- 
 ```
 
 ### `@see` {#see}
@@ -705,8 +703,8 @@ apiV;
 
 ```ts
 type Box<T> = { t: T }
-/** @see Box for implementation details */
-type Boxify<T> = { [K in keyof T]: Box<T> };
+/** @seeBox for implementation details */
+typeBoxify<T> = { [KinkeyofT]: Box<T> };
 ```
 
 Some editors will turn `Box` into a link to make it easy to jump there and back.
@@ -719,9 +717,9 @@ Some editors will turn `Box` into a link to make it easy to jump there and back.
 
 ```ts
 type Box<T> = { t: T }
-/** @returns A {@link Box} containing the parameter. */
-function box<U>(u: U): Box<U> {
-  return { t: u };
+/** @returns A {@linkBox} containing the parameter. */
+functionbox<U>(u: U): Box<U> {
+return { t:u };
 }
 ```
 
@@ -736,12 +734,12 @@ The `@enum` tag allows you to create an object literal whose members are all of 
 
 ```js
 /** @enum {number} */
-const JSDocState = {
-  BeginningOfLine: 0,
-  SawAsterisk: 1,
-  SavingComments: 2,
+constJSDocState = {
+BeginningOfLine:0,
+SawAsterisk:1,
+SavingComments:2,
 };
- 
+
 JSDocState.SawAsterisk;
 ```
 
@@ -751,12 +749,12 @@ Note that `@enum` is quite different from, and much simpler than, TypeScript’s
 
 ```js
 /** @enum {function(number): number} */
-const MathFuncs = {
-  add1: (n) => n + 1,
-  id: (n) => -n,
-  sub1: (n) => n - 1,
+constMathFuncs = {
+add1: (n) =>n + 1,
+id: (n) => -n,
+sub1: (n) =>n - 1,
 };
- 
+
 MathFuncs.add1;
 ```
 
@@ -769,7 +767,7 @@ You can specify the author of an item with `@author`:
 ```ts
 /**
  * Welcome to awesome.ts
- * @author Ian Awesome <i.am.awesome@example.com>
+ * @authorIan Awesome <i.am.awesome@example.com>
  */
 ```
 
@@ -782,53 +780,53 @@ Otherwise, `@example` will be parsed as a new tag.
 
 ```js
 var someObj = {
-  /**
-   * @param {string} param1 - JSDocs on property assignments work
+/**
+   * @param{string}param1 - JSDocs on property assignments work
    */
-  x: function (param1) {},
+x:function (param1) {},
 };
- 
+
 /**
  * As do jsdocs on variable assignments
- * @return {Window}
+ * @return{Window}
  */
-let someFunc = function () {};
- 
+letsomeFunc = function () {};
+
 /**
  * And class methods
- * @param {string} greeting The greeting to use
+ * @param{string}greeting The greeting to use
  */
-Foo.prototype.sayHi = (greeting) => console.log("Hi!");
- 
+Foo.prototype.sayHi = (greeting) =>console.log("Hi!");
+
 /**
  * And arrow function expressions
- * @param {number} x - A multiplier
+ * @param{number}x - A multiplier
  */
-let myArrow = (x) => x * x;
- 
+letmyArrow = (x) =>x * x;
+
 /**
  * Which means it works for function components in JSX too
- * @param {{a: string, b: number}} props - Some param
+ * @param{{a: string, b: number}}props - Some param
  */
-var fc = (props) => <div>{props.a.charAt(0)}</div>;
- 
+varfc = (props) =><div>{props.a.charAt(0)}</div>;
+
 /**
  * A parameter can be a class constructor, using Google Closure syntax.
  *
- * @param {{new(...args: any[]): object}} C - The class to register
+ * @param{{new(...args: any[]): object}}C - The class to register
  */
-function registerClass(C) {}
- 
+functionregisterClass(C) {}
+
 /**
- * @param {...string} p1 - A 'rest' arg (array) of strings. (treated as 'any')
+ * @param{...string}p1 - A 'rest' arg (array) of strings. (treated as 'any')
  */
-function fn10(p1) {}
- 
+functionfn10(p1) {}
+
 /**
- * @param {...string} p1 - A 'rest' arg (array) of strings. (treated as 'any')
+ * @param{...string}p1 - A 'rest' arg (array) of strings. (treated as 'any')
  */
-function fn9(p1) {
-  return p1.join();
+functionfn9(p1) {
+returnp1.join();
 }
 ```
 
@@ -840,14 +838,14 @@ Postfix equals on a property type in an object literal type doesn’t specify an
 
 ```js
 /**
- * @type {{ a: string, b: number= }}
+ * @type{{ a: string, b: number= }}
  */
-var wrong;
+varwrong;
 /**
  * Use postfix question on the property name instead:
- * @type {{ a: string, b?: number }}
+ * @type{{ a: string, b?: number }}
  */
-var right;
+varright;
 ```
 
 Nullable types only have meaning if [`strictNullChecks` ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks) is on:
@@ -856,11 +854,11 @@ Nullable types only have meaning if [`strictNullChecks` ↗](https://www.typescr
 
 ```js
 /**
- * @type {?number}
+ * @type{?number}
  * With strictNullChecks: true  -- number | null
  * With strictNullChecks: false -- number
  */
-var nullable;
+varnullable;
 ```
 
 The TypeScript-native syntax is a union type:
@@ -869,11 +867,11 @@ The TypeScript-native syntax is a union type:
 
 ```js
 /**
- * @type {number | null}
+ * @type{number | null}
  * With strictNullChecks: true  -- number | null
  * With strictNullChecks: false -- number
  */
-var unionNullable;
+varunionNullable;
 ```
 
 Non-nullable types have no meaning and are treated just as their original type:
@@ -882,10 +880,10 @@ Non-nullable types have no meaning and are treated just as their original type:
 
 ```js
 /**
- * @type {!number}
+ * @type{!number}
  * Just has type number
  */
-var normal;
+varnormal;
 ```
 
 Unlike JSDoc’s type system, TypeScript only allows you to mark types as containing null or not.
@@ -898,7 +896,7 @@ TypeScript ignores any unsupported JSDoc tags.
 
 The following tags have open issues to support them:
 
-- `@const` ([issue #19672](https://github.com/Microsoft/TypeScript/issues/19672))
-- `@inheritdoc` ([issue #23215](https://github.com/Microsoft/TypeScript/issues/23215))
-- `@memberof` ([issue #7237](https://github.com/Microsoft/TypeScript/issues/7237))
-- `@yields` ([issue #23857](https://github.com/Microsoft/TypeScript/issues/23857))
+- `@const` ([issue #19672 ↗](https://github.com/Microsoft/TypeScript/issues/19672))
+- `@inheritdoc` ([issue #23215 ↗](https://github.com/Microsoft/TypeScript/issues/23215))
+- `@memberof` ([issue #7237 ↗](https://github.com/Microsoft/TypeScript/issues/7237))
+- `@yields` ([issue #23857 ↗](https://github.com/Microsoft/TypeScript/issues/23857))

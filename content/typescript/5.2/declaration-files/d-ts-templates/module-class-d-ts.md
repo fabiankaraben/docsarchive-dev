@@ -13,7 +13,7 @@ For example, when you want to work with JavaScript code which looks like:
 ```ts
 const Greeter = require("super-greeter");
 
-const greeter = new Greeter();
+constgreeter = newGreeter();
 greeter.greet();
 ```
 
@@ -47,7 +47,7 @@ To handle both importing via UMD and modules:
  *~ loaded outside a module loader environment, declare that global here.
  *~ Otherwise, delete this declaration.
  */
-export as namespace "super-greeter";
+exportasnamespace"super-greeter";
 
 /*~ This declaration specifies that the class constructor function
  *~ is the exported object from the file
@@ -55,12 +55,12 @@ export as namespace "super-greeter";
 export = Greeter;
 
 /*~ Write your module's methods and properties in this class */
-declare class Greeter {
-  constructor(customGreeting?: string);
+declareclassGreeter {
+constructor(customGreeting?: string);
 
-  greet: void;
+greet: void;
 
-  myMethod(opts: MyClass.MyClassMethodOptions): number;
+myMethod(opts: MyClass.MyClassMethodOptions): number;
 }
 
 /*~ If you want to expose types from your module as well, you can
@@ -71,10 +71,10 @@ declare class Greeter {
  *~ --esModuleInterop is turned on:
  *~   import * as x from '[~THE MODULE~]'; // WRONG! DO NOT DO THIS!
  */
-declare namespace MyClass {
-  export interface MyClassMethodOptions {
-    width?: number;
-    height?: number;
+declarenamespaceMyClass {
+exportinterfaceMyClassMethodOptions {
+width?: number;
+height?: number;
   }
 }
 ```

@@ -33,27 +33,27 @@ Example `tsconfig.json` files:
 
   ```
   {
-    "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-      "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "commonjs",
-      "[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
-      "[removeComments ↗](https://www.typescriptlang.org/tsconfig.html#removeComments)": true,
-      "[preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)": true,
-      "[sourceMap ↗](https://www.typescriptlang.org/tsconfig.html#sourceMap)": true
+  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+  "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "commonjs",
+  "[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
+  "[removeComments ↗](https://www.typescriptlang.org/tsconfig.html#removeComments)": true,
+  "[preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)": true,
+  "[sourceMap ↗](https://www.typescriptlang.org/tsconfig.html#sourceMap)": true
     },
-    "[files ↗](https://www.typescriptlang.org/tsconfig.html#files)": [
-      "core.ts",
-      "sys.ts",
-      "types.ts",
-      "scanner.ts",
-      "parser.ts",
-      "utilities.ts",
-      "binder.ts",
-      "checker.ts",
-      "emitter.ts",
-      "program.ts",
-      "commandLineParser.ts",
-      "tsc.ts",
-      "diagnosticInformationMap.generated.ts"
+  "[files ↗](https://www.typescriptlang.org/tsconfig.html#files)": [
+  "core.ts",
+  "sys.ts",
+  "types.ts",
+  "scanner.ts",
+  "parser.ts",
+  "utilities.ts",
+  "binder.ts",
+  "checker.ts",
+  "emitter.ts",
+  "program.ts",
+  "commandLineParser.ts",
+  "tsc.ts",
+  "diagnosticInformationMap.generated.ts"
     ]
   }
   ```
@@ -62,36 +62,36 @@ Example `tsconfig.json` files:
 
   ```
   {
-    "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-      "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "system",
-      "[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
-      "[removeComments ↗](https://www.typescriptlang.org/tsconfig.html#removeComments)": true,
-      "[preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)": true,
-      "[outFile ↗](https://www.typescriptlang.org/tsconfig.html#outFile)": "../../built/local/tsc.js",
-      "[sourceMap ↗](https://www.typescriptlang.org/tsconfig.html#sourceMap)": true
+  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+  "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "system",
+  "[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
+  "[removeComments ↗](https://www.typescriptlang.org/tsconfig.html#removeComments)": true,
+  "[preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)": true,
+  "[outFile ↗](https://www.typescriptlang.org/tsconfig.html#outFile)": "../../built/local/tsc.js",
+  "[sourceMap ↗](https://www.typescriptlang.org/tsconfig.html#sourceMap)": true
     },
-    "[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["src/**/*"],
-    "[exclude ↗](https://www.typescriptlang.org/tsconfig.html#exclude)": ["**/*.spec.ts"]
+  "[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["src/**/*"],
+  "[exclude ↗](https://www.typescriptlang.org/tsconfig.html#exclude)": ["**/*.spec.ts"]
   }
   ```
 
 ## TSConfig Bases {#tsconfig-bases}
 
-Depending on the JavaScript runtime environment which you intend to run your code in, there may be a base configuration which you can use at [github.com/tsconfig/bases](https://github.com/tsconfig/bases/).
+Depending on the JavaScript runtime environment which you intend to run your code in, there may be a base configuration which you can use at [github.com/tsconfig/bases ↗](https://github.com/tsconfig/bases/).
 These are `tsconfig.json` files which your project extends from which simplifies your `tsconfig.json` by handling the runtime support.
 
-For example, if you were writing a project which uses Node.js version 12 and above, then you could use the npm module [`@tsconfig/node12`](https://www.npmjs.com/package/@tsconfig/node12):
+For example, if you were writing a project which uses Node.js version 12 and above, then you could use the npm module [`@tsconfig/node12` ↗](https://www.npmjs.com/package/@tsconfig/node12):
 
 ```
 {
-  "[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "@tsconfig/node12/tsconfig.json",
+"[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "@tsconfig/node12/tsconfig.json",
 
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)": true
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)": true
   },
 
-  "[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["src/**/*"],
-  "[exclude ↗](https://www.typescriptlang.org/tsconfig.html#exclude)": ["**/*.spec.ts"]
+"[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["src/**/*"],
+"[exclude ↗](https://www.typescriptlang.org/tsconfig.html#exclude)": ["**/*.spec.ts"]
 }
 ```
 
@@ -99,12 +99,12 @@ This lets your `tsconfig.json` focus on the unique choices for your project, and
 
 ## Details {#details}
 
-The `"compilerOptions"` property can be omitted, in which case the compiler’s defaults are used. See our full list of supported [Compiler Options](/typescript/5.1/project-configuration/tsconfig).
+The `"compilerOptions"` property can be omitted, in which case the compiler’s defaults are used. See our full list of supported [Compiler Options ↗](https://www.typescriptlang.org/tsconfig.html).
 
 ## TSConfig Reference {#tsconfig-reference}
 
-To learn more about the hundreds of configuration options in the [TSConfig Reference](/typescript/5.1/project-configuration/tsconfig).
+To learn more about the hundreds of configuration options in the [TSConfig Reference ↗](https://www.typescriptlang.org/tsconfig.html).
 
 ## Schema {#schema}
 
-The `tsconfig.json` Schema can be found at [the JSON Schema Store](http://json.schemastore.org/tsconfig).
+The `tsconfig.json` Schema can be found at [the JSON Schema Store ↗](http://json.schemastore.org/tsconfig).

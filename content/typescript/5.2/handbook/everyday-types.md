@@ -19,7 +19,7 @@ These will later form the core building blocks of more complex types.
 
 ## The primitives: `string`, `number`, and `boolean` {#the-primitives-string-number-and-boolean}
 
-JavaScript has three very commonly used [primitives](https://developer.mozilla.org/en-US/docs/Glossary/Primitive): `string`, `number`, and `boolean`.
+JavaScript has three very commonly used [primitives ↗](https://developer.mozilla.org/en-US/docs/Glossary/Primitive): `string`, `number`, and `boolean`.
 Each has a corresponding type in TypeScript.
 As you might expect, these are the same names you’d see if you used the JavaScript `typeof` operator on a value of those types:
 
@@ -36,7 +36,7 @@ To specify the type of an array like `[1, 2, 3]`, you can use the syntax `number
 You may also see this written as `Array<number>`, which means the same thing.
 We’ll learn more about the syntax `T<U>` when we cover *generics*.
 
-> Note that `[number]` is a different thing; refer to the section on [Tuples ↗](https://www.typescriptlang.org/docs/handbook/2/objects.html#tuple-types).
+> Note that `[number]` is a different thing; refer to the section on [Tuples](/typescript/5.2/handbook/objects#tuple-types).
 > 
 
 ## `any` {#any}
@@ -56,7 +56,7 @@ obj.foo();
 obj();
 obj.bar = 100;
 obj = "hello";
-const n: number = obj;
+constn: number = obj;
 ```
 
 The `any` type is useful when you don’t want to write out a long type just to convince TypeScript that a particular line of code is okay.
@@ -90,7 +90,7 @@ For example, the type of a variable is inferred based on the type of its initial
 
 ```ts
 // No type annotation needed -- 'myName' inferred as type 'string'
-let myName = "Alice";
+letmyName = "Alice";
 ```
 
 For the most part you don’t need to explicitly learn the rules of inference.
@@ -110,8 +110,8 @@ Parameter type annotations go after the parameter name:
 
 ```ts
 // Parameter type annotation
-function greet(name: string) {
-  console.log("Hello, " + name.toUpperCase() + "!!");
+functiongreet(name: string) {
+console.log("Hello, " + name.toUpperCase() + "!!");
 }
 ```
 
@@ -140,7 +140,7 @@ Return type annotations appear after the parameter list:
 
 ```ts
 function getFavoriteNumber(): number {
-  return 26;
+return26;
 }
 ```
 
@@ -156,7 +156,7 @@ If you want to annotate the return type of a function which returns a promise, y
 
 ```ts
 async function getFavoriteNumber(): Promise<number> {
-  return 26;
+return26;
 }
 ```
 
@@ -171,15 +171,15 @@ Here’s an example:
 
 ```ts
 const names = ["Alice", "Bob", "Eve"];
- 
+
 // Contextual typing for function - parameter s inferred to have type string
 names.forEach(function (s) {
-  console.log(s.toUpperCase());
+console.log(s.toUpperCase());
 });
- 
+
 // Contextual typing also applies to arrow functions
 names.forEach((s) => {
-  console.log(s.toUpperCase());
+console.log(s.toUpperCase());
 });
 ```
 
@@ -202,11 +202,11 @@ For example, here’s a function that takes a point-like object:
 
 ```ts
 // The parameter's type annotation is an object type
-function printCoord(pt: { x: number; y: number }) {
-  console.log("The coordinate's x value is " + pt.x);
-  console.log("The coordinate's y value is " + pt.y);
+functionprintCoord(pt: { x: number; y: number }) {
+console.log("The coordinate's x value is " + pt.x);
+console.log("The coordinate's y value is " + pt.y);
 }
-printCoord({ x: 3, y: 7 });
+printCoord({ x:3, y:7 });
 ```
 
 Here, we annotated the parameter with a type with two properties - `x` and `y` - which are both of type `number`.
@@ -224,11 +224,11 @@ To do this, add a `?` after the property name:
 
 ```ts
 function printName(obj: { first: string; last?: string }) {
-  // ...
+// ...
 }
 // Both OK
-printName({ first: "Bob" });
-printName({ first: "Alice", last: "Alisson" });
+printName({ first:"Bob" });
+printName({ first:"Alice", last:"Alisson" });
 ```
 
 In JavaScript, if you access a property that doesn’t exist, you’ll get the value `undefined` rather than a runtime error.
@@ -238,15 +238,15 @@ Because of this, when you *read* from an optional property, you’ll have to che
 
 ```ts
 function printName(obj: { first: string; last?: string }) {
-  // Error - might crash if 'obj.last' wasn't provided!
-  console.log(obj.last.toUpperCase());
-  if (obj.last !== undefined) {
-    // OK
-    console.log(obj.last.toUpperCase());
+// Error - might crash if 'obj.last' wasn't provided!
+console.log(obj.last.toUpperCase());
+if (obj.last !== undefined) {
+// OK
+console.log(obj.last.toUpperCase());
   }
- 
-  // A safe alternative using modern JavaScript syntax:
-  console.log(obj.last?.toUpperCase());
+
+// A safe alternative using modern JavaScript syntax:
+console.log(obj.last?.toUpperCase());
 }
 ```
 
@@ -271,14 +271,14 @@ Let’s write a function that can operate on strings or numbers:
 
 ```ts
 function printId(id: number | string) {
-  console.log("Your ID is: " + id);
+console.log("Your ID is: " + id);
 }
 // OK
 printId(101);
 // OK
 printId("202");
 // Error
-printId({ myID: 22342 });
+printId({ myID:22342 });
 ```
 
 ```text {filename="Generated error"}
@@ -297,7 +297,7 @@ For example, if you have the union `string | number`, you can’t use methods th
 
 ```ts
 function printId(id: number | string) {
-  console.log(id.toUpperCase());
+console.log(id.toUpperCase());
 }
 ```
 
@@ -315,12 +315,12 @@ For example, TypeScript knows that only a `string` value will have a `typeof` va
 
 ```ts
 function printId(id: number | string) {
-  if (typeof id === "string") {
-    // In this branch, id is of type 'string'
-    console.log(id.toUpperCase());
+if (typeofid === "string") {
+// In this branch, id is of type 'string'
+console.log(id.toUpperCase());
   } else {
-    // Here, id is of type 'number'
-    console.log(id);
+// Here, id is of type 'number'
+console.log(id);
   }
 }
 ```
@@ -331,12 +331,12 @@ Another example is to use a function like `Array.isArray`:
 
 ```ts
 function welcomePeople(x: string[] | string) {
-  if (Array.isArray(x)) {
-    // Here: 'x' is 'string[]'
-    console.log("Hello, " + x.join(" and "));
+if (Array.isArray(x)) {
+// Here: 'x' is 'string[]'
+console.log("Hello, " + x.join(" and "));
   } else {
-    // Here: 'x' is 'string'
-    console.log("Welcome lone traveler " + x);
+// Here: 'x' is 'string'
+console.log("Welcome lone traveler " + x);
   }
 }
 ```
@@ -351,8 +351,8 @@ If every member in a union has a property in common, you can use that property w
 
 ```ts
 // Return type is inferred as number[] | string
-function getFirstThree(x: number[] | string) {
-  return x.slice(0, 3);
+functiongetFirstThree(x: number[] | string) {
+returnx.slice(0, 3);
 }
 ```
 
@@ -375,17 +375,17 @@ The syntax for a type alias is:
 
 ```ts
 type Point = {
-  x: number;
-  y: number;
+x: number;
+y: number;
 };
- 
+
 // Exactly the same as the earlier example
-function printCoord(pt: Point) {
-  console.log("The coordinate's x value is " + pt.x);
-  console.log("The coordinate's y value is " + pt.y);
+functionprintCoord(pt: Point) {
+console.log("The coordinate's x value is " + pt.x);
+console.log("The coordinate's y value is " + pt.y);
 }
- 
-printCoord({ x: 100, y: 100 });
+
+printCoord({ x:100, y:100 });
 ```
 
 You can actually use a type alias to give a name to any type at all, not just an object type.
@@ -405,14 +405,14 @@ In other words, this code might *look* illegal, but is OK according to TypeScrip
 
 ```ts
 type UserInputSanitizedString = string;
- 
-function sanitizeInput(str: string): UserInputSanitizedString {
-  return sanitize(str);
+
+functionsanitizeInput(str: string): UserInputSanitizedString {
+returnsanitize(str);
 }
- 
+
 // Create a sanitized input
-let userInput = sanitizeInput(getInput());
- 
+letuserInput = sanitizeInput(getInput());
+
 // Can still be re-assigned with a string though
 userInput = "new input";
 ```
@@ -425,16 +425,16 @@ An *interface declaration* is another way to name an object type:
 
 ```ts
 interface Point {
-  x: number;
-  y: number;
+x: number;
+y: number;
 }
- 
-function printCoord(pt: Point) {
-  console.log("The coordinate's x value is " + pt.x);
-  console.log("The coordinate's y value is " + pt.y);
+
+functionprintCoord(pt: Point) {
+console.log("The coordinate's x value is " + pt.x);
+console.log("The coordinate's y value is " + pt.y);
 }
- 
-printCoord({ x: 100, y: 100 });
+
+printCoord({ x:100, y:100 });
 ```
 
 Just like when we used a type alias above, the example works just as if we had used an anonymous object type.
@@ -524,14 +524,14 @@ changingString = "Olá Mundo";
 // Because `changingString` can represent any possible string, that
 // is how TypeScript describes it in the type system
 changingString;
-      
+
 let changingString: string
- 
-const constantString = "Hello World";
+
+constconstantString = "Hello World";
 // Because `constantString` can only represent 1 possible string, it
 // has a literal type representation
 constantString;
-      
+
 const constantString: "Hello World"
 ```
 
@@ -559,7 +559,7 @@ But by *combining* literals into unions, you can express a much more useful conc
 
 ```ts
 function printText(s: string, alignment: "left" | "right" | "center") {
-  // ...
+// ...
 }
 printText("Hello, world", "left");
 printText("G'day, mate", "centre");
@@ -575,7 +575,7 @@ Numeric literal types work the same way:
 
 ```ts
 function compare(a: string, b: string): -1 | 0 | 1 {
-  return a === b ? 0 : a > b ? 1 : -1;
+returna === b ? 0 : a > b ? 1 : -1;
 }
 ```
 
@@ -585,12 +585,12 @@ Of course, you can combine these with non-literal types:
 
 ```ts
 interface Options {
-  width: number;
+width: number;
 }
-function configure(x: Options | "auto") {
-  // ...
+functionconfigure(x: Options | "auto") {
+// ...
 }
-configure({ width: 100 });
+configure({ width:100 });
 configure("auto");
 configure("automatic");
 ```
@@ -613,7 +613,7 @@ For example, if you wrote code like this:
 ```ts
 const obj = { counter: 0 };
 if (someCondition) {
-  obj.counter = 1;
+obj.counter = 1;
 }
 ```
 
@@ -626,8 +626,8 @@ The same applies to strings:
 
 ```ts
 declare function handleRequest(url: string, method: "GET" | "POST"): void;
- 
-const req = { url: "https://example.com", method: "GET" };
+
+constreq = { url:"https://example.com", method:"GET" };
 handleRequest(req.url, req.method);
 ```
 
@@ -645,9 +645,9 @@ There are two ways to work around this.
 
   ```ts
   // Change 1:
-  const req = { url: "https://example.com", method: "GET" as "GET" };
+  constreq = { url:"https://example.com", method:"GET"as"GET" };
   // Change 2
-  handleRequest(req.url, req.method as "GET");
+  handleRequest(req.url, req.methodas"GET");
   ```
   Change 1 means “I intend for `req.method` to always have the *literal type*`"GET"`”, preventing the possible assignment of `"GUESS"` to that field after.
   Change 2 means “I know for other reasons that `req.method` has the value `"GET"`“.
@@ -684,10 +684,10 @@ Just like checking for `undefined` before using an optional property, we can use
 
 ```ts
 function doSomething(x: string | null) {
-  if (x === null) {
-    // do nothing
+if (x === null) {
+// do nothing
   } else {
-    console.log("Hello, " + x.toUpperCase());
+console.log("Hello, " + x.toUpperCase());
   }
 }
 ```
@@ -701,8 +701,8 @@ Writing `!` after any expression is effectively a type assertion that the value 
 
 ```ts
 function liveDangerously(x?: number | null) {
-  // No error
-  console.log(x!.toFixed());
+// No error
+console.log(x!.toFixed());
 }
 ```
 
@@ -725,13 +725,13 @@ From ES2020 onwards, there is a primitive in JavaScript used for very large inte
 
 ```ts
 // Creating a bigint via the BigInt function
-const oneHundred: bigint = BigInt(100);
- 
+constoneHundred: bigint = BigInt(100);
+
 // Creating a BigInt via the literal syntax
-const anotherHundred: bigint = 100n;
+constanotherHundred: bigint = 100n;
 ```
 
-You can learn more about BigInt in [the TypeScript 3.2 release notes ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-2.html#bigint).
+You can learn more about BigInt in [the TypeScript 3.2 release notes](/typescript/5.2/whats-new/typescript-3-2#bigint).
 
 #### `symbol` {#symbol}
 
@@ -741,10 +741,10 @@ There is a primitive in JavaScript used to create a globally unique reference vi
 
 ```ts
 const firstName = Symbol("name");
-const secondName = Symbol("name");
- 
+constsecondName = Symbol("name");
+
 if (firstName === secondName) {
-  // Can't ever happen
+// Can't ever happen
 }
 ```
 

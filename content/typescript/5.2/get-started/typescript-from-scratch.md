@@ -35,10 +35,10 @@ Every language has its own *quirks* — oddities and surprises, and JavaScript�
 
   ```js
   if ("" == 0) {
-    // It is! But why??
+  // It is! But why??
   }
   if (1 < x < 3) {
-    // True for *any* value of x!
+  // True for *any* value of x!
   }
   ```
 
@@ -47,7 +47,7 @@ Every language has its own *quirks* — oddities and surprises, and JavaScript�
   ```js
   const obj = { width: 10, height: 15 };
   // Why is this NaN? Spelling is hard!
-  const area = obj.width * obj.heigth;
+  constarea = obj.width * obj.heigth;
   ```
 
 Most programming languages would throw an error when these sorts of errors occur, some would do so during compilation — before any code is running.
@@ -67,7 +67,7 @@ Here’s the error TypeScript found:
 
 ```ts
 const obj = { width: 10, height: 15 };
-const area = obj.width * obj.heigth;
+constarea = obj.width * obj.heigth;
 ```
 
 ```text {filename="Generated error"}
@@ -169,8 +169,8 @@ If you find a resource that uses TypeScript directly, that’s great too, but do
 This was a brief overview of the syntax and tools used in everyday TypeScript. From here, you can:
 
 - Learn some of the JavaScript fundamentals, we recommend either:
-  - [Microsoft’s JavaScript Resources](https://developer.microsoft.com/javascript/) or
-  - [JavaScript guide at the Mozilla Web Docs](https://developer.mozilla.org/docs/Web/JavaScript/Guide)
+  - [Microsoft’s JavaScript Resources ↗](https://developer.microsoft.com/javascript/) or
+  - [JavaScript guide at the Mozilla Web Docs ↗](https://developer.mozilla.org/docs/Web/JavaScript/Guide)
 - Continue to [TypeScript for JavaScript Programmers](/typescript/5.2/get-started/typescript-in-5-minutes)
 - Read the full Handbook [from start to finish](/typescript/5.2/handbook/intro)
 - Explore the [Playground examples ↗](https://www.typescriptlang.org/play#show-examples)

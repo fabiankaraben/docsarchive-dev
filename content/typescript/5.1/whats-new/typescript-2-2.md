@@ -10,7 +10,7 @@ type: docs
 
 ## Support for Mix-in classes {#support-for-mix-in-classes}
 
-TypeScript 2.2 adds support for the ECMAScript 2015 mixin class pattern (see [MDN Mixin description](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes#Mix-ins) and [“Real” Mixins with JavaScript Classes](http://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/) for more details) as well as rules for combining mixin construct signatures with regular construct signatures in intersection types.
+TypeScript 2.2 adds support for the ECMAScript 2015 mixin class pattern (see [MDN Mixin description ↗](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Classes#Mix-ins) and [“Real” Mixins with JavaScript Classes ↗](http://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/) for more details) as well as rules for combining mixin construct signatures with regular construct signatures in intersection types.
 
 ##### First some terminology {#first-some-terminology}
 
@@ -31,35 +31,35 @@ For example, the intersection type `{ new(...args: any[]) => A } & { new(s: stri
 
 ```ts
 class Point {
-  constructor(public x: number, public y: number) {}
+constructor(publicx: number, publicy: number) {}
 }
 
-class Person {
-  constructor(public name: string) {}
+classPerson {
+constructor(publicname: string) {}
 }
 
-type Constructor<T> = new (...args: any[]) => T;
+typeConstructor<T> = new (...args: any[]) =>T;
 
-function Tagged<T extends Constructor<{}>>(Base: T) {
-  return class extends Base {
-    _tag: string;
-    constructor(...args: any[]) {
-      super(...args);
-      this._tag = "";
+functionTagged<TextendsConstructor<{}>>(Base: T) {
+returnclassextendsBase {
+_tag: string;
+constructor(...args: any[]) {
+super(...args);
+this._tag = "";
     }
   };
 }
 
-const TaggedPoint = Tagged(Point);
+constTaggedPoint = Tagged(Point);
 
-let point = new TaggedPoint(10, 20);
+letpoint = newTaggedPoint(10, 20);
 point._tag = "hello";
 
-class Customer extends Tagged(Person) {
-  accountBalance: number;
+classCustomerextendsTagged(Person) {
+accountBalance: number;
 }
 
-let customer = new Customer("Joe");
+letcustomer = newCustomer("Joe");
 customer._tag = "test";
 customer.accountBalance = 0;
 ```
@@ -69,14 +69,14 @@ For example, the following `WithLocation` function implements a subclass factory
 
 ```ts
 interface Point {
-  x: number;
-  y: number;
+x: number;
+y: number;
 }
 
-const WithLocation = <T extends Constructor<Point>>(Base: T) =>
-  class extends Base {
-    getLocation(): [number, number] {
-      return [this.x, this.y];
+constWithLocation = <TextendsConstructor<Point>>(Base: T) =>
+classextendsBase {
+getLocation(): [number, number] {
+return [this.x, this.y];
     }
   };
 ```
@@ -90,7 +90,7 @@ With `object` type, APIs like `Object.create` can be better represented. For exa
 ```ts
 declare function create(o: object | null): void;
 
-create({ prop: 0 }); // OK
+create({ prop:0 }); // OK
 create(null); // OK
 
 create(42); // Error
@@ -111,9 +111,9 @@ If a function is called rather than constructed via `new`, `new.target` is set t
 
 ```ts
 class CustomError extends Error {
-  constructor(message?: string) {
-    super(message); // 'Error' breaks prototype chain here
-    Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
+constructor(message?: string) {
+super(message); // 'Error' breaks prototype chain here
+Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
   }
 }
 ```
@@ -122,14 +122,14 @@ This results in the generated JS
 
 ```js
 var CustomError = (function(_super) {
-  __extends(CustomError, _super);
-  function CustomError() {
-    var _newTarget = this.constructor;
-    var _this = _super.apply(this, arguments); // 'Error' breaks prototype chain here
-    _this.__proto__ = _newTarget.prototype; // restore prototype chain
-    return _this;
+__extends(CustomError, _super);
+functionCustomError() {
+var_newTarget = this.constructor;
+var_this = _super.apply(this, arguments); // 'Error' breaks prototype chain here
+_this.__proto__ = _newTarget.prototype; // restore prototype chain
+return_this;
   }
-  return CustomError;
+returnCustomError;
 })(Error);
 ```
 
@@ -137,8 +137,8 @@ var CustomError = (function(_super) {
 
 ```ts
 function f() {
-  if (new.target) {
-    /* called via 'new' */
+if (new.target) {
+/* called via 'new' */
   }
 }
 ```
@@ -147,9 +147,9 @@ Which translates to:
 
 ```js
 function f() {
-  var _newTarget = this && this instanceof f ? this.constructor : void 0;
-  if (_newTarget) {
-    /* called via 'new' */
+var_newTarget = this && thisinstanceoff ? this.constructor : void0;
+if (_newTarget) {
+/* called via 'new' */
   }
 }
 ```
@@ -177,7 +177,7 @@ interface StringMap<T> {
   [x: string]: T;
 }
 
-const map: StringMap<number>;
+constmap: StringMap<number>;
 
 map["prop1"] = 1;
 map.prop2 = 2;
@@ -189,22 +189,22 @@ It is still an error to access unknown properties on a type using `.` notation.
 ## Support for spread operator on JSX element children {#support-for-spread-operator-on-jsx-element-children}
 
 TypeScript 2.2 adds support for using spread on a JSX element children.
-Please see [facebook/jsx#57](https://github.com/facebook/jsx/issues/57) for more details.
+Please see [facebook/jsx#57 ↗](https://github.com/facebook/jsx/issues/57) for more details.
 
 ##### Example {#example-1}
 
 ```ts
 function Todo(prop: { key: number; todo: string }) {
-  return <div>{prop.key.toString() + prop.todo}</div>;
+return <div>{prop.key.toString() + prop.todo}</div>;
 }
 
-function TodoList({ todos }: TodoListProps) {
-  return (
-    <div>{...todos.map(todo => <Todo key={todo.id} todo={todo.todo} />)}</div>
+functionTodoList({ todos }: TodoListProps) {
+return (
+    <div>{...todos.map(todo=> <Todokey={todo.id} todo={todo.todo} />)}</div>
   );
 }
 
-let x: TodoListProps;
+letx: TodoListProps;
 
 <TodoList {...x} />;
 ```

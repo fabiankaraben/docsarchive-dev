@@ -8,9 +8,9 @@ type: docs
 
 # JSX
 
-[JSX](https://facebook.github.io/jsx/) is an embeddable XML-like syntax.
+[JSX ↗](https://facebook.github.io/jsx/) is an embeddable XML-like syntax.
 It is meant to be transformed into valid JavaScript, though the semantics of that transformation are implementation-specific.
-JSX rose to popularity with the [React](https://reactjs.org/) framework, but has since seen other implementations as well.
+JSX rose to popularity with the [React ↗](https://reactjs.org/) framework, but has since seen other implementations as well.
 TypeScript supports embedding, type checking, and compiling JSX directly to JavaScript.
 
 ## Basic usage {#basic-usage}
@@ -22,7 +22,7 @@ In order to use JSX you must do two things.
 
 TypeScript ships with three JSX modes: `preserve`, `react`, and `react-native`.
 These modes only affect the emit stage - type checking is unaffected.
-The `preserve` mode will keep the JSX as part of the output to be further consumed by another transform step (e.g. [Babel](https://babeljs.io/)).
+The `preserve` mode will keep the JSX as part of the output to be further consumed by another transform step (e.g. [Babel ↗](https://babeljs.io/)).
 Additionally the output will have a `.jsx` file extension.
 The `react` mode will emit `React.createElement`, does not need to go through a JSX transformation before use, and the output will have a `.js` file extension.
 The `react-native` mode is the equivalent of `preserve` in that it keeps all JSX, but the output will instead have a `.js` file extension.
@@ -71,7 +71,7 @@ This is important for two reasons:
 2. The types of the attributes being passed in the JSX element should be looked up differently.
   Intrinsic element attributes should be known *intrinsically* whereas components will likely want to specify their own set of attributes.
 
-TypeScript uses the [same convention that React does](http://facebook.github.io/react/docs/jsx-in-depth.html#html-tags-vs.-react-components) for distinguishing between these.
+TypeScript uses the [same convention that React does ↗](http://facebook.github.io/react/docs/jsx-in-depth.html#html-tags-vs.-react-components) for distinguishing between these.
 An intrinsic element always begins with a lowercase letter, and a value-based element always begins with an uppercase letter.
 
 ### Intrinsic elements {#intrinsic-elements}
@@ -83,8 +83,8 @@ For example:
 
 ```ts
 declare namespace JSX {
-  interface IntrinsicElements {
-    foo: any;
+interfaceIntrinsicElements {
+foo: any;
   }
 }
 
@@ -99,7 +99,7 @@ In the above example, `<foo />` will work fine but `<bar />` will result in an e
 
 ```ts
 declare namespace JSX {
-  interface IntrinsicElements {
+interfaceIntrinsicElements {
     [elemName: string]: any;
   }
 }
@@ -130,17 +130,17 @@ TS enforces that its return type must be assignable to `JSX.Element`.
 
 ```ts
 interface FooProp {
-  name: string;
-  X: number;
-  Y: number;
+name: string;
+X: number;
+Y: number;
 }
 
-declare function AnotherComponent(prop: { name: string });
-function ComponentFoo(prop: FooProp) {
-  return <AnotherComponent name={prop.name} />;
+declarefunctionAnotherComponent(prop: { name: string });
+functionComponentFoo(prop: FooProp) {
+return <AnotherComponentname={prop.name} />;
 }
 
-const Button = (prop: { value: string }, context: { color: string }) => (
+constButton = (prop: { value: string }, context: { color: string }) => (
   <button />
 );
 ```
@@ -151,21 +151,21 @@ Because a Function Component is simply a JavaScript function, function overloads
 
 ```ts
 interface ClickableProps {
-  children: JSX.Element[] | JSX.Element;
+children: JSX.Element[] | JSX.Element;
 }
- 
-interface HomeProps extends ClickableProps {
-  home: JSX.Element;
+
+interfaceHomePropsextendsClickableProps {
+home: JSX.Element;
 }
- 
-interface SideProps extends ClickableProps {
-  side: JSX.Element | string;
+
+interfaceSidePropsextendsClickableProps {
+side: JSX.Element | string;
 }
- 
-function MainButton(prop: HomeProps): JSX.Element;
-function MainButton(prop: SideProps): JSX.Element;
-function MainButton(prop: ClickableProps): JSX.Element {
-  // ...
+
+functionMainButton(prop: HomeProps): JSX.Element;
+functionMainButton(prop: SideProps): JSX.Element;
+functionMainButton(prop: ClickableProps): JSX.Element {
+// ...
 }
 ```
 
@@ -186,23 +186,23 @@ So again, in the case of an ES6 class, the instance type would be the type of an
 
 ```ts
 class MyComponent {
-  render() {}
+render() {}
 }
 
 // use a construct signature
-const myComponent = new MyComponent();
+constmyComponent = newMyComponent();
 
 // element class type => MyComponent
 // element instance type => { render: () => void }
 
-function MyFactoryFunction() {
-  return {
-    render: () => {},
+functionMyFactoryFunction() {
+return {
+render: () => {},
   };
 }
 
 // use a call signature
-const myComponent = MyFactoryFunction();
+constmyComponent = MyFactoryFunction();
 
 // element class type => MyFactoryFunction
 // element instance type => { render: () => void }
@@ -213,24 +213,24 @@ By default `JSX.ElementClass` is `{}`, but it can be augmented to limit the use 
 
 ```ts
 declare namespace JSX {
-  interface ElementClass {
-    render: any;
+interfaceElementClass {
+render: any;
   }
 }
 
-class MyComponent {
-  render() {}
+classMyComponent {
+render() {}
 }
-function MyFactoryFunction() {
-  return { render: () => {} };
+functionMyFactoryFunction() {
+return { render: () => {} };
 }
 
 <MyComponent />; // ok
 <MyFactoryFunction />; // ok
 
-class NotAValidComponent {}
-function NotAValidFactoryFunction() {
-  return {};
+classNotAValidComponent {}
+functionNotAValidFactoryFunction() {
+return {};
 }
 
 <NotAValidComponent />; // error
@@ -246,13 +246,13 @@ For intrinsic elements, it is the type of the property on `JSX.IntrinsicElements
 
 ```ts
 declare namespace JSX {
-  interface IntrinsicElements {
-    foo: { bar?: boolean };
+interfaceIntrinsicElements {
+foo: { bar?: boolean };
   }
 }
 
 // element attributes type for 'foo' is '{bar?: boolean}'
-<foo bar />;
+<foobar />;
 ```
 
 For value-based elements, it is a bit more complex.
@@ -264,20 +264,20 @@ As of TypeScript 2.8, if `JSX.ElementAttributesProperty` is not provided, the ty
 
 ```ts
 declare namespace JSX {
-  interface ElementAttributesProperty {
-    props; // specify the property name to use
+interfaceElementAttributesProperty {
+props; // specify the property name to use
   }
 }
 
-class MyComponent {
-  // specify the property on the element instance type
-  props: {
-    foo?: string;
+classMyComponent {
+// specify the property on the element instance type
+props: {
+foo?: string;
   };
 }
 
 // element attributes type for 'MyComponent' is '{foo?: string}'
-<MyComponent foo="bar" />;
+<MyComponentfoo="bar" />;
 ```
 
 The element attribute type is used to type check the attributes in the JSX.
@@ -285,17 +285,17 @@ Optional and required properties are supported.
 
 ```ts
 declare namespace JSX {
-  interface IntrinsicElements {
-    foo: { requiredProp: string; optionalProp?: number };
+interfaceIntrinsicElements {
+foo: { requiredProp: string; optionalProp?: number };
   }
 }
 
-<foo requiredProp="bar" />; // ok
-<foo requiredProp="bar" optionalProp={0} />; // ok
+<foorequiredProp="bar" />; // ok
+<foorequiredProp="bar"optionalProp={0} />; // ok
 <foo />; // error, requiredProp is missing
-<foo requiredProp={0} />; // error, requiredProp should be a string
-<foo requiredProp="bar" unknownProp />; // error, unknownProp does not exist
-<foo requiredProp="bar" some-unknown-prop />; // ok, because 'some-unknown-prop' is not a valid identifier
+<foorequiredProp={0} />; // error, requiredProp should be a string
+<foorequiredProp="bar"unknownProp />; // error, unknownProp does not exist
+<foorequiredProp="bar"some-unknown-prop />; // ok, because 'some-unknown-prop' is not a valid identifier
 ```
 
 > Note: If an attribute name is not a valid JS identifier (like a `data-*` attribute), it is not considered to be an error if it is not found in the element attributes type.
@@ -309,7 +309,7 @@ The spread operator also works:
 const props = { requiredProp: "bar" };
 <foo {...props} />; // ok
 
-const badProps = {};
+constbadProps = {};
 <foo {...badProps} />; // error
 ```
 
@@ -321,8 +321,8 @@ Similar to how TS uses `JSX.ElementAttributesProperty` to determine the name of 
 
 ```ts
 declare namespace JSX {
-  interface ElementChildrenAttribute {
-    children: {}; // specify children name to use
+interfaceElementChildrenAttribute {
+children: {}; // specify children name to use
   }
 }
 ```
@@ -334,27 +334,27 @@ declare namespace JSX {
 
 <div>
   <h1>Hello</h1>
-  World
+World
 </div>;
 
-const CustomComp = (props) => <div>{props.children}</div>
+constCustomComp = (props) => <div>{props.children}</div>
 <CustomComp>
-  <div>Hello World</div>
+  <div>HelloWorld</div>
   {"This is just a JS expression..." + 1000}
 </CustomComp>
 ```
 
-You can specify the type of *children* like any other attribute. This will override the default type from, e.g. the [React typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react) if you use them.
+You can specify the type of *children* like any other attribute. This will override the default type from, e.g. the [React typings ↗](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react) if you use them.
 
 ```ts
 interface PropsType {
-  children: JSX.Element
-  name: string
+children: JSX.Element
+name: string
 }
 
-class Component extends React.Component<PropsType, {}> {
-  render() {
-    return (
+classComponentextendsReact.Component<PropsType, {}> {
+render() {
+return (
       <h2>
         {this.props.children}
       </h2>
@@ -363,20 +363,20 @@ class Component extends React.Component<PropsType, {}> {
 }
 
 // OK
-<Component name="foo">
-  <h1>Hello World</h1>
+<Componentname="foo">
+  <h1>HelloWorld</h1>
 </Component>
 
 // Error: children is of type JSX.Element not array of JSX.Element
-<Component name="bar">
-  <h1>Hello World</h1>
-  <h2>Hello World</h2>
+<Componentname="bar">
+  <h1>HelloWorld</h1>
+  <h2>HelloWorld</h2>
 </Component>
 
 // Error: children is of type JSX.Element not array of JSX.Element or string.
-<Component name="baz">
+<Componentname="baz">
   <h1>Hello</h1>
-  World
+World
 </Component>
 ```
 
@@ -408,7 +408,7 @@ The output, when using the `preserve` option, looks like:
 const a = (
   <div>
     {["foo", "bar"].map(function (i) {
-      return <span>{i / 2}</span>;
+return <span>{i / 2}</span>;
     })}
   </div>
 );
@@ -416,24 +416,24 @@ const a = (
 
 ## React integration {#react-integration}
 
-To use JSX with React you should use the [React typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react).
+To use JSX with React you should use the [React typings ↗](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react).
 These typings define the `JSX` namespace appropriately for use with React.
 
 ```ts
 /// <reference path="react.d.ts" />
 
-interface Props {
-  foo: string;
+interfaceProps {
+foo: string;
 }
 
-class MyComponent extends React.Component<Props, {}> {
-  render() {
-    return <span>{this.props.foo}</span>;
+classMyComponentextendsReact.Component<Props, {}> {
+render() {
+return <span>{this.props.foo}</span>;
   }
 }
 
-<MyComponent foo="bar" />; // ok
-<MyComponent foo={0} />; // error
+<MyComponentfoo="bar" />; // ok
+<MyComponentfoo={0} />; // error
 ```
 
 ### Configuring JSX {#configuring-jsx}

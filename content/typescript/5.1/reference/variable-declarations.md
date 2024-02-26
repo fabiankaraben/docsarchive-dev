@@ -34,9 +34,9 @@ We can also declare a variable inside of a function:
 
 ```ts
 function f() {
-  var message = "Hello, world!";
+varmessage = "Hello, world!";
 
-  return message;
+returnmessage;
 }
 ```
 
@@ -44,14 +44,14 @@ and we can also access those same variables within other functions:
 
 ```ts
 function f() {
-  var a = 10;
-  return function g() {
-    var b = a + 1;
-    return b;
+vara = 10;
+returnfunctiong() {
+varb = a + 1;
+returnb;
   };
 }
 
-var g = f();
+varg = f();
 g(); // returns '11'
 ```
 
@@ -61,16 +61,16 @@ Even if `g` is called once `f` is done running, it will be able to access and mo
 
 ```ts
 function f() {
-  var a = 1;
+vara = 1;
 
-  a = 2;
-  var b = g();
-  a = 3;
+a = 2;
+varb = g();
+a = 3;
 
-  return b;
+returnb;
 
-  function g() {
-    return a;
+functiong() {
+returna;
   }
 }
 
@@ -84,11 +84,11 @@ Take the following example:
 
 ```ts
 function f(shouldInitialize: boolean) {
-  if (shouldInitialize) {
-    var x = 10;
+if (shouldInitialize) {
+varx = 10;
   }
 
-  return x;
+returnx;
 }
 
 f(true); // returns '10'
@@ -106,15 +106,15 @@ One problem they exacerbate is the fact that it is not an error to declare the s
 
 ```ts
 function sumMatrix(matrix: number[][]) {
-  var sum = 0;
-  for (var i = 0; i < matrix.length; i++) {
-    var currentRow = matrix[i];
-    for (var i = 0; i < currentRow.length; i++) {
-      sum += currentRow[i];
+varsum = 0;
+for (vari = 0; i < matrix.length; i++) {
+varcurrentRow = matrix[i];
+for (vari = 0; i < currentRow.length; i++) {
+sum += currentRow[i];
     }
   }
 
-  return sum;
+returnsum;
 }
 ```
 
@@ -127,8 +127,8 @@ Take a quick second to guess what the output of the following snippet is:
 
 ```ts
 for (var i = 0; i < 10; i++) {
-  setTimeout(function () {
-    console.log(i);
+setTimeout(function () {
+console.log(i);
   }, 100 * i);
 }
 ```
@@ -178,11 +178,11 @@ A common work around is to use an IIFE - an Immediately Invoked Function Express
 
 ```ts
 for (var i = 0; i < 10; i++) {
-  // capture the current state of 'i'
-  // by invoking a function with its current value
+// capture the current state of 'i'
+// by invoking a function with its current value
   (function (i) {
-    setTimeout(function () {
-      console.log(i);
+setTimeout(function () {
+console.log(i);
     }, 100 * i);
   })(i);
 }
@@ -209,16 +209,16 @@ Unlike variables declared with `var` whose scopes leak out to their containing f
 
 ```ts
 function f(input: boolean) {
-  let a = 100;
+leta = 100;
 
-  if (input) {
-    // Still okay to reference 'a'
-    let b = a + 1;
-    return b;
+if (input) {
+// Still okay to reference 'a'
+letb = a + 1;
+returnb;
   }
 
-  // Error: 'b' doesn't exist here
-  return b;
+// Error: 'b' doesn't exist here
+returnb;
 }
 ```
 
@@ -229,9 +229,9 @@ Variables declared in a `catch` clause also have similar scoping rules.
 
 ```ts
 try {
-  throw "oh no!";
+throw"oh no!";
 } catch (e) {
-  console.log("Oh well.");
+console.log("Oh well.");
 }
 
 // Error: 'e' doesn't exist here
@@ -244,7 +244,7 @@ This is just a sophisticated way of saying you can’t access them before the `l
 
 ```ts
 a++; // illegal to use 'a' before it's declared;
-let a;
+leta;
 ```
 
 Something to note is that you can still *capture* a block-scoped variable before it’s declared.
@@ -253,18 +253,18 @@ If targeting ES2015, a modern runtime will throw an error; however, right now Ty
 
 ```ts
 function foo() {
-  // okay to capture 'a'
-  return a;
+// okay to capture 'a'
+returna;
 }
 
 // illegal call 'foo' before 'a' is declared
 // runtimes should throw an error here
 foo();
 
-let a;
+leta;
 ```
 
-For more information on temporal dead zones, see relevant content on the [Mozilla Developer Network](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let).
+For more information on temporal dead zones, see relevant content on the [Mozilla Developer Network ↗](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let).
 
 ### Re-declarations and Shadowing {#re-declarations-and-shadowing}
 
@@ -272,11 +272,11 @@ With `var` declarations, we mentioned that it didn’t matter how many times you
 
 ```ts
 function f(x) {
-  var x;
-  var x;
+varx;
+varx;
 
-  if (true) {
-    var x;
+if (true) {
+varx;
   }
 }
 ```
@@ -287,19 +287,19 @@ Thankfully, `let` declarations are not as forgiving.
 
 ```ts
 let x = 10;
-let x = 20; // error: can't re-declare 'x' in the same scope
+letx = 20; // error: can't re-declare 'x' in the same scope
 ```
 
 The variables don’t necessarily need to both be block-scoped for TypeScript to tell us that there’s a problem.
 
 ```ts
 function f(x) {
-  let x = 100; // error: interferes with parameter declaration
+letx = 100; // error: interferes with parameter declaration
 }
 
-function g() {
-  let x = 100;
-  var x = 100; // error: can't have both declarations of 'x'
+functiong() {
+letx = 100;
+varx = 100; // error: can't have both declarations of 'x'
 }
 ```
 
@@ -308,12 +308,12 @@ The block-scoped variable just needs to be declared within a distinctly differen
 
 ```ts
 function f(condition, x) {
-  if (condition) {
-    let x = 100;
-    return x;
+if (condition) {
+letx = 100;
+returnx;
   }
 
-  return x;
+returnx;
 }
 
 f(false, 0); // returns '0'
@@ -326,15 +326,15 @@ For instance, imagine we had written our earlier `sumMatrix` function using `let
 
 ```ts
 function sumMatrix(matrix: number[][]) {
-  let sum = 0;
-  for (let i = 0; i < matrix.length; i++) {
-    var currentRow = matrix[i];
-    for (let i = 0; i < currentRow.length; i++) {
-      sum += currentRow[i];
+letsum = 0;
+for (leti = 0; i < matrix.length; i++) {
+varcurrentRow = matrix[i];
+for (leti = 0; i < currentRow.length; i++) {
+sum += currentRow[i];
     }
   }
 
-  return sum;
+returnsum;
 }
 ```
 
@@ -351,16 +351,16 @@ That environment and its captured variables can exist even after everything with
 
 ```ts
 function theCityThatAlwaysSleeps() {
-  let getCity;
+letgetCity;
 
-  if (true) {
-    let city = "Seattle";
-    getCity = function () {
-      return city;
+if (true) {
+letcity = "Seattle";
+getCity = function () {
+returncity;
     };
   }
 
-  return getCity();
+returngetCity();
 }
 ```
 
@@ -376,8 +376,8 @@ Since this is what we were doing anyway with our IIFE, we can change our old `se
 
 ```ts
 for (let i = 0; i < 10; i++) {
-  setTimeout(function () {
-    console.log(i);
+setTimeout(function () {
+console.log(i);
   }, 100 * i);
 }
 ```
@@ -412,15 +412,15 @@ This should not be confused with the idea that the values they refer to are *imm
 
 ```ts
 const numLivesForCat = 9;
-const kitty = {
-  name: "Aurora",
-  numLives: numLivesForCat,
+constkitty = {
+name:"Aurora",
+numLives:numLivesForCat,
 };
 
 // Error
 kitty = {
-  name: "Danielle",
-  numLives: numLivesForCat,
+name:"Danielle",
+numLives:numLivesForCat,
 };
 
 // all "okay"
@@ -439,7 +439,7 @@ The [chapter on Interfaces ↗](https://www.typescriptlang.org/docs/handbook/int
 Given that we have two types of declarations with similar scoping semantics, it’s natural to find ourselves asking which one to use.
 Like most broad questions, the answer is: it depends.
 
-Applying the [principle of least privilege](https://wikipedia.org/wiki/Principle_of_least_privilege), all declarations other than those you plan to modify should use `const`.
+Applying the [principle of least privilege ↗](https://wikipedia.org/wiki/Principle_of_least_privilege), all declarations other than those you plan to modify should use `const`.
 The rationale is that if a variable didn’t need to get written to, others working on the same codebase shouldn’t automatically be able to write to the object, and will need to consider whether they really need to reassign to the variable.
 Using `const` also makes code more predictable when reasoning about flow of data.
 
@@ -450,7 +450,7 @@ The majority of this handbook uses `let` declarations.
 ## Destructuring {#destructuring}
 
 Another ECMAScript 2015 feature that TypeScript has is destructuring.
-For a complete reference, see [the article on the Mozilla Developer Network](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+For a complete reference, see [the article on the Mozilla Developer Network ↗](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 In this section, we’ll give a short overview.
 
 ### Array destructuring {#array-destructuring}
@@ -483,8 +483,8 @@ And with parameters to a function:
 
 ```ts
 function f([first, second]: [number, number]) {
-  console.log(first);
-  console.log(second);
+console.log(first);
+console.log(second);
 }
 f([1, 2]);
 ```
@@ -548,9 +548,9 @@ You can also destructure objects:
 
 ```ts
 let o = {
-  a: "foo",
-  b: 12,
-  c: "bar",
+a:"foo",
+b:12,
+c:"bar",
 };
 let { a, b } = o;
 ```
@@ -571,7 +571,7 @@ You can create a variable for the remaining items in an object using the syntax 
 
 ```ts
 let { a, ...passthrough } = o;
-let total = passthrough.b + passthrough.c.length;
+lettotal = passthrough.b + passthrough.c.length;
 ```
 
 #### Property renaming {#property-renaming}
@@ -588,7 +588,7 @@ The direction is left-to-right, as if you had written:
 
 ```ts
 let newName1 = o.a;
-let newName2 = o.b;
+letnewName2 = o.b;
 ```
 
 Confusingly, the colon here does *not* indicate the type.
@@ -604,7 +604,7 @@ Default values let you specify a default value in case a property is undefined:
 
 ```ts
 function keepWholeObject(wholeObject: { a: string; b?: number }) {
-  let { a, b = 1001 } = wholeObject;
+let { a, b = 1001 } = wholeObject;
 }
 ```
 
@@ -618,8 +618,8 @@ For simple cases this is straightforward:
 
 ```ts
 type C = { a: string; b?: number };
-function f({ a, b }: C): void {
-  // ...
+functionf({ a, b }: C): void {
+// ...
 }
 ```
 
@@ -628,7 +628,7 @@ First of all, you need to remember to put the pattern before the default value.
 
 ```ts
 function f({ a = "", b = 0 } = {}): void {
-  // ...
+// ...
 }
 f();
 ```
@@ -641,9 +641,9 @@ Remember that `C` was defined with `b` optional:
 
 ```ts
 function f({ a, b = 0 } = { a: "" }): void {
-  // ...
+// ...
 }
-f({ a: "yes" }); // ok, default b = 0
+f({ a:"yes" }); // ok, default b = 0
 f(); // ok, default to { a: "" }, which then defaults b = 0
 f({}); // error, 'a' is required if you supply an argument
 ```
@@ -662,8 +662,8 @@ For example:
 
 ```ts
 let first = [1, 2];
-let second = [3, 4];
-let bothPlus = [0, ...first, ...second, 5];
+letsecond = [3, 4];
+letbothPlus = [0, ...first, ...second, 5];
 ```
 
 This gives bothPlus the value `[0, 1, 2, 3, 4, 5]`.
@@ -674,7 +674,7 @@ You can also spread objects:
 
 ```ts
 let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
-let search = { ...defaults, food: "rich" };
+letsearch = { ...defaults, food:"rich" };
 ```
 
 Now `search` is `{ food: "rich", price: "$$", ambiance: "noisy" }`.
@@ -685,23 +685,23 @@ So if we modify the previous example to spread at the end:
 
 ```ts
 let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
-let search = { food: "rich", ...defaults };
+letsearch = { food:"rich", ...defaults };
 ```
 
 Then the `food` property in `defaults` overwrites `food: "rich"`, which is not what we want in this case.
 
 Object spread also has a couple of other surprising limits.
 First, it only includes an objects’
-[own, enumerable properties](https://developer.mozilla.org/docs/Web/JavaScript/Enumerability_and_ownership_of_properties).
+[own, enumerable properties ↗](https://developer.mozilla.org/docs/Web/JavaScript/Enumerability_and_ownership_of_properties).
 Basically, that means you lose methods when you spread instances of an object:
 
 ```ts
 class C {
-  p = 12;
-  m() {}
+p = 12;
+m() {}
 }
-let c = new C();
-let clone = { ...c };
+letc = newC();
+letclone = { ...c };
 clone.p; // ok
 clone.m(); // error!
 ```

@@ -8,7 +8,7 @@ type: docs
 
 # Nightly Builds
 
-A nightly build from the [TypeScript’s `main`](https://github.com/Microsoft/TypeScript/tree/main) branch is published by midnight PST to npm.
+A nightly build from the [TypeScript’s `main` ↗](https://github.com/Microsoft/TypeScript/tree/main) branch is published by midnight PST to npm.
 Here is how you can get it and use it with your tools.
 
 ## Using npm {#using-npm}
@@ -33,7 +33,7 @@ Update `.vscode/settings.json` with the following:
 "typescript.tsdk": "<path to your folder>/node_modules/typescript/lib"
 ```
 
-More information is available at [VSCode documentation](https://code.visualstudio.com/Docs/languages/typescript#_using-newer-typescript-versions).
+More information is available at [VSCode documentation ↗](https://code.visualstudio.com/Docs/languages/typescript#_using-newer-typescript-versions).
 
 ### Sublime Text {#sublime-text}
 
@@ -43,7 +43,7 @@ Update the `Settings - User` file with the following:
 "typescript_tsdk": "<path to your folder>/node_modules/typescript/lib"
 ```
 
-More information is available at the [TypeScript Plugin for Sublime Text installation documentation](https://github.com/Microsoft/TypeScript-Sublime-Plugin#installation).
+More information is available at the [TypeScript Plugin for Sublime Text installation documentation ↗](https://github.com/Microsoft/TypeScript-Sublime-Plugin#installation).
 
 ### Visual Studio 2013 and 2015 {#visual-studio-2013-and-2015}
 
@@ -52,8 +52,8 @@ More information is available at the [TypeScript Plugin for Sublime Text install
 
 The nightly build currently does not include the full plugin setup, but we are working on publishing an installer on a nightly basis as well.
 
-1. Download the [VSDevMode.ps1](https://github.com/Microsoft/TypeScript/blob/main/scripts/VSDevMode.ps1) script.
-  > Also see our wiki page on [using a custom language service file](https://github.com/Microsoft/TypeScript/wiki/Dev-Mode-in-Visual-Studio#using-a-custom-language-service-file).
+1. Download the [VSDevMode.ps1 ↗](https://github.com/Microsoft/TypeScript/blob/main/scripts/VSDevMode.ps1) script.
+  > Also see our wiki page on [using a custom language service file ↗](https://github.com/Microsoft/TypeScript/wiki/Dev-Mode-in-Visual-Studio#using-a-custom-language-service-file).
   > 
 2. From a PowerShell command window, run:
 

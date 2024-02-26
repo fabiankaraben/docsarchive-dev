@@ -25,7 +25,7 @@ For example in creating a variable and assigning it to a particular value, TypeS
 
 ```ts
 let helloWorld = "Hello World";
-        
+
 let helloWorld: string
 ```
 
@@ -43,8 +43,8 @@ For example, to create an object with an inferred type which includes `name: str
 
 ```ts
 const user = {
-  name: "Hayes",
-  id: 0,
+name:"Hayes",
+id:0,
 };
 ```
 
@@ -54,8 +54,8 @@ You can explicitly describe this object’s shape using an `interface` declarati
 
 ```ts
 interface User {
-  name: string;
-  id: number;
+name: string;
+id: number;
 }
 ```
 
@@ -65,8 +65,8 @@ You can then declare that a JavaScript object conforms to the shape of your new 
 
 ```ts
 const user: User = {
-  name: "Hayes",
-  id: 0,
+name:"Hayes",
+id:0,
 };
 ```
 
@@ -76,13 +76,13 @@ If you provide an object that doesn’t match the interface you have provided, T
 
 ```ts
 interface User {
-  name: string;
-  id: number;
+name: string;
+id: number;
 }
- 
-const user: User = {
-  username: "Hayes",
-  id: 0,
+
+constuser: User = {
+username:"Hayes",
+id:0,
 };
 ```
 
@@ -97,21 +97,21 @@ Since JavaScript supports classes and object-oriented programming, so does TypeS
 
 ```ts
 interface User {
-  name: string;
-  id: number;
+name: string;
+id: number;
 }
- 
-class UserAccount {
-  name: string;
-  id: number;
- 
-  constructor(name: string, id: number) {
-    this.name = name;
-    this.id = id;
+
+classUserAccount {
+name: string;
+id: number;
+
+constructor(name: string, id: number) {
+this.name = name;
+this.id = id;
   }
 }
- 
-const user: User = new UserAccount("Murphy", 1);
+
+constuser: User = newUserAccount("Murphy", 1);
 ```
 
 You can use interfaces to annotate parameters and return values to functions:
@@ -120,11 +120,11 @@ You can use interfaces to annotate parameters and return values to functions:
 
 ```ts
 function deleteUser(user: User) {
-  // ...
+// ...
 }
- 
-function getAdminUser(): User {
-  //...
+
+functiongetAdminUser(): User {
+//...
 }
 ```
 
@@ -148,14 +148,14 @@ type MyBool = true | false;
 
 *Note:* If you hover over `MyBool` above, you’ll see that it is classed as `boolean`. That’s a property of the Structural Type System. More on this below.
 
-A popular use-case for union types is to describe the set of `string` or `number`[literals ↗](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) that a value is allowed to be:
+A popular use-case for union types is to describe the set of `string` or `number`[literals](/typescript/5.2/handbook/everyday-types#literal-types) that a value is allowed to be:
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBA6glgOwCYHsDuBlYBDYEDOUAvFAEQqQKlQA+ZAxgDYr4RLV2kC2icPAXm1IBuAFChIUADIp6Aayy4CxMs3lDaZAK4I1coWInQACizjA4ANwgB5JEgByWrgCMIAJ3wBVZB4AqEAgqAIyaAMyaAKyaAOyaAJzCQA)
 
 ```ts
 type WindowStates = "open" | "closed" | "minimized";
-type LockStates = "locked" | "unlocked";
-type PositiveOddNumbersUnderTen = 1 | 3 | 5 | 7 | 9;
+typeLockStates = "locked" | "unlocked";
+typePositiveOddNumbersUnderTen = 1 | 3 | 5 | 7 | 9;
 ```
 
 Unions provide a way to handle different types too. For example, you may have a function that takes an `array` or a `string`:
@@ -164,7 +164,7 @@ Unions provide a way to handle different types too. For example, you may have a 
 
 ```ts
 function getLength(obj: string | string[]) {
-  return obj.length;
+returnobj.length;
 }
 ```
 
@@ -186,12 +186,12 @@ For example, you can make a function return different values depending on whethe
 
 ```ts
 function wrapInArray(obj: string | string[]) {
-  if (typeof obj === "string") {
-    return [obj];
-            
+if (typeofobj === "string") {
+return [obj];
+
 (parameter) obj: string
   }
-  return obj;
+returnobj;
 }
 ```
 
@@ -201,8 +201,8 @@ Generics provide variables to types. A common example is an array. An array with
 
 ```ts
 type StringArray = Array<string>;
-type NumberArray = Array<number>;
-type ObjectWithNameArray = Array<{ name: string }>;
+typeNumberArray = Array<number>;
+typeObjectWithNameArray = Array<{ name: string }>;
 ```
 
 You can declare your own types that use generics:
@@ -211,17 +211,17 @@ You can declare your own types that use generics:
 
 ```ts
 interface Backpack<Type> {
-  add: (obj: Type) => void;
-  get: () => Type;
+add: (obj: Type) =>void;
+get: () =>Type;
 }
- 
+
 // This line is a shortcut to tell TypeScript there is a
 // constant called `backpack`, and to not worry about where it came from.
-declare const backpack: Backpack<string>;
- 
+declareconstbackpack: Backpack<string>;
+
 // object is a string, because we declared it above as the variable part of Backpack.
-const object = backpack.get();
- 
+constobject = backpack.get();
+
 // Since the backpack variable is a string, you can't pass a number to the add function.
 backpack.add(23);
 ```
@@ -240,16 +240,16 @@ In a structural type system, if two objects have the same shape, they are consid
 
 ```ts
 interface Point {
-  x: number;
-  y: number;
+x: number;
+y: number;
 }
- 
-function logPoint(p: Point) {
-  console.log(`${p.x}, ${p.y}`);
+
+functionlogPoint(p: Point) {
+console.log(`${p.x}, ${p.y}`);
 }
- 
+
 // logs "12, 26"
-const point = { x: 12, y: 26 };
+constpoint = { x:12, y:26 };
 logPoint(point);
 ```
 
@@ -262,11 +262,11 @@ The shape-matching only requires a subset of the object’s fields to match.
 ```ts
 const point3 = { x: 12, y: 26, z: 89 };
 logPoint(point3); // logs "12, 26"
- 
-const rect = { x: 33, y: 3, width: 30, height: 80 };
+
+constrect = { x:33, y:3, width:30, height:80 };
 logPoint(rect); // logs "33, 3"
- 
-const color = { hex: "#187ABF" };
+
+constcolor = { hex:"#187ABF" };
 logPoint(color);
 ```
 
@@ -281,16 +281,16 @@ There is no difference between how classes and objects conform to shapes:
 
 ```ts
 class VirtualPoint {
-  x: number;
-  y: number;
- 
-  constructor(x: number, y: number) {
-    this.x = x;
-    this.y = y;
+x: number;
+y: number;
+
+constructor(x: number, y: number) {
+this.x = x;
+this.y = y;
   }
 }
- 
-const newVPoint = new VirtualPoint(13, 56);
+
+constnewVPoint = newVirtualPoint(13, 56);
 logPoint(newVPoint); // logs "13, 56"
 ```
 

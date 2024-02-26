@@ -18,7 +18,7 @@ Websites are made up of HTML and/or XML documents. These documents are static, t
 
 TypeScript is a typed superset of JavaScript, and it ships type definitions for the DOM API. These definitions are readily available in any default TypeScript project. Of the 20,000+ lines of definitions in *lib.dom.d.ts*, one stands out among the rest: `HTMLElement`. This type is the backbone for DOM manipulation with TypeScript.
 
-> You can explore the source code for the [DOM type definitions](https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts)
+> You can explore the source code for the [DOM type definitions ↗](https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts)
 > 
 
 ## Basic Example {#basic-example}
@@ -27,13 +27,13 @@ Given a simplified *index.html* file:
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
-  <head><title>TypeScript Dom Manipulation</title></head>
-  <body>
-    <div id="app"></div>
-    <!-- Assume index.js is the compiled output of index.ts -->
-    <script src="index.js"></script>
-  </body>
+<htmllang="en">
+<head><title>TypeScript Dom Manipulation</title></head>
+<body>
+<divid="app"></div>
+<!-- Assume index.js is the compiled output of index.ts -->
+<scriptsrc="index.js"></script>
+</body>
 </html>
 ```
 
@@ -41,10 +41,10 @@ Let’s explore a TypeScript script that adds a `<p>Hello, World!</p>` element t
 
 ```ts
 // 1. Select the div element using the id property
-const app = document.getElementById("app");
+constapp = document.getElementById("app");
 
 // 2. Create a new <p></p> element programmatically
-const p = document.createElement("p");
+constp = document.createElement("p");
 
 // 3. Add the text content
 p.textContent = "Hello, World!";
@@ -57,7 +57,7 @@ After compiling and running the *index.html* page, the resulting HTML will be:
 
 ```html
 <div id="app">
-  <p>Hello, World!</p>
+<p>Hello, World!</p>
 </div>
 ```
 
@@ -95,11 +95,11 @@ For the first definition of `createElement`, it is using some advanced generic p
 
 ```ts
 interface HTMLElementTagNameMap {
-    "a": HTMLAnchorElement;
-    "abbr": HTMLElement;
-    "address": HTMLElement;
-    "applet": HTMLAppletElement;
-    "area": HTMLAreaElement;
+"a": HTMLAnchorElement;
+"abbr": HTMLElement;
+"address": HTMLElement;
+"applet": HTMLAppletElement;
+"area": HTMLAreaElement;
         ...
 }
 ```
@@ -128,11 +128,11 @@ Previously, this document details the `HTMLElement` interface extends from `Elem
 
 ```tsx
 <div>
-  <p>Hello, World</p>
-  <p>TypeScript!</p>
+<p>Hello, World</p>
+<p>TypeScript!</p>
 </div>;
 
-const div = document.getElementsByTagName("div")[0];
+constdiv = document.getElementsByTagName("div")[0];
 
 div.children;
 // HTMLCollection(2) [p, p]
@@ -147,11 +147,11 @@ Modify the HTML by removing one of the `p` tags, but keep the text.
 
 ```tsx
 <div>
-  <p>Hello, World</p>
+<p>Hello, World</p>
   TypeScript!
 </div>;
 
-const div = document.getElementsByTagName("div")[0];
+constdiv = document.getElementsByTagName("div")[0];
 
 div.children;
 // HTMLCollection(1) [p]
@@ -170,16 +170,16 @@ Both of these methods are great tools for getting lists of dom elements that fit
 /**
  * Returns the first element that is a descendant of node that matches selectors.
  */
-querySelector<K extends keyof HTMLElementTagNameMap>(selectors: K): HTMLElementTagNameMap[K] | null;
-querySelector<K extends keyof SVGElementTagNameMap>(selectors: K): SVGElementTagNameMap[K] | null;
-querySelector<E extends Element = Element>(selectors: string): E | null;
+querySelector<KextendskeyofHTMLElementTagNameMap>(selectors: K): HTMLElementTagNameMap[K] | null;
+querySelector<KextendskeyofSVGElementTagNameMap>(selectors: K): SVGElementTagNameMap[K] | null;
+querySelector<EextendsElement = Element>(selectors: string): E | null;
 
 /**
  * Returns all element descendants of node that match selectors.
  */
-querySelectorAll<K extends keyof HTMLElementTagNameMap>(selectors: K): NodeListOf<HTMLElementTagNameMap[K]>;
-querySelectorAll<K extends keyof SVGElementTagNameMap>(selectors: K): NodeListOf<SVGElementTagNameMap[K]>;
-querySelectorAll<E extends Element = Element>(selectors: string): NodeListOf<E>;
+querySelectorAll<KextendskeyofHTMLElementTagNameMap>(selectors: K): NodeListOf<HTMLElementTagNameMap[K]>;
+querySelectorAll<KextendskeyofSVGElementTagNameMap>(selectors: K): NodeListOf<SVGElementTagNameMap[K]>;
+querySelectorAll<EextendsElement = Element>(selectors: string): NodeListOf<E>;
 ```
 
 The `querySelectorAll` definition is similar to `getElementsByTagName`, except it returns a new type: `NodeListOf`. This return type is essentially a custom implementation of the standard JavaScript list element. Arguably, replacing `NodeListOf<E>` with `E[]` would result in a very similar user experience. `NodeListOf` only implements the following properties and methods: `length`, `item(index)`, `forEach((value, key, parent) => void)`, and numeric indexing. Additionally, this method returns a list of *elements*, not *nodes*, which is what `NodeList` was returning from the `.childNodes` method. While this may appear as a discrepancy, take note that interface `Element` extends from `Node`.
@@ -188,20 +188,20 @@ To see these methods in action modify the existing code to:
 
 ```tsx
 <ul>
-  <li>First :)</li>
-  <li>Second!</li>
-  <li>Third times a charm.</li>
+<li>First :)</li>
+<li>Second!</li>
+<li>Third times a charm.</li>
 </ul>;
 
-const first = document.querySelector("li"); // returns the first li element
-const all = document.querySelectorAll("li"); // returns the list of all li elements
+constfirst = document.querySelector("li"); // returns the first li element
+constall = document.querySelectorAll("li"); // returns the list of all li elements
 ```
 
 ## Interested in learning more? {#interested-in-learning-more}
 
-The best part about the *lib.dom.d.ts* type definitions is that they are reflective of the types annotated in the Mozilla Developer Network (MDN) documentation site. For example, the `HTMLElement` interface is documented by this [HTMLElement page](https://developer.mozilla.org/docs/Web/API/HTMLElement) on MDN. These pages list all available properties, methods, and sometimes even examples. Another great aspect of the pages is that they provide links to the corresponding standard documents. Here is the link to the [W3C Recommendation for HTMLElement](https://www.w3.org/TR/html52/dom.html#htmlelement).
+The best part about the *lib.dom.d.ts* type definitions is that they are reflective of the types annotated in the Mozilla Developer Network (MDN) documentation site. For example, the `HTMLElement` interface is documented by this [HTMLElement page ↗](https://developer.mozilla.org/docs/Web/API/HTMLElement) on MDN. These pages list all available properties, methods, and sometimes even examples. Another great aspect of the pages is that they provide links to the corresponding standard documents. Here is the link to the [W3C Recommendation for HTMLElement ↗](https://www.w3.org/TR/html52/dom.html#htmlelement).
 
 Sources:
 
-- [ECMA-262 Standard](http://www.ecma-international.org/ecma-262/10.0/index.html)
-- [Introduction to the DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)
+- [ECMA-262 Standard ↗](http://www.ecma-international.org/ecma-262/10.0/index.html)
+- [Introduction to the DOM ↗](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)

@@ -12,21 +12,21 @@ type: docs
 
 With TypeScript 1.8 it becomes possible for a type parameter constraint to reference type parameters from the same type parameter list.
 Previously this was an error.
-This capability is usually referred to as [F-Bounded Polymorphism](https://wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification).
+This capability is usually referred to as [F-Bounded Polymorphism ↗](https://wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification).
 
 ##### Example {#example}
 
 ```ts
 function assign<T extends U, U>(target: T, source: U): T {
-  for (let id in source) {
-    target[id] = source[id];
+for (letidinsource) {
+target[id] = source[id];
   }
-  return target;
+returntarget;
 }
 
-let x = { a: 1, b: 2, c: 3, d: 4 };
-assign(x, { b: 10, d: 20 });
-assign(x, { e: 0 }); // Error
+letx = { a:1, b:2, c:3, d:4 };
+assign(x, { b:10, d:20 });
+assign(x, { e:0 }); // Error
 ```
 
 ## Control flow analysis errors {#control-flow-analysis-errors}
@@ -48,13 +48,13 @@ Here’s a simple example of an unreachable code error:
 
 ```ts
 function f(x) {
-  if (x) {
-    return true;
+if (x) {
+returntrue;
   } else {
-    return false;
+returnfalse;
   }
 
-  x = 0; // Error: Unreachable code detected.
+x = 0; // Error: Unreachable code detected.
 }
 ```
 
@@ -62,7 +62,7 @@ A more common error that this feature catches is adding a newline after a `retur
 
 ```ts
 function f() {
-  return; // Automatic Semicolon Insertion triggered at newline
+return; // Automatic Semicolon Insertion triggered at newline
   {
     x: "string"; // Error: Unreachable code detected.
   }
@@ -81,8 +81,8 @@ use [`allowUnusedLabels`](/tsconfig.html#allowUnusedLabels) to stop reporting th
 
 ```ts
 loop: while (x > 0) {
-  // Error: Unused label.
-  x++;
+// Error: Unused label.
+x++;
 }
 ```
 
@@ -96,12 +96,12 @@ The check is turned *off* by default; use [`noImplicitReturns`](/tsconfig.html#n
 
 ```ts
 function f(x) {
-  // Error: Not all code paths return a value.
-  if (x) {
-    return false;
+// Error: Not all code paths return a value.
+if (x) {
+returnfalse;
   }
 
-  // implicitly returns `undefined`
+// implicitly returns `undefined`
 }
 ```
 
@@ -116,12 +116,12 @@ With [`noFallthroughCasesInSwitch`](/tsconfig.html#noFallthroughCasesInSwitch), 
 
 ```ts
 switch (x % 2) {
-  case 0: // Error: Fallthrough case in switch.
-    console.log("even");
+case0: // Error: Fallthrough case in switch.
+console.log("even");
 
-  case 1:
-    console.log("odd");
-    break;
+case1:
+console.log("odd");
+break;
 }
 ```
 
@@ -129,14 +129,14 @@ However, in the following example, no error will be reported because the fall-th
 
 ```ts
 switch (x % 3) {
-  case 0:
-  case 1:
-    console.log("Acceptable");
-    break;
+case0:
+case1:
+console.log("Acceptable");
+break;
 
-  case 2:
-    console.log("This is *two much*!");
-    break;
+case2:
+console.log("This is *two much*!");
+break;
 }
 ```
 
@@ -147,10 +147,10 @@ These are lightweight components that easily compose other components:
 
 ```ts
 // Use parameter destructuring and defaults for easy definition of 'props' type
-const Greeter = ({ name = "world" }) => <div>Hello, {name}!</div>;
+constGreeter = ({ name = "world" }) => <div>Hello, {name}!</div>;
 
 // Properties get validated
-let example = <Greeter name="TypeScript 1.8" />;
+letexample = <Greetername="TypeScript 1.8" />;
 ```
 
 For this feature and simplified props, be sure to be use the [latest version of react.d.ts](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts).
@@ -184,21 +184,21 @@ Here `map.ts` can declare that it will internally patch the `Observable` type fr
 
 ```ts
 // observable.ts
-export class Observable<T> {
-  // ...
+exportclassObservable<T> {
+// ...
 }
 ```
 
 ```ts
 // map.ts
-import { Observable } from "./observable";
+import { Observable } from"./observable";
 
 // Create an augmentation for "./observable"
-declare module "./observable" {
+declaremodule"./observable" {
 
-    // Augment the 'Observable' class definition with interface merging
-    interface Observable<T> {
-        map<U>(proj: (el: T) => U): Observable<U>;
+// Augment the 'Observable' class definition with interface merging
+interfaceObservable<T> {
+map<U>(proj: (el: T) =>U): Observable<U>;
     }
 
 }
@@ -208,11 +208,11 @@ Observable.prototype.map = /*...*/;
 
 ```ts
 // consumer.ts
-import { Observable } from "./observable";
-import "./map";
+import { Observable } from"./observable";
+import"./map";
 
-let o: Observable<number>;
-o.map((x) => x.toFixed());
+leto: Observable<number>;
+o.map((x) =>x.toFixed());
 ```
 
 Similarly, the global scope can be augmented from modules using a `declare global` declarations:
@@ -223,14 +223,14 @@ Similarly, the global scope can be augmented from modules using a `declare globa
 // Ensure this is treated as a module.
 export {};
 
-declare global {
-  interface Array<T> {
-    mapToNumbers(): number[];
+declareglobal {
+interfaceArray<T> {
+mapToNumbers(): number[];
   }
 }
 
 Array.prototype.mapToNumbers = function () {
-  /* ... */
+/* ... */
 };
 ```
 
@@ -241,13 +241,13 @@ For instance, consider a UI library that can move elements across the screen whi
 
 ```ts
 declare class UIElement {
-  animate(options: AnimationOptions): void;
+animate(options: AnimationOptions): void;
 }
 
-interface AnimationOptions {
-  deltaX: number;
-  deltaY: number;
-  easing: string; // Can be "ease-in", "ease-out", "ease-in-out"
+interfaceAnimationOptions {
+deltaX: number;
+deltaY: number;
+easing: string; // Can be "ease-in", "ease-out", "ease-in-out"
 }
 ```
 
@@ -255,7 +255,7 @@ However, this is error prone - there is nothing stopping a user from accidentall
 
 ```ts
 // No errors
-new UIElement().animate({ deltaX: 100, deltaY: 100, easing: "ease-inout" });
+newUIElement().animate({ deltaX:100, deltaY:100, easing:"ease-inout" });
 ```
 
 With TypeScript 1.8, we’ve introduced string literal types.
@@ -266,13 +266,13 @@ Here’s our new `AnimationOptions` using string literal types:
 
 ```ts
 interface AnimationOptions {
-  deltaX: number;
-  deltaY: number;
-  easing: "ease-in" | "ease-out" | "ease-in-out";
+deltaX: number;
+deltaY: number;
+easing: "ease-in" | "ease-out" | "ease-in-out";
 }
 
 // Error: Type '"ease-inout"' is not assignable to type '"ease-in" | "ease-out" | "ease-in-out"'
-new UIElement().animate({ deltaX: 100, deltaY: 100, easing: "ease-inout" });
+newUIElement().animate({ deltaX:100, deltaY:100, easing:"ease-inout" });
 ```
 
 ## Improved union/intersection type inference {#improved-unionintersection-type-inference}
@@ -285,28 +285,28 @@ For example, when inferring from `string | string[]` to `string | T`, we reduce 
 ```ts
 type Maybe<T> = T | void;
 
-function isDefined<T>(x: Maybe<T>): x is T {
-  return x !== undefined && x !== null;
+functionisDefined<T>(x: Maybe<T>): xisT {
+returnx !== undefined && x !== null;
 }
 
-function isUndefined<T>(x: Maybe<T>): x is void {
-  return x === undefined || x === null;
+functionisUndefined<T>(x: Maybe<T>): xisvoid {
+returnx === undefined || x === null;
 }
 
-function getOrElse<T>(x: Maybe<T>, defaultValue: T): T {
-  return isDefined(x) ? x : defaultValue;
+functiongetOrElse<T>(x: Maybe<T>, defaultValue: T): T {
+returnisDefined(x) ? x : defaultValue;
 }
 
-function test1(x: Maybe<string>) {
-  let x1 = getOrElse(x, "Undefined"); // string
-  let x2 = isDefined(x) ? x : "Undefined"; // string
-  let x3 = isUndefined(x) ? "Undefined" : x; // string
+functiontest1(x: Maybe<string>) {
+letx1 = getOrElse(x, "Undefined"); // string
+letx2 = isDefined(x) ? x : "Undefined"; // string
+letx3 = isUndefined(x) ? "Undefined" : x; // string
 }
 
-function test2(x: Maybe<number>) {
-  let x1 = getOrElse(x, -1); // number
-  let x2 = isDefined(x) ? x : -1; // number
-  let x3 = isUndefined(x) ? -1 : x; // number
+functiontest2(x: Maybe<number>) {
+letx1 = getOrElse(x, -1); // number
+letx2 = isDefined(x) ? x : -1; // number
+letx3 = isUndefined(x) ? -1 : x; // number
 }
 ```
 
@@ -320,16 +320,16 @@ A module name will be computed for each module based on its relative location to
 
 ```ts
 // file src/a.ts
-import * as B from "./lib/b";
-export function createA() {
-  return B.createB();
+import*asBfrom"./lib/b";
+exportfunctioncreateA() {
+returnB.createB();
 }
 ```
 
 ```ts
 // file src/lib/b.ts
-export function createB() {
-  return {};
+exportfunctioncreateB() {
+return {};
 }
 ```
 
@@ -337,18 +337,18 @@ Results in:
 
 ```js
 define("lib/b", ["require", "exports"], function (require, exports) {
-  "use strict";
-  function createB() {
-    return {};
+"use strict";
+functioncreateB() {
+return {};
   }
-  exports.createB = createB;
+exports.createB = createB;
 });
 define("a", ["require", "exports", "lib/b"], function (require, exports, B) {
-  "use strict";
-  function createA() {
-    return B.createB();
+"use strict";
+functioncreateA() {
+returnB.createB();
   }
-  exports.createA = createA;
+exports.createA = createA;
 });
 ```
 
@@ -369,27 +369,27 @@ Previously an error, now supported in TypeScript 1.8.
 
 ```ts
 let list = [];
-for (let i = 0; i < 5; i++) {
-  list.push(() => i);
+for (leti = 0; i < 5; i++) {
+list.push(() =>i);
 }
 
-list.forEach((f) => console.log(f()));
+list.forEach((f) =>console.log(f()));
 ```
 
 is compiled to:
 
 ```js
 var list = [];
-var _loop_1 = function (i) {
-  list.push(function () {
-    return i;
+var_loop_1 = function (i) {
+list.push(function () {
+returni;
   });
 };
-for (var i = 0; i < 5; i++) {
-  _loop_1(i);
+for (vari = 0; i < 5; i++) {
+_loop_1(i);
 }
 list.forEach(function (f) {
-  return console.log(f());
+returnconsole.log(f());
 });
 ```
 
@@ -416,9 +416,9 @@ Starting with TypeScript 1.8:
 
 ```ts
 var a: MyObject[];
-for (var x in a) {
-  // Type of x is implicitly string
-  var obj = a[x]; // Type of obj is MyObject
+for (varxina) {
+// Type of x is implicitly string
+varobj = a[x]; // Type of obj is MyObject
 }
 ```
 
@@ -447,7 +447,7 @@ The new factory name will be used to call `createElement` and `__spread` functio
 ```ts
 import { jsxFactory } from "jsxFactory";
 
-var div = <div>Hello JSX!</div>;
+vardiv = <div>HelloJSX!</div>;
 ```
 
 Compiled with:
@@ -460,8 +460,8 @@ Results in:
 
 ```js
 "use strict";
-var jsxFactory_1 = require("jsxFactory");
-var div = jsxFactory_1.jsxFactory.createElement("div", null, "Hello JSX!");
+varjsxFactory_1 = require("jsxFactory");
+vardiv = jsxFactory_1.jsxFactory.createElement("div", null, "Hello JSX!");
 ```
 
 ## `this`-based type guards {#this-based-type-guards}
@@ -475,37 +475,37 @@ When used in a type narrowing position (e.g. `if` statement), the type of the ca
 
 ```ts
 class FileSystemObject {
-  isFile(): this is File {
-    return this instanceof File;
+isFile(): thisisFile {
+returnthisinstanceofFile;
   }
-  isDirectory(): this is Directory {
-    return this instanceof Directory;
+isDirectory(): thisisDirectory {
+returnthisinstanceofDirectory;
   }
-  isNetworked(): this is Networked & this {
-    return this.networked;
+isNetworked(): thisisNetworked & this {
+returnthis.networked;
   }
-  constructor(public path: string, private networked: boolean) {}
+constructor(publicpath: string, privatenetworked: boolean) {}
 }
 
-class File extends FileSystemObject {
-  constructor(path: string, public content: string) {
-    super(path, false);
+classFileextendsFileSystemObject {
+constructor(path: string, publiccontent: string) {
+super(path, false);
   }
 }
-class Directory extends FileSystemObject {
-  children: FileSystemObject[];
+classDirectoryextendsFileSystemObject {
+children: FileSystemObject[];
 }
-interface Networked {
-  host: string;
+interfaceNetworked {
+host: string;
 }
 
-let fso: FileSystemObject = new File("foo/bar.txt", "foo");
+letfso: FileSystemObject = newFile("foo/bar.txt", "foo");
 if (fso.isFile()) {
-  fso.content; // fso is File
-} else if (fso.isDirectory()) {
-  fso.children; // fso is Directory
-} else if (fso.isNetworked()) {
-  fso.host; // fso is networked
+fso.content; // fso is File
+} elseif (fso.isDirectory()) {
+fso.children; // fso is Directory
+} elseif (fso.isNetworked()) {
+fso.host; // fso is networked
 }
 ```
 
@@ -555,14 +555,14 @@ It’s always nice to be able to document your configuration!
 
 ```
 {
-  "[compilerOptions](/tsconfig.html#compilerOptions)": {
-    "[target](/tsconfig.html#target)": "ES2015", // running on node v5, yaay!
-    "[sourceMap](/tsconfig.html#sourceMap)": true // makes debugging easier
+"[compilerOptions](/tsconfig.html#compilerOptions)": {
+"[target](/tsconfig.html#target)": "ES2015", // running on node v5, yaay!
+"[sourceMap](/tsconfig.html#sourceMap)": true// makes debugging easier
   },
-  /*
+/*
    * Excluded files
    */
-  "[exclude](/tsconfig.html#exclude)": ["file.d.ts"]
+"[exclude](/tsconfig.html#exclude)": ["file.d.ts"]
 }
 ```
 

@@ -26,7 +26,7 @@ Without generics, we would either have to give the identity function a specific 
 
 ```ts
 function identity(arg: number): number {
-  return arg;
+returnarg;
 }
 ```
 
@@ -36,7 +36,7 @@ Or, we could describe the identity function using the `any` type:
 
 ```ts
 function identity(arg: any): any {
-  return arg;
+returnarg;
 }
 ```
 
@@ -50,7 +50,7 @@ Here, we will use a *type variable*, a special kind of variable that works on ty
 
 ```ts
 function identity<Type>(arg: Type): Type {
-  return arg;
+returnarg;
 }
 ```
 
@@ -69,7 +69,7 @@ The first way is to pass all of the arguments, including the type argument, to t
 
 ```ts
 let output = identity<string>("myString");
-      
+
 let output: string
 ```
 
@@ -81,7 +81,7 @@ The second way is also perhaps the most common. Here we use *type argument infer
 
 ```ts
 let output = identity("myString");
-      
+
 let output: string
 ```
 
@@ -99,7 +99,7 @@ Let’s take our `identity` function from earlier:
 
 ```ts
 function identity<Type>(arg: Type): Type {
-  return arg;
+returnarg;
 }
 ```
 
@@ -110,8 +110,8 @@ We might be tempted to write this:
 
 ```ts
 function loggingIdentity<Type>(arg: Type): Type {
-  console.log(arg.length);
-  return arg;
+console.log(arg.length);
+returnarg;
 }
 ```
 
@@ -129,8 +129,8 @@ We can describe this just like we would create arrays of other types:
 
 ```ts
 function loggingIdentity<Type>(arg: Type[]): Type[] {
-  console.log(arg.length);
-  return arg;
+console.log(arg.length);
+returnarg;
 }
 ```
 
@@ -144,8 +144,8 @@ We can alternatively write the sample example this way:
 
 ```ts
 function loggingIdentity<Type>(arg: Array<Type>): Array<Type> {
-  console.log(arg.length); // Array has a .length, so no more error
-  return arg;
+console.log(arg.length); // Array has a .length, so no more error
+returnarg;
 }
 ```
 
@@ -163,10 +163,10 @@ The type of generic functions is just like those of non-generic functions, with 
 
 ```ts
 function identity<Type>(arg: Type): Type {
-  return arg;
+returnarg;
 }
- 
-let myIdentity: <Type>(arg: Type) => Type = identity;
+
+letmyIdentity: <Type>(arg: Type) =>Type = identity;
 ```
 
 We could also have used a different name for the generic type parameter in the type, so long as the number of type variables and how the type variables are used line up.
@@ -175,10 +175,10 @@ We could also have used a different name for the generic type parameter in the t
 
 ```ts
 function identity<Input>(arg: Input): Input {
-  return arg;
+returnarg;
 }
- 
-let myIdentity: <Input>(arg: Input) => Input = identity;
+
+letmyIdentity: <Input>(arg: Input) =>Input = identity;
 ```
 
 We can also write the generic type as a call signature of an object literal type:
@@ -187,10 +187,10 @@ We can also write the generic type as a call signature of an object literal type
 
 ```ts
 function identity<Type>(arg: Type): Type {
-  return arg;
+returnarg;
 }
- 
-let myIdentity: { <Type>(arg: Type): Type } = identity;
+
+letmyIdentity: { <Type>(arg: Type): Type } = identity;
 ```
 
 Which leads us to writing our first generic interface.
@@ -202,12 +202,12 @@ Let’s take the object literal from the previous example and move it to an inte
 interface GenericIdentityFn {
   <Type>(arg: Type): Type;
 }
- 
-function identity<Type>(arg: Type): Type {
-  return arg;
+
+functionidentity<Type>(arg: Type): Type {
+returnarg;
 }
- 
-let myIdentity: GenericIdentityFn = identity;
+
+letmyIdentity: GenericIdentityFn = identity;
 ```
 
 In a similar example, we may want to move the generic parameter to be a parameter of the whole interface.
@@ -220,12 +220,12 @@ This makes the type parameter visible to all the other members of the interface.
 interface GenericIdentityFn<Type> {
   (arg: Type): Type;
 }
- 
-function identity<Type>(arg: Type): Type {
-  return arg;
+
+functionidentity<Type>(arg: Type): Type {
+returnarg;
 }
- 
-let myIdentity: GenericIdentityFn<number> = identity;
+
+letmyIdentity: GenericIdentityFn<number> = identity;
 ```
 
 Notice that our example has changed to be something slightly different.
@@ -245,14 +245,14 @@ Generic classes have a generic type parameter list in angle brackets (`<>`) foll
 
 ```ts
 class GenericNumber<NumType> {
-  zeroValue: NumType;
-  add: (x: NumType, y: NumType) => NumType;
+zeroValue: NumType;
+add: (x: NumType, y: NumType) =>NumType;
 }
- 
-let myGenericNumber = new GenericNumber<number>();
+
+letmyGenericNumber = newGenericNumber<number>();
 myGenericNumber.zeroValue = 0;
 myGenericNumber.add = function (x, y) {
-  return x + y;
+returnx + y;
 };
 ```
 
@@ -265,9 +265,9 @@ We could have instead used `string` or even more complex objects.
 let stringNumeric = new GenericNumber<string>();
 stringNumeric.zeroValue = "";
 stringNumeric.add = function (x, y) {
-  return x + y;
+returnx + y;
 };
- 
+
 console.log(stringNumeric.add(stringNumeric.zeroValue, "test"));
 ```
 
@@ -285,8 +285,8 @@ In our `loggingIdentity` example, we wanted to be able to access the `.length` p
 
 ```ts
 function loggingIdentity<Type>(arg: Type): Type {
-  console.log(arg.length);
-  return arg;
+console.log(arg.length);
+returnarg;
 }
 ```
 
@@ -305,12 +305,12 @@ Here, we’ll create an interface that has a single `.length` property and then 
 
 ```ts
 interface Lengthwise {
-  length: number;
+length: number;
 }
- 
-function loggingIdentity<Type extends Lengthwise>(arg: Type): Type {
-  console.log(arg.length); // Now we know it has a .length property, so no more error
-  return arg;
+
+functionloggingIdentity<TypeextendsLengthwise>(arg: Type): Type {
+console.log(arg.length); // Now we know it has a .length property, so no more error
+returnarg;
 }
 ```
 
@@ -344,11 +344,11 @@ We’d like to ensure that we’re not accidentally grabbing a property that doe
 
 ```ts
 function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
-  return obj[key];
+returnobj[key];
 }
- 
-let x = { a: 1, b: 2, c: 3, d: 4 };
- 
+
+letx = { a:1, b:2, c:3, d:4 };
+
 getProperty(x, "a");
 getProperty(x, "m");
 ```
@@ -365,7 +365,7 @@ When creating factories in TypeScript using generics, it is necessary to refer t
 
 ```ts
 function create<Type>(c: { new (): Type }): Type {
-  return new c();
+returnnewc();
 }
 ```
 
@@ -375,30 +375,30 @@ A more advanced example uses the prototype property to infer and constrain relat
 
 ```ts
 class BeeKeeper {
-  hasMask: boolean = true;
+hasMask: boolean = true;
 }
- 
-class ZooKeeper {
-  nametag: string = "Mikle";
+
+classZooKeeper {
+nametag: string = "Mikle";
 }
- 
-class Animal {
-  numLegs: number = 4;
+
+classAnimal {
+numLegs: number = 4;
 }
- 
-class Bee extends Animal {
-  numLegs = 6;
-  keeper: BeeKeeper = new BeeKeeper();
+
+classBeeextendsAnimal {
+numLegs = 6;
+keeper: BeeKeeper = newBeeKeeper();
 }
- 
-class Lion extends Animal {
-  keeper: ZooKeeper = new ZooKeeper();
+
+classLionextendsAnimal {
+keeper: ZooKeeper = newZooKeeper();
 }
- 
-function createInstance<A extends Animal>(c: new () => A): A {
-  return new c();
+
+functioncreateInstance<AextendsAnimal>(c: new () =>A): A {
+returnnewc();
 }
- 
+
 createInstance(Lion).keeper.nametag;
 createInstance(Bee).keeper.hasMask;
 ```
@@ -413,10 +413,10 @@ By declaring a default for a generic type parameter, you make it optional to spe
 
 ```ts
 declare function create(): Container<HTMLDivElement, HTMLDivElement[]>;
-declare function create<T extends HTMLElement>(element: T): Container<T, T[]>;
-declare function create<T extends HTMLElement, U extends HTMLElement>(
-  element: T,
-  children: U[]
+declarefunctioncreate<TextendsHTMLElement>(element: T): Container<T, T[]>;
+declarefunctioncreate<TextendsHTMLElement, UextendsHTMLElement>(
+element: T,
+children: U[]
 ): Container<T, U[]>;
 ```
 
@@ -426,16 +426,16 @@ With generic parameter defaults we can reduce it to:
 
 ```ts
 declare function create<T extends HTMLElement = HTMLDivElement, U = T[]>(
-  element?: T,
-  children?: U
+element?: T,
+children?: U
 ): Container<T, U>;
- 
-const div = create();
-      
+
+constdiv = create();
+
 const div: Container<HTMLDivElement, HTMLDivElement[]>
- 
-const p = create(new HTMLParagraphElement());
-     
+
+constp = create(newHTMLParagraphElement());
+
 const p: Container<HTMLParagraphElement, HTMLParagraphElement[]>
 ```
 

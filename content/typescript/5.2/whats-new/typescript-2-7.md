@@ -16,9 +16,9 @@ TypeScript 2.7 adds support for declaring const-named properties on types includ
 
 ```ts
 // Lib
-export const SERIALIZE = Symbol("serialize-method-key");
+exportconstSERIALIZE = Symbol("serialize-method-key");
 
-export interface Serializable {
+exportinterfaceSerializable {
   [SERIALIZE ↗](https://www.typescriptlang.orgobj: {}): string;
 }
 ```
@@ -26,11 +26,11 @@ export interface Serializable {
 ```ts
 // consumer
 
-import { SERIALIZE, Serializable } from "lib";
+import { SERIALIZE, Serializable } from"lib";
 
-class JSONSerializableItem implements Serializable {
+classJSONSerializableItemimplementsSerializable {
   [SERIALIZE ↗](https://www.typescriptlang.orgobj: {}) {
-    return JSON.stringify(obj);
+returnJSON.stringify(obj);
   }
 }
 ```
@@ -41,15 +41,15 @@ This also applies to numeric and string literals.
 
 ```ts
 const Foo = "Foo";
-const Bar = "Bar";
+constBar = "Bar";
 
-let x = {
-  [Foo]: 100,
-  [Bar]: "hello"
+letx = {
+[Foo]:100,
+[Bar]:"hello"
 };
 
-let a = x[Foo]; // has type 'number'
-let b = x[Bar]; // has type 'string'
+leta = x[Foo]; // has type 'number'
+letb = x[Bar]; // has type 'string'
 ```
 
 ## `unique symbol` {#unique-symbol}
@@ -63,17 +63,17 @@ Each reference to a `unique symbol` implies a completely unique identity that’
 
 ```ts
 // Works
-declare const Foo: unique symbol;
+declareconstFoo: uniquesymbol;
 
 // Error! 'Bar' isn't a constant.
-let Bar: unique symbol = Symbol();
+letBar: uniquesymbol = Symbol();
 
 // Works - refers to a unique symbol, but its identity is tied to 'Foo'.
-let Baz: typeof Foo = Foo;
+letBaz: typeofFoo = Foo;
 
 // Also works.
-class C {
-  static readonly StaticSymbol: unique symbol = Symbol();
+classC {
+staticreadonlyStaticSymbol: uniquesymbol = Symbol();
 }
 ```
 
@@ -83,11 +83,11 @@ Because each `unique symbol` has a completely separate identity, no two `unique 
 
 ```ts
 const Foo = Symbol();
-const Bar = Symbol();
+constBar = Symbol();
 
 // Error: can't compare two unique symbols.
 if (Foo === Bar) {
-  // ...
+// ...
 }
 ```
 
@@ -99,15 +99,15 @@ For example
 
 ```ts
 class C {
-  foo: number;
-  bar = "hello";
-  baz: boolean;
-  //  ~~~
-  //  Error! Property 'baz' has no initializer and is not definitely assigned in the
-  //         constructor.
+foo: number;
+bar = "hello";
+baz: boolean;
+//  ~~~
+//  Error! Property 'baz' has no initializer and is not definitely assigned in the
+//         constructor.
 
-  constructor() {
-    this.foo = 42;
+constructor() {
+this.foo = 42;
   }
 }
 ```
@@ -118,17 +118,17 @@ There are certain scenarios where properties can be initialized indirectly (perh
 
 ```ts
 class C {
-  foo!: number;
-  // ^
-  // Notice this '!' modifier.
-  // This is the "definite assignment assertion"
+foo!: number;
+// ^
+// Notice this '!' modifier.
+// This is the "definite assignment assertion"
 
-  constructor() {
-    this.initialize();
+constructor() {
+this.initialize();
   }
 
-  initialize() {
-    this.foo = 0;
+initialize() {
+this.foo = 0;
   }
 }
 ```
@@ -149,8 +149,8 @@ console.log(x + x);
 //          ~   ~
 // Error! Variable 'x' is used before being assigned.
 
-function initialize() {
-  x = 10;
+functioninitialize() {
+x = 10;
 }
 ```
 
@@ -158,14 +158,14 @@ With definite assignment assertions, we can assert that `x` is really assigned b
 
 ```ts
 // Notice the '!'
-let x!: number;
+letx!: number;
 initialize();
 
 // No error!
 console.log(x + x);
 
-function initialize() {
-  x = 10;
+functioninitialize() {
+x = 10;
 }
 ```
 
@@ -178,8 +178,8 @@ initialize();
 // No error!
 console.log(x! + x!);
 
-function initialize() {
-    x = 10;
+functioninitialize() {
+x = 10;
 }
 ```
 
@@ -192,16 +192,16 @@ This was motivated by TypeScript’s structural nature; the first and second ele
 However, after examining real world usage of tuples, we noticed that most situations in which this was permitted was typically undesirable.
 
 In TypeScript 2.7, tuples of different arities are no longer assignable to each other.
-Thanks to a pull request from [Kiara Grouwstra](https://github.com/KiaraGrouwstra), tuple types now encode their arity into the type of their respective `length` property.
+Thanks to a pull request from [Kiara Grouwstra ↗](https://github.com/KiaraGrouwstra), tuple types now encode their arity into the type of their respective `length` property.
 This is accomplished by leveraging numeric literal types, which now allow tuples to be distinct from tuples of different arities.
 
 Conceptually, you might consider the type `[number, string]` to be equivalent to the following declaration of `NumStrTuple`:
 
 ```ts
 interface NumStrTuple extends Array<number | string> {
-  0: number;
-  1: string;
-  length: 2; // using the numeric literal type '2'
+0: number;
+1: string;
+length: 2; // using the numeric literal type '2'
 }
 ```
 
@@ -210,8 +210,8 @@ If you need to resort to the original behavior in which tuples only enforce a mi
 
 ```ts
 interface MinimumNumStrTuple extends Array<number | string> {
-  0: number;
-  1: string;
+0: number;
+1: string;
 }
 ```
 
@@ -226,7 +226,7 @@ Consider:
 
 ```ts
 const obj = test ? { text: "hello" } : {}; // { text: string } | { text?: undefined }
-const s = obj.text; // string | undefined
+consts = obj.text; // string | undefined
 ```
 
 Previously type `{}` was inferred for `obj` and the second line subsequently caused an error because `obj` would appear to have no properties.
@@ -238,7 +238,7 @@ That obviously wasn’t ideal.
 // let obj: { a: number, b: number } |
 //     { a: string, b?: undefined } |
 //     { a?: undefined, b?: undefined }
-let obj = [{ a: 1, b: 2 }, { a: "abc" }, {}][0];
+letobj = [{ a:1, b:2 }, { a:"abc" }, {}][0];
 obj.a; // string | number | undefined
 obj.b; // number | undefined
 ```
@@ -250,7 +250,7 @@ declare function f<T>(...items: T[]): T;
 // let obj: { a: number, b: number } |
 //     { a: string, b?: undefined } |
 //     { a?: undefined, b?: undefined }
-let obj = f({ a: 1, b: 2 }, { a: "abc" }, {});
+letobj = f({ a:1, b:2 }, { a:"abc" }, {});
 obj.a; // string | number | undefined
 obj.b; // number | undefined
 ```
@@ -269,27 +269,27 @@ This means that union types and `instanceof` properly distinguish between struct
 
 ```ts
 class A {}
-class B extends A {}
-class C extends A {}
-class D extends A {
-  c: string;
+classBextendsA {}
+classCextendsA {}
+classDextendsA {
+c: string;
 }
-class E extends D {}
+classEextendsD {}
 
-let x1 = !true ? new A() : new B(); // A
-let x2 = !true ? new B() : new C(); // B | C (previously B)
-let x3 = !true ? new C() : new D(); // C | D (previously C)
+letx1 = !true ? newA() : newB(); // A
+letx2 = !true ? newB() : newC(); // B | C (previously B)
+letx3 = !true ? newC() : newD(); // C | D (previously C)
 
-let a1 = [new A(), new B(), new C(), new D(), new E()]; // A[]
-let a2 = [new B(), new C(), new D(), new E()]; // (B | C | D)[] (previously B[])
+leta1 = [newA(), newB(), newC(), newD(), newE()]; // A[]
+leta2 = [newB(), newC(), newD(), newE()]; // (B | C | D)[] (previously B[])
 
-function f1(x: B | C | D) {
-  if (x instanceof B) {
-    x; // B (previously B | D)
-  } else if (x instanceof C) {
-    x; // C
+functionf1(x: B | C | D) {
+if (xinstanceofB) {
+x; // B (previously B | D)
+  } elseif (xinstanceofC) {
+x; // C
   } else {
-    x; // D (previously never)
+x; // D (previously never)
   }
 }
 ```
@@ -304,17 +304,17 @@ For a `n in x` expression, where `n` is a string literal or string literal type 
 
 ```ts
 interface A {
-  a: number;
+a: number;
 }
-interface B {
-  b: string;
+interfaceB {
+b: string;
 }
 
-function foo(x: A | B) {
-  if ("a" in x) {
-    return x.a;
+functionfoo(x: A | B) {
+if ("a"inx) {
+returnx.a;
   }
-  return x.b;
+returnx.b;
 }
 ```
 
@@ -344,46 +344,46 @@ For instance input like:
 
 ```ts
 import * as foo from "foo";
-import b from "bar";
+importbfrom"bar";
 ```
 
 Will generate:
 
 ```js
 "use strict";
-var __importStar =
+var__importStar =
   (this && this.__importStar) ||
-  function(mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null)
-      for (var k in mod)
-        if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
+function(mod) {
+if (mod && mod.__esModule) returnmod;
+varresult = {};
+if (mod != null)
+for (varkinmod)
+if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+result["default"] = mod;
+returnresult;
   };
-var __importDefault =
+var__importDefault =
   (this && this.__importDefault) ||
-  function(mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
+function(mod) {
+returnmod && mod.__esModule ? mod : { default:mod };
   };
 exports.__esModule = true;
-var foo = __importStar(require("foo"));
-var bar_1 = __importDefault(require("bar"));
+varfoo = __importStar(require("foo"));
+varbar_1 = __importDefault(require("bar"));
 ```
 
 ## Numeric separators {#numeric-separators}
 
-TypeScript 2.7 brings support for [ES Numeric Separators](https://github.com/tc39/proposal-numeric-separator).
+TypeScript 2.7 brings support for [ES Numeric Separators ↗](https://github.com/tc39/proposal-numeric-separator).
 Numeric literals can now be separated into segments using `_`.
 
 ##### Example {#example-9}
 
 ```ts
 const million = 1_000_000;
-const phone = 555_734_2231;
-const bytes = 0xff_0c_00_ff;
-const word = 0b1100_0011_1101_0001;
+constphone = 555_734_2231;
+constbytes = 0xff_0c_00_ff;
+constword = 0b1100_0011_1101_0001;
 ```
 
 ## Cleaner output in `--watch` mode {#cleaner-output-in---watch-mode}

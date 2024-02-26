@@ -55,8 +55,8 @@ Recall that these need to be declared in a `.d.ts` file.
 
   ```ts
   // In a .d.ts file or .ts file that is not a module:
-  declare module "SomeModule" {
-    export function fn(): string;
+  declaremodule"SomeModule" {
+  exportfunctionfn(): string;
   }
   ```
 
@@ -64,7 +64,7 @@ Recall that these need to be declared in a `.d.ts` file.
 
   ```ts
   /// <reference path="myModules.d.ts" />
-  import * as m from "SomeModule";
+  import*asmfrom"SomeModule";
   ```
 
 The reference tag here allows us to locate the declaration file that contains the declaration for the ambient module.
@@ -78,11 +78,11 @@ If you’re converting a program from namespaces to modules, it can be easy to e
 
   ```ts
   export namespace Shapes {
-    export class Triangle {
-      /* ... */
+  exportclassTriangle {
+  /* ... */
     }
-    export class Square {
-      /* ... */
+  exportclassSquare {
+  /* ... */
     }
   }
   ```
@@ -94,7 +94,7 @@ This is confusing and annoying for consumers of your module:
 
   ```ts
   import * as shapes from "./shapes";
-  let t = new shapes.Shapes.Triangle(); // shapes.Shapes?
+  lett = newshapes.Shapes.Triangle(); // shapes.Shapes?
   ```
 
 A key feature of modules in TypeScript is that two different modules will never contribute names to the same scope.
@@ -109,10 +109,10 @@ Here’s a revised example:
 
   ```ts
   export class Triangle {
-    /* ... */
+  /* ... */
   }
-  export class Square {
-    /* ... */
+  exportclassSquare {
+  /* ... */
   }
   ```
 
@@ -120,11 +120,11 @@ Here’s a revised example:
 
   ```ts
   import * as shapes from "./shapes";
-  let t = new shapes.Triangle();
+  lett = newshapes.Triangle();
   ```
 
 ### Trade-offs of Modules {#trade-offs-of-modules}
 
 Just as there is a one-to-one correspondence between JS files and modules, TypeScript has a one-to-one correspondence between module source files and their emitted JS files.
 One effect of this is that it’s not possible to concatenate multiple module source files depending on the module system you target.
-For instance, you can’t use the [`outFile` ↗](https://www.typescriptlang.org/tsconfig.html#outFile) option while targeting `commonjs` or `umd`, but with TypeScript 1.8 and later, [it’s possible ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-8.html#concatenate-amd-and-system-modules-with---outfile) to use [`outFile` ↗](https://www.typescriptlang.org/tsconfig.html#outFile) when targeting `amd` or `system`.
+For instance, you can’t use the [`outFile` ↗](https://www.typescriptlang.org/tsconfig.html#outFile) option while targeting `commonjs` or `umd`, but with TypeScript 1.8 and later, [it’s possible](/typescript/5.1/whats-new/typescript-1-8#concatenate-amd-and-system-modules-with---outfile) to use [`outFile` ↗](https://www.typescriptlang.org/tsconfig.html#outFile) when targeting `amd` or `system`.

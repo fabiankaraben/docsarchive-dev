@@ -14,10 +14,10 @@ In JavaScript, if a function finishes running without hitting a `return`, it ret
 
 ```ts
 function foo() {
-    // no return
+// no return
 }
 // x = undefined
-let x = foo();
+letx = foo();
 ```
 
 However, in previous versions of TypeScript, the *only* functions that could have absolutely no return statements were `void`- and `any`-returning functions.
@@ -25,21 +25,21 @@ That meant that even if you explicitly said “this function returns `undefined`
 
 ```ts
 // ✅ fine - we inferred that 'f1' returns 'void'
-function f1() {
-    // no returns
+functionf1() {
+// no returns
 }
 // ✅ fine - 'void' doesn't need a return statement
-function f2(): void {
-    // no returns
+functionf2(): void {
+// no returns
 }
 // ✅ fine - 'any' doesn't need a return statement
-function f3(): any {
-    // no returns
+functionf3(): any {
+// no returns
 }
 // ❌ error!
 // A function whose declared type is neither 'void' nor 'any' must return a value.
-function f4(): undefined {
-    // no returns
+functionf4(): undefined {
+// no returns
 }
 ```
 
@@ -50,25 +50,25 @@ declare function takesFunction(f: () => undefined): undefined;
 // ❌ error!
 // Argument of type '() => void' is not assignable to parameter of type '() => undefined'.
 takesFunction(() => {
-    // no returns
+// no returns
 });
 // ❌ error!
 // A function whose declared type is neither 'void' nor 'any' must return a value.
-takesFunction((): undefined => {
-    // no returns
+takesFunction((): undefined=> {
+// no returns
 });
 // ❌ error!
 // Argument of type '() => void' is not assignable to parameter of type '() => undefined'.
 takesFunction(() => {
-    return;
+return;
 });
 // ✅ works
 takesFunction(() => {
-    return undefined;
+returnundefined;
 });
 // ✅ works
-takesFunction((): undefined => {
-    return;
+takesFunction((): undefined=> {
+return;
 });
 ```
 
@@ -79,12 +79,12 @@ First, TypeScript 5.1 now allows `undefined`-returning functions to have no retu
 
 ```ts
 // ✅ Works in TypeScript 5.1!
-function f4(): undefined {
-    // no returns
+functionf4(): undefined {
+// no returns
 }
 // ✅ Works in TypeScript 5.1!
-takesFunction((): undefined => {
-    // no returns
+takesFunction((): undefined=> {
+// no returns
 });
 ```
 
@@ -92,14 +92,14 @@ Second, if a function has no return expressions and is being passed to something
 
 ```ts
 // ✅ Works in TypeScript 5.1!
-takesFunction(function f() {
-    //                 ^ return type is undefined
-    // no returns
+takesFunction(functionf() {
+//                 ^ return type is undefined
+// no returns
 });
 // ✅ Works in TypeScript 5.1!
-takesFunction(function f() {
-    //                 ^ return type is undefined
-    return;
+takesFunction(functionf() {
+//                 ^ return type is undefined
+return;
 });
 ```
 
@@ -107,15 +107,15 @@ To address another similar pain-point, under TypeScript’s `--noImplicitReturns
 
 ```ts
 // ✅ Works in TypeScript 5.1 under '--noImplicitReturns'!
-function f(): undefined {
-    if (Math.random()) {
-        // do some stuff...
-        return;
+functionf(): undefined {
+if (Math.random()) {
+// do some stuff...
+return;
     }
 }
 ```
 
-For more information, you can read up on [the original issue](https://github.com/microsoft/TypeScript/issues/36288) and [the implementing pull request](https://github.com/microsoft/TypeScript/pull/53607).
+For more information, you can read up on [the original issue ↗](https://github.com/microsoft/TypeScript/issues/36288) and [the implementing pull request ↗](https://github.com/microsoft/TypeScript/pull/53607).
 
 ## Unrelated Types for Getters and Setters {#unrelated-types-for-getters-and-setters}
 
@@ -123,10 +123,10 @@ TypeScript 4.3 made it possible to say that a `get` and `set` accessor pair migh
 
 ```ts
 interface Serializer {
-    set value(v: string | number | boolean);
-    get value(): string;
+setvalue(v: string | number | boolean);
+getvalue(): string;
 }
-declare let box: Serializer;
+declareletbox: Serializer;
 // Allows writing a 'boolean'
 box.value = true;
 // Comes out as a 'string'
@@ -143,8 +143,8 @@ box.value = box.value;
 would always be valid.
 
 However, there are plenty of existing and proposed APIs that have completely unrelated types between their getters and setters.
-For example, consider one of the most common examples - the `style` property in the DOM and [`CSSStyleRule`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule) API.
-Every style rule has [a `style` property](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/style) that is a [`CSSStyleDeclaration`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration);
+For example, consider one of the most common examples - the `style` property in the DOM and [`CSSStyleRule` ↗](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule) API.
+Every style rule has [a `style` property ↗](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule/style) that is a [`CSSStyleDeclaration` ↗](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration);
 however, if you try to write to that property, it will only work correctly with a string!
 
 TypeScript 5.1 now allows completely unrelated types for `get` and `set` accessor properties, provided that they have explicit type annotations.
@@ -152,12 +152,12 @@ And while this version of TypeScript does not yet change the types for these bui
 
 ```ts
 interface CSSStyleRule {
-    // ...
-    /** Always reads as a `CSSStyleDeclaration` */
-    get style(): CSSStyleDeclaration;
-    /** Can only write a `string` here. */
-    set style(newValue: string);
-    // ...
+// ...
+/** Always reads as a `CSSStyleDeclaration` */
+getstyle(): CSSStyleDeclaration;
+/** Can only write a `string` here. */
+setstyle(newValue: string);
+// ...
 }
 ```
 
@@ -165,20 +165,20 @@ This also allows other patterns like requiring `set` accessors to accept only �
 
 ```ts
 class SafeBox {
-    #value: string | undefined;
-    // Only accepts strings!
-    set value(newValue: string) {
+#value: string | undefined;
+// Only accepts strings!
+setvalue(newValue: string) {
     }
-    // Must check for 'undefined'!
-    get value(): string | undefined {
-        return this.#value;
+// Must check for 'undefined'!
+getvalue(): string | undefined {
+returnthis.#value;
     }
 }
 ```
 
 In fact, this is similar to how optional properties are checked under `--exactOptionalProperties`.
 
-You can read up more on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/53417).
+You can read up more on [the implementing pull request ↗](https://github.com/microsoft/TypeScript/pull/53417).
 
 ## Decoupled Type-Checking Between JSX Elements and JSX Tag Types {#decoupled-type-checking-between-jsx-elements-and-jsx-tag-types}
 
@@ -188,7 +188,7 @@ For context, a JSX element is either of the following:
 
 ```tsx
 // A self-closing JSX tag
-<Foo />
+<Foo/>
 // A regular element with an opening/closing tag
 <Bar></Bar>
 ```
@@ -200,14 +200,14 @@ But to check whether `Foo` or `Bar` themselves were valid to use as tag names, T
 The limitations here meant that components could not be used if they returned or “rendered” a more broad type than just `JSX.Element`.
 For example, a JSX library might be fine with a component returning `string`s or `Promise`s.
 
-As a more concrete example, [React is considering adding limited support for components that return `Promise`s](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md), but existing versions of TypeScript cannot express that without someone drastically loosening the type of `JSX.Element`.
+As a more concrete example, [React is considering adding limited support for components that return `Promise`s ↗](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md), but existing versions of TypeScript cannot express that without someone drastically loosening the type of `JSX.Element`.
 
 ```tsx
 import * as React from "react";
-async function Foo() {
-    return <div></div>;
+asyncfunctionFoo() {
+return<div></div>;
 }
-let element = <Foo />;
+letelement = <Foo/>;
 //             ~~~
 // 'Foo' cannot be used as a JSX component.
 //   Its return type 'Promise<Element>' is not a valid JSX element.
@@ -219,20 +219,20 @@ So it might be typed today as something like
 
 ```tsx
 namespace JSX {
-    export type ElementType =
-        // All the valid lowercase tags
-        keyof IntrinsicAttributes
-        // Function components
-        (props: any) => Element
-        // Class components
-        new (props: any) => ElementClass;
-    export interface IntrinsicAttributes extends /*...*/ {}
-    export type Element = /*...*/;
-    export type ElementClass = /*...*/;
+exporttypeElementType =
+// All the valid lowercase tags
+keyofIntrinsicAttributes
+// Function components
+        (props: any) =>Element
+// Class components
+new (props: any) =>ElementClass;
+exportinterfaceIntrinsicAttributesextends/*...*/ {}
+exporttypeElement = /*...*/;
+exporttypeElementClass = /*...*/;
 }
 ```
 
-We’d like to extend our thanks to [Sebastian Silbermann](https://github.com/eps1lon) who contributed [this change](https://github.com/microsoft/TypeScript/pull/51328)!
+We’d like to extend our thanks to [Sebastian Silbermann ↗](https://github.com/eps1lon) who contributed [this change ↗](https://github.com/microsoft/TypeScript/pull/51328)!
 
 ## Namespaced JSX Attributes {#namespaced-jsx-attributes}
 
@@ -241,13 +241,13 @@ TypeScript now supports namespaced attribute names when using JSX.
 ```tsx
 import * as React from "react";
 // Both of these are equivalent:
-const x = <Foo a:b="hello" />;
-const y = <Foo a : b="hello" />;
-interface FooProps {
-    "a:b": string;
+constx = <Fooa:b="hello"/>;
+consty = <Fooa:b="hello"/>;
+interfaceFooProps {
+"a:b": string;
 }
-function Foo(props: FooProps) {
-    return <div>{props["a:b"]}</div>;
+functionFoo(props: FooProps) {
+return<div>{props["a:b"]}</div>;
 }
 ```
 
@@ -255,22 +255,22 @@ Namespaced tag names are looked up in a similar way on `JSX.IntrinsicAttributes`
 
 ```tsx
 // In some library's code or in an augmentation of that library:
-namespace JSX {
-    interface IntrinsicElements {
+namespaceJSX {
+interfaceIntrinsicElements {
         ["a:b"]: { prop: string };
     }
 }
 // In our code:
-let x = <a:b prop="hello!" />;
+letx = <a:bprop="hello!"/>;
 ```
 
-[This contribution](https://github.com/microsoft/TypeScript/pull/53799) was provided thanks to [Oleksandr Tarasiuk](https://github.com/a-tarasyuk).
+[This contribution ↗](https://github.com/microsoft/TypeScript/pull/53799) was provided thanks to [Oleksandr Tarasiuk ↗](https://github.com/a-tarasyuk).
 
 ## `typeRoots` Are Consulted In Module Resolution {#typeroots-are-consulted-in-module-resolution}
 
 When TypeScript’s specified module lookup strategy is unable to resolve a path, it will now resolve packages relative to the specified `typeRoots`.
 
-See [this pull request](https://github.com/microsoft/TypeScript/pull/51715) for more details.
+See [this pull request ↗](https://github.com/microsoft/TypeScript/pull/51715) for more details.
 
 ## Move Declarations to Existing Files {#move-declarations-to-existing-files}
 
@@ -299,8 +299,8 @@ or configure `editor.linkedEditing` in your JSON settings file:
 
 ```jsonc
 {
-    // ...
-    "editor.linkedEditing": true,
+// ...
+"editor.linkedEditing": true,
 }
 ```
 
@@ -411,19 +411,19 @@ The solution is typically to add specific entries for `node_modules/@types` to y
 
 ```jsonc
 {
-    "compilerOptions": {
-        "types": [
-            "node",
-            "mocha"
+"compilerOptions": {
+"types": [
+"node",
+"mocha"
         ],
-        "typeRoots": [
-            // Keep whatever you had around before.
-            "./some-custom-types/",
-            // You might need your local 'node_modules/@types'.
-            "./node_modules/@types",
-            // You might also need to specify a shared 'node_modules/@types'
-            // if you're using a "monorepo" layout.
-            "../../node_modules/@types",
+"typeRoots": [
+// Keep whatever you had around before.
+"./some-custom-types/",
+// You might need your local 'node_modules/@types'.
+"./node_modules/@types",
+// You might also need to specify a shared 'node_modules/@types'
+// if you're using a "monorepo" layout.
+"../../node_modules/@types",
         ]
     }
 }

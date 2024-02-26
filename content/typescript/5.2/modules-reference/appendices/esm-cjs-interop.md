@@ -14,8 +14,8 @@ It’s 2015, and you’re writing an ESM-to-CJS transpiler. There’s no specifi
 
 ```ts
 export const A = {};
-export const B = {};
-export default "Hello, world!";
+exportconstB = {};
+exportdefault"Hello, world!";
 ```
 
 How would you turn this into a CommonJS module? Recalling that default exports are just named exports with special syntax, there seems to be only one choice:
@@ -34,7 +34,7 @@ console.log(hello, A, B);
 
 // transpiles to:
 
-const module_1 = require("./module");
+constmodule_1 = require("./module");
 console.log(module_1.default, module_1.A, module_1.B);
 ```
 
@@ -46,7 +46,7 @@ console.log(mod.default, mod.A, mod.B);
 
 // transpiles to:
 
-const mod = require("./module");
+constmod = require("./module");
 console.log(mod.default, mod.A, mod.B);
 ```
 
@@ -54,8 +54,8 @@ You might notice that in this scheme, there’s no way to write an ESM export th
 
 ```ts
 // @Filename: exports-function.js
-module.exports = function hello() {
-  console.log("Hello, world!");
+module.exports = functionhello() {
+console.log("Hello, world!");
 };
 ```
 
@@ -67,11 +67,11 @@ hello();
 
 // transpiles to:
 
-const hello = require("./exports-function");
+consthello = require("./exports-function");
 hello();
 ```
 
-Our output works at runtime, but we have a compliance problem: according to the JavaScript specification, a namespace import always resolves to a [*Module Namespace Object*](https://tc39.es/ecma262/#sec-module-namespace-objects), that is, an object whose members are the exports of the module. In this case, `require` would return the function `hello`, but `import *` can never return a function. The correspondence we assumed appears invalid.
+Our output works at runtime, but we have a compliance problem: according to the JavaScript specification, a namespace import always resolves to a [*Module Namespace Object* ↗](https://tc39.es/ecma262/#sec-module-namespace-objects), that is, an object whose members are the exports of the module. In this case, `require` would return the function `hello`, but `import *` can never return a function. The correspondence we assumed appears invalid.
 
 It’s worth taking a step back here and clarifying what the *goal* is. As soon as modules landed in the ES2015 specification, transpilers emerged with support for downleveling ESM to CJS, allowing users to adopt the new syntax long before runtimes implemented support for it. There was even a sense that writing ESM code was a good way to “future-proof” new projects. For this to be true, there needed to be a seamless migration path from executing the transpilers’ CJS output to executing the ESM input natively once runtimes developed support for it. The goal was to find a way to downlevel ESM to CJS that would allow any or all of those transpiled outputs to be replaced by their true ESM inputs in a future runtime, with no observable change in behavior.
 
@@ -93,11 +93,11 @@ Let’s return to our specification compliance problem, where `import *` transpi
 
 ```ts
 // Invalid according to the spec:
-import * as hello from "./exports-function";
+import*ashellofrom"./exports-function";
 hello();
 
 // but the transpilation works:
-const hello = require("./exports-function");
+consthello = require("./exports-function");
 hello();
 ```
 
@@ -126,7 +126,7 @@ Forcing users to revert to non-ESM syntax was essentially an admission that “w
 > A should-be-meaningless change allowed the invalid import to type check without errors:
 > ```ts
 > declare namespace $ {}
-> declare function $(selector: string): any;
+> declarefunction$(selector: string): any;
 > export = $; // Allowed to `import *` this and call it 😱
 > ```
 > 
@@ -150,21 +150,21 @@ Meanwhile, other transpilers were coming up with a way to solve the same problem
 
   ```ts
   // import hello from "./modue";
-  const _mod = require("./module");
-  const hello = _mod.__esModule ? _mod.default : _mod;
+  const_mod = require("./module");
+  consthello = _mod.__esModule ? _mod.default : _mod;
   ```
 
 The `__esModule` flag first appeared in Traceur, then in Babel, SystemJS, and Webpack shortly after. TypeScript added the `allowSyntheticDefaultImports` in 1.8 to allow the type checker to link default imports directly to the `exports`, rather than the `exports.default`, of any module types that lacked an `export default` declaration. The flag didn’t modify how imports or exports were emitted, but it allowed default imports to reflect how other transpilers would treat them. Namely, it allowed a default import to be used to resolve to “non-module entities,” where `import *` was an error:
 
 ```ts
 // Error:
-import * as hello from "./exports-function";
+import*ashellofrom"./exports-function";
 
 // Old workaround:
-import hello = require("./exports-function");
+importhello = require("./exports-function");
 
 // New way, with `allowSyntheticDefaultImports`:
-import hello from "./exports-function";
+importhellofrom"./exports-function";
 ```
 
 This was usually enough to let Babel and Webpack users write code that already worked in those systems without TypeScript complaining, but it was only a partial solution, leaving a few issues unsolved:
@@ -174,12 +174,12 @@ This was usually enough to let Babel and Webpack users write code that already w
 
   ```ts
   // @Filename: exportEqualsObject.d.ts
-  declare const obj: object;
+  declareconstobj: object;
   export = obj;
 
   // @Filename: main.ts
-  import objDefault from "./exportEqualsObject";
-  import * as objNamespace from "./exportEqualsObject";
+  importobjDefaultfrom"./exportEqualsObject";
+  import*asobjNamespacefrom"./exportEqualsObject";
 
   // This should be true at runtime, but TypeScript gives an error:
   objNamespace.default === objDefault;
@@ -196,10 +196,10 @@ Node.js shipped support for ES modules unflagged in v12. Like the bundlers and t
 
 ```ts
 // @Filename: export.cjs
-module.exports = { hello: "world" };
+module.exports = { hello:"world" };
 
 // @Filename: import.mjs
-import greeting from "./export.cjs";
+importgreetingfrom"./export.cjs";
 greeting.hello; // "world"
 ```
 
@@ -212,10 +212,10 @@ Node.js wasn’t able to respect the `__esModule` marker to vary its default imp
 ```ts
 // @Filename: node_modules/dependency/index.js
 exports.__esModule = true;
-exports.default = function doSomething() { /*...*/ }
+exports.default = functiondoSomething() { /*...*/ }
 
 // @Filename: transpile-vs-run-directly.{js/mjs}
-import doSomething from "dependency";
+importdoSomethingfrom"dependency";
 // Works after transpilation, but not a function in Node.js ESM:
 doSomething();
 // Doesn't exist after trasnpilation, but works in Node.js ESM:
@@ -234,10 +234,10 @@ exports.hello = "world";
 exports["worl" + "d"] = "hello";
 
 // @Filename: transpile-vs-run-directly.{js/mjs}
-import { hello, world } from "./named-exports.cjs";
+import { hello, world } from"./named-exports.cjs";
 // `hello` works, but `world` is missing in Node.js 💥
 
-import mod from "./named-exports.cjs";
+importmodfrom"./named-exports.cjs";
 mod.world;
 // Accessing properties from the default always works ✅
 ```
@@ -248,10 +248,10 @@ True CommonJS modules can `require` an ESM-transpiled-to-CJS module, since they�
 
 ```ts
 // @Filename: node_modules/dependency/index.js
-export function doSomething() { /* ... */ }
+exportfunctiondoSomething() { /* ... */ }
 
 // @Filename: dependent.js
-import { doSomething } from "dependency";
+import { doSomething } from"dependency";
 // ✅ Works if dependent and dependency are both transpiled
 // ✅ Works if dependent and dependency are both true ESM
 // ✅ Works if dependent is true ESM and dependency is transpiled
@@ -264,12 +264,12 @@ Node.js introduced a new module resolution algorithm for resolving ESM imports t
 
 ```ts
 // @Filename: add.js
-export function add(a, b) {
-  return a + b;
+exportfunctionadd(a, b) {
+returna + b;
 }
 
 // @Filename: math.js
-export * from "./add";
+export*from"./add";
 //            ^^^^^^^
 // Works when transpiled to CJS,
 // but would have to be "./add.js"
@@ -297,20 +297,20 @@ Some people object to the inclusion of the `__importDefault` and `__importStar` 
 ```ts
 // @Filename: node_modules/transpiled-dependency/index.js
 exports.__esModule = true;
-exports.default = function doSomething() { /* ... */ };
+exports.default = functiondoSomething() { /* ... */ };
 exports.something = "something";
 
 // @Filename: node_modules/true-cjs-dependency/index.js
-module.exports = function doSomethingElse() { /* ... */ };
+module.exports = functiondoSomethingElse() { /* ... */ };
 
 // @Filename: src/sayHello.ts
-export default function sayHello() { /* ... */ }
-export const hello = "hello";
+exportdefaultfunctionsayHello() { /* ... */ }
+exportconsthello = "hello";
 
 // @Filename: src/main.ts
-import doSomething from "transpiled-dependency";
-import doSomethingElse from "true-cjs-dependency";
-import sayHello from "./sayHello.js";
+importdoSomethingfrom"transpiled-dependency";
+importdoSomethingElsefrom"true-cjs-dependency";
+importsayHellofrom"./sayHello.js";
 ```
 
 Assume we’re compiling `src` to CommonJS for use in Node.js. Without `allowSyntheticDefaultImports` or `esModuleInterop`, the import of `doSomethingElse` from `"true-cjs-dependency"` is an error, and the others are not. To fix the error without changing any compiler options, you could change the import to `import doSomethingElse = require("true-cjs-dependency")`. However, depending on how the types for the module (not shown) are written, you may also be able to write and call a namespace import, which would be a language-level specification violation. With `esModuleInterop`, none of the imports shown are errors (and all are callable), but the invalid namespace import would be caught.
@@ -327,8 +327,8 @@ Libraries (that ship declaration files) should take extra care to ensure the typ
 
 ```ts
 // @Filename: /node_modules/dependency/index.d.ts
-import express from "express";
-declare function doSomething(req: express.Request): any;
+importexpressfrom"express";
+declarefunctiondoSomething(req: express.Request): any;
 export = doSomething;
 ```
 

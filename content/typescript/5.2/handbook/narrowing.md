@@ -14,7 +14,7 @@ Imagine we have a function called `padLeft`.
 
 ```ts
 function padLeft(padding: number | string, input: string): string {
-  throw new Error("Not implemented yet!");
+thrownewError("Not implemented yet!");
 }
 ```
 
@@ -26,7 +26,7 @@ Let’s try to implement the logic for when `padLeft` is passed a `number` for `
 
 ```ts
 function padLeft(padding: number | string, input: string) {
-  return " ".repeat(padding) + input;
+return" ".repeat(padding) + input;
 }
 ```
 
@@ -43,10 +43,10 @@ In other words, we haven’t explicitly checked if `padding` is a `number` first
 
 ```ts
 function padLeft(padding: number | string, input: string) {
-  if (typeof padding === "number") {
-    return " ".repeat(padding) + input;
+if (typeofpadding === "number") {
+return" ".repeat(padding) + input;
   }
-  return padding + input;
+returnpadding + input;
 }
 ```
 
@@ -66,13 +66,13 @@ In many editors we can observe these types as they change, and we’ll even do s
 
 ```ts
 function padLeft(padding: number | string, input: string) {
-  if (typeof padding === "number") {
-    return " ".repeat(padding) + input;
-                        
+if (typeofpadding === "number") {
+return" ".repeat(padding) + input;
+
 (parameter) padding: number
   }
-  return padding + input;
-           
+returnpadding + input;
+
 (parameter) padding: string
 }
 ```
@@ -104,14 +104,14 @@ Check out the following example:
 
 ```ts
 function printAll(strs: string | string[] | null) {
-  if (typeof strs === "object") {
-    for (const s of strs) {
-      console.log(s);
+if (typeofstrs === "object") {
+for (constsofstrs) {
+console.log(s);
     }
-  } else if (typeof strs === "string") {
-    console.log(strs);
+  } elseif (typeofstrs === "string") {
+console.log(strs);
   } else {
-    // do nothing
+// do nothing
   }
 }
 ```
@@ -139,10 +139,10 @@ As an example, `if` statements don’t expect their condition to always have the
 
 ```ts
 function getUsersOnlineMessage(numUsersOnline: number) {
-  if (numUsersOnline) {
-    return `There are ${numUsersOnline} online now!`;
+if (numUsersOnline) {
+return`There are ${numUsersOnline} online now!`;
   }
-  return "Nobody's here. :(";
+return"Nobody's here. :(";
 }
 ```
 
@@ -174,12 +174,12 @@ As an example, let’s try using it for our `printAll` function.
 
 ```ts
 function printAll(strs: string | string[] | null) {
-  if (strs && typeof strs === "object") {
-    for (const s of strs) {
-      console.log(s);
+if (strs && typeofstrs === "object") {
+for (constsofstrs) {
+console.log(s);
     }
-  } else if (typeof strs === "string") {
-    console.log(strs);
+  } elseif (typeofstrs === "string") {
+console.log(strs);
   }
 }
 ```
@@ -198,17 +198,17 @@ As an example, consider a different attempt at writing `printAll`
 
 ```ts
 function printAll(strs: string | string[] | null) {
-  // !!!!!!!!!!!!!!!!
-  //  DON'T DO THIS!
-  //   KEEP READING
-  // !!!!!!!!!!!!!!!!
-  if (strs) {
-    if (typeof strs === "object") {
-      for (const s of strs) {
-        console.log(s);
+// !!!!!!!!!!!!!!!!
+//  DON'T DO THIS!
+//   KEEP READING
+// !!!!!!!!!!!!!!!!
+if (strs) {
+if (typeofstrs === "object") {
+for (constsofstrs) {
+console.log(s);
       }
-    } else if (typeof strs === "string") {
-      console.log(strs);
+    } elseif (typeofstrs === "string") {
+console.log(strs);
     }
   }
 }
@@ -226,13 +226,13 @@ One last word on narrowing by truthiness is that Boolean negations with `!` filt
 
 ```ts
 function multiplyAll(
-  values: number[] | undefined,
-  factor: number
+values: number[] | undefined,
+factor: number
 ): number[] | undefined {
-  if (!values) {
-    return values;
+if (!values) {
+returnvalues;
   } else {
-    return values.map((x) => x * factor);
+returnvalues.map((x) =>x * factor);
   }
 }
 ```
@@ -246,20 +246,20 @@ For example:
 
 ```ts
 function example(x: string | number, y: string | boolean) {
-  if (x === y) {
-    // We can now call any 'string' method on 'x' or 'y'.
-    x.toUpperCase();
-          
+if (x === y) {
+// We can now call any 'string' method on 'x' or 'y'.
+x.toUpperCase();
+
 (method) String.toUpperCase(): string
-    y.toLowerCase();
-          
+y.toLowerCase();
+
 (method) String.toLowerCase(): string
   } else {
-    console.log(x);
-               
+console.log(x);
+
 (parameter) x: string | number
-    console.log(y);
-               
+console.log(y);
+
 (parameter) y: string | boolean
   }
 }
@@ -276,16 +276,16 @@ Instead we could have done a specific check to block out `null`s, and TypeScript
 
 ```ts
 function printAll(strs: string | string[] | null) {
-  if (strs !== null) {
-    if (typeof strs === "object") {
-      for (const s of strs) {
-                       
+if (strs !== null) {
+if (typeofstrs === "object") {
+for (constsofstrs) {
+
 (parameter) strs: string[]
-        console.log(s);
+console.log(s);
       }
-    } else if (typeof strs === "string") {
-      console.log(strs);
-                   
+    } elseif (typeofstrs === "string") {
+console.log(strs);
+
 (parameter) strs: string
     }
   }
@@ -300,18 +300,18 @@ The same applies to `== undefined`: it checks whether a value is either `null` o
 
 ```ts
 interface Container {
-  value: number | null | undefined;
+value: number | null | undefined;
 }
- 
-function multiplyValue(container: Container, factor: number) {
-  // Remove both 'null' and 'undefined' from the type.
-  if (container.value != null) {
-    console.log(container.value);
-                           
+
+functionmultiplyValue(container: Container, factor: number) {
+// Remove both 'null' and 'undefined' from the type.
+if (container.value != null) {
+console.log(container.value);
+
 (property) Container.value: number
- 
-    // Now we can safely multiply 'container.value'.
-    container.value *= factor;
+
+// Now we can safely multiply 'container.value'.
+container.value *= factor;
   }
 }
 ```
@@ -328,14 +328,14 @@ The “true” branch narrows `x`’s types which have either an optional or req
 
 ```ts
 type Fish = { swim: () => void };
-type Bird = { fly: () => void };
- 
-function move(animal: Fish | Bird) {
-  if ("swim" in animal) {
-    return animal.swim();
+typeBird = { fly: () =>void };
+
+functionmove(animal: Fish | Bird) {
+if ("swim"inanimal) {
+returnanimal.swim();
   }
- 
-  return animal.fly();
+
+returnanimal.fly();
 }
 ```
 
@@ -345,17 +345,17 @@ To reiterate, optional properties will exist in both sides for narrowing. For ex
 
 ```ts
 type Fish = { swim: () => void };
-type Bird = { fly: () => void };
-type Human = { swim?: () => void; fly?: () => void };
- 
-function move(animal: Fish | Bird | Human) {
-  if ("swim" in animal) {
-    animal;
-      
+typeBird = { fly: () =>void };
+typeHuman = { swim?: () =>void; fly?: () =>void };
+
+functionmove(animal: Fish | Bird | Human) {
+if ("swim"inanimal) {
+animal;
+
 (parameter) animal: Fish | Human
   } else {
-    animal;
-      
+animal;
+
 (parameter) animal: Bird | Human
   }
 }
@@ -372,13 +372,13 @@ As you might have guessed, `instanceof` is also a type guard, and TypeScript nar
 
 ```ts
 function logValue(x: Date | string) {
-  if (x instanceof Date) {
-    console.log(x.toUTCString());
-               
+if (xinstanceofDate) {
+console.log(x.toUTCString());
+
 (parameter) x: Date
   } else {
-    console.log(x.toUpperCase());
-               
+console.log(x.toUpperCase());
+
 (parameter) x: string
   }
 }
@@ -392,17 +392,17 @@ As we mentioned earlier, when we assign to any variable, TypeScript looks at the
 
 ```ts
 let x = Math.random() < 0.5 ? 10 : "hello world!";
-   
+
 let x: string | number
 x = 1;
- 
+
 console.log(x);
-           
+
 let x: number
 x = "goodbye!";
- 
+
 console.log(x);
-           
+
 let x: string
 ```
 
@@ -416,17 +416,17 @@ If we’d assigned a `boolean` to `x`, we’d have seen an error since that wasn
 
 ```ts
 let x = Math.random() < 0.5 ? 10 : "hello world!";
-   
+
 let x: string | number
 x = 1;
- 
+
 console.log(x);
-           
+
 let x: number
 x = true;
- 
+
 console.log(x);
-           
+
 let x: string | number
 ```
 
@@ -444,10 +444,10 @@ For example
 
 ```ts
 function padLeft(padding: number | string, input: string) {
-  if (typeof padding === "number") {
-    return " ".repeat(padding) + input;
+if (typeofpadding === "number") {
+return" ".repeat(padding) + input;
   }
-  return padding + input;
+returnpadding + input;
 }
 ```
 
@@ -462,28 +462,28 @@ When a variable is analyzed, control flow can split off and re-merge over and ov
 
 ```ts
 function example() {
-  let x: string | number | boolean;
- 
-  x = Math.random() < 0.5;
- 
-  console.log(x);
-             
+letx: string | number | boolean;
+
+x = Math.random() < 0.5;
+
+console.log(x);
+
 let x: boolean
- 
-  if (Math.random() < 0.5) {
-    x = "hello";
-    console.log(x);
-               
+
+if (Math.random() < 0.5) {
+x = "hello";
+console.log(x);
+
 let x: string
   } else {
-    x = 100;
-    console.log(x);
-               
+x = 100;
+console.log(x);
+
 let x: number
   }
- 
-  return x;
-        
+
+returnx;
+
 let x: string | number
 }
 ```
@@ -498,7 +498,7 @@ To define a user-defined type guard, we simply need to define a function whose r
 
 ```ts
 function isFish(pet: Fish | Bird): pet is Fish {
-  return (pet as Fish).swim !== undefined;
+return (petasFish).swim !== undefined;
 }
 ```
 
@@ -511,12 +511,12 @@ Any time `isFish` is called with some variable, TypeScript will *narrow* that va
 
 ```ts
 // Both calls to 'swim' and 'fly' are now okay.
-let pet = getSmallPet();
- 
+letpet = getSmallPet();
+
 if (isFish(pet)) {
-  pet.swim();
+pet.swim();
 } else {
-  pet.fly();
+pet.fly();
 }
 ```
 
@@ -529,22 +529,22 @@ You may use the type guard `isFish` to filter an array of `Fish | Bird` and obta
 
 ```ts
 const zoo: (Fish | Bird)[] = [getSmallPet(), getSmallPet(), getSmallPet()];
-const underWater1: Fish[] = zoo.filter(isFish);
+constunderWater1: Fish[] = zoo.filter(isFish);
 // or, equivalently
-const underWater2: Fish[] = zoo.filter(isFish) as Fish[];
- 
+constunderWater2: Fish[] = zoo.filter(isFish) asFish[];
+
 // The predicate may need repeating for more complex examples
-const underWater3: Fish[] = zoo.filter((pet): pet is Fish => {
-  if (pet.name === "sharkey") return false;
-  return isFish(pet);
+constunderWater3: Fish[] = zoo.filter((pet): petisFish=> {
+if (pet.name === "sharkey") returnfalse;
+returnisFish(pet);
 });
 ```
 
-In addition, classes can [use `this is Type` ↗](https://www.typescriptlang.org/docs/handbook/2/classes.html#this-based-type-guards) to narrow their type.
+In addition, classes can [use `this is Type`](/typescript/5.2/handbook/classes#this-based-type-guards) to narrow their type.
 
 ## Assertion functions {#assertion-functions}
 
-Types can also be narrowed using [Assertion functions ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions).
+Types can also be narrowed using [Assertion functions](/typescript/5.2/whats-new/typescript-3-7#assertion-functions).
 
 # Discriminated unions {#discriminated-unions}
 
@@ -560,9 +560,9 @@ Here’s a first attempt at defining `Shape`.
 
 ```ts
 interface Shape {
-  kind: "circle" | "square";
-  radius?: number;
-  sideLength?: number;
+kind: "circle" | "square";
+radius?: number;
+sideLength?: number;
 }
 ```
 
@@ -573,9 +573,9 @@ By using `"circle" | "square"` instead of `string`, we can avoid misspelling iss
 
 ```ts
 function handleShape(shape: Shape) {
-  // oops!
-  if (shape.kind === "rect") {
-    // ...
+// oops!
+if (shape.kind === "rect") {
+// ...
   }
 }
 ```
@@ -591,7 +591,7 @@ We’ll first try dealing with circles.
 
 ```ts
 function getArea(shape: Shape) {
-  return Math.PI * shape.radius ** 2;
+returnMath.PI * shape.radius ** 2;
 }
 ```
 
@@ -606,8 +606,8 @@ But what if we perform the appropriate checks on the `kind` property?
 
 ```ts
 function getArea(shape: Shape) {
-  if (shape.kind === "circle") {
-    return Math.PI * shape.radius ** 2;
+if (shape.kind === "circle") {
+returnMath.PI * shape.radius ** 2;
   }
 }
 ```
@@ -624,8 +624,8 @@ We could try to use a non-null assertion (a `!` after `shape.radius`) to say tha
 
 ```ts
 function getArea(shape: Shape) {
-  if (shape.kind === "circle") {
-    return Math.PI * shape.radius! ** 2;
+if (shape.kind === "circle") {
+returnMath.PI * shape.radius! ** 2;
   }
 }
 ```
@@ -643,16 +643,16 @@ With that in mind, let’s take another swing at defining `Shape`.
 
 ```ts
 interface Circle {
-  kind: "circle";
-  radius: number;
+kind: "circle";
+radius: number;
 }
- 
-interface Square {
-  kind: "square";
-  sideLength: number;
+
+interfaceSquare {
+kind: "square";
+sideLength: number;
 }
- 
-type Shape = Circle | Square;
+
+typeShape = Circle | Square;
 ```
 
 Here, we’ve properly separated `Shape` out into two types with different values for the `kind` property, but `radius` and `sideLength` are declared as required properties in their respective types.
@@ -663,7 +663,7 @@ Let’s see what happens here when we try to access the `radius` of a `Shape`.
 
 ```ts
 function getArea(shape: Shape) {
-  return Math.PI * shape.radius ** 2;
+returnMath.PI * shape.radius ** 2;
 }
 ```
 
@@ -683,9 +683,9 @@ But what if we tried checking the `kind` property again?
 
 ```ts
 function getArea(shape: Shape) {
-  if (shape.kind === "circle") {
-    return Math.PI * shape.radius ** 2;
-                      
+if (shape.kind === "circle") {
+returnMath.PI * shape.radius ** 2;
+
 (parameter) shape: Circle
   }
 }
@@ -705,14 +705,14 @@ Now we can try to write our complete `getArea` without any pesky `!` non-null as
 
 ```ts
 function getArea(shape: Shape) {
-  switch (shape.kind) {
-    case "circle":
-      return Math.PI * shape.radius ** 2;
-                        
+switch (shape.kind) {
+case"circle":
+returnMath.PI * shape.radius ** 2;
+
 (parameter) shape: Circle
-    case "square":
-      return shape.sideLength ** 2;
-              
+case"square":
+returnshape.sideLength ** 2;
+
 (parameter) shape: Square
   }
 }
@@ -745,16 +745,16 @@ For example, adding a `default` to our `getArea` function which tries to assign 
 
 ```ts
 type Shape = Circle | Square;
- 
-function getArea(shape: Shape) {
-  switch (shape.kind) {
-    case "circle":
-      return Math.PI * shape.radius ** 2;
-    case "square":
-      return shape.sideLength ** 2;
-    default:
-      const _exhaustiveCheck: never = shape;
-      return _exhaustiveCheck;
+
+functiongetArea(shape: Shape) {
+switch (shape.kind) {
+case"circle":
+returnMath.PI * shape.radius ** 2;
+case"square":
+returnshape.sideLength ** 2;
+default:
+const_exhaustiveCheck: never = shape;
+return_exhaustiveCheck;
   }
 }
 ```
@@ -765,21 +765,21 @@ Adding a new member to the `Shape` union, will cause a TypeScript error:
 
 ```ts
 interface Triangle {
-  kind: "triangle";
-  sideLength: number;
+kind: "triangle";
+sideLength: number;
 }
- 
-type Shape = Circle | Square | Triangle;
- 
-function getArea(shape: Shape) {
-  switch (shape.kind) {
-    case "circle":
-      return Math.PI * shape.radius ** 2;
-    case "square":
-      return shape.sideLength ** 2;
-    default:
-      const _exhaustiveCheck: never = shape;
-      return _exhaustiveCheck;
+
+typeShape = Circle | Square | Triangle;
+
+functiongetArea(shape: Shape) {
+switch (shape.kind) {
+case"circle":
+returnMath.PI * shape.radius ** 2;
+case"square":
+returnshape.sideLength ** 2;
+default:
+const_exhaustiveCheck: never = shape;
+return_exhaustiveCheck;
   }
 }
 ```

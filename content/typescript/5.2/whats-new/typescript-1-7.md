@@ -22,26 +22,26 @@ In the following example, each input element will be printed out one at a time w
 "use strict";
 
 // printDelayed is a 'Promise<void>'
-async function printDelayed(elements: string[]) {
-  for (const element of elements) {
-    await delay(400);
-    console.log(element);
+asyncfunctionprintDelayed(elements: string[]) {
+for (constelementofelements) {
+awaitdelay(400);
+console.log(element);
   }
 }
 
-async function delay(milliseconds: number) {
-  return new Promise<void>((resolve) => {
-    setTimeout(resolve, milliseconds);
+asyncfunctiondelay(milliseconds: number) {
+returnnewPromise<void>((resolve) => {
+setTimeout(resolve, milliseconds);
   });
 }
 
 printDelayed(["Hello", "beautiful", "asynchronous", "world"]).then(() => {
-  console.log();
-  console.log("Printed every element!");
+console.log();
+console.log("Printed every element!");
 });
 ```
 
-For more information see [async function reference](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) reference.
+For more information see [async function reference ↗](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) reference.
 
 ## Support for `--target ES6` with `--module` {#support-for---target-es6-with---module}
 
@@ -52,44 +52,44 @@ This provides more flexibility to target exactly the features you want in specif
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "amd",
-    "[target ↗](https://www.typescriptlang.org/tsconfig.html#target)": "es6"
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "amd",
+"[target ↗](https://www.typescriptlang.org/tsconfig.html#target)": "es6"
   }
 }
 ```
 
 ## `this`-typing {#this-typing}
 
-It is a common pattern to return the current object (i.e. `this`) from a method to create [fluent-style APIs](https://wikipedia.org/wiki/Fluent_interface).
+It is a common pattern to return the current object (i.e. `this`) from a method to create [fluent-style APIs ↗](https://wikipedia.org/wiki/Fluent_interface).
 For instance, consider the following `BasicCalculator` module:
 
 ```ts
 export default class BasicCalculator {
-  public constructor(protected value: number = 0) {}
+publicconstructor(protectedvalue: number = 0) {}
 
-  public currentValue(): number {
-    return this.value;
+publiccurrentValue(): number {
+returnthis.value;
   }
 
-  public add(operand: number) {
-    this.value += operand;
-    return this;
+publicadd(operand: number) {
+this.value += operand;
+returnthis;
   }
 
-  public subtract(operand: number) {
-    this.value -= operand;
-    return this;
+publicsubtract(operand: number) {
+this.value -= operand;
+returnthis;
   }
 
-  public multiply(operand: number) {
-    this.value *= operand;
-    return this;
+publicmultiply(operand: number) {
+this.value *= operand;
+returnthis;
   }
 
-  public divide(operand: number) {
-    this.value /= operand;
-    return this;
+publicdivide(operand: number) {
+this.value /= operand;
+returnthis;
   }
 }
 ```
@@ -99,7 +99,7 @@ A user could express `2 * 5 + 1` as
 ```ts
 import calc from "./BasicCalculator";
 
-let v = new calc(2).multiply(5).add(1).currentValue();
+letv = newcalc(2).multiply(5).add(1).currentValue();
 ```
 
 This often opens up very elegant ways of writing code; however, there was a problem for classes that wanted to extend from `BasicCalculator`.
@@ -108,19 +108,19 @@ Imagine a user wanted to start writing a `ScientificCalculator`:
 ```ts
 import BasicCalculator from "./BasicCalculator";
 
-export default class ScientificCalculator extends BasicCalculator {
-  public constructor(value = 0) {
-    super(value);
+exportdefaultclassScientificCalculatorextendsBasicCalculator {
+publicconstructor(value = 0) {
+super(value);
   }
 
-  public square() {
-    this.value = this.value ** 2;
-    return this;
+publicsquare() {
+this.value = this.value ** 2;
+returnthis;
   }
 
-  public sin() {
-    this.value = Math.sin(this.value);
-    return this;
+publicsin() {
+this.value = Math.sin(this.value);
+returnthis;
   }
 }
 ```
@@ -132,7 +132,7 @@ For instance:
 ```ts
 import calc from "./ScientificCalculator";
 
-let v = new calc(0.5)
+letv = newcalc(0.5)
   .square()
   .divide(2)
   .sin() // Error: 'BasicCalculator' has no 'sin' method.
@@ -146,31 +146,31 @@ The `this` type is also useful with intersection types in describing libraries (
 
 ```ts
 interface MyType {
-  extend<T>(other: T): this & T;
+extend<T>(other: T): this & T;
 }
 ```
 
 ## ES7 exponentiation operator {#es7-exponentiation-operator}
 
-TypeScript 1.7 supports upcoming [ES7/ES2016 exponentiation operators](https://github.com/rwaldron/exponentiation-operator): `**` and `**=`.
+TypeScript 1.7 supports upcoming [ES7/ES2016 exponentiation operators ↗](https://github.com/rwaldron/exponentiation-operator): `**` and `**=`.
 The operators will be transformed in the output to ES3/ES5 using `Math.pow`.
 
 ##### Example {#example-2}
 
 ```ts
 var x = 2 ** 3;
-var y = 10;
+vary = 10;
 y **= 2;
-var z = -(4 ** 3);
+varz = -(4 ** 3);
 ```
 
 Will generate the following JavaScript output:
 
 ```js
 var x = Math.pow(2, 3);
-var y = 10;
+vary = 10;
 y = Math.pow(y, 2);
-var z = -Math.pow(4, 3);
+varz = -Math.pow(4, 3);
 ```
 
 ## Improved checking for destructuring object literal {#improved-checking-for-destructuring-object-literal}
@@ -191,23 +191,23 @@ When an array literal is contextually typed by the implied type of an array bind
 
 ```ts
 // Type of f1 is (arg?: { x?: number, y?: number }) => void
-function f1({ x = 0, y = 0 } = {}) {}
+functionf1({ x = 0, y = 0 } = {}) {}
 
 // And can be called as:
 f1();
 f1({});
-f1({ x: 1 });
-f1({ y: 1 });
-f1({ x: 1, y: 1 });
+f1({ x:1 });
+f1({ y:1 });
+f1({ x:1, y:1 });
 
 // Type of f2 is (arg?: (x: number, y?: number) => void
-function f2({ x, y = 0 } = { x: 0 }) {}
+functionf2({ x, y = 0 } = { x:0 }) {}
 
 f2();
 f2({}); // Error, x not optional
-f2({ x: 1 });
-f2({ y: 1 }); // Error, x not optional
-f2({ x: 1, y: 1 });
+f2({ x:1 });
+f2({ y:1 }); // Error, x not optional
+f2({ x:1, y:1 });
 ```
 
 ## Support for decorators when targeting ES3 {#support-for-decorators-when-targeting-es3}

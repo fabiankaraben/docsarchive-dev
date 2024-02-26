@@ -20,14 +20,14 @@ A `keyof T` type is considered a subtype of `string`.
 
 ```ts
 interface Person {
-  name: string;
-  age: number;
-  location: string;
+name: string;
+age: number;
+location: string;
 }
 
-type K1 = keyof Person; // "name" | "age" | "location"
-type K2 = keyof Person[]; // "length" | "push" | "pop" | "concat" | ...
-type K3 = keyof { [x: string]: Person }; // string
+typeK1 = keyofPerson; // "name" | "age" | "location"
+typeK2 = keyofPerson[]; // "length" | "push" | "pop" | "concat" | ...
+typeK3 = keyof { [x: string]: Person }; // string
 ```
 
 The dual of this is *indexed access types*, also called *lookup types*.
@@ -37,29 +37,29 @@ Syntactically, they look exactly like an element access, but are written as type
 
 ```ts
 type P1 = Person["name"]; // string
-type P2 = Person["name" | "age"]; // string | number
-type P3 = string["charAt"]; // (pos: number) => string
-type P4 = string[]["push"]; // (...items: string[]) => number
-type P5 = string[][0]; // string
+typeP2 = Person["name" | "age"]; // string | number
+typeP3 = string["charAt"]; // (pos: number) => string
+typeP4 = string[]["push"]; // (...items: string[]) => number
+typeP5 = string[][0]; // string
 ```
 
 You can use this pattern with other parts of the type system to get type-safe lookups.
 
 ```ts
 function getProperty<T, K extends keyof T>(obj: T, key: K) {
-  return obj[key]; // Inferred type is T[K]
+returnobj[key]; // Inferred type is T[K]
 }
 
-function setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
-  obj[key] = value;
+functionsetProperty<T, KextendskeyofT>(obj: T, key: K, value: T[K]) {
+obj[key] = value;
 }
 
-let x = { foo: 10, bar: "hello!" };
+letx = { foo:10, bar:"hello!" };
 
-let foo = getProperty(x, "foo"); // number
-let bar = getProperty(x, "bar"); // string
+letfoo = getProperty(x, "foo"); // number
+letbar = getProperty(x, "bar"); // string
 
-let oops = getProperty(x, "wargarbl"); // Error! "wargarbl" is not "foo" | "bar"
+letoops = getProperty(x, "wargarbl"); // Error! "wargarbl" is not "foo" | "bar"
 
 setProperty(x, "foo", "string"); // Error!, string expected number
 ```
@@ -71,9 +71,9 @@ Let’s say we have a `Person`:
 
 ```ts
 interface Person {
-  name: string;
-  age: number;
-  location: string;
+name: string;
+age: number;
+location: string;
 }
 ```
 
@@ -81,9 +81,9 @@ A partial version of it would be:
 
 ```ts
 interface PartialPerson {
-  name?: string;
-  age?: number;
-  location?: string;
+name?: string;
+age?: number;
+location?: string;
 }
 ```
 
@@ -91,31 +91,31 @@ with Mapped types, `PartialPerson` can be written as a generalized transformatio
 
 ```ts
 type Partial<T> = {
-  [P in keyof T]?: T[P];
+  [PinkeyofT]?: T[P];
 };
 
-type PartialPerson = Partial<Person>;
+typePartialPerson = Partial<Person>;
 ```
 
 Mapped types are produced by taking a union of literal types, and computing a set of properties for a new object type.
-They’re like [list comprehensions in Python](https://docs.python.org/2/tutorial/datastructures.html#nested-list-comprehensions), but instead of producing new elements in a list, they produce new properties in a type.
+They’re like [list comprehensions in Python ↗](https://docs.python.org/2/tutorial/datastructures.html#nested-list-comprehensions), but instead of producing new elements in a list, they produce new properties in a type.
 
 In addition to `Partial`, Mapped Types can express many useful transformations on types:
 
 ```ts
 // Keep types the same, but make each property to be read-only.
-type Readonly<T> = {
-  readonly [P in keyof T]: T[P];
+typeReadonly<T> = {
+readonly [PinkeyofT]: T[P];
 };
 
 // Same property names, but make the value a promise instead of a concrete one
-type Deferred<T> = {
-  [P in keyof T]: Promise<T[P]>;
+typeDeferred<T> = {
+  [PinkeyofT]: Promise<T[P]>;
 };
 
 // Wrap proxies around properties of T
-type Proxify<T> = {
-  [P in keyof T]: { get(): T[P]; set(v: T[P]): void };
+typeProxify<T> = {
+  [PinkeyofT]: { get(): T[P]; set(v: T[P]): void };
 };
 ```
 
@@ -126,7 +126,7 @@ You can use them to describe some common JS routines like:
 
 ```ts
 function assign<T>(obj: T, props: Partial<T>): void;
-function freeze<T>(obj: T): Readonly<T>;
+functionfreeze<T>(obj: T): Readonly<T>;
 ```
 
 Because of that, they are now included by default in the standard library.
@@ -135,25 +135,25 @@ We’re also including two other utility types as well: `Record` and `Pick`.
 
 ```ts
 // From T pick a set of properties K
-declare function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K>;
+declarefunctionpick<T, KextendskeyofT>(obj: T, ...keys: K[]): Pick<T, K>;
 
-const nameAndAgeOnly = pick(person, "name", "age"); // { name: string, age: number }
+constnameAndAgeOnly = pick(person, "name", "age"); // { name: string, age: number }
 ```
 
 ```ts
 // For every properties K of type T, transform it to U
-function mapObject<K extends string, T, U>(
-  obj: Record<K, T>,
-  f: (x: T) => U
+functionmapObject<Kextendsstring, T, U>(
+obj: Record<K, T>,
+f: (x: T) =>U
 ): Record<K, U>;
 
-const names = { foo: "hello", bar: "world", baz: "bye" };
-const lengths = mapObject(names, s => s.length); // { foo: number, bar: number, baz: number }
+constnames = { foo:"hello", bar:"world", baz:"bye" };
+constlengths = mapObject(names, s=>s.length); // { foo: number, bar: number, baz: number }
 ```
 
 ## Object Spread and Rest {#object-spread-and-rest}
 
-TypeScript 2.1 brings support for [ESnext Spread and Rest](https://github.com/sebmarkbage/ecmascript-rest-spread).
+TypeScript 2.1 brings support for [ESnext Spread and Rest ↗](https://github.com/sebmarkbage/ecmascript-rest-spread).
 
 Similar to array spread, spreading an object can be handy to get a shallow copy:
 
@@ -172,7 +172,7 @@ You can also override existing properties and add new ones:
 
 ```ts
 let obj = { x: 1, y: "string" };
-var newObj = { ...obj, z: 3, y: 4 }; // { x: number, y: number, z: number }
+varnewObj = { ...obj, z:3, y:4 }; // { x: number, y: number, z: number }
 ```
 
 The order of specifying spread operations determines what properties end up in the resulting object;
@@ -192,7 +192,7 @@ This feature was supported before TypeScript 2.1, but only when targeting ES6/ES
 TypeScript 2.1 brings the capability to ES3 and ES5 run-times, meaning you’ll be free to take advantage of it no matter what environment you’re using.
 
 > Note: first, we need to make sure our run-time has an ECMAScript-compliant `Promise` available globally.
-> That might involve grabbing [a polyfill](https://github.com/stefanpenner/es6-promise) for `Promise`, or relying on one that you might have in the run-time that you’re targeting.
+> That might involve grabbing [a polyfill ↗](https://github.com/stefanpenner/es6-promise) for `Promise`, or relying on one that you might have in the run-time that you’re targeting.
 > We also need to make sure that TypeScript knows `Promise` exists by setting your [`lib` ↗](https://www.typescriptlang.org/tsconfig.html#lib) option to something like `"dom", "es2015"` or `"dom", "es2015.promise", "es5"`
 > 
 
@@ -202,8 +202,8 @@ TypeScript 2.1 brings the capability to ES3 and ES5 run-times, meaning you’ll 
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[lib ↗](https://www.typescriptlang.org/tsconfig.html#lib)": ["dom", "es2015.promise", "es5"]
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[lib ↗](https://www.typescriptlang.org/tsconfig.html#lib)": ["dom", "es2015.promise", "es5"]
   }
 }
 ```
@@ -212,20 +212,20 @@ TypeScript 2.1 brings the capability to ES3 and ES5 run-times, meaning you’ll 
 
 ```ts
 function delay(milliseconds: number) {
-  return new Promise<void>(resolve => {
-    setTimeout(resolve, milliseconds);
+returnnewPromise<void>(resolve=> {
+setTimeout(resolve, milliseconds);
   });
 }
 
-async function dramaticWelcome() {
-  console.log("Hello");
+asyncfunctiondramaticWelcome() {
+console.log("Hello");
 
-  for (let i = 0; i < 3; i++) {
-    await delay(500);
-    console.log(".");
+for (leti = 0; i < 3; i++) {
+awaitdelay(500);
+console.log(".");
   }
 
-  console.log("World!");
+console.log("World!");
 }
 
 dramaticWelcome();
@@ -248,7 +248,7 @@ And not including helpers, meant customers had to maintain their own helpers lib
 
 TypeScript 2.1 allows for including these files in your project once in a separate module, and the compiler will emit imports to them as needed.
 
-First, install the [`tslib`](https://github.com/Microsoft/tslib) utility library:
+First, install the [`tslib` ↗](https://github.com/Microsoft/tslib) utility library:
 
 ```sh
 npm install tslib
@@ -264,13 +264,13 @@ So given the following input, the resulting `.js` file will include an import to
 
 ```ts
 export const o = { a: 1, name: "o" };
-export const copy = { ...o };
+exportconstcopy = { ...o };
 ```
 
 ```js
 "use strict";
-var tslib_1 = require("tslib");
-exports.o = { a: 1, name: "o" };
+vartslib_1 = require("tslib");
+exports.o = { a:1, name:"o" };
 exports.copy = tslib_1.__assign({}, exports.o);
 ```
 
@@ -292,7 +292,7 @@ An import to a module with no declaration file will still be flagged as an error
 
 ```ts
 // Succeeds if `node_modules/asdf/index.js` exists
-import { x } from "asdf";
+import { x } from"asdf";
 ```
 
 ## Support for `--target ES2016`, `--target ES2017` and `--target ESNext` {#support-for---target-es2016---target-es2017-and---target-esnext}
@@ -303,7 +303,7 @@ Using target `--target ES2016` will instruct the compiler not to transform ES201
 
 Similarly, `--target ES2017` will instruct the compiler not to transform ES2017-specific features like `async`/`await`.
 
-`--target ESNext` targets latest supported [ES proposed features](https://github.com/tc39/proposals).
+`--target ESNext` targets latest supported [ES proposed features ↗](https://github.com/tc39/proposals).
 
 ## Improved `any` Inference {#improved-any-inference}
 
@@ -311,9 +311,9 @@ Previously, if TypeScript couldn’t figure out the type of a variable, it would
 
 ```ts
 let x; // implicitly 'any'
-let y = []; // implicitly 'any[]'
+lety = []; // implicitly 'any[]'
 
-let z: any; // explicitly 'any'.
+letz: any; // explicitly 'any'.
 ```
 
 With TypeScript 2.1, instead of just choosing `any`, TypeScript will infer types based on what you end up assigning later on.
@@ -326,10 +326,10 @@ This is only enabled if [`noImplicitAny` ↗](https://www.typescriptlang.org/tsc
 let x;
 
 // You can still assign anything you want to 'x'.
-x = () => 42;
+x = () =>42;
 
 // After that last assignment, TypeScript 2.1 knows that 'x' has type '() => number'.
-let y = x();
+lety = x();
 
 // Thanks to that, it will now tell you that you can't add a number to a function!
 console.log(x + y);
@@ -350,22 +350,22 @@ However, each subsequent `x.push(value)`, `x.unshift(value)` or `x[n] = value` o
 
 ```ts
 function f1() {
-  let x = [];
-  x.push(5);
-  x[1] = "hello";
-  x.unshift(true);
-  return x; // (string | number | boolean)[]
+letx = [];
+x.push(5);
+x[1] = "hello";
+x.unshift(true);
+returnx; // (string | number | boolean)[]
 }
 
-function f2() {
-  let x = null;
-  if (cond()) {
-    x = [];
-    while (cond()) {
-      x.push("hello");
+functionf2() {
+letx = null;
+if (cond()) {
+x = [];
+while (cond()) {
+x.push("hello");
     }
   }
-  return x; // string[] | null
+returnx; // string[] | null
 }
 ```
 
@@ -378,10 +378,10 @@ Implicit `any` errors are only reported when the compiler is unable to know the 
 
 ```ts
 function f3() {
-  let x = []; // Error: Variable 'x' implicitly has type 'any[]' in some locations where its type cannot be determined.
-  x.push(5);
-  function g() {
-    x; // Error: Variable 'x' implicitly has an 'any[]' type.
+letx = []; // Error: Variable 'x' implicitly has type 'any[]' in some locations where its type cannot be determined.
+x.push(5);
+functiong() {
+x; // Error: Variable 'x' implicitly has an 'any[]' type.
   }
 }
 ```
@@ -399,16 +399,16 @@ Where the widened type for a string literal type is `string`, `number` for numer
 
 ```ts
 const c1 = 1; // Type 1
-const c2 = c1; // Type 1
-const c3 = "abc"; // Type "abc"
-const c4 = true; // Type true
-const c5 = cond ? 1 : "abc"; // Type 1 | "abc"
+constc2 = c1; // Type 1
+constc3 = "abc"; // Type "abc"
+constc4 = true; // Type true
+constc5 = cond ? 1 : "abc"; // Type 1 | "abc"
 
-let v1 = 1; // Type number
-let v2 = c2; // Type number
-let v3 = c3; // Type string
-let v4 = c4; // Type boolean
-let v5 = c5; // Type number | string
+letv1 = 1; // Type number
+letv2 = c2; // Type number
+letv3 = c3; // Type string
+letv4 = c4; // Type boolean
+letv5 = c5; // Type number | string
 ```
 
 Literal type widening can be controlled through explicit type annotations.
@@ -419,35 +419,35 @@ But when a `const` location has an explicit literal type annotation, the `const`
 
 ```ts
 const c1 = "hello"; // Widening type "hello"
-let v1 = c1; // Type string
+letv1 = c1; // Type string
 
-const c2: "hello" = "hello"; // Type "hello"
-let v2 = c2; // Type "hello"
+constc2: "hello" = "hello"; // Type "hello"
+letv2 = c2; // Type "hello"
 ```
 
 ## Use returned values from super calls as ‘this’ {#use-returned-values-from-super-calls-as-this}
 
 In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super()`.
 As a result, it is necessary to capture any potential return value of `super()` and replace it with `this`.
-This change enables working with [Custom Elements](https://www.w3.org/TR/custom-elements/), which takes advantage of this to initialize browser-allocated elements with user-written constructors.
+This change enables working with [Custom Elements ↗](https://www.w3.org/TR/custom-elements/), which takes advantage of this to initialize browser-allocated elements with user-written constructors.
 
 ##### Example {#example-8}
 
 ```ts
 class Base {
-  x: number;
-  constructor() {
-    // return a new object other than `this`
-    return {
-      x: 1
+x: number;
+constructor() {
+// return a new object other than `this`
+return {
+x:1
     };
   }
 }
 
-class Derived extends Base {
-  constructor() {
-    super();
-    this.x = 2;
+classDerivedextendsBase {
+constructor() {
+super();
+this.x = 2;
   }
 }
 ```
@@ -456,17 +456,17 @@ Generates:
 
 ```js
 var Derived = (function(_super) {
-  __extends(Derived, _super);
-  function Derived() {
-    var _this = _super.call(this) || this;
-    _this.x = 2;
-    return _this;
+__extends(Derived, _super);
+functionDerived() {
+var_this = _super.call(this) || this;
+_this.x = 2;
+return_this;
   }
-  return Derived;
+returnDerived;
 })(Base);
 ```
 
-> This change entails a break in the behavior of extending built-in classes like `Error`, `Array`, `Map`, etc.. Please see the [extending built-ins breaking change documentation](https://github.com/Microsoft/TypeScript-wiki/blob/master/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work) for more details.
+> This change entails a break in the behavior of extending built-in classes like `Error`, `Array`, `Map`, etc.. Please see the [extending built-ins breaking change documentation ↗](https://github.com/Microsoft/TypeScript-wiki/blob/master/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work) for more details.
 > 
 
 ## Configuration inheritance {#configuration-inheritance}
@@ -489,9 +489,9 @@ TypeScript 2.1 supports inheriting configuration using `extends`, where:
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
-    "[strictNullChecks ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks)": true
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
+"[strictNullChecks ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks)": true
   }
 }
 ```
@@ -500,8 +500,8 @@ TypeScript 2.1 supports inheriting configuration using `extends`, where:
 
 ```
 {
-  "[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "./configs/base",
-  "[files ↗](https://www.typescriptlang.org/tsconfig.html#files)": ["main.ts", "supplemental.ts"]
+"[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "./configs/base",
+"[files ↗](https://www.typescriptlang.org/tsconfig.html#files)": ["main.ts", "supplemental.ts"]
 }
 ```
 
@@ -509,9 +509,9 @@ TypeScript 2.1 supports inheriting configuration using `extends`, where:
 
 ```
 {
-  "[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "./tsconfig",
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[strictNullChecks ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks)": false
+"[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "./tsconfig",
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[strictNullChecks ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks)": false
   }
 }
 ```

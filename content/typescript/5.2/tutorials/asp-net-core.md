@@ -11,7 +11,7 @@ prev: /typescript/5.2/modules-reference/appendices/esm-cjs-interop
 
 ## Install ASP.NET Core and TypeScript {#install-aspnet-core-and-typescript}
 
-First, install [ASP.NET Core](https://dotnet.microsoft.com/apps/aspnet) if you need it. This quick-start guide requires Visual Studio 2015 or 2017.
+First, install [ASP.NET Core ↗](https://dotnet.microsoft.com/apps/aspnet) if you need it. This quick-start guide requires Visual Studio 2015 or 2017.
 
 Next, if your version of Visual Studio does not already have the latest TypeScript, you can [install it ↗](https://www.typescriptlang.org/index.html#download-links).
 
@@ -79,11 +79,11 @@ Add the following code to the `app.ts` file.
 
 ```ts
 function sayHello() {
-  const compiler = (document.getElementById("compiler") as HTMLInputElement)
+constcompiler = (document.getElementById("compiler") asHTMLInputElement)
     .value;
-  const framework = (document.getElementById("framework") as HTMLInputElement)
+constframework = (document.getElementById("framework") asHTMLInputElement)
     .value;
-  return `Hello from ${compiler} and ${framework}!`;
+return`Hello from ${compiler} and ${framework}!`;
 }
 ```
 
@@ -99,14 +99,14 @@ Replace the contents of the `tsconfig.json` file with:
 
 ```
 {
-  "[compilerOptions](/tsconfig.html#compilerOptions)": {
-    "[noEmitOnError](/tsconfig.html#noEmitOnError)": true,
-    "[noImplicitAny](/tsconfig.html#noImplicitAny)": true,
-    "[sourceMap](/tsconfig.html#sourceMap)": true,
-    "[target](/tsconfig.html#target)": "es6"
+"[compilerOptions](/tsconfig.html#compilerOptions)": {
+"[noEmitOnError](/tsconfig.html#noEmitOnError)": true,
+"[noImplicitAny](/tsconfig.html#noImplicitAny)": true,
+"[sourceMap](/tsconfig.html#sourceMap)": true,
+"[target](/tsconfig.html#target)": "es6"
   },
-  "[files](/tsconfig.html#files)": ["./app.ts"],
-  "compileOnSave": true
+"[files](/tsconfig.html#files)": ["./app.ts"],
+"compileOnSave": true
 }
 ```
 
@@ -129,8 +129,8 @@ Inside the `"devDependencies"` section of the `package.json` file, add *gulp* an
 
 ```
 "devDependencies": {
-    "gulp": "4.0.2",
-    "del": "5.1.0"
+"gulp": "4.0.2",
+"del": "5.1.0"
 }
 ```
 
@@ -151,20 +151,20 @@ This file is the main entry point for defining Gulp tasks and using Gulp plugins
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 */
 
-var gulp = require("gulp");
-var del = require("del");
+vargulp = require("gulp");
+vardel = require("del");
 
-var paths = {
-  scripts: ["scripts/**/*.js", "scripts/**/*.ts", "scripts/**/*.map"],
+varpaths = {
+scripts: ["scripts/**/*.js", "scripts/**/*.ts", "scripts/**/*.map"],
 };
 
 gulp.task("clean", function () {
-  return del(["wwwroot/scripts/**/*"]);
+returndel(["wwwroot/scripts/**/*"]);
 });
 
 gulp.task("default", function (done) {
-    gulp.src(paths.scripts).pipe(gulp.dest("wwwroot/scripts"));
-    done();
+gulp.src(paths.scripts).pipe(gulp.dest("wwwroot/scripts"));
+done();
 });
 ```
 

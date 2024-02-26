@@ -10,14 +10,14 @@ type: docs
 
 Starting with ECMAScript 2015, JavaScript has a concept of modules. TypeScript shares this concept.
 
-Modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the [`export` forms ↗](https://www.typescriptlang.org/docs/handbook/modules.html#export).
-Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the [`import` forms ↗](https://www.typescriptlang.org/docs/handbook/modules.html#import).
+Modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the [`export` forms](/typescript/5.1/reference/modules#export).
+Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the [`import` forms](/typescript/5.1/reference/modules#import).
 
 Modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level.
 
 Modules import one another using a module loader.
 At runtime the module loader is responsible for locating and executing all dependencies of a module before executing it.
-Well-known module loaders used in JavaScript are Node.js’s loader for [CommonJS](https://wikipedia.org/wiki/CommonJS) modules and the [RequireJS](http://requirejs.org/) loader for [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) modules in Web applications.
+Well-known module loaders used in JavaScript are Node.js’s loader for [CommonJS ↗](https://wikipedia.org/wiki/CommonJS) modules and the [RequireJS ↗](http://requirejs.org/) loader for [AMD ↗](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) modules in Web applications.
 
 In TypeScript, just as in ECMAScript 2015, any file containing a top-level `import` or `export` is considered a module.
 Conversely, a file without any top-level `import` or `export` declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well).
@@ -32,7 +32,7 @@ Any declaration (such as a variable, function, class, type alias, or interface) 
 
 ```ts
 export interface StringValidator {
-  isAcceptable(s: string): boolean;
+isAcceptable(s: string): boolean;
 }
 ```
 
@@ -41,11 +41,11 @@ export interface StringValidator {
 ```ts
 import { StringValidator } from "./StringValidator";
 
-export const numberRegexp = /^[0-9]+$/;
+exportconstnumberRegexp = /^[0-9]+$/;
 
-export class ZipCodeValidator implements StringValidator {
-  isAcceptable(s: string) {
-    return s.length === 5 && numberRegexp.test(s);
+exportclassZipCodeValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returns.length === 5 && numberRegexp.test(s);
   }
 }
 ```
@@ -56,12 +56,12 @@ Export statements are handy when exports need to be renamed for consumers, so th
 
 ```ts
 class ZipCodeValidator implements StringValidator {
-  isAcceptable(s: string) {
-    return s.length === 5 && numberRegexp.test(s);
+isAcceptable(s: string) {
+returns.length === 5 && numberRegexp.test(s);
   }
 }
 export { ZipCodeValidator };
-export { ZipCodeValidator as mainValidator };
+export { ZipCodeValidatorasmainValidator };
 ```
 
 ### Re-exports {#re-exports}
@@ -73,13 +73,13 @@ A re-export does not import it locally, or introduce a local variable.
 
 ```ts
 export class ParseIntBasedZipCodeValidator {
-  isAcceptable(s: string) {
-    return s.length === 5 && parseInt(s).toString() === s;
+isAcceptable(s: string) {
+returns.length === 5 && parseInt(s).toString() === s;
   }
 }
 
 // Export original validator but rename it
-export { ZipCodeValidator as RegExpBasedZipCodeValidator } from "./ZipCodeValidator";
+export { ZipCodeValidatorasRegExpBasedZipCodeValidator } from"./ZipCodeValidator";
 ```
 
 Optionally, a module can wrap one or more modules and combine all their exports using `export * from "module"` syntax.
@@ -88,8 +88,8 @@ Optionally, a module can wrap one or more modules and combine all their exports 
 
 ```ts
 export * from "./StringValidator"; // exports 'StringValidator' interface
-export * from "./ZipCodeValidator"; // exports 'ZipCodeValidator' class and 'numberRegexp' constant value
-export * from "./ParseIntBasedZipCodeValidator"; //  exports the 'ParseIntBasedZipCodeValidator' class
+export*from"./ZipCodeValidator"; // exports 'ZipCodeValidator' class and 'numberRegexp' constant value
+export*from"./ParseIntBasedZipCodeValidator"; //  exports the 'ParseIntBasedZipCodeValidator' class
 // and re-exports 'RegExpBasedZipCodeValidator' as alias
 // of the 'ZipCodeValidator' class from 'ZipCodeValidator.ts'
 // module.
@@ -105,21 +105,21 @@ Importing an exported declaration is done through using one of the `import` form
 ```ts
 import { ZipCodeValidator } from "./ZipCodeValidator";
 
-let myValidator = new ZipCodeValidator();
+letmyValidator = newZipCodeValidator();
 ```
 
 imports can also be renamed
 
 ```ts
 import { ZipCodeValidator as ZCV } from "./ZipCodeValidator";
-let myValidator = new ZCV();
+letmyValidator = newZCV();
 ```
 
 ### Import the entire module into a single variable, and use it to access the module exports {#import-the-entire-module-into-a-single-variable-and-use-it-to-access-the-module-exports}
 
 ```ts
 import * as validator from "./ZipCodeValidator";
-let myValidator = new validator.ZipCodeValidator();
+letmyValidator = newvalidator.ZipCodeValidator();
 ```
 
 ### Import a module for side-effects only {#import-a-module-for-side-effects-only}
@@ -139,17 +139,17 @@ With TypeScript 3.8, you can import a type using the `import` statement, or usin
 
 ```ts
 // Re-using the same import
-import { APIResponseType } from "./api";
+import { APIResponseType } from"./api";
 
 // Explicitly use import type
-import type { APIResponseType } from "./api";
+importtype { APIResponseType } from"./api";
 
 // Explicitly pull out a value (getResponse) and a type (APIResponseType) 
-import { getResponse, type APIResponseType} from "./api";
+import { getResponse, typeAPIResponseType} from"./api";
 ```
 
 Any explicitly marked `type` import is guaranteed to be removed from your JavaScript, and tools like Babel can make better assumptions about your code via the [`isolatedModules` ↗](https://www.typescriptlang.org/tsconfig.html#isolatedModules) compiler flag.
-You can read more in the [3.8 release notes](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8-beta/#type-only-imports-exports).
+You can read more in the [3.8 release notes ↗](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8-beta/#type-only-imports-exports).
 
 With TypeScript 4.5, you can use a `type` modifier on individual named imports.
 
@@ -166,11 +166,11 @@ Default exports are marked with the keyword `default`; and there can only be one
 `default` exports are really handy.
 For instance, a library like jQuery might have a default export of `jQuery` or `$`, which we’d probably also import under the name `$` or `jQuery`.
 
-##### [JQuery.d.ts](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/jquery/JQuery.d.ts) {#jquerydts}
+##### [JQuery.d.ts ↗](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/jquery/JQuery.d.ts) {#jquerydts}
 
 ```ts
 declare let $: JQuery;
-export default $;
+exportdefault$;
 ```
 
 ##### App.ts {#appts}
@@ -188,9 +188,9 @@ Default export class and function declaration names are optional.
 
 ```ts
 export default class ZipCodeValidator {
-  static numberRegexp = /^[0-9]+$/;
-  isAcceptable(s: string) {
-    return s.length === 5 && ZipCodeValidator.numberRegexp.test(s);
+staticnumberRegexp = /^[0-9]+$/;
+isAcceptable(s: string) {
+returns.length === 5 && ZipCodeValidator.numberRegexp.test(s);
   }
 }
 ```
@@ -200,7 +200,7 @@ export default class ZipCodeValidator {
 ```ts
 import validator from "./ZipCodeValidator";
 
-let myValidator = new validator();
+letmyValidator = newvalidator();
 ```
 
 or
@@ -210,8 +210,8 @@ or
 ```ts
 const numberRegexp = /^[0-9]+$/;
 
-export default function (s: string) {
-  return s.length === 5 && numberRegexp.test(s);
+exportdefaultfunction (s: string) {
+returns.length === 5 && numberRegexp.test(s);
 }
 ```
 
@@ -220,11 +220,11 @@ export default function (s: string) {
 ```ts
 import validate from "./StaticZipCodeValidator";
 
-let strings = ["Hello", "98052", "101"];
+letstrings = ["Hello", "98052", "101"];
 
 // Use function validate
 strings.forEach((s) => {
-  console.log(`"${s}" ${validate(s) ? "matches" : "does not match"}`);
+console.log(`"${s}" ${validate(s) ?"matches":"does not match"}`);
 });
 ```
 
@@ -273,9 +273,9 @@ This can be a class, interface, namespace, function, or enum.
 
 ```ts
 let numberRegexp = /^[0-9]+$/;
-class ZipCodeValidator {
-  isAcceptable(s: string) {
-    return s.length === 5 && numberRegexp.test(s);
+classZipCodeValidator {
+isAcceptable(s: string) {
+returns.length === 5 && numberRegexp.test(s);
   }
 }
 export = ZipCodeValidator;
@@ -287,22 +287,22 @@ export = ZipCodeValidator;
 import zip = require("./ZipCodeValidator");
 
 // Some samples to try
-let strings = ["Hello", "98052", "101"];
+letstrings = ["Hello", "98052", "101"];
 
 // Validators to use
-let validator = new zip();
+letvalidator = newzip();
 
 // Show whether each string passed each validator
 strings.forEach((s) => {
-  console.log(
-    `"${s}" - ${validator.isAcceptable(s) ? "matches" : "does not match"}`
+console.log(
+`"${s}" - ${validator.isAcceptable(s) ?"matches":"does not match"}`
   );
 });
 ```
 
 ## Code Generation for Modules {#code-generation-for-modules}
 
-Depending on the module target specified during compilation, the compiler will generate appropriate code for Node.js ([CommonJS](http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs), or [ECMAScript 2015 native modules](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) module-loading systems.
+Depending on the module target specified during compilation, the compiler will generate appropriate code for Node.js ([CommonJS ↗](http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD ↗](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD ↗](https://github.com/umdjs/umd), [SystemJS ↗](https://github.com/systemjs/systemjs), or [ECMAScript 2015 native modules ↗](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) module-loading systems.
 For more information on what the `define`, `require` and `register` calls in the generated code do, consult the documentation for each module loader.
 
 This simple example shows how the names used during importing and exporting get translated into the module loading code.
@@ -311,14 +311,14 @@ This simple example shows how the names used during importing and exporting get 
 
 ```ts
 import m = require("mod");
-export let t = m.something + 1;
+exportlett = m.something + 1;
 ```
 
 ##### AMD / RequireJS SimpleModule.js {#amd--requirejs-simplemodulejs}
 
 ```js
 define(["require", "exports", "./mod"], function (require, exports, mod_1) {
-  exports.t = mod_1.something + 1;
+exports.t = mod_1.something + 1;
 });
 ```
 
@@ -333,15 +333,15 @@ exports.t = mod_1.something + 1;
 
 ```js
 (function (factory) {
-  if (typeof module === "object" && typeof module.exports === "object") {
-    var v = factory(require, exports);
-    if (v !== undefined) module.exports = v;
-  } else if (typeof define === "function" && define.amd) {
-    define(["require", "exports", "./mod"], factory);
+if (typeofmodule === "object" && typeofmodule.exports === "object") {
+varv = factory(require, exports);
+if (v !== undefined) module.exports = v;
+  } elseif (typeofdefine === "function" && define.amd) {
+define(["require", "exports", "./mod"], factory);
   }
 })(function (require, exports) {
-  var mod_1 = require("./mod");
-  exports.t = mod_1.something + 1;
+varmod_1 = require("./mod");
+exports.t = mod_1.something + 1;
 });
 ```
 
@@ -349,16 +349,16 @@ exports.t = mod_1.something + 1;
 
 ```js
 System.register(["./mod"], function (exports_1) {
-  var mod_1;
-  var t;
-  return {
-    setters: [
-      function (mod_1_1) {
-        mod_1 = mod_1_1;
+varmod_1;
+vart;
+return {
+setters: [
+function (mod_1_1) {
+mod_1 = mod_1_1;
       },
     ],
-    execute: function () {
-      exports_1("t", (t = mod_1.something + 1));
+execute:function () {
+exports_1("t", (t = mod_1.something + 1));
     },
   };
 });
@@ -368,7 +368,7 @@ System.register(["./mod"], function (exports_1) {
 
 ```js
 import { something } from "./mod";
-export var t = something + 1;
+exportvart = something + 1;
 ```
 
 ## Simple Example {#simple-example}
@@ -389,7 +389,7 @@ As with reference tags, the compiler will follow `import` statements to compile 
 
 ```ts
 export interface StringValidator {
-  isAcceptable(s: string): boolean;
+isAcceptable(s: string): boolean;
 }
 ```
 
@@ -398,11 +398,11 @@ export interface StringValidator {
 ```ts
 import { StringValidator } from "./Validation";
 
-const lettersRegexp = /^[A-Za-z]+$/;
+constlettersRegexp = /^[A-Za-z]+$/;
 
-export class LettersOnlyValidator implements StringValidator {
-  isAcceptable(s: string) {
-    return lettersRegexp.test(s);
+exportclassLettersOnlyValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returnlettersRegexp.test(s);
   }
 }
 ```
@@ -412,11 +412,11 @@ export class LettersOnlyValidator implements StringValidator {
 ```ts
 import { StringValidator } from "./Validation";
 
-const numberRegexp = /^[0-9]+$/;
+constnumberRegexp = /^[0-9]+$/;
 
-export class ZipCodeValidator implements StringValidator {
-  isAcceptable(s: string) {
-    return s.length === 5 && numberRegexp.test(s);
+exportclassZipCodeValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returns.length === 5 && numberRegexp.test(s);
   }
 }
 ```
@@ -425,24 +425,24 @@ export class ZipCodeValidator implements StringValidator {
 
 ```ts
 import { StringValidator } from "./Validation";
-import { ZipCodeValidator } from "./ZipCodeValidator";
-import { LettersOnlyValidator } from "./LettersOnlyValidator";
+import { ZipCodeValidator } from"./ZipCodeValidator";
+import { LettersOnlyValidator } from"./LettersOnlyValidator";
 
 // Some samples to try
-let strings = ["Hello", "98052", "101"];
+letstrings = ["Hello", "98052", "101"];
 
 // Validators to use
-let validators: { [s: string]: StringValidator } = {};
-validators["ZIP code"] = new ZipCodeValidator();
-validators["Letters only"] = new LettersOnlyValidator();
+letvalidators: { [s: string]: StringValidator } = {};
+validators["ZIP code"] = newZipCodeValidator();
+validators["Letters only"] = newLettersOnlyValidator();
 
 // Show whether each string passed each validator
 strings.forEach((s) => {
-  for (let name in validators) {
-    console.log(
-      `"${s}" - ${
-        validators[name].isAcceptable(s) ? "matches" : "does not match"
-      } ${name}`
+for (letnameinvalidators) {
+console.log(
+`"${s}" - ${
+validators[name].isAcceptable(s) ?"matches":"does not match"
+}${name}`
     );
   }
 });
@@ -470,13 +470,13 @@ The `typeof` keyword, when used in a type position, produces the type of a value
 ```ts
 declare function require(moduleName: string): any;
 
-import { ZipCodeValidator as Zip } from "./ZipCodeValidator";
+import { ZipCodeValidatorasZip } from"./ZipCodeValidator";
 
 if (needZipValidation) {
-  let ZipCodeValidator: typeof Zip = require("./ZipCodeValidator");
-  let validator = new ZipCodeValidator();
-  if (validator.isAcceptable("...")) {
-    /* ... */
+letZipCodeValidator: typeofZip = require("./ZipCodeValidator");
+letvalidator = newZipCodeValidator();
+if (validator.isAcceptable("...")) {
+/* ... */
   }
 }
 ```
@@ -485,17 +485,17 @@ if (needZipValidation) {
 
 ```ts
 declare function require(
-  moduleNames: string[],
-  onLoad: (...args: any[]) => void
+moduleNames: string[],
+onLoad: (...args: any[]) =>void
 ): void;
 
-import * as Zip from "./ZipCodeValidator";
+import*asZipfrom"./ZipCodeValidator";
 
 if (needZipValidation) {
-  require(["./ZipCodeValidator"], (ZipCodeValidator: typeof Zip) => {
-    let validator = new ZipCodeValidator.ZipCodeValidator();
-    if (validator.isAcceptable("...")) {
-      /* ... */
+require(["./ZipCodeValidator"], (ZipCodeValidator: typeofZip) => {
+letvalidator = newZipCodeValidator.ZipCodeValidator();
+if (validator.isAcceptable("...")) {
+/* ... */
     }
   });
 }
@@ -506,13 +506,13 @@ if (needZipValidation) {
 ```ts
 declare const System: any;
 
-import { ZipCodeValidator as Zip } from "./ZipCodeValidator";
+import { ZipCodeValidatorasZip } from"./ZipCodeValidator";
 
 if (needZipValidation) {
-  System.import("./ZipCodeValidator").then((ZipCodeValidator: typeof Zip) => {
-    var x = new ZipCodeValidator();
-    if (x.isAcceptable("...")) {
-      /* ... */
+System.import("./ZipCodeValidator").then((ZipCodeValidator: typeofZip) => {
+varx = newZipCodeValidator();
+if (x.isAcceptable("...")) {
+/* ... */
     }
   });
 }
@@ -538,23 +538,23 @@ For example:
 
 ```ts
 declare module "url" {
-  export interface Url {
-    protocol?: string;
-    hostname?: string;
-    pathname?: string;
+exportinterfaceUrl {
+protocol?: string;
+hostname?: string;
+pathname?: string;
   }
 
-  export function parse(
-    urlStr: string,
-    parseQueryString?,
-    slashesDenoteHost?
+exportfunctionparse(
+urlStr: string,
+parseQueryString?,
+slashesDenoteHost?
   ): Url;
 }
 
-declare module "path" {
-  export function normalize(p: string): string;
-  export function join(...paths: any[]): string;
-  export var sep: string;
+declaremodule"path" {
+exportfunctionnormalize(p: string): string;
+exportfunctionjoin(...paths: any[]): string;
+exportvarsep: string;
 }
 ```
 
@@ -562,8 +562,8 @@ Now we can `/// <reference>``node.d.ts` and then load the modules using `import 
 
 ```ts
 /// <reference path="node.d.ts"/>
-import * as URL from "url";
-let myUrl = URL.parse("https://www.typescriptlang.org");
+import*asURLfrom"url";
+letmyUrl = URL.parse("https://www.typescriptlang.org");
 ```
 
 #### Shorthand ambient modules {#shorthand-ambient-modules}
@@ -585,20 +585,20 @@ x(y);
 
 #### Wildcard module declarations {#wildcard-module-declarations}
 
-Some module loaders such as [SystemJS](https://github.com/systemjs/systemjs/blob/master/docs/module-types.md)
-and [AMD](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md) allow non-JavaScript content to be imported.
+Some module loaders such as [SystemJS ↗](https://github.com/systemjs/systemjs/blob/master/docs/module-types.md)
+and [AMD ↗](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md) allow non-JavaScript content to be imported.
 These typically use a prefix or suffix to indicate the special loading semantics.
 Wildcard module declarations can be used to cover these cases.
 
 ```ts
 declare module "*!text" {
-  const content: string;
-  export default content;
+constcontent: string;
+exportdefaultcontent;
 }
 // Some do it the other way around.
-declare module "json!*" {
-  const value: any;
-  export default value;
+declaremodule"json!*" {
+constvalue: any;
+exportdefaultvalue;
 }
 ```
 
@@ -606,14 +606,14 @@ Now you can import things that match `"*!text"` or `"json!*"`.
 
 ```ts
 import fileContent from "./xyz.txt!text";
-import data from "json!http://example.com/data.json";
+importdatafrom"json!http://example.com/data.json";
 console.log(data, fileContent);
 ```
 
 #### UMD modules {#umd-modules}
 
 Some libraries are designed to be used in many module loaders, or with no module loading (global variables).
-These are known as [UMD](https://github.com/umdjs/umd) modules.
+These are known as [UMD ↗](https://github.com/umdjs/umd) modules.
 These libraries can be accessed through either an import or a global variable.
 For example:
 
@@ -621,7 +621,7 @@ For example:
 
 ```ts
 export function isPrime(x: number): boolean;
-export as namespace mathLib;
+exportasnamespacemathLib;
 ```
 
 The library can then be used as an import within modules:
@@ -664,7 +664,7 @@ For example:
 
 ```ts
 export default class SomeType {
-  constructor() { ... }
+constructor() { ... }
 }
 ```
 
@@ -672,7 +672,7 @@ export default class SomeType {
 
 ```ts
 export default function getThing() {
-  return "thing";
+return"thing";
 }
 ```
 
@@ -680,8 +680,8 @@ export default function getThing() {
 
 ```ts
 import t from "./MyClass";
-import f from "./MyFunc";
-let x = new t();
+importffrom"./MyFunc";
+letx = newt();
 console.log(f());
 ```
 
@@ -693,10 +693,10 @@ This is optimal for consumers. They can name your type whatever they want (`t` i
 
 ```ts
 export class SomeType {
-  /* ... */
+/* ... */
 }
-export function someFunc() {
-  /* ... */
+exportfunctionsomeFunc() {
+/* ... */
 }
 ```
 
@@ -708,8 +708,8 @@ Conversely when importing:
 
 ```ts
 import { SomeType, someFunc } from "./MyThings";
-let x = new SomeType();
-let y = someFunc();
+letx = newSomeType();
+lety = someFunc();
 ```
 
 #### Use the namespace import pattern if you’re importing a large number of things {#use-the-namespace-import-pattern-if-youre-importing-a-large-number-of-things}
@@ -718,16 +718,16 @@ let y = someFunc();
 
 ```ts
 export class Dog { ... }
-export class Cat { ... }
-export class Tree { ... }
-export class Flower { ... }
+exportclassCat { ... }
+exportclassTree { ... }
+exportclassFlower { ... }
 ```
 
 ##### Consumer.ts {#consumerts-2}
 
 ```ts
 import * as myLargeModule from "./MyLargeModule.ts";
-let x = new myLargeModule.Dog();
+letx = newmyLargeModule.Dog();
 ```
 
 ### Re-export to extend {#re-export-to-extend}
@@ -744,84 +744,84 @@ The module also exports a helper function to test the calculator functionality b
 
 ```ts
 export class Calculator {
-  private current = 0;
-  private memory = 0;
-  private operator: string;
+privatecurrent = 0;
+privatememory = 0;
+privateoperator: string;
 
-  protected processDigit(digit: string, currentValue: number) {
-    if (digit >= "0" && digit <= "9") {
-      return currentValue * 10 + (digit.charCodeAt(0) - "0".charCodeAt(0));
+protectedprocessDigit(digit: string, currentValue: number) {
+if (digit >= "0" && digit <= "9") {
+returncurrentValue * 10 + (digit.charCodeAt(0) - "0".charCodeAt(0));
     }
   }
 
-  protected processOperator(operator: string) {
-    if (["+", "-", "*", "/"].indexOf(operator) >= 0) {
-      return operator;
+protectedprocessOperator(operator: string) {
+if (["+", "-", "*", "/"].indexOf(operator) >= 0) {
+returnoperator;
     }
   }
 
-  protected evaluateOperator(
-    operator: string,
-    left: number,
-    right: number
+protectedevaluateOperator(
+operator: string,
+left: number,
+right: number
   ): number {
-    switch (this.operator) {
-      case "+":
-        return left + right;
-      case "-":
-        return left - right;
-      case "*":
-        return left * right;
-      case "/":
-        return left / right;
+switch (this.operator) {
+case"+":
+returnleft + right;
+case"-":
+returnleft - right;
+case"*":
+returnleft * right;
+case"/":
+returnleft / right;
     }
   }
 
-  private evaluate() {
-    if (this.operator) {
-      this.memory = this.evaluateOperator(
-        this.operator,
-        this.memory,
-        this.current
+privateevaluate() {
+if (this.operator) {
+this.memory = this.evaluateOperator(
+this.operator,
+this.memory,
+this.current
       );
     } else {
-      this.memory = this.current;
+this.memory = this.current;
     }
-    this.current = 0;
+this.current = 0;
   }
 
-  public handleChar(char: string) {
-    if (char === "=") {
-      this.evaluate();
-      return;
+publichandleChar(char: string) {
+if (char === "=") {
+this.evaluate();
+return;
     } else {
-      let value = this.processDigit(char, this.current);
-      if (value !== undefined) {
-        this.current = value;
-        return;
+letvalue = this.processDigit(char, this.current);
+if (value !== undefined) {
+this.current = value;
+return;
       } else {
-        let value = this.processOperator(char);
-        if (value !== undefined) {
-          this.evaluate();
-          this.operator = value;
-          return;
+letvalue = this.processOperator(char);
+if (value !== undefined) {
+this.evaluate();
+this.operator = value;
+return;
         }
       }
     }
-    throw new Error(`Unsupported input: '${char}'`);
+thrownewError(`Unsupported input: '${char}'`);
   }
 
-  public getResult() {
-    return this.memory;
+publicgetResult() {
+returnthis.memory;
   }
 }
 
-export function test(c: Calculator, input: string) {
-  for (let i = 0; i < input.length; i++) {
-    c.handleChar(input[i]);
+exportfunctiontest(c: Calculator, input: string) {
+for (leti = 0; i < input.length; i++) {
+c.handleChar(input[i]);
   }
 
-  console.log(`result of '${input}' is '${c.getResult()}'`);
+console.log(`result of '${input}' is '${c.getResult()}'`);
 }
 ```
 
@@ -832,7 +832,7 @@ Here is a simple test for the calculator using the exposed `test` function.
 ```ts
 import { Calculator, test } from "./Calculator";
 
-let c = new Calculator();
+letc = newCalculator();
 test(c, "1+2*33/11="); // prints 9
 ```
 
@@ -843,48 +843,48 @@ Now to extend this to add support for input with numbers in bases other than 10,
 ```ts
 import { Calculator } from "./Calculator";
 
-class ProgrammerCalculator extends Calculator {
-  static digits = [
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
+classProgrammerCalculatorextendsCalculator {
+staticdigits = [
+"0",
+"1",
+"2",
+"3",
+"4",
+"5",
+"6",
+"7",
+"8",
+"9",
+"A",
+"B",
+"C",
+"D",
+"E",
+"F",
   ];
 
-  constructor(public base: number) {
-    super();
-    const maxBase = ProgrammerCalculator.digits.length;
-    if (base <= 0 || base > maxBase) {
-      throw new Error(`base has to be within 0 to ${maxBase} inclusive.`);
+constructor(publicbase: number) {
+super();
+constmaxBase = ProgrammerCalculator.digits.length;
+if (base <= 0 || base > maxBase) {
+thrownewError(`base has to be within 0 to ${maxBase} inclusive.`);
     }
   }
 
-  protected processDigit(digit: string, currentValue: number) {
-    if (ProgrammerCalculator.digits.indexOf(digit) >= 0) {
-      return (
-        currentValue * this.base + ProgrammerCalculator.digits.indexOf(digit)
+protectedprocessDigit(digit: string, currentValue: number) {
+if (ProgrammerCalculator.digits.indexOf(digit) >= 0) {
+return (
+currentValue * this.base + ProgrammerCalculator.digits.indexOf(digit)
       );
     }
   }
 }
 
 // Export the new extended calculator as Calculator
-export { ProgrammerCalculator as Calculator };
+export { ProgrammerCalculatorasCalculator };
 
 // Also, export the helper function
-export { test } from "./Calculator";
+export { test } from"./Calculator";
 ```
 
 The new module `ProgrammerCalculator` exports an API shape similar to that of the original `Calculator` module, but does not augment any objects in the original module.
@@ -895,7 +895,7 @@ Here is a test for our ProgrammerCalculator class:
 ```ts
 import { Calculator, test } from "./ProgrammerCalculator";
 
-let c = new Calculator(2);
+letc = newCalculator(2);
 test(c, "001+010="); // prints 3
 ```
 

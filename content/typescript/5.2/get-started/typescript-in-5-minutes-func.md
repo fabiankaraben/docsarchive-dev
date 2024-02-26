@@ -32,13 +32,13 @@ In this introduction, I assume you know the following:
 - Type syntax of a C-descended language.
 
 If you need to learn the good parts of JavaScript, read
-[JavaScript: The Good Parts](https://shop.oreilly.com/product/9780596517748.do).
+[JavaScript: The Good Parts ↗](https://shop.oreilly.com/product/9780596517748.do).
 You may be able to skip the book if you know how to write programs in
 a call-by-value lexically scoped language with lots of mutability and
 not much else.
-[RRS Scheme](https://people.csail.mit.edu/jaffer/r4rs.pdf) is a good example.
+[RRS Scheme ↗](https://people.csail.mit.edu/jaffer/r4rs.pdf) is a good example.
 
-[The C++ Programming Language](http://www.stroustrup.com/4th.html) is
+[The C++ Programming Language ↗](http://www.stroustrup.com/4th.html) is
 a good place to learn about C-style type syntax. Unlike C++,
 TypeScript uses postfix types, like so: `x: string` instead of `string x`.
 
@@ -60,7 +60,7 @@ JavaScript defines 8 built-in types:
 |`Object`|similar to records.|
 
 
-[See the MDN page for more detail](https://developer.mozilla.org/docs/Web/JavaScript/Data_structures).
+[See the MDN page for more detail ↗](https://developer.mozilla.org/docs/Web/JavaScript/Data_structures).
 
 TypeScript has corresponding primitive types for the built-in types:
 
@@ -95,7 +95,7 @@ Notes:
 
   // or more precisely:
 
-  let fst: <T, U>(a: T, b: U) => T = (a, b) => a;
+  letfst: <T, U>(a: T, b: U) =>T = (a, b) =>a;
   ```
 
 2. Object literal type syntax closely mirrors object literal value syntax:
@@ -135,10 +135,10 @@ wherever it appears. For example, you can push any value into an
 
 ```ts
 // with "noImplicitAny": false in tsconfig.json, anys: any[]
-const anys = [];
+constanys = [];
 anys.push(1);
 anys.push("oh no");
-anys.push({ anything: "goes" });
+anys.push({ anything:"goes" });
 ```
 
 And you can use an expression of type `any` anywhere:
@@ -165,8 +165,8 @@ structurally typed. Its basic form is pretty simple:
 
 ```ts
 // @strict: false
-let o = { x: "hi", extra: 1 }; // ok
-let o2: { x: string } = o; // ok
+leto = { x:"hi", extra:1 }; // ok
+leto2: { x: string } = o; // ok
 ```
 
 Here, the object literal `{ x: "hi", extra: 1 }` has a matching
@@ -186,16 +186,16 @@ definitions and type parameters, however.)
 
 ```ts
 type One = { p: string };
-interface Two {
-  p: string;
+interfaceTwo {
+p: string;
 }
-class Three {
-  p = "Hello";
+classThree {
+p = "Hello";
 }
- 
-let x: One = { p: "hi" };
-let two: Two = x;
-two = new Three();
+
+letx: One = { p:"hi" };
+lettwo: Two = x;
+two = newThree();
 ```
 
 ### Unions {#unions}
@@ -208,22 +208,22 @@ discriminate types in a union using built-in tags or other properties.
 
 ```ts
 function start(
-  arg: string | string[] | (() => string) | { s: string }
+arg: string | string[] | (() =>string) | { s: string }
 ): string {
-  // this is super common in JavaScript
-  if (typeof arg === "string") {
-    return commonCase(arg);
-  } else if (Array.isArray(arg)) {
-    return arg.map(commonCase).join(",");
-  } else if (typeof arg === "function") {
-    return commonCase(arg());
+// this is super common in JavaScript
+if (typeofarg === "string") {
+returncommonCase(arg);
+  } elseif (Array.isArray(arg)) {
+returnarg.map(commonCase).join(",");
+  } elseif (typeofarg === "function") {
+returncommonCase(arg());
   } else {
-    return commonCase(arg.s);
+returncommonCase(arg.s);
   }
- 
-  function commonCase(s: string): string {
-    // finally, just convert a string to another string
-    return s;
+
+functioncommonCase(s: string): string {
+// finally, just convert a string to another string
+returns;
   }
 }
 ```
@@ -260,7 +260,7 @@ In addition to unions, TypeScript also has intersections:
 
 ```ts
 type Combined = { a: number } & { b: string };
-type Conflicting = { a: number } & { a: string };
+typeConflicting = { a: number } & { a: string };
 ```
 
 `Combined` has two properties, `a` and `b`, just as if they had been
@@ -335,7 +335,7 @@ if you’ve worked with other C-syntax languages:
 
 ```ts
 declare function map<T, U>(f: (t: T) => U, ts: T[]): U[];
-let sns = map((n) => n.toString(), [1, 2, 3]);
+letsns = map((n) =>n.toString(), [1, 2, 3]);
 ```
 
 Here, `n: number` in this example also, despite the fact that `T` and `U`
@@ -362,8 +362,8 @@ on unit types that would otherwise be inferred as `string` or
 
 ```ts
 declare function run<T>(thunk: (t: T) => void): T;
-let i: { inference: string } = run((o) => {
-  o.inference = "INSERT STATE HERE";
+leti: { inference: string } = run((o) => {
+o.inference = "INSERT STATE HERE";
 });
 ```
 
@@ -392,7 +392,7 @@ the source code, but does not always succeed.
 
 ```ts
 type Size = [number, number];
-let x: Size = [101.1, 999.9];
+letx: Size = [101.1, 999.9];
 ```
 
 The closest equivalent to `newtype` is a *tagged intersection*:
@@ -431,14 +431,14 @@ type Shape =
   | { kind: "circle"; radius: number }
   | { kind: "square"; x: number }
   | { kind: "triangle"; x: number; y: number };
- 
-function area(s: Shape) {
-  if (s.kind === "circle") {
-    return Math.PI * s.radius * s.radius;
-  } else if (s.kind === "square") {
-    return s.x * s.x;
+
+functionarea(s: Shape) {
+if (s.kind === "circle") {
+returnMath.PI * s.radius * s.radius;
+  } elseif (s.kind === "square") {
+returns.x * s.x;
   } else {
-    return (s.x * s.y) / 2;
+return (s.x * s.y) / 2;
   }
 }
 ```
@@ -454,11 +454,11 @@ can usefully discriminate multiple members of the union:
 
 ```ts
 function height(s: Shape) {
-  if (s.kind === "circle") {
-    return 2 * s.radius;
+if (s.kind === "circle") {
+return2 * s.radius;
   } else {
-    // s.kind: "square" | "triangle"
-    return s.x;
+// s.kind: "square" | "triangle"
+returns.x;
   }
 }
 ```
@@ -470,7 +470,7 @@ type parameters:
 
 ```ts
 function liftArray<T>(t: T): Array<T> {
-  return [t];
+return [t];
 }
 ```
 
@@ -480,7 +480,7 @@ type, which behaves a bit like type class constraints:
 
 ```ts
 function firstish<T extends { length: number }>(t1: T, t2: T): T {
-  return t1.length > t2.length ? t1 : t2;
+returnt1.length > t2.length ? t1 : t2;
 }
 ```
 
@@ -496,7 +496,7 @@ the same type:
 ```ts
 function length<T extends ArrayLike<unknown>>(t: T): number {}
 
-function length(t: ArrayLike<unknown>): number {}
+functionlength(t: ArrayLike<unknown>): number {}
 ```
 
 In the first `length`, T is not necessary; notice that it’s only
@@ -527,8 +527,8 @@ any file with `import` or `export` is implicitly a module:
 
 ```ts
 import { value, Type } from "npm-package";
-import { other, Types } from "./local-package";
-import * as prefix from "../lib/third-package";
+import { other, Types } from"./local-package";
+import*asprefixfrom"../lib/third-package";
 ```
 
 You can also import commonjs modules — modules written using node.js’
@@ -543,17 +543,17 @@ You can export with an export list:
 ```ts
 export { f };
 
-function f() {
-  return g();
+functionf() {
+returng();
 }
-function g() {} // g is not exported
+functiong() {} // g is not exported
 ```
 
 Or by marking each export individually:
 
 ```ts
 export function f() { return g() }
-function g() { }
+functiong() { }
 ```
 
 The latter style is more common but both are allowed, even in the same
@@ -575,9 +575,9 @@ TypeScript additionally has a `readonly` modifier for properties.
 
 ```ts
 interface Rx {
-  readonly x: number;
+readonlyx: number;
 }
-let rx: Rx = { x: 1 };
+letrx: Rx = { x:1 };
 rx.x = 12; // error
 ```
 
@@ -586,9 +586,9 @@ all properties `readonly`:
 
 ```ts
 interface X {
-  x: number;
+x: number;
 }
-let rx: Readonly<X> = { x: 1 };
+letrx: Readonly<X> = { x:1 };
 rx.x = 12; // error
 ```
 
@@ -598,7 +598,7 @@ as well as special syntax for this type:
 
 ```ts
 let a: ReadonlyArray<number> = [1, 2, 3];
-let b: readonly number[] = [1, 2, 3];
+letb: readonlynumber[] = [1, 2, 3];
 a.push(102); // error
 b[0] = 101; // error
 ```

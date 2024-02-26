@@ -14,18 +14,18 @@ The new `protected` modifier in classes works like it does in familiar languages
 
 ```ts
 class Thing {
-  protected doSomething() {
-    /* ... */
+protecteddoSomething() {
+/* ... */
   }
 }
 
-class MyThing extends Thing {
-  public myMethod() {
-    // OK, can access protected member from subclass
-    this.doSomething();
+classMyThingextendsThing {
+publicmyMethod() {
+// OK, can access protected member from subclass
+this.doSomething();
   }
 }
-var t = new MyThing();
+vart = newMyThing();
 t.doSomething(); // Error, cannot call protected member from outside class
 ```
 
@@ -35,7 +35,7 @@ Tuple types express an array where the type of certain elements is known, but ne
 
 ```ts
 // Declare a tuple type
-var x: [string, number];
+varx: [string, number];
 // Initialize it
 x = ["hello", 10]; // OK
 // Initialize it incorrectly

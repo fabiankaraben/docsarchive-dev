@@ -17,8 +17,8 @@ The following type `P` is the same type as `type P = "x" | "y"`:
 
 ```ts
 type Point = { x: number; y: number };
-type P = keyof Point;
-    
+typeP = keyofPoint;
+
 type P = keyof Point
 ```
 
@@ -28,13 +28,13 @@ If the type has a `string` or `number` index signature, `keyof` will return thos
 
 ```ts
 type Arrayish = { [n: number]: unknown };
-type A = keyof Arrayish;
-    
+typeA = keyofArrayish;
+
 type A = number
- 
-type Mapish = { [k: string]: boolean };
-type M = keyof Mapish;
-    
+
+typeMapish = { [k: string]: boolean };
+typeM = keyofMapish;
+
 type M = string | number
 ```
 

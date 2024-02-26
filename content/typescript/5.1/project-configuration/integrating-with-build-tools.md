@@ -20,7 +20,7 @@ npm install @babel/cli @babel/core @babel/preset-typescript --save-dev
 
 ```js
 {
-  "presets": ["@babel/preset-typescript"]
+"presets": ["@babel/preset-typescript"]
 }
 ```
 
@@ -34,8 +34,8 @@ npm install @babel/cli @babel/core @babel/preset-typescript --save-dev
 
 ```js
 {
-  "scripts": {
-    "build": "babel --out-file bundle.js main.ts"
+"scripts": {
+"build":"babel --out-file bundle.js main.ts"
   },
 }
 ```
@@ -64,16 +64,16 @@ browserify main.ts -p [ tsify --noImplicitAny ] > bundle.js
 
 ```js
 var browserify = require("browserify");
-var tsify = require("tsify");
+vartsify = require("tsify");
 
 browserify()
   .add("main.ts")
-  .plugin("tsify", { noImplicitAny: true })
+  .plugin("tsify", { noImplicitAny:true })
   .bundle()
   .pipe(process.stdout);
 ```
 
-More details: [smrq/tsify](https://github.com/smrq/tsify)
+More details: [smrq/tsify ↗](https://github.com/smrq/tsify)
 
 ## Grunt {#grunt}
 
@@ -87,19 +87,19 @@ npm install grunt-ts
 
 ```js
 module.exports = function (grunt) {
-  grunt.initConfig({
-    ts: {
-      default: {
-        src: ["**/*.ts", "!node_modules/**/*.ts"],
+grunt.initConfig({
+ts: {
+default: {
+src: ["**/*.ts", "!node_modules/**/*.ts"],
       },
     },
   });
-  grunt.loadNpmTasks("grunt-ts");
-  grunt.registerTask("default", ["ts"]);
+grunt.loadNpmTasks("grunt-ts");
+grunt.registerTask("default", ["ts"]);
 };
 ```
 
-More details: [TypeStrong/grunt-ts](https://github.com/TypeStrong/grunt-ts)
+More details: [TypeStrong/grunt-ts ↗](https://github.com/TypeStrong/grunt-ts)
 
 ## Gulp {#gulp}
 
@@ -113,20 +113,20 @@ npm install gulp-typescript
 
 ```js
 var gulp = require("gulp");
-var ts = require("gulp-typescript");
+varts = require("gulp-typescript");
 
 gulp.task("default", function () {
-  var tsResult = gulp.src("src/*.ts").pipe(
-    ts({
-      noImplicitAny: true,
-      out: "output.js",
+vartsResult = gulp.src("src/*.ts").pipe(
+ts({
+noImplicitAny:true,
+out:"output.js",
     })
   );
-  return tsResult.js.pipe(gulp.dest("built/local"));
+returntsResult.js.pipe(gulp.dest("built/local"));
 });
 ```
 
-More details: [ivogabe/gulp-typescript](https://github.com/ivogabe/gulp-typescript)
+More details: [ivogabe/gulp-typescript ↗](https://github.com/ivogabe/gulp-typescript)
 
 ## Jspm {#jspm}
 
@@ -138,7 +138,7 @@ npm install -g jspm@beta
 
 *Note: Currently TypeScript support in jspm is in 0.16beta*
 
-More details: [TypeScriptSamples/jspm](https://github.com/Microsoft/TypeScriptSamples/tree/master/jspm)
+More details: [TypeScriptSamples/jspm ↗](https://github.com/Microsoft/TypeScriptSamples/tree/master/jspm)
 
 ## MSBuild {#msbuild}
 
@@ -146,26 +146,26 @@ Update project file to include locally installed `Microsoft.TypeScript.Default.p
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Include default props at the top -->
-  <Import
-      Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props"
-      Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+<ProjectToolsVersion="4.0"DefaultTargets="Build"xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!-- Include default props at the top -->
+<Import
+Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props"
+Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')"/>
 
-  <!-- TypeScript configurations go here -->
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>true</TypeScriptSourceMap>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
-    <TypeScriptSourceMap>false</TypeScriptSourceMap>
-  </PropertyGroup>
+<!-- TypeScript configurations go here -->
+<PropertyGroupCondition="'$(Configuration)' == 'Debug'">
+<TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+<TypeScriptSourceMap>true</TypeScriptSourceMap>
+</PropertyGroup>
+<PropertyGroupCondition="'$(Configuration)' == 'Release'">
+<TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+<TypeScriptSourceMap>false</TypeScriptSourceMap>
+</PropertyGroup>
 
-  <!-- Include default targets at the bottom -->
-  <Import
-      Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets"
-      Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+<!-- Include default targets at the bottom -->
+<Import
+Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets"
+Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')"/>
 </Project>
 ```
 
@@ -178,7 +178,7 @@ More details about defining MSBuild compiler options: [Setting Compiler Options 
 - Hit `Install`
 - When install is complete, rebuild!
 
-More details can be found at [Package Manager Dialog](http://docs.nuget.org/Consume/Package-Manager-Dialog) and [using nightly builds with NuGet](https://github.com/Microsoft/TypeScript/wiki/Nightly-drops#using-nuget-with-msbuild)
+More details can be found at [Package Manager Dialog ↗](http://docs.nuget.org/Consume/Package-Manager-Dialog) and [using nightly builds with NuGet ↗](https://github.com/Microsoft/TypeScript/wiki/Nightly-drops#using-nuget-with-msbuild)
 
 ## Rollup {#rollup}
 
@@ -192,19 +192,19 @@ Note that both `typescript` and `tslib` are peer dependencies of this plugin tha
 
 ### Usage {#usage}
 
-Create a `rollup.config.js`[configuration file](https://www.rollupjs.org/guide/en/#configuration-files) and import the plugin:
+Create a `rollup.config.js`[configuration file ↗](https://www.rollupjs.org/guide/en/#configuration-files) and import the plugin:
 
 ```js
 // rollup.config.js
-import typescript from '@rollup/plugin-typescript';
+importtypescriptfrom'@rollup/plugin-typescript';
 
-export default {
-  input: 'src/index.ts',
-  output: {
-    dir: 'output',
-    format: 'cjs'
+exportdefault {
+input:'src/index.ts',
+output: {
+dir:'output',
+format:'cjs'
   },
-  plugins: [typescript()]
+plugins: [typescript()]
 };
 ```
 
@@ -218,7 +218,7 @@ npm install --save-dev svelte-preprocess
 
 Note that `typescript` is an optional peer dependencies of this plugin and needs to be installed separately. `tslib` is not provided either.
 
-You may also consider [`svelte-check`](https://www.npmjs.com/package/svelte-check) for CLI type checking.
+You may also consider [`svelte-check` ↗](https://www.npmjs.com/package/svelte-check) for CLI type checking.
 
 ### Usage {#usage-1}
 
@@ -226,15 +226,15 @@ Create a `svelte.config.js` configuration file and import the plugin:
 
 ```js
 // svelte.config.js
-import preprocess from 'svelte-preprocess';
+importpreprocessfrom'svelte-preprocess';
 
-const config = {
-  // Consult https://github.com/sveltejs/svelte-preprocess
-  // for more information about preprocessors
-  preprocess: preprocess()
+constconfig = {
+// Consult https://github.com/sveltejs/svelte-preprocess
+// for more information about preprocessors
+preprocess:preprocess()
 };
 
-export default config;
+exportdefaultconfig;
 ```
 
 You can now specify that script blocks are written in TypeScript:
@@ -245,7 +245,7 @@ You can now specify that script blocks are written in TypeScript:
 
 ## Vite {#vite}
 
-Vite supports importing `.ts` files out-of-the-box. It only performs transpilation and not type checking. It also requires that some `compilerOptions` have certain values. See the [Vite docs](https://vitejs.dev/guide/features.html#typescript) for more details.
+Vite supports importing `.ts` files out-of-the-box. It only performs transpilation and not type checking. It also requires that some `compilerOptions` have certain values. See the [Vite docs ↗](https://vitejs.dev/guide/features.html#typescript) for more details.
 
 ## Webpack {#webpack}
 
@@ -261,28 +261,28 @@ npm install ts-loader --save-dev
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.ts',
-  module: {
-    rules: [
+entry:'./src/index.ts',
+module: {
+rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
+test: /\.tsx?$/,
+use:'ts-loader',
+exclude: /node_modules/,
       },
     ],
   },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+resolve: {
+extensions: ['.tsx', '.ts', '.js'],
   },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+output: {
+filename:'bundle.js',
+path:path.resolve(__dirname, 'dist'),
   },
 };
 ```
 
-See [more details on ts-loader here](https://www.npmjs.com/package/ts-loader).
+See [more details on ts-loader here ↗](https://www.npmjs.com/package/ts-loader).
 
 Alternatives:
 
-- [awesome-typescript-loader](https://www.npmjs.com/package/awesome-typescript-loader)
+- [awesome-typescript-loader ↗](https://www.npmjs.com/package/awesome-typescript-loader)

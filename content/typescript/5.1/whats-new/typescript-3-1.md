@@ -16,9 +16,9 @@ For example:
 ```ts
 type MapToPromise<T> = { [K in keyof T]: Promise<T[K]> };
 
-type Coordinate = [number, number];
+typeCoordinate = [number, number];
 
-type PromiseCoordinate = MapToPromise<Coordinate>; // [Promise<number>, Promise<number>]
+typePromiseCoordinate = MapToPromise<Coordinate>; // [Promise<number>, Promise<number>]
 ```
 
 `MapToPromise` takes a type `T`, and when that type is a tuple like `Coordinate`, only the numeric properties are converted.
@@ -34,12 +34,12 @@ For example:
 
 ```ts
 function readImage(path: string, callback: (err: any, image: Image) => void) {
-  // ...
+// ...
 }
 
 readImage.sync = (path: string) => {
-  const contents = fs.readFileSync(path);
-  return decodeImageSync(contents);
+constcontents = fs.readFileSync(path);
+returndecodeImageSync(contents);
 };
 ```
 
@@ -53,7 +53,7 @@ Additionally, this approach for property declarations allows us to express commo
 export const FooComponent = ({ name }) => <div>Hello! I am {name}</div>;
 
 FooComponent.defaultProps = {
-  name: "(anonymous)",
+name:"(anonymous)",
 };
 ```
 
@@ -66,4 +66,4 @@ FooComponent.defaultProps = {
 Feedback from our community, as well as our own experience, has shown us that leveraging the newest TypeScript features while also accommodating users on the older versions are difficult.
 TypeScript introduces a new feature called `typesVersions` to help accommodate these scenarios.
 
-You can read [about it in the Publishing section of the declaration files section ↗](https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html#version-selection-with-typesversions)
+You can read [about it in the Publishing section of the declaration files section](/typescript/5.1/declaration-files/publishing#version-selection-with-typesversions)

@@ -84,8 +84,8 @@ Let’s say we wrote a module file `foo.d.ts`:
 
 ```ts
 export var SomeVar: { a: SomeType };
-export interface SomeType {
-  count: number;
+exportinterfaceSomeType {
+count: number;
 }
 ```
 
@@ -93,7 +93,7 @@ Then consumed it:
 
 ```ts
 import * as foo from "./foo";
-let x: foo.SomeType = foo.SomeVar.a;
+letx: foo.SomeType = foo.SomeVar.a;
 console.log(x.count);
 ```
 
@@ -103,8 +103,8 @@ We can use combining to present these two different objects (the value and the t
 
 ```ts
 export var Bar: { a: Bar };
-export interface Bar {
-  count: number;
+exportinterfaceBar {
+count: number;
 }
 ```
 
@@ -112,7 +112,7 @@ This presents a very good opportunity for destructuring in the consuming code:
 
 ```ts
 import { Bar } from "./foo";
-let x: Bar = Bar.a;
+letx: Bar = Bar.a;
 console.log(x.count);
 ```
 
@@ -137,13 +137,13 @@ We can add additional members to an `interface` with another `interface` declara
 
 ```ts
 interface Foo {
-  x: number;
+x: number;
 }
 // ... elsewhere ...
-interface Foo {
-  y: number;
+interfaceFoo {
+y: number;
 }
-let a: Foo = ...;
+leta: Foo = ...;
 console.log(a.x + a.y); // OK
 ```
 
@@ -151,13 +151,13 @@ This also works with classes:
 
 ```ts
 class Foo {
-  x: number;
+x: number;
 }
 // ... elsewhere ...
-interface Foo {
-  y: number;
+interfaceFoo {
+y: number;
 }
-let a: Foo = ...;
+leta: Foo = ...;
 console.log(a.x + a.y); // OK
 ```
 
@@ -172,10 +172,10 @@ For example, we can add a static member to a class:
 ```ts
 class C {}
 // ... elsewhere ...
-namespace C {
-  export let x: number;
+namespaceC {
+exportletx: number;
 }
-let y = C.x; // OK
+lety = C.x; // OK
 ```
 
 Note that in this example, we added a value to the *static* side of `C` (its constructor function).
@@ -187,10 +187,10 @@ We could also add a namespaced type to a class:
 ```ts
 class C {}
 // ... elsewhere ...
-namespace C {
-  export interface D {}
+namespaceC {
+exportinterfaceD {}
 }
-let y: C.D; // OK
+lety: C.D; // OK
 ```
 
 In this example, there wasn’t a namespace `C` until we wrote the `namespace` declaration for it.
@@ -201,18 +201,18 @@ This isn’t a particularly realistic example, but shows all sorts of interestin
 
 ```ts
 namespace X {
-  export interface Y {}
-  export class Z {}
+exportinterfaceY {}
+exportclassZ {}
 }
 
 // ... elsewhere ...
-namespace X {
-  export var Y: number;
-  export namespace Z {
-    export class C {}
+namespaceX {
+exportvarY: number;
+exportnamespaceZ {
+exportclassC {}
   }
 }
-type X = string;
+typeX = string;
 ```
 
 In this example, the first block creates the following name meanings:

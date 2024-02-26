@@ -9,18 +9,18 @@ next: /typescript/5.1/handbook/classes
 
 # Template Literal Types
 
-Template literal types build on [string literal types ↗](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types), and have the ability to expand into many strings via unions.
+Template literal types build on [string literal types](/typescript/5.1/handbook/everyday-types#literal-types), and have the ability to expand into many strings via unions.
 
-They have the same syntax as [template literal strings in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), but are used in type positions.
+They have the same syntax as [template literal strings in JavaScript ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), but are used in type positions.
 When used with concrete literal types, a template literal produces a new string literal type by concatenating the contents.
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBA6g9gJwDYBMoF4oCIDujVYDcAUMaJFAOIIQTACWAdgOYZQAGAFhEknFABIA3vGQoAvuxIB6aVHkA9APxA)
 
 ```ts
 type World = "world";
- 
-type Greeting = `hello ${World}`;
-        
+
+typeGreeting = `hello ${World}`;
+
 type Greeting = "hello world"
 ```
 
@@ -30,10 +30,10 @@ When a union is used in the interpolated position, the type is the set of every 
 
 ```ts
 type EmailLocaleIDs = "welcome_email" | "email_heading";
-type FooterLocaleIDs = "footer_title" | "footer_sendoff";
- 
-type AllLocaleIDs = `${EmailLocaleIDs | FooterLocaleIDs}_id`;
-          
+typeFooterLocaleIDs = "footer_title" | "footer_sendoff";
+
+typeAllLocaleIDs = `${EmailLocaleIDs|FooterLocaleIDs}_id`;
+
 type AllLocaleIDs = "welcome_email_id" | "email_heading_id" | "footer_title_id" | "footer_sendoff_id"
 ```
 
@@ -43,10 +43,10 @@ For each interpolated position in the template literal, the unions are cross mul
 
 ```ts
 type AllLocaleIDs = `${EmailLocaleIDs | FooterLocaleIDs}_id`;
-type Lang = "en" | "ja" | "pt";
- 
-type LocaleMessageIDs = `${Lang}_${AllLocaleIDs}`;
-            
+typeLang = "en" | "ja" | "pt";
+
+typeLocaleMessageIDs = `${Lang}_${AllLocaleIDs}`;
+
 type LocaleMessageIDs = "en_welcome_email_id" | "en_email_heading_id" | "en_footer_title_id" | "en_footer_sendoff_id" | "ja_welcome_email_id" | "ja_email_heading_id" | "ja_footer_title_id" | "ja_footer_sendoff_id" | "pt_welcome_email_id" | "pt_email_heading_id" | "pt_footer_title_id" | "pt_footer_sendoff_id"
 ```
 
@@ -65,9 +65,9 @@ like:
 
 ```ts
 const passedObject = {
-  firstName: "Saoirse",
-  lastName: "Ronan",
-  age: 26,
+firstName:"Saoirse",
+lastName:"Ronan",
+age:26,
 };
 ```
 
@@ -86,15 +86,15 @@ The naive function signature of `on()` might thus be: `on(eventName: string, cal
 
 ```ts
 const person = makeWatchedObject({
-  firstName: "Saoirse",
-  lastName: "Ronan",
-  age: 26,
+firstName:"Saoirse",
+lastName:"Ronan",
+age:26,
 });
- 
+
 // makeWatchedObject has added `on` to the anonymous Object
- 
+
 person.on("firstNameChanged", (newValue) => {
-  console.log(`firstName was changed to ${newValue}!`);
+console.log(`firstName was changed to ${newValue}!`);
 });
 ```
 
@@ -104,12 +104,12 @@ Notice that `on` listens on the event `"firstNameChanged"`, not just `"firstName
 
 ```ts
 type PropEventSource<Type> = {
-    on(eventName: `${string & keyof Type}Changed`, callback: (newValue: any) => void): void;
+on(eventName: `${string&keyofType}Changed`, callback: (newValue: any) =>void): void;
 };
- 
+
 /// Create a "watched object" with an `on` method
 /// so that you can watch for changes to properties.
-declare function makeWatchedObject<Type>(obj: Type): Type & PropEventSource<Type>;
+declarefunctionmakeWatchedObject<Type>(obj: Type): Type & PropEventSource<Type>;
 ```
 
 With this, we can build something that errors when given the wrong property:
@@ -118,16 +118,16 @@ With this, we can build something that errors when given the wrong property:
 
 ```ts
 const person = makeWatchedObject({
-  firstName: "Saoirse",
-  lastName: "Ronan",
-  age: 26
+firstName:"Saoirse",
+lastName:"Ronan",
+age:26
 });
- 
+
 person.on("firstNameChanged", () => {});
- 
+
 // Prevent easy human error (using the key instead of the event name)
 person.on("firstName", () => {});
- 
+
 // It's typo-resistant
 person.on("frstNameChanged", () => {});
 Argument of type '"frstNameChanged"' is not assignable to parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.2345Argument of type '"frstNameChanged"' is not assignable to parameter of type '"firstNameChanged" | "lastNameChanged" | "ageChanged"'.
@@ -153,29 +153,29 @@ The key insight that makes this possible is this: we can use a function with a g
 
 ```ts
 type PropEventSource<Type> = {
-    on<Key extends string & keyof Type>
-        (eventName: `${Key}Changed`, callback: (newValue: Type[Key]) => void): void;
+on<Keyextendsstring & keyofType>
+        (eventName: `${Key}Changed`, callback: (newValue: Type[Key]) =>void): void;
 };
- 
-declare function makeWatchedObject<Type>(obj: Type): Type & PropEventSource<Type>;
- 
-const person = makeWatchedObject({
-  firstName: "Saoirse",
-  lastName: "Ronan",
-  age: 26
+
+declarefunctionmakeWatchedObject<Type>(obj: Type): Type & PropEventSource<Type>;
+
+constperson = makeWatchedObject({
+firstName: "Saoirse",
+lastName: "Ronan",
+age: 26
 });
- 
-person.on("firstNameChanged", newName => {
-                                
+
+person.on("firstNameChanged", newName=> {
+
 (parameter) newName: string
-    console.log(`new name is ${newName.toUpperCase()}`);
+console.log(`new name is ${newName.toUpperCase()}`);
 });
- 
-person.on("ageChanged", newAge => {
-                          
+
+person.on("ageChanged", newAge=> {
+
 (parameter) newAge: number
-    if (newAge < 0) {
-        console.warn("warning! negative age");
+if (newAge < 0) {
+console.warn("warning! negative age");
     }
 })
 ```
@@ -203,13 +203,13 @@ Converts each character in the string to the uppercase version.
 
 ```ts
 type Greeting = "Hello, world"
-type ShoutyGreeting = Uppercase<Greeting>
-           
+typeShoutyGreeting = Uppercase<Greeting>
+
 type ShoutyGreeting = "HELLO, WORLD"
- 
-type ASCIICacheKey<Str extends string> = `ID-${Uppercase<Str>}`
-type MainID = ASCIICacheKey<"my_app">
-       
+
+typeASCIICacheKey<Strextendsstring> = `ID-${Uppercase<Str>}`
+typeMainID = ASCIICacheKey<"my_app">
+
 type MainID = "ID-MY_APP"
 ```
 
@@ -223,13 +223,13 @@ Converts each character in the string to the lowercase equivalent.
 
 ```ts
 type Greeting = "Hello, world"
-type QuietGreeting = Lowercase<Greeting>
-          
+typeQuietGreeting = Lowercase<Greeting>
+
 type QuietGreeting = "hello, world"
- 
-type ASCIICacheKey<Str extends string> = `id-${Lowercase<Str>}`
-type MainID = ASCIICacheKey<"MY_APP">
-       
+
+typeASCIICacheKey<Strextendsstring> = `id-${Lowercase<Str>}`
+typeMainID = ASCIICacheKey<"MY_APP">
+
 type MainID = "id-my_app"
 ```
 
@@ -243,8 +243,8 @@ Converts the first character in the string to an uppercase equivalent.
 
 ```ts
 type LowercaseGreeting = "hello, world";
-type Greeting = Capitalize<LowercaseGreeting>;
-        
+typeGreeting = Capitalize<LowercaseGreeting>;
+
 type Greeting = "Hello, world"
 ```
 
@@ -258,7 +258,7 @@ Converts the first character in the string to a lowercase equivalent.
 
 ```ts
 type UppercaseGreeting = "HELLO WORLD";
-type UncomfortableGreeting = Uncapitalize<UppercaseGreeting>;
-              
+typeUncomfortableGreeting = Uncapitalize<UppercaseGreeting>;
+
 type UncomfortableGreeting = "hELLO WORLD"
 ```

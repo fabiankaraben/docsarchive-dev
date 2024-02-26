@@ -14,7 +14,7 @@ Converting a JavaScript codebase over to TypeScript is, while somewhat tedious, 
 In this tutorial, we’re going to look at how you might start out.
 We assume you’ve read enough of the handbook to write new TypeScript code.
 
-If you’re looking to convert a React project, we recommend looking at the [React Conversion Guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide) first.
+If you’re looking to convert a React project, we recommend looking at the [React Conversion Guide ↗](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide) first.
 
 ## Setting up your Directories {#setting-up-your-directories}
 
@@ -48,12 +48,12 @@ Let’s create a bare-bones one for our project:
 
 ```json
 {
-  "compilerOptions": {
-    "outDir": "./built",
-    "allowJs": true,
-    "target": "es5"
+"compilerOptions": {
+"outDir": "./built",
+"allowJs": true,
+"target": "es5"
   },
-  "include": ["./src/**/*"]
+"include": ["./src/**/*"]
 }
 ```
 
@@ -71,7 +71,7 @@ You should now have TypeScript working with your project.
 ## Early Benefits {#early-benefits}
 
 Even at this point you can get some great benefits from TypeScript understanding your project.
-If you open up an editor like [VS Code](https://code.visualstudio.com/) or [Visual Studio](https://visualstudio.com/), you’ll see that you can often get some tooling support like completion.
+If you open up an editor like [VS Code ↗](https://code.visualstudio.com/) or [Visual Studio ↗](https://visualstudio.com/), you’ll see that you can often get some tooling support like completion.
 You can also catch certain bugs with options like:
 
 - [`noImplicitReturns` ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitReturns) which prevents you from forgetting to return at the end of a function.
@@ -104,30 +104,30 @@ and merge in options from the following into your `webpack.config.js` file:
 
 ```js
 module.exports = {
-  entry: "./src/index.ts",
-  output: {
-    filename: "./dist/bundle.js",
+entry:"./src/index.ts",
+output: {
+filename:"./dist/bundle.js",
   },
 
-  // Enable sourcemaps for debugging webpack's output.
-  devtool: "source-map",
+// Enable sourcemaps for debugging webpack's output.
+devtool:"source-map",
 
-  resolve: {
-    // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
+resolve: {
+// Add '.ts' and '.tsx' as resolvable extensions.
+extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
   },
 
-  module: {
-    rules: [
-      // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-      { test: /\.tsx?$/, loader: "ts-loader" },
+module: {
+rules: [
+// All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+      { test: /\.tsx?$/, loader:"ts-loader" },
 
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { test: /\.js$/, loader: "source-map-loader" },
+// All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      { test: /\.js$/, loader:"source-map-loader" },
     ],
   },
 
-  // Other options...
+// Other options...
 };
 ```
 
@@ -154,7 +154,7 @@ If that sounds too lax for you, you can tighten that behavior up.
 If, for instance, you *don’t* want TypeScript to compile to JavaScript in the face of errors, you can use the [`noEmitOnError` ↗](https://www.typescriptlang.org/tsconfig.html#noEmitOnError) option.
 In that sense, TypeScript has a dial on its strictness, and you can turn that knob up as high as you want.
 
-If you plan on using the stricter settings that are available, it’s best to turn them on now (see [Getting Stricter Checks ↗](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html#getting-stricter-checks) below).
+If you plan on using the stricter settings that are available, it’s best to turn them on now (see [Getting Stricter Checks](/typescript/5.2/tutorials/migrating-from-javascript#getting-stricter-checks) below).
 For instance, if you never want TypeScript to silently infer `any` for a type without you explicitly saying so, you can use [`noImplicitAny` ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny) before you start modifying your files.
 While it might feel somewhat overwhelming, the long-term gains become apparent much more quickly.
 
@@ -172,14 +172,14 @@ While you can just convince TypeScript that these exist by writing out
 
 ```ts
 // For Node/CommonJS
-declare function require(path: string): any;
+declarefunctionrequire(path: string): any;
 ```
 
 or
 
 ```ts
 // For RequireJS/AMD
-declare function define(...args: any[]): any;
+declarefunctiondefine(...args: any[]): any;
 ```
 
 it’s better to get rid of those calls and use TypeScript syntax for imports.
@@ -199,7 +199,7 @@ or the following RequireJS/AMD code:
 
 ```js
 define(["foo"], function (foo) {
-  foo.doStuff();
+foo.doStuff();
 });
 ```
 
@@ -234,7 +234,7 @@ For instance, if you exported a function like so:
 
 ```js
 module.exports.feedPets = function (pets) {
-  // ...
+// ...
 };
 ```
 
@@ -242,7 +242,7 @@ you could write that out as the following:
 
 ```ts
 export function feedPets(pets) {
-  // ...
+// ...
 }
 ```
 
@@ -251,14 +251,14 @@ This is a common pattern people use to make their modules immediately callable l
 
 ```js
 var express = require("express");
-var app = express();
+varapp = express();
 ```
 
 You might have previously written that like so:
 
 ```js
 function foo() {
-  // ...
+// ...
 }
 module.exports = foo;
 ```
@@ -267,7 +267,7 @@ In TypeScript, you can model this with the `export =` construct.
 
 ```ts
 function foo() {
-  // ...
+// ...
 }
 export = foo;
 ```
@@ -279,28 +279,28 @@ Typically, this is a bug, but in some cases, you might have declared a function 
 
 ```js
 function myCoolFunction() {
-  if (arguments.length == 2 && !Array.isArray(arguments[1])) {
-    var f = arguments[0];
-    var arr = arguments[1];
-    // ...
+if (arguments.length == 2 && !Array.isArray(arguments[1])) {
+varf = arguments[0];
+vararr = arguments[1];
+// ...
   }
-  // ...
+// ...
 }
 
 myCoolFunction(
-  function (x) {
-    console.log(x);
+function (x) {
+console.log(x);
   },
   [1, 2, 3, 4]
 );
 myCoolFunction(
-  function (x) {
-    console.log(x);
+function (x) {
+console.log(x);
   },
-  1,
-  2,
-  3,
-  4
+1,
+2,
+3,
+4
 );
 ```
 
@@ -308,14 +308,14 @@ In this case, we need to use TypeScript to tell any of our callers about the way
 
 ```ts
 function myCoolFunction(f: (x: number) => void, nums: number[]): void;
-function myCoolFunction(f: (x: number) => void, ...nums: number[]): void;
-function myCoolFunction() {
-  if (arguments.length == 2 && !Array.isArray(arguments[1])) {
-    var f = arguments[0];
-    var arr = arguments[1];
-    // ...
+functionmyCoolFunction(f: (x: number) =>void, ...nums: number[]): void;
+functionmyCoolFunction() {
+if (arguments.length == 2 && !Array.isArray(arguments[1])) {
+varf = arguments[0];
+vararr = arguments[1];
+// ...
   }
-  // ...
+// ...
 }
 ```
 
@@ -338,8 +338,8 @@ If you instead moved the declarations into the object literal themselves, you’
 
 ```ts
 let options = {
-  color: "red",
-  volume: 11,
+color:"red",
+volume:11,
 };
 ```
 
@@ -347,11 +347,11 @@ You could also define the type of `options` and add a type assertion on the obje
 
 ```ts
 interface Options {
-  color: string;
-  volume: number;
+color: string;
+volume: number;
 }
 
-let options = {} as Options;
+letoptions = {} asOptions;
 options.color = "red";
 options.volume = 11;
 ```
@@ -412,21 +412,21 @@ For instance, imagine a `Point` class, and imagine a function that we wish to ad
 
 ```ts
 class Point {
-  constructor(public x, public y) {}
-  getDistance(p: Point) {
-    let dx = p.x - this.x;
-    let dy = p.y - this.y;
-    return Math.sqrt(dx ** 2 + dy ** 2);
+constructor(publicx, publicy) {}
+getDistance(p: Point) {
+letdx = p.x - this.x;
+letdy = p.y - this.y;
+returnMath.sqrt(dx ** 2 + dy ** 2);
   }
 }
 // ...
 
 // Reopen the interface.
-interface Point {
-  distanceFromOrigin(): number;
+interfacePoint {
+distanceFromOrigin(): number;
 }
 Point.prototype.distanceFromOrigin = function () {
-  return this.getDistance({ x: 0, y: 0 });
+returnthis.getDistance({ x:0, y:0 });
 };
 ```
 
@@ -437,6 +437,6 @@ The fix is to use a `this`-parameter to give an explicit type in the interface o
 
 ```ts
 Point.prototype.distanceFromOrigin = function (this: Point) {
-  return this.getDistance({ x: 0, y: 0 });
+returnthis.getDistance({ x:0, y:0 });
 };
 ```

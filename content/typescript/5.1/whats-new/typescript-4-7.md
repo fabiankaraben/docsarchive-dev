@@ -20,8 +20,8 @@ TypeScript 4.7 adds this functionality with two new `module` settings: `node16` 
 
 ```jsonc
 {
-    "compilerOptions": {
-        "module": "node16",
+"compilerOptions": {
+"module": "node16",
     }
 }
 ```
@@ -30,16 +30,16 @@ These new modes bring a few high-level features which we’ll explore here.
 
 ### `type` in `package.json` and New Extensions {#type-in-packagejson-and-new-extensions}
 
-Node.js supports [a new setting in `package.json`](https://nodejs.org/api/packages.html#packages_package_json_and_file_extensions) called `type`.
+Node.js supports [a new setting in `package.json` ↗](https://nodejs.org/api/packages.html#packages_package_json_and_file_extensions) called `type`.
 `"type"` can be set to either `"module"` or `"commonjs"`.
 
 ```jsonc
 {
-    "name": "my-package",
-    "type": "module",
+"name": "my-package",
+"type": "module",
 
-    "//": "...",
-    "dependencies": {
+"//": "...",
+"dependencies": {
     }
 }
 ```
@@ -70,12 +70,12 @@ For example, let’s say you have the following code today:
 
 ```ts
 // ./foo.ts
-export function helper() {
-    // ...
+exportfunctionhelper() {
+// ...
 }
 
 // ./bar.ts
-import { helper } from "./foo"; // only works in CJS
+import { helper } from"./foo"; // only works in CJS
 
 helper();
 ```
@@ -85,7 +85,7 @@ As a result, it will have to be rewritten to use the extension of the *output* o
 
 ```ts
 // ./bar.ts
-import { helper } from "./foo.js"; // works in ESM & CJS
+import { helper } from"./foo.js"; // works in ESM & CJS
 
 helper();
 ```
@@ -118,12 +118,12 @@ Node.js allows ES modules to import CommonJS modules as if they were ES modules 
 
 ```ts
 // ./foo.cts
-export function helper() {
-    console.log("hello world!");
+exportfunctionhelper() {
+console.log("hello world!");
 }
 
 // ./bar.mts
-import foo from "./foo.cjs";
+importfoofrom"./foo.cjs";
 
 // prints "hello world!"
 foo.helper();
@@ -134,12 +134,12 @@ In these cases, ES modules can use a “namespace-style” import (i.e. `import 
 
 ```ts
 // ./foo.cts
-export function helper() {
-    console.log("hello world!");
+exportfunctionhelper() {
+console.log("hello world!");
 }
 
 // ./bar.mts
-import { helper } from "./foo.cjs";
+import { helper } from"./foo.cjs";
 
 // prints "hello world!"
 helper();
@@ -153,18 +153,18 @@ One TypeScript-specific note about interop is the following syntax:
 import foo = require("foo");
 ```
 
-In a CommonJS module, this just boils down to a `require()` call, and in an ES module, this imports [`createRequire`](https://nodejs.org/api/module.html#module_module_createrequire_filename) to achieve the same thing.
+In a CommonJS module, this just boils down to a `require()` call, and in an ES module, this imports [`createRequire` ↗](https://nodejs.org/api/module.html#module_module_createrequire_filename) to achieve the same thing.
 This will make code less portable on runtimes like the browser (which don’t support `require()`), but will often be useful for interoperability.
 In turn, you can write the above example using this syntax as follows:
 
 ```ts
 // ./foo.cts
-export function helper() {
-    console.log("hello world!");
+exportfunctionhelper() {
+console.log("hello world!");
 }
 
 // ./bar.mts
-import foo = require("./foo.cjs");
+importfoo = require("./foo.cjs");
 
 foo.helper()
 ```
@@ -172,11 +172,11 @@ foo.helper()
 Finally, it’s worth noting that the only way to import ESM files from a CJS module is using dynamic `import()` calls.
 This can present challenges, but is the behavior in Node.js today.
 
-You can [read more about ESM/CommonJS interop in Node.js here](https://nodejs.org/api/esm.html#esm_interoperability_with_commonjs).
+You can [read more about ESM/CommonJS interop in Node.js here ↗](https://nodejs.org/api/esm.html#esm_interoperability_with_commonjs).
 
 ### `package.json` Exports, Imports, and Self-Referencing {#packagejson-exports-imports-and-self-referencing}
 
-Node.js supports [a new field for defining entry points in `package.json` called `"exports"`](https://nodejs.org/api/packages.html#packages_exports).
+Node.js supports [a new field for defining entry points in `package.json` called `"exports"` ↗](https://nodejs.org/api/packages.html#packages_exports).
 This field is a more powerful alternative to defining `"main"` in `package.json`, and can control what parts of your package are exposed to consumers.
 
 Here’s a `package.json` that supports separate entry-points for CommonJS and ESM:
@@ -184,31 +184,31 @@ Here’s a `package.json` that supports separate entry-points for CommonJS and E
 ```jsonc
 // package.json
 {
-    "name": "my-package",
-    "type": "module",
-    "exports": {
-        ".": {
-            // Entry-point for `import "my-package"` in ESM
-            "import": "./esm/index.js",
+"name": "my-package",
+"type": "module",
+"exports": {
+".": {
+// Entry-point for `import "my-package"` in ESM
+"import": "./esm/index.js",
 
-            // Entry-point for `require("my-package") in CJS
-            "require": "./commonjs/index.cjs",
+// Entry-point for `require("my-package") in CJS
+"require": "./commonjs/index.cjs",
         },
     },
 
-    // CJS fall-back for older versions of Node.js
-    "main": "./commonjs/index.cjs",
+// CJS fall-back for older versions of Node.js
+"main": "./commonjs/index.cjs",
 }
 ```
 
-There’s a lot to this feature, [which you can read more about on the Node.js documentation](https://nodejs.org/api/packages.html).
+There’s a lot to this feature, [which you can read more about on the Node.js documentation ↗](https://nodejs.org/api/packages.html).
 Here we’ll try to focus on how TypeScript supports it.
 
 With TypeScript’s original Node support, it would look for a `"main"` field, and then look for declaration files that corresponded to that entry.
 For example, if `"main"` pointed to `./lib/index.js`, TypeScript would look for a file called `./lib/index.d.ts`.
 A package author could override this by specifying a separate field called `"types"` (e.g. `"types": "./types/index.d.ts"`).
 
-The new support works similarly with [import conditions](https://nodejs.org/api/packages.html).
+The new support works similarly with [import conditions ↗](https://nodejs.org/api/packages.html).
 By default, TypeScript overlays the same rules with import conditions - if you write an `import` from an ES module, it will look up the `import` field, and from a CommonJS module, it will look at the `require` field.
 If it finds them, it will look for a corresponding declaration file.
 If you need to point to a different location for your type declarations, you can add a `"types"` import condition.
@@ -216,34 +216,34 @@ If you need to point to a different location for your type declarations, you can
 ```jsonc
 // package.json
 {
-    "name": "my-package",
-    "type": "module",
-    "exports": {
-        ".": {
-            // Entry-point for `import "my-package"` in ESM
-            "import": {
-                // Where TypeScript will look.
-                "types": "./types/esm/index.d.ts",
+"name": "my-package",
+"type": "module",
+"exports": {
+".": {
+// Entry-point for `import "my-package"` in ESM
+"import": {
+// Where TypeScript will look.
+"types": "./types/esm/index.d.ts",
 
-                // Where Node.js will look.
-                "default": "./esm/index.js"
+// Where Node.js will look.
+"default": "./esm/index.js"
             },
-            // Entry-point for `require("my-package") in CJS
-            "require": {
-                // Where TypeScript will look.
-                "types": "./types/commonjs/index.d.cts",
+// Entry-point for `require("my-package") in CJS
+"require": {
+// Where TypeScript will look.
+"types": "./types/commonjs/index.d.cts",
 
-                // Where Node.js will look.
-                "default": "./commonjs/index.cjs"
+// Where Node.js will look.
+"default": "./commonjs/index.cjs"
             },
         }
     },
 
-    // Fall-back for older versions of TypeScript
-    "types": "./types/index.d.ts",
+// Fall-back for older versions of TypeScript
+"types": "./types/index.d.ts",
 
-    // CJS fall-back for older versions of Node.js
-    "main": "./commonjs/index.cjs"
+// CJS fall-back for older versions of Node.js
+"main": "./commonjs/index.cjs"
 }
 ```
 
@@ -254,7 +254,7 @@ It’s important to note that the CommonJS entrypoint and the ES module entrypoi
 Every declaration file is interpreted either as a CommonJS module or as an ES module, based on its file extension and the `"type"` field of the `package.json`, and this detected module kind must match the module kind that Node will detect for the corresponding JavaScript file for type checking to be correct.
 Attempting to use a single `.d.ts` file to type both an ES module entrypoint and a CommonJS entrypoint will cause TypeScript to think only one of those entrypoints exists, causing compiler errors for users of the package.
 
-TypeScript also supports [the `"imports"` field of `package.json`](https://nodejs.org/api/packages.html#packages_imports) in a similar manner by looking for declaration files alongside corresponding files, and supports [packages self-referencing themselves](https://nodejs.org/api/packages.html#packages_self_referencing_a_package_using_its_name).
+TypeScript also supports [the `"imports"` field of `package.json` ↗](https://nodejs.org/api/packages.html#packages_imports) in a similar manner by looking for declaration files alongside corresponding files, and supports [packages self-referencing themselves ↗](https://nodejs.org/api/packages.html#packages_self_referencing_a_package_using_its_name).
 These features are generally not as involved to set up, but are supported.
 
 ### Your Feedback Wanted! {#your-feedback-wanted}
@@ -263,7 +263,7 @@ As we continue working on TypeScript 4.7, we expect to see more documentation an
 Supporting these new features has been an ambitious under-taking, and that’s why we’re looking for early feedback on it!
 Please try it out and let us know how it works for you.
 
-For more information, [you can see the implementing PR here](https://github.com/microsoft/TypeScript/pull/44501).
+For more information, [you can see the implementing PR here ↗](https://github.com/microsoft/TypeScript/pull/44501).
 
 ## Control over Module Detection {#control-over-module-detection}
 
@@ -288,7 +288,7 @@ This will be true regardless of how `module`, `moduleResolution`, and `jsx` are 
 
 Meanwhile, the `"legacy"` option simply goes back to the old behavior of only seeking out `import` and `export` statements to determine whether a file is a module.
 
-You can [read up more about this change on the pull request](https://github.com/microsoft/TypeScript/pull/47495).
+You can [read up more about this change on the pull request ↗](https://github.com/microsoft/TypeScript/pull/47495).
 
 ## Control-Flow Analysis for Bracketed Element Access {#control-flow-analysis-for-bracketed-element-access}
 
@@ -298,14 +298,14 @@ For example, take the following code:
 ```ts
 const key = Symbol();
 
-const numberOrString = Math.random() < 0.5 ? 42 : "hello";
+constnumberOrString = Math.random() < 0.5 ? 42 : "hello";
 
-const obj = {
-    [key]: numberOrString,
+constobj = {
+[key]:numberOrString,
 };
 
-if (typeof obj[key] === "string") {
-    let str = obj[key].toUpperCase();
+if (typeofobj[key] === "string") {
+letstr = obj[key].toUpperCase();
 }
 ```
 
@@ -318,24 +318,24 @@ This also means that under `--strictPropertyInitialization`, TypeScript can corr
 
 ```ts
 // 'key' has type 'unique symbol'
-const key = Symbol();
+constkey = Symbol();
 
-class C {
+classC {
     [key]: string;
 
-    constructor(str: string) {
-        // oops, forgot to set 'this[key]'
+constructor(str: string) {
+// oops, forgot to set 'this[key]'
     }
 
-    screamString() {
-        return this[key].toUpperCase();
+screamString() {
+returnthis[key].toUpperCase();
     }
 }
 ```
 
 Under TypeScript 4.7, `--strictPropertyInitialization` reports an error telling us that the `[key]` property wasn’t definitely assigned by the end of the constructor.
 
-We’d like to extend our gratitude to [Oleksandr Tarasiuk](https://github.com/a-tarasyuk) who provided [this change](https://github.com/microsoft/TypeScript/pull/45974)!
+We’d like to extend our gratitude to [Oleksandr Tarasiuk ↗](https://github.com/a-tarasyuk) who provided [this change ↗](https://github.com/microsoft/TypeScript/pull/45974)!
 
 ## Improved Function Inference in Objects and Methods {#improved-function-inference-in-objects-and-methods}
 
@@ -344,45 +344,45 @@ This allows the types of these functions to consistently flow in a left-to-right
 
 ```ts
 declare function f<T>(arg: {
-    produce: (n: string) => T,
-    consume: (x: T) => void }
+produce: (n: string) =>T,
+consume: (x: T) =>void }
 ): void;
 
 // Works
 f({
-    produce: () => "hello",
-    consume: x => x.toLowerCase()
+produce: () =>"hello",
+consume:x=>x.toLowerCase()
 });
 
 // Works
 f({
-    produce: (n: string) => n,
-    consume: x => x.toLowerCase(),
+produce: (n: string) =>n,
+consume:x=>x.toLowerCase(),
 });
 
 // Was an error, now works.
 f({
-    produce: n => n,
-    consume: x => x.toLowerCase(),
+produce:n=>n,
+consume:x=>x.toLowerCase(),
 });
 
 // Was an error, now works.
 f({
-    produce: function () { return "hello"; },
-    consume: x => x.toLowerCase(),
+produce:function () { return"hello"; },
+consume:x=>x.toLowerCase(),
 });
 
 // Was an error, now works.
 f({
-    produce() { return "hello" },
-    consume: x => x.toLowerCase(),
+produce() { return"hello" },
+consume:x=>x.toLowerCase(),
 });
 ```
 
 Inference failed in some of these examples because knowing the type of their `produce` functions would indirectly request the type of `arg` before finding a good type for `T`.
 TypeScript now gathers functions that could contribute to the inferred type of `T` and infers from them lazily.
 
-For more information, you can [take a look at the specific modifications to our inference process](https://github.com/microsoft/TypeScript/pull/48538).
+For more information, you can [take a look at the specific modifications to our inference process ↗](https://github.com/microsoft/TypeScript/pull/48538).
 
 ## Instantiation Expressions {#instantiation-expressions}
 
@@ -391,11 +391,11 @@ For example, let’s say we had a `makeBox` function.
 
 ```ts
 interface Box<T> {
-    value: T;
+value: T;
 }
 
-function makeBox<T>(value: T) {
-    return { value };
+functionmakeBox<T>(value: T) {
+return { value };
 }
 ```
 
@@ -404,12 +404,12 @@ To do that today, we’d have to wrap `makeBox` in other functions, or use an ex
 
 ```ts
 function makeHammerBox(hammer: Hammer) {
-    return makeBox(hammer);
+returnmakeBox(hammer);
 }
 
 // or...
 
-const makeWrenchBox: (wrench: Wrench) => Box<Wrench> = makeBox;
+constmakeWrenchBox: (wrench: Wrench) =>Box<Wrench> = makeBox;
 ```
 
 These work, but wrapping a call to `makeBox` is a bit wasteful, and writing the full signature of `makeWrenchBox` could get unwieldy.
@@ -420,7 +420,7 @@ We can now take functions and constructors and feed them type arguments directly
 
 ```ts
 const makeHammerBox = makeBox<Hammer>;
-const makeWrenchBox = makeBox<Wrench>;
+constmakeWrenchBox = makeBox<Wrench>;
 ```
 
 So with this, we can specialize `makeBox` to accept more specific types and reject anything else.
@@ -436,16 +436,16 @@ This logic also works for constructor functions such as `Array`, `Map`, and `Set
 
 ```ts
 // Has type `new () => Map<string, Error>`
-const ErrorMap = Map<string, Error>;
+constErrorMap = Map<string, Error>;
 
 // Has type `// Map<string, Error>`
-const errorMap = new ErrorMap();
+consterrorMap = newErrorMap();
 ```
 
 When a function or constructor is given type arguments, it will produce a new type that keeps all signatures with compatible type parameter lists, and replaces the corresponding type parameters with the given type arguments.
 Any other signatures are dropped, as TypeScript will assume that they aren’t meant to be used.
 
-For more information on this feature, [check out the pull request](https://github.com/microsoft/TypeScript/pull/47607).
+For more information on this feature, [check out the pull request ↗](https://github.com/microsoft/TypeScript/pull/47607).
 
 ## `extends` Constraints on `infer` Type Variables {#extends-constraints-on-infer-type-variables}
 
@@ -455,21 +455,21 @@ For example, we can write a conditional type that returns the first element of a
 
 ```ts
 type FirstIfString<T> =
-    T extends [infer S, ...unknown[]]
-        ? S extends string ? S : never
+Textends [inferS, ...unknown[]]
+        ? Sextendsstring ? S : never
         : never;
 
- // string
-type A = FirstIfString<[string, number, number]>;
+// string
+typeA = FirstIfString<[string, number, number]>;
 
 // "hello"
-type B = FirstIfString<["hello", number, number]>;
+typeB = FirstIfString<["hello", number, number]>;
 
 // "hello" | "world"
-type C = FirstIfString<["hello" | "world", boolean]>;
+typeC = FirstIfString<["hello" | "world", boolean]>;
 
 // never
-type D = FirstIfString<[boolean, number, string]>;
+typeD = FirstIfString<[boolean, number, string]>;
 ```
 
 `FirstIfString` matches against any tuple with at least one element and grabs the type of the first element as `S`.
@@ -480,8 +480,8 @@ We could have written `FirstIfString` as follows:
 
 ```ts
 type FirstIfString<T> =
-    T extends [string, ...unknown[]]
-        // Grab the first type out of `T`
+Textends [string, ...unknown[]]
+// Grab the first type out of `T`
         ? T[0]
         : never;
 ```
@@ -495,7 +495,7 @@ To avoid that second level of nesting, TypeScript 4.7 now allows you to place a 
 
 ```ts
 type FirstIfString<T> =
-    T extends [infer S extends string, ...unknown[]]
+Textends [inferSextendsstring, ...unknown[]]
         ? S
         : never;
 ```
@@ -503,7 +503,7 @@ type FirstIfString<T> =
 This way, when TypeScript matches against `S`, it also ensures that `S` has to be a `string`.
 If `S` isn’t a `string`, it takes the false path, which in these cases is `never`.
 
-For more details, you can [read up on the change on GitHub](https://github.com/microsoft/TypeScript/pull/48112).
+For more details, you can [read up on the change on GitHub ↗](https://github.com/microsoft/TypeScript/pull/48112).
 
 ## Optional Variance Annotations for Type Parameters {#optional-variance-annotations-for-type-parameters}
 
@@ -511,18 +511,18 @@ Let’s take the following types.
 
 ```ts
 interface Animal {
-    animalStuff: any;
+animalStuff: any;
 }
 
-interface Dog extends Animal {
-    dogStuff: any;
+interfaceDogextendsAnimal {
+dogStuff: any;
 }
 
 // ...
 
-type Getter<T> = () => T;
+typeGetter<T> = () =>T;
 
-type Setter<T> = (value: T) => void;
+typeSetter<T> = (value: T) =>void;
 ```
 
 Imagine we had two different instances of `Getter`s.
@@ -554,8 +554,8 @@ There are also cases for using both `in` and `out`.
 
 ```ts
 interface State<in out T> {
-    get: () => T;
-    set: (value: T) => void;
+get: () =>T;
+set: (value: T) =>void;
 }
 ```
 
@@ -574,15 +574,15 @@ As an example, if we forgot to specify both `in` and `out` on `State`, we’d ge
 
 ```ts
 interface State<out T> {
-    //          ~~~~~
-    // error!
-    // Type 'State<sub-T>' is not assignable to type 'State<super-T>' as implied by variance annotation.
-    //   Types of property 'set' are incompatible.
-    //     Type '(value: sub-T) => void' is not assignable to type '(value: super-T) => void'.
-    //       Types of parameters 'value' and 'value' are incompatible.
-    //         Type 'super-T' is not assignable to type 'sub-T'.
-    get: () => T;
-    set: (value: T) => void;
+//          ~~~~~
+// error!
+// Type 'State<sub-T>' is not assignable to type 'State<super-T>' as implied by variance annotation.
+//   Types of property 'set' are incompatible.
+//     Type '(value: sub-T) => void' is not assignable to type '(value: super-T) => void'.
+//       Types of parameters 'value' and 'value' are incompatible.
+//         Type 'super-T' is not assignable to type 'sub-T'.
+get: () =>T;
+set: (value: T) =>void;
 }
 ```
 
@@ -594,18 +594,18 @@ But often there are cases where this calculation is still fairly expensive, and 
 
 ```ts
 type Foo<T> = {
-    x: T;
-    f: Bar<T>;
+x: T;
+f: Bar<T>;
 }
 
-type Bar<U> = (x: Baz<U[]>) => void;
+typeBar<U> = (x: Baz<U[]>) =>void;
 
-type Baz<V> = {
-    value: Foo<V[]>;
+typeBaz<V> = {
+value: Foo<V[]>;
 }
 
-declare let foo1: Foo<unknown>;
-declare let foo2: Foo<string>;
+declareletfoo1: Foo<unknown>;
+declareletfoo2: Foo<string>;
 
 foo1 = foo2;  // Should be an error but isn't ❌
 foo2 = foo1;  // Error - correct ✅
@@ -628,9 +628,9 @@ So if you do choose to add explicit variance markers, we would encourage thought
 
 But if you’re working with deeply recursive types, especially if you’re a library author, you may be interested in using these annotations to the benefit of your users.
 Those annotations can provide wins in both accuracy and type-checking speed, which can even affect their code editing experience.
-Determining when variance calculation is a bottleneck on type-checking time can be done experimentally, and determined using tooling like our [analyze-trace](https://github.com/microsoft/typescript-analyze-trace) utility.
+Determining when variance calculation is a bottleneck on type-checking time can be done experimentally, and determined using tooling like our [analyze-trace ↗](https://github.com/microsoft/typescript-analyze-trace) utility.
 
-For more details on this feature, you can [read up on the pull request](https://github.com/microsoft/TypeScript/pull/48240).
+For more details on this feature, you can [read up on the pull request ↗](https://github.com/microsoft/TypeScript/pull/48240).
 
 ## Resolution Customization with `moduleSuffixes` {#resolution-customization-with-modulesuffixes}
 
@@ -638,8 +638,8 @@ TypeScript 4.7 now supports a `moduleSuffixes` option to customize how module sp
 
 ```jsonc
 {
-    "compilerOptions": {
-        "moduleSuffixes": [".ios", ".native", ""]
+"compilerOptions": {
+"moduleSuffixes": [".ios", ".native", ""]
     }
 }
 ```
@@ -654,7 +654,7 @@ will try to look at the relative files `./foo.ios.ts`, `./foo.native.ts`, and fi
 
 This feature can be useful for React Native projects where each target platform can use a separate `tsconfig.json` with differing `moduleSuffixes`.
 
-[The `moduleSuffixes` option](https://github.com/microsoft/TypeScript/pull/48189) was contributed thanks to [Adam Foxman](https://github.com/afoxman)!
+[The `moduleSuffixes` option ↗](https://github.com/microsoft/TypeScript/pull/48189) was contributed thanks to [Adam Foxman ↗](https://github.com/afoxman)!
 
 ## resolution-mode {#resolution-mode}
 
@@ -675,28 +675,28 @@ Additionally, in nightly versions of TypeScript, `import type` can specify an im
 
 ```ts
 // Resolve `pkg` as if we were importing with a `require()`
-import type { TypeFromRequire } from "pkg" assert {
+importtype { TypeFromRequire } from"pkg"assert {
     "resolution-mode": "require"
 };
 
 // Resolve `pkg` as if we were importing with an `import`
-import type { TypeFromImport } from "pkg" assert {
+importtype { TypeFromImport } from"pkg"assert {
     "resolution-mode": "import"
 };
 
-export interface MergedType extends TypeFromRequire, TypeFromImport {}
+exportinterfaceMergedTypeextendsTypeFromRequire, TypeFromImport {}
 ```
 
 These import assertions can also be used on `import()` types.
 
 ```ts
 export type TypeFromRequire =
-    import("pkg", { assert: { "resolution-mode": "require" } }).TypeFromRequire;
+import("pkg", { assert: { "resolution-mode":"require" } }).TypeFromRequire;
 
-export type TypeFromImport =
-    import("pkg", { assert: { "resolution-mode": "import" } }).TypeFromImport;
+exporttypeTypeFromImport =
+import("pkg", { assert: { "resolution-mode":"import" } }).TypeFromImport;
 
-export interface MergedType extends TypeFromRequire, TypeFromImport {}
+exportinterfaceMergedTypeextendsTypeFromRequire, TypeFromImport {}
 ```
 
 The `import type` and `import()` syntaxes only support `resolution-mode` in [nightly builds of TypeScript](/typescript/5.1/project-configuration/nightly-builds).
@@ -706,9 +706,9 @@ You’ll likely get an error like
 Resolution mode assertions are unstable. Use nightly TypeScript to silence this error. Try updating with 'npm install -D typescript@next'.
 ```
 
-If you do find yourself using this feature in nightly versions of TypeScript, [consider providing feedback on this issue](https://github.com/microsoft/TypeScript/issues/49055).
+If you do find yourself using this feature in nightly versions of TypeScript, [consider providing feedback on this issue ↗](https://github.com/microsoft/TypeScript/issues/49055).
 
-You can see the respective changes [for reference directives](https://github.com/microsoft/TypeScript/pull/47732) and [for type import assertions](https://github.com/microsoft/TypeScript/pull/47807).
+You can see the respective changes [for reference directives ↗](https://github.com/microsoft/TypeScript/pull/47732) and [for type import assertions ↗](https://github.com/microsoft/TypeScript/pull/47807).
 
 ## Go to Source Definition {#go-to-source-definition}
 
@@ -736,14 +736,14 @@ For instance, if you ran Organize Imports on the following file…
 
 ```ts
 // local code
-import * as bbb from "./bbb";
-import * as ccc from "./ccc";
-import * as aaa from "./aaa";
+import*asbbbfrom"./bbb";
+import*ascccfrom"./ccc";
+import*asaaafrom"./aaa";
 
 // built-ins
-import * as path from "path";
-import * as child_process from "child_process"
-import * as fs from "fs";
+import*aspathfrom"path";
+import*aschild_processfrom"child_process"
+import*asfsfrom"fs";
 
 // some code...
 ```
@@ -752,13 +752,13 @@ You would get something like the following
 
 ```ts
 // local code
-import * as child_process from "child_process";
-import * as fs from "fs";
+import*aschild_processfrom"child_process";
+import*asfsfrom"fs";
 // built-ins
-import * as path from "path";
-import * as aaa from "./aaa";
-import * as bbb from "./bbb";
-import * as ccc from "./ccc";
+import*aspathfrom"path";
+import*asaaafrom"./aaa";
+import*asbbbfrom"./bbb";
+import*ascccfrom"./ccc";
 
 
 // some code...
@@ -773,14 +773,14 @@ Running it on the above code looks a little bit more like what you’d expect:
 
 ```ts
 // local code
-import * as aaa from "./aaa";
-import * as bbb from "./bbb";
-import * as ccc from "./ccc";
+import*asaaafrom"./aaa";
+import*asbbbfrom"./bbb";
+import*ascccfrom"./ccc";
 
 // built-ins
-import * as child_process from "child_process";
-import * as fs from "fs";
-import * as path from "path";
+import*aschild_processfrom"child_process";
+import*asfsfrom"fs";
+import*aspathfrom"path";
 
 // some code...
 ```
@@ -813,12 +813,12 @@ So for the following example:
 ```tsx
 import * as React from "react";
 
-interface Props {
-    stuff?: string;
+interfaceProps {
+stuff?: string;
 }
 
-function MyComponent(props: unknown) {
-    return <div {...props} />;
+functionMyComponent(props: unknown) {
+return<div{...props}/>;
 }
 ```
 
@@ -846,15 +846,15 @@ however, TypeScript now also checks if a generic value that is constrained to a 
 
 ```ts
 function logKey<S extends string | symbol>(key: S): S {
-    // Now an error.
-    console.log(`${key} is the key`);
-    return key;
+// Now an error.
+console.log(`${key} is the key`);
+returnkey;
 }
 
-function get<T, K extends keyof T>(obj: T, key: K) {
-    // Now an error.
-    console.log(`Grabbing property '${key}'.`);
-    return obj[key];
+functionget<T, KextendskeyofT>(obj: T, key: K) {
+// Now an error.
+console.log(`Grabbing property '${key}'.`);
+returnobj[key];
 }
 ```
 
@@ -868,9 +868,9 @@ In some cases, you can get around this by wrapping the expression in a call to `
 
 ```ts
 function logKey<S extends string | symbol>(key: S): S {
-    // No longer an error.
-    console.log(`${String(key)} is the key`);
-    return key;
+// No longer an error.
+console.log(`${String(key)} is the key`);
+returnkey;
 }
 ```
 
@@ -879,9 +879,9 @@ In such cases, you can switch to `string & keyof ...`:
 
 ```ts
 function get<T, K extends string & keyof T>(obj: T, key: K) {
-    // No longer an error.
-    console.log(`Grabbing property '${key}'.`);
-    return obj[key];
+// No longer an error.
+console.log(`Grabbing property '${key}'.`);
+returnobj[key];
 }
 ```
 
@@ -903,8 +903,8 @@ As a result, the following code will now fail:
 
 ```ts
 function overwriteLength(tuple: readonly [string, string, string]) {
-    // Now errors.
-    tuple.length = 7;
+// Now errors.
+tuple.length = 7;
 }
 ```
 

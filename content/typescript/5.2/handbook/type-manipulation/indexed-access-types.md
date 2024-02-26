@@ -14,8 +14,8 @@ We can use an *indexed access type* to look up a specific property on another ty
 
 ```ts
 type Person = { age: number; name: string; alive: boolean };
-type Age = Person["age"];
-     
+typeAge = Person["age"];
+
 type Age = number
 ```
 
@@ -25,16 +25,16 @@ The indexing type is itself a type, so we can use unions, `keyof`, or other type
 
 ```ts
 type I1 = Person["age" | "name"];
-     
+
 type I1 = string | number
- 
-type I2 = Person[keyof Person];
-     
+
+typeI2 = Person[keyofPerson];
+
 type I2 = string | number | boolean
- 
-type AliveOrName = "alive" | "name";
-type I3 = Person[AliveOrName];
-     
+
+typeAliveOrName = "alive" | "name";
+typeI3 = Person[AliveOrName];
+
 type I3 = string | boolean
 ```
 
@@ -57,23 +57,23 @@ We can combine this with `typeof` to conveniently capture the element type of an
 
 ```ts
 const MyArray = [
-  { name: "Alice", age: 15 },
-  { name: "Bob", age: 23 },
-  { name: "Eve", age: 38 },
+  { name:"Alice", age:15 },
+  { name:"Bob", age:23 },
+  { name:"Eve", age:38 },
 ];
- 
-type Person = typeof MyArray[number];
-       
+
+typePerson = typeofMyArray[number];
+
 type Person = {
     name: string;
     age: number;
 }
-type Age = typeof MyArray[number]["age"];
-     
+typeAge = typeofMyArray[number]["age"];
+
 type Age = number
 // Or
-type Age2 = Person["age"];
-      
+typeAge2 = Person["age"];
+
 type Age2 = number
 ```
 
@@ -83,7 +83,7 @@ You can only use types when indexing, meaning you can’t use a `const` to make 
 
 ```ts
 const key = "age";
-type Age = Person[key];
+typeAge = Person[key];
 ```
 
 ```text {filename="Generated error"}
@@ -96,5 +96,5 @@ However, you can use a type alias for a similar style of refactor:
 
 ```ts
 type key = "age";
-type Age = Person[key];
+typeAge = Person[key];
 ```

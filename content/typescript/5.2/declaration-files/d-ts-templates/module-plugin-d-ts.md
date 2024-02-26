@@ -18,7 +18,7 @@ greeter(2);
 greeter("Hello world");
 
 // Now we extend the object with a new function at runtime
-import "hyper-super-greeter";
+import"hyper-super-greeter";
 greeter.hyperGreet();
 ```
 
@@ -26,13 +26,13 @@ The definition for “super-greeter”:
 
 ```ts
 /*~ This example shows how to have multiple overloads for your function */
-export interface GreeterFunction {
+exportinterfaceGreeterFunction {
   (name: string): void
   (time: number): void
 }
 
 /*~ This example shows how to export a function specified by an interface */
-export const greeter: GreeterFunction;
+exportconstgreeter: GreeterFunction;
 ```
 
 We can extend the existing module like the following:
@@ -49,15 +49,15 @@ We can extend the existing module like the following:
  */
 
 /*~ On this line, import the module which this module adds to */
-import { greeter } from "super-greeter";
+import { greeter } from"super-greeter";
 
 /*~ Here, declare the same module as the one you imported above
  *~ then we expand the existing declaration of the greeter function
  */
-export module "super-greeter" {
-  export interface GreeterFunction {
-    /** Greets even better! */
-    hyperGreet(): void;
+exportmodule"super-greeter" {
+exportinterfaceGreeterFunction {
+/** Greets even better! */
+hyperGreet(): void;
   }
 }
 ```

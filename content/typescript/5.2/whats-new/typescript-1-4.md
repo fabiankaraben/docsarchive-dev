@@ -16,8 +16,8 @@ Union types are a powerful way to express a value that can be one of several typ
 
 ```ts
 interface RunOptions {
-  program: string;
-  commandline: string[] | string | (() => string);
+program: string;
+commandline: string[] | string | (() =>string);
 }
 ```
 
@@ -34,8 +34,8 @@ When reading from a union type, you can see any properties that are shared by th
 
 ```ts
 if (opts.commandline.length === 0) {
-  // OK, string and string[] both have 'length' property
-  console.log("it's empty");
+// OK, string and string[] both have 'length' property
+console.log("it's empty");
 }
 ```
 
@@ -43,10 +43,10 @@ Using Type Guards, you can easily work with a variable of a union type:
 
 ```ts
 function formatCommandline(c: string | string[]) {
-  if (typeof c === "string") {
-    return c.trim();
+if (typeofc === "string") {
+returnc.trim();
   } else {
-    return c.join(" ");
+returnc.join(" ");
   }
 }
 ```
@@ -57,30 +57,30 @@ With union types able to represent a wide range of type scenarios, we’ve decid
 
 ```ts
 function equal<T>(lhs: T, rhs: T): boolean {
-  return lhs === rhs;
+returnlhs === rhs;
 }
 
 // Previously: No error
 // New behavior: Error, no best common type between 'string' and 'number'
-var e = equal(42, "hello");
+vare = equal(42, "hello");
 ```
 
 With union types, you can now specify the desired behavior at both the function declaration site and the call site:
 
 ```ts
 // 'choose' function where types must match
-function choose1<T>(a: T, b: T): T {
-  return Math.random() > 0.5 ? a : b;
+functionchoose1<T>(a: T, b: T): T {
+returnMath.random() > 0.5 ? a : b;
 }
-var a = choose1("hello", 42); // Error
-var b = choose1<string | number>("hello", 42); // OK
+vara = choose1("hello", 42); // Error
+varb = choose1<string | number>("hello", 42); // OK
 
 // 'choose' function where types need not match
-function choose2<T, U>(a: T, b: U): T | U {
-  return Math.random() > 0.5 ? a : b;
+functionchoose2<T, U>(a: T, b: U): T | U {
+returnMath.random() > 0.5 ? a : b;
 }
-var c = choose2("bar", "foo"); // OK, c: string
-var d = choose2("hello", 42); // OK, d: string|number
+varc = choose2("bar", "foo"); // OK, c: string
+vard = choose2("hello", 42); // OK, d: string|number
 ```
 
 ### Better Type Inference {#better-type-inference}
@@ -100,17 +100,17 @@ In JavaScript, `var` declarations are “hoisted” to the top of their enclosin
 ```ts
 console.log(x); // meant to write 'y' here
 /* later in the same block */
-var x = "hello";
+varx = "hello";
 ```
 
 The new ES6 keyword `let`, now supported in TypeScript, declares a variable with more intuitive “block” semantics. A `let` variable can only be referred to after its declaration, and is scoped to the syntactic block where it is defined:
 
 ```ts
 if (foo) {
-  console.log(x); // Error, cannot refer to x before its declaration
-  let x = "hello";
+console.log(x); // Error, cannot refer to x before its declaration
+letx = "hello";
 } else {
-  console.log(x); // Error, x is not declared in this block
+console.log(x); // Error, x is not declared in this block
 }
 ```
 
@@ -133,15 +133,15 @@ TypeScript now supports ES6 template strings. These are an easy way to embed arb
 
 ```ts
 var name = "TypeScript";
-var greeting = `Hello, ${name}! Your name has ${name.length} characters`;
+vargreeting = `Hello, ${name}! Your name has ${name.length} characters`;
 ```
 
 When compiling to pre-ES6 targets, the string is decomposed:
 
 ```js
 var name = "TypeScript!";
-var greeting =
-  "Hello, " + name + "! Your name has " + name.length + " characters";
+vargreeting =
+"Hello, " + name + "! Your name has " + name.length + " characters";
 ```
 
 ## Type Guards {#type-guards}
@@ -152,8 +152,8 @@ Using `typeof` to test a variable:
 
 ```ts
 var x: any = /* ... */;
-if(typeof x === 'string') {
-    console.log(x.subtr(1)); // Error, 'subtr' does not exist on 'string'
+if(typeofx === 'string') {
+console.log(x.subtr(1)); // Error, 'subtr' does not exist on 'string'
 }
 // x is still any here
 x.unknown(); // OK
@@ -163,12 +163,12 @@ Using `typeof` with union types and `else`:
 
 ```ts
 var x: string | HTMLElement = /* ... */;
-if(typeof x === 'string') {
-    // x is string here, as shown above
+if(typeofx === 'string') {
+// x is string here, as shown above
 }
 else {
-    // x is HTMLElement here
-    console.log(x.innerHTML);
+// x is HTMLElement here
+console.log(x.innerHTML);
 }
 ```
 
@@ -176,13 +176,13 @@ Using `instanceof` with classes and union types:
 
 ```ts
 class Dog { woof() { } }
-class Cat { meow() { } }
-var pet: Dog|Cat = /* ... */;
-if (pet instanceof Dog) {
-    pet.woof(); // OK
+classCat { meow() { } }
+varpet: Dog|Cat = /* ... */;
+if (petinstanceofDog) {
+pet.woof(); // OK
 }
 else {
-    pet.woof(); // Error
+pet.woof(); // Error
 }
 ```
 
@@ -192,9 +192,9 @@ You can now define an *alias* for a type using the `type` keyword:
 
 ```ts
 type PrimitiveArray = Array<string | number | boolean>;
-type MyNumber = number;
-type NgScope = ng.IScope;
-type Callback = () => void;
+typeMyNumber = number;
+typeNgScope = ng.IScope;
+typeCallback = () =>void;
 ```
 
 Type aliases are exactly the same as their original types; they are simply alternative names.
@@ -205,12 +205,12 @@ Enums are very useful, but some programs don’t actually need the generated cod
 
 ```ts
 const enum Suit {
-  Clubs,
-  Diamonds,
-  Hearts,
-  Spades
+Clubs,
+Diamonds,
+Hearts,
+Spades
 }
-var d = Suit.Diamonds;
+vard = Suit.Diamonds;
 ```
 
 Compiles to exactly:
@@ -223,13 +223,13 @@ TypeScript will also now compute enum values when possible:
 
 ```ts
 enum MyFlags {
-  None = 0,
-  Neat = 1,
-  Cool = 2,
-  Awesome = 4,
-  Best = Neat | Cool | Awesome
+None = 0,
+Neat = 1,
+Cool = 2,
+Awesome = 4,
+Best = Neat | Cool | Awesome
 }
-var b = MyFlags.Best; // emits var b = 7;
+varb = MyFlags.Best; // emits var b = 7;
 ```
 
 ## `-noEmitOnError` commandline option {#-noemitonerror-commandline-option}
@@ -246,8 +246,8 @@ The new `amd-module name` tag allows passing an optional module name to the comp
 
 ```ts
 //// [amdModule.ts]
-///<amd-module name='NamedModule'/>
-export class C {}
+///<amd-modulename='NamedModule'/>
+exportclassC {}
 ```
 
 Will result in assigning the name `NamedModule` to the module as part of calling the AMD `define`:
@@ -255,10 +255,10 @@ Will result in assigning the name `NamedModule` to the module as part of calling
 ```js
 //// [amdModule.js]
 define("NamedModule", ["require", "exports"], function(require, exports) {
-  var C = (function() {
-    function C() {}
-    return C;
+varC = (function() {
+functionC() {}
+returnC;
   })();
-  exports.C = C;
+exports.C = C;
 });
 ```

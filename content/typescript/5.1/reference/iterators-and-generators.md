@@ -10,7 +10,7 @@ type: docs
 
 ## Iterables {#iterables}
 
-An object is deemed iterable if it has an implementation for the [`Symbol.iterator` ↗](https://www.typescriptlang.org/docs/handbook/symbols.html#symboliterator) property.
+An object is deemed iterable if it has an implementation for the [`Symbol.iterator`](/typescript/5.1/reference/symbols#symboliterator) property.
 Some built-in types like `Array`, `Map`, `Set`, `String`, `Int32Array`, `Uint32Array`, etc. have their `Symbol.iterator` property already implemented.
 `Symbol.iterator` function on an object is responsible for returning the list of values to iterate on.
 
@@ -20,7 +20,7 @@ Some built-in types like `Array`, `Map`, `Set`, `String`, `Int32Array`, `Uint32A
 
 ```ts
 function toArray<X>(xs: Iterable<X>): X[] {
-  return [...xs]
+return [...xs]
 }
 ```
 
@@ -32,8 +32,8 @@ Here is a simple `for..of` loop on an array:
 ```ts
 let someArray = [1, "string", false];
 
-for (let entry of someArray) {
-  console.log(entry); // 1, "string", false
+for (letentryofsomeArray) {
+console.log(entry); // 1, "string", false
 }
 ```
 
@@ -46,12 +46,12 @@ Here is an example that demonstrates this distinction:
 ```ts
 let list = [4, 5, 6];
 
-for (let i in list) {
-  console.log(i); // "0", "1", "2",
+for (letiinlist) {
+console.log(i); // "0", "1", "2",
 }
 
-for (let i of list) {
-  console.log(i); // 4, 5, 6
+for (letioflist) {
+console.log(i); // 4, 5, 6
 }
 ```
 
@@ -62,12 +62,12 @@ Another distinction is that `for..in` operates on any object; it serves as a way
 let pets = new Set(["Cat", "Dog", "Hamster"]);
 pets["species"] = "mammals";
 
-for (let pet in pets) {
-  console.log(pet); // "species"
+for (letpetinpets) {
+console.log(pet); // "species"
 }
 
-for (let pet of pets) {
-  console.log(pet); // "Cat", "Dog", "Hamster"
+for (letpetofpets) {
+console.log(pet); // "Cat", "Dog", "Hamster"
 }
 ```
 
@@ -82,8 +82,8 @@ The compiler will generate a simple `for` loop for a `for..of` loop, for instanc
 
 ```ts
 let numbers = [1, 2, 3];
-for (let num of numbers) {
-  console.log(num);
+for (letnumofnumbers) {
+console.log(num);
 }
 ```
 
@@ -91,9 +91,9 @@ will be generated as:
 
 ```js
 var numbers = [1, 2, 3];
-for (var _i = 0; _i < numbers.length; _i++) {
-  var num = numbers[_i];
-  console.log(num);
+for (var_i = 0; _i < numbers.length; _i++) {
+varnum = numbers[_i];
+console.log(num);
 }
 ```
 

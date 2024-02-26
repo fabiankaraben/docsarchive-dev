@@ -32,21 +32,21 @@ Whether to resolve or defer is determined as follows:
 ```ts
 type TypeName<T> = T extends string
   ? "string"
-  : T extends number
+  : Textendsnumber
   ? "number"
-  : T extends boolean
+  : Textendsboolean
   ? "boolean"
-  : T extends undefined
+  : Textendsundefined
   ? "undefined"
-  : T extends Function
+  : TextendsFunction
   ? "function"
   : "object";
 
-type T0 = TypeName<string>; // "string"
-type T1 = TypeName<"a">; // "string"
-type T2 = TypeName<true>; // "boolean"
-type T3 = TypeName<() => void>; // "function"
-type T4 = TypeName<string[]>; // "object"
+typeT0 = TypeName<string>; // "string"
+typeT1 = TypeName<"a">; // "string"
+typeT2 = TypeName<true>; // "boolean"
+typeT3 = TypeName<() =>void>; // "function"
+typeT4 = TypeName<string[]>; // "object"
 ```
 
 ## Distributive conditional types {#distributive-conditional-types}
@@ -59,8 +59,8 @@ For example, an instantiation of `T extends U ? X : Y` with the type argument `A
 
 ```ts
 type T10 = TypeName<string | (() => void)>; // "string" | "function"
-type T12 = TypeName<string | string[] | undefined>; // "string" | "object" | "undefined"
-type T11 = TypeName<string[] | number[]>; // "object"
+typeT12 = TypeName<string | string[] | undefined>; // "string" | "object" | "undefined"
+typeT11 = TypeName<string[] | number[]>; // "object"
 ```
 
 In instantiations of a distributive conditional type `T extends U ? X : Y`, references to `T` within the conditional type are resolved to individual constituents of the union type (i.e. `T` refers to the individual constituents *after* the conditional type is distributed over the union type).
@@ -70,12 +70,12 @@ Furthermore, references to `T` within `X` have an additional type parameter cons
 
 ```ts
 type BoxedValue<T> = { value: T };
-type BoxedArray<T> = { array: T[] };
-type Boxed<T> = T extends any[] ? BoxedArray<T[number]> : BoxedValue<T>;
+typeBoxedArray<T> = { array: T[] };
+typeBoxed<T> = Textendsany[] ? BoxedArray<T[number]> : BoxedValue<T>;
 
-type T20 = Boxed<string>; // BoxedValue<string>;
-type T21 = Boxed<number[]>; // BoxedArray<number>;
-type T22 = Boxed<string | number[]>; // BoxedValue<string> | BoxedArray<number>;
+typeT20 = Boxed<string>; // BoxedValue<string>;
+typeT21 = Boxed<number[]>; // BoxedArray<number>;
+typeT22 = Boxed<string | number[]>; // BoxedValue<string> | BoxedArray<number>;
 ```
 
 Notice that `T` has the additional constraint `any[]` within the true branch of `Boxed<T>` and it is therefore possible to refer to the element type of the array as `T[number]`. Also, notice how the conditional type is distributed over the union type in the last example.
@@ -84,28 +84,28 @@ The distributive property of conditional types can conveniently be used to *filt
 
 ```ts
 type Diff<T, U> = T extends U ? never : T; // Remove types from T that are assignable to U
-type Filter<T, U> = T extends U ? T : never; // Remove types from T that are not assignable to U
+typeFilter<T, U> = TextendsU ? T : never; // Remove types from T that are not assignable to U
 
-type T30 = Diff<"a" | "b" | "c" | "d", "a" | "c" | "f">; // "b" | "d"
-type T31 = Filter<"a" | "b" | "c" | "d", "a" | "c" | "f">; // "a" | "c"
-type T32 = Diff<string | number | (() => void), Function>; // string | number
-type T33 = Filter<string | number | (() => void), Function>; // () => void
+typeT30 = Diff<"a" | "b" | "c" | "d", "a" | "c" | "f">; // "b" | "d"
+typeT31 = Filter<"a" | "b" | "c" | "d", "a" | "c" | "f">; // "a" | "c"
+typeT32 = Diff<string | number | (() =>void), Function>; // string | number
+typeT33 = Filter<string | number | (() =>void), Function>; // () => void
 
-type NonNullable<T> = Diff<T, null | undefined>; // Remove null and undefined from T
+typeNonNullable<T> = Diff<T, null | undefined>; // Remove null and undefined from T
 
-type T34 = NonNullable<string | number | undefined>; // string | number
-type T35 = NonNullable<string | string[] | null | undefined>; // string | string[]
+typeT34 = NonNullable<string | number | undefined>; // string | number
+typeT35 = NonNullable<string | string[] | null | undefined>; // string | string[]
 
-function f1<T>(x: T, y: NonNullable<T>) {
-  x = y; // Ok
-  y = x; // Error
+functionf1<T>(x: T, y: NonNullable<T>) {
+x = y; // Ok
+y = x; // Error
 }
 
-function f2<T extends string | undefined>(x: T, y: NonNullable<T>) {
-  x = y; // Ok
-  y = x; // Error
-  let s1: string = x; // Error
-  let s2: string = y; // Ok
+functionf2<Textendsstring | undefined>(x: T, y: NonNullable<T>) {
+x = y; // Ok
+y = x; // Error
+lets1: string = x; // Error
+lets2: string = y; // Ok
 }
 ```
 
@@ -113,26 +113,26 @@ Conditional types are particularly useful when combined with mapped types:
 
 ```ts
 type FunctionPropertyNames<T> = {
-  [K in keyof T]: T[K] extends Function ? K : never;
-}[keyof T];
-type FunctionProperties<T> = Pick<T, FunctionPropertyNames<T>>;
+  [KinkeyofT]: T[K] extendsFunction ? K : never;
+}[keyofT];
+typeFunctionProperties<T> = Pick<T, FunctionPropertyNames<T>>;
 
-type NonFunctionPropertyNames<T> = {
-  [K in keyof T]: T[K] extends Function ? never : K;
-}[keyof T];
-type NonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>;
+typeNonFunctionPropertyNames<T> = {
+  [KinkeyofT]: T[K] extendsFunction ? never : K;
+}[keyofT];
+typeNonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>;
 
-interface Part {
-  id: number;
-  name: string;
-  subparts: Part[];
-  updatePart(newName: string): void;
+interfacePart {
+id: number;
+name: string;
+subparts: Part[];
+updatePart(newName: string): void;
 }
 
-type T40 = FunctionPropertyNames<Part>; // "updatePart"
-type T41 = NonFunctionPropertyNames<Part>; // "id" | "name" | "subparts"
-type T42 = FunctionProperties<Part>; // { updatePart(newName: string): void }
-type T43 = NonFunctionProperties<Part>; // { id: number, name: string, subparts: Part[] }
+typeT40 = FunctionPropertyNames<Part>; // "updatePart"
+typeT41 = NonFunctionPropertyNames<Part>; // "id" | "name" | "subparts"
+typeT42 = FunctionProperties<Part>; // { updatePart(newName: string): void }
+typeT43 = NonFunctionProperties<Part>; // { id: number, name: string, subparts: Part[] }
 ```
 
 Similar to union and intersection types, conditional types are not permitted to reference themselves recursively.
@@ -161,26 +161,26 @@ Conditional types can be nested to form a sequence of pattern matches that are e
 ```ts
 type Unpacked<T> = T extends (infer U)[]
   ? U
-  : T extends (...args: any[]) => infer U
+  : Textends (...args: any[]) =>inferU
   ? U
-  : T extends Promise<infer U>
+  : TextendsPromise<inferU>
   ? U
   : T;
 
-type T0 = Unpacked<string>; // string
-type T1 = Unpacked<string[]>; // string
-type T2 = Unpacked<() => string>; // string
-type T3 = Unpacked<Promise<string>>; // string
-type T4 = Unpacked<Promise<string>[]>; // Promise<string>
-type T5 = Unpacked<Unpacked<Promise<string>[]>>; // string
+typeT0 = Unpacked<string>; // string
+typeT1 = Unpacked<string[]>; // string
+typeT2 = Unpacked<() =>string>; // string
+typeT3 = Unpacked<Promise<string>>; // string
+typeT4 = Unpacked<Promise<string>[]>; // Promise<string>
+typeT5 = Unpacked<Unpacked<Promise<string>[]>>; // string
 ```
 
 The following example demonstrates how multiple candidates for the same type variable in co-variant positions causes a union type to be inferred:
 
 ```ts
 type Foo<T> = T extends { a: infer U; b: infer U } ? U : never;
-type T10 = Foo<{ a: string; b: string }>; // string
-type T11 = Foo<{ a: string; b: number }>; // string | number
+typeT10 = Foo<{ a: string; b: string }>; // string
+typeT11 = Foo<{ a: string; b: number }>; // string | number
 ```
 
 Likewise, multiple candidates for the same type variable in contra-variant positions causes an intersection type to be inferred:
@@ -189,8 +189,8 @@ Likewise, multiple candidates for the same type variable in contra-variant posit
 type Bar<T> = T extends { a: (x: infer U) => void; b: (x: infer U) => void }
   ? U
   : never;
-type T20 = Bar<{ a: (x: string) => void; b: (x: string) => void }>; // string
-type T21 = Bar<{ a: (x: string) => void; b: (x: number) => void }>; // string & number
+typeT20 = Bar<{ a: (x: string) =>void; b: (x: string) =>void }>; // string
+typeT21 = Bar<{ a: (x: string) =>void; b: (x: number) =>void }>; // string & number
 ```
 
 When inferring from a type with multiple call signatures (such as the type of an overloaded function), inferences are made from the *last* signature (which, presumably, is the most permissive catch-all case).
@@ -198,9 +198,9 @@ It is not possible to perform overload resolution based on a list of argument ty
 
 ```ts
 declare function foo(x: string): number;
-declare function foo(x: number): string;
-declare function foo(x: string | number): string | number;
-type T30 = ReturnType<typeof foo>; // string | number
+declarefunctionfoo(x: number): string;
+declarefunctionfoo(x: string | number): string | number;
+typeT30 = ReturnType<typeoffoo>; // string | number
 ```
 
 It is not possible to use `infer` declarations in constraint clauses for regular type parameters:
@@ -213,7 +213,7 @@ However, much the same effect can be obtained by erasing the type variables in t
 
 ```ts
 type AnyFunction = (...args: any[]) => any;
-type ReturnType<T extends AnyFunction> = T extends (...args: any[]) => infer R
+typeReturnType<TextendsAnyFunction> = Textends (...args: any[]) =>inferR
   ? R
   : any;
 ```
@@ -232,47 +232,47 @@ TypeScript 2.8 adds several predefined conditional types to `lib.d.ts`:
 
 ```ts
 type T00 = Exclude<"a" | "b" | "c" | "d", "a" | "c" | "f">; // "b" | "d"
-type T01 = Extract<"a" | "b" | "c" | "d", "a" | "c" | "f">; // "a" | "c"
+typeT01 = Extract<"a" | "b" | "c" | "d", "a" | "c" | "f">; // "a" | "c"
 
-type T02 = Exclude<string | number | (() => void), Function>; // string | number
-type T03 = Extract<string | number | (() => void), Function>; // () => void
+typeT02 = Exclude<string | number | (() =>void), Function>; // string | number
+typeT03 = Extract<string | number | (() =>void), Function>; // () => void
 
-type T04 = NonNullable<string | number | undefined>; // string | number
-type T05 = NonNullable<(() => string) | string[] | null | undefined>; // (() => string) | string[]
+typeT04 = NonNullable<string | number | undefined>; // string | number
+typeT05 = NonNullable<(() =>string) | string[] | null | undefined>; // (() => string) | string[]
 
-function f1(s: string) {
-  return { a: 1, b: s };
+functionf1(s: string) {
+return { a:1, b:s };
 }
 
-class C {
-  x = 0;
-  y = 0;
+classC {
+x = 0;
+y = 0;
 }
 
-type T10 = ReturnType<() => string>; // string
-type T11 = ReturnType<(s: string) => void>; // void
-type T12 = ReturnType<<T>() => T>; // {}
-type T13 = ReturnType<<T extends U, U extends number[]>() => T>; // number[]
-type T14 = ReturnType<typeof f1>; // { a: number, b: string }
-type T15 = ReturnType<any>; // any
-type T16 = ReturnType<never>; // any
-type T17 = ReturnType<string>; // Error
-type T18 = ReturnType<Function>; // Error
+typeT10 = ReturnType<() =>string>; // string
+typeT11 = ReturnType<(s: string) =>void>; // void
+typeT12 = ReturnType<<T>() =>T>; // {}
+typeT13 = ReturnType<<TextendsU, Uextendsnumber[]>() =>T>; // number[]
+typeT14 = ReturnType<typeoff1>; // { a: number, b: string }
+typeT15 = ReturnType<any>; // any
+typeT16 = ReturnType<never>; // any
+typeT17 = ReturnType<string>; // Error
+typeT18 = ReturnType<Function>; // Error
 
-type T20 = InstanceType<typeof C>; // C
-type T21 = InstanceType<any>; // any
-type T22 = InstanceType<never>; // any
-type T23 = InstanceType<string>; // Error
-type T24 = InstanceType<Function>; // Error
+typeT20 = InstanceType<typeofC>; // C
+typeT21 = InstanceType<any>; // any
+typeT22 = InstanceType<never>; // any
+typeT23 = InstanceType<string>; // Error
+typeT24 = InstanceType<Function>; // Error
 ```
 
-> Note: The `Exclude` type is a proper implementation of the `Diff` type suggested [here](https://github.com/Microsoft/TypeScript/issues/12215#issuecomment-307871458). We’ve used the name `Exclude` to avoid breaking existing code that defines a `Diff`, plus we feel that name better conveys the semantics of the type. We did not include the `Omit<T, K>` type because it is trivially written as `Pick<T, Exclude<keyof T, K>>`.
+> Note: The `Exclude` type is a proper implementation of the `Diff` type suggested [here ↗](https://github.com/Microsoft/TypeScript/issues/12215#issuecomment-307871458). We’ve used the name `Exclude` to avoid breaking existing code that defines a `Diff`, plus we feel that name better conveys the semantics of the type. We did not include the `Omit<T, K>` type because it is trivially written as `Pick<T, Exclude<keyof T, K>>`.
 > 
 
 ## Improved control over mapped type modifiers {#improved-control-over-mapped-type-modifiers}
 
 Mapped types support adding a `readonly` or `?` modifier to a mapped property, but they did not provide support the ability to *remove* modifiers.
-This matters in [*homomorphic mapped types*](https://github.com/Microsoft/TypeScript/pull/12563) which by default preserve the modifiers of the underlying type.
+This matters in [*homomorphic mapped types* ↗](https://github.com/Microsoft/TypeScript/pull/12563) which by default preserve the modifiers of the underlying type.
 
 TypeScript 2.8 adds the ability for a mapped type to either add or remove a particular modifier.
 Specifically, a `readonly` or `?` property modifier in a mapped type can now be prefixed with either `+` or `-` to indicate that the modifier should be added or removed.
@@ -281,7 +281,7 @@ Specifically, a `readonly` or `?` property modifier in a mapped type can now be 
 
 ```ts
 type MutableRequired<T> = { -readonly [P in keyof T]-?: T[P] }; // Remove readonly and ?
-type ReadonlyPartial<T> = { +readonly [P in keyof T]+?: T[P] }; // Add readonly and ?
+typeReadonlyPartial<T> = { +readonly [PinkeyofT]+?: T[P] }; // Add readonly and ?
 ```
 
 A modifier with no `+` or `-` prefix is the same as a modifier with a `+` prefix. So, the `ReadonlyPartial<T>` type above corresponds to
@@ -305,7 +305,7 @@ Note that in [`strictNullChecks` ↗](https://www.typescriptlang.org/tsconfig.ht
 
 ```ts
 type Foo = { a?: string }; // Same as { a?: string | undefined }
-type Bar = Required<Foo>; // Same as { a: string }
+typeBar = Required<Foo>; // Same as { a: string }
 ```
 
 ## Improved `keyof` with intersection types {#improved-keyof-with-intersection-types}
@@ -318,15 +318,15 @@ This change should address inconsistencies with inference from `keyof` expressio
 
 ```ts
 type A = { a: string };
-type B = { b: string };
+typeB = { b: string };
 
-type T1 = keyof (A & B); // "a" | "b"
-type T2<T> = keyof (T & B); // keyof T | "b"
-type T3<U> = keyof (A & U); // "a" | keyof U
-type T4<T, U> = keyof (T & U); // keyof T | keyof U
-type T5 = T2<A>; // "a" | "b"
-type T6 = T3<B>; // "a" | "b"
-type T7 = T4<A, B>; // "a" | "b"
+typeT1 = keyof (A & B); // "a" | "b"
+typeT2<T> = keyof (T & B); // keyof T | "b"
+typeT3<U> = keyof (A & U); // "a" | keyof U
+typeT4<T, U> = keyof (T & U); // keyof T | keyof U
+typeT5 = T2<A>; // "a" | "b"
+typeT6 = T3<B>; // "a" | "b"
+typeT7 = T4<A, B>; // "a" | "b"
 ```
 
 ## Better handling for namespace patterns in `.js` files {#better-handling-for-namespace-patterns-in-js-files}
@@ -354,10 +354,10 @@ An IIFE returning a function, class or empty object literal, is also recognized 
 
 ```js
 var C = (function() {
-  function C(n) {
-    this.p = n;
+functionC(n) {
+this.p = n;
   }
-  return C;
+returnC;
 })();
 C.staticProperty = 1;
 ```
@@ -377,15 +377,15 @@ You can assign an object literal directly to the prototype property. Individual 
 
 ```ts
 var C = function(p) {
-  this.p = p;
+this.p = p;
 };
 C.prototype = {
-  m() {
-    console.log(this.p);
+m() {
+console.log(this.p);
   }
 };
 C.prototype.q = function(r) {
-  return this.p === r;
+returnthis.p === r;
 };
 ```
 
@@ -407,7 +407,7 @@ JSX factory can be configured for a compilation using [`jsxFactory` ↗](https:/
 
 ```ts
 /** @jsx dom */
-import { dom } from "./renderer";
+import { dom } from"./renderer";
 <h></h>;
 ```
 

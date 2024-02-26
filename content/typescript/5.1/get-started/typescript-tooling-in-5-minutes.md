@@ -35,11 +35,11 @@ In your editor, type the following JavaScript code in `greeter.ts`:
 
 ```ts
 function greeter(person) {
-  return "Hello, " + person;
+return"Hello, " + person;
 }
- 
-let user = "Jane User";
- 
+
+letuser = "Jane User";
+
 document.body.textContent = greeter(user);
 ```
 
@@ -64,11 +64,11 @@ Add a `: string` type annotation to the ‘person’ function argument as shown 
 
 ```ts
 function greeter(person: string) {
-  return "Hello, " + person;
+return"Hello, " + person;
 }
- 
-let user = "Jane User";
- 
+
+letuser = "Jane User";
+
 document.body.textContent = greeter(user);
 ```
 
@@ -82,11 +82,11 @@ We can try changing the call greeter to pass an array instead:
 
 ```ts
 function greeter(person: string) {
-  return "Hello, " + person;
+return"Hello, " + person;
 }
- 
-let user = [0, 1, 2];
- 
+
+letuser = [0, 1, 2];
+
 document.body.textContent = greeter(user);
 ```
 
@@ -117,16 +117,16 @@ This allows us to implement an interface just by having the shape the interface 
 
 ```ts
 interface Person {
-  firstName: string;
-  lastName: string;
+firstName: string;
+lastName: string;
 }
- 
-function greeter(person: Person) {
-  return "Hello, " + person.firstName + " " + person.lastName;
+
+functiongreeter(person: Person) {
+return"Hello, " + person.firstName + " " + person.lastName;
 }
- 
-let user = { firstName: "Jane", lastName: "User" };
- 
+
+letuser = { firstName:"Jane", lastName:"User" };
+
 document.body.textContent = greeter(user);
 ```
 
@@ -144,27 +144,27 @@ Also of note, the use of `public` on arguments to the constructor is a shorthand
 
 ```ts
 class Student {
-  fullName: string;
-  constructor(
-    public firstName: string,
-    public middleInitial: string,
-    public lastName: string
+fullName: string;
+constructor(
+publicfirstName: string,
+publicmiddleInitial: string,
+publiclastName: string
   ) {
-    this.fullName = firstName + " " + middleInitial + " " + lastName;
+this.fullName = firstName + " " + middleInitial + " " + lastName;
   }
 }
- 
-interface Person {
-  firstName: string;
-  lastName: string;
+
+interfacePerson {
+firstName: string;
+lastName: string;
 }
- 
-function greeter(person: Person) {
-  return "Hello, " + person.firstName + " " + person.lastName;
+
+functiongreeter(person: Person) {
+return"Hello, " + person.firstName + " " + person.lastName;
 }
- 
-let user = new Student("Jane", "M.", "User");
- 
+
+letuser = newStudent("Jane", "M.", "User");
+
 document.body.textContent = greeter(user);
 ```
 
@@ -178,12 +178,12 @@ Now type the following in `greeter.html`:
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>TypeScript Greeter</title>
-  </head>
-  <body>
-    <script src="greeter.js"></script>
-  </body>
+<head>
+<title>TypeScript Greeter</title>
+</head>
+<body>
+<scriptsrc="greeter.js"></script>
+</body>
 </html>
 ```
 

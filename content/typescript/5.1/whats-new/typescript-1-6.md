@@ -24,28 +24,28 @@ For example:
 ```ts
 var x = <any>foo;
 // is equivalent to:
-var x = foo as any;
+varx = fooasany;
 ```
 
 #### Using React {#using-react}
 
-To use JSX-support with React you should use the [React typings](https://github.com/borisyankov/DefinitelyTyped/tree/master/react). These typings define the `JSX` namespace so that TypeScript can correctly check JSX expressions for React. For example:
+To use JSX-support with React you should use the [React typings ↗](https://github.com/borisyankov/DefinitelyTyped/tree/master/react). These typings define the `JSX` namespace so that TypeScript can correctly check JSX expressions for React. For example:
 
 ```ts
 /// <reference path="react.d.ts" />
 
-interface Props {
-  name: string;
+interfaceProps {
+name: string;
 }
 
-class MyComponent extends React.Component<Props, {}> {
-  render() {
-    return <span>{this.props.name}</span>;
+classMyComponentextendsReact.Component<Props, {}> {
+render() {
+return <span>{this.props.name}</span>;
   }
 }
 
-<MyComponent name="bar" />; // OK
-<MyComponent name={0} />; // error, `name` is not a number
+<MyComponentname="bar" />; // OK
+<MyComponentname={0} />; // error, `name` is not a number
 ```
 
 #### Using other JSX frameworks {#using-other-jsx-frameworks}
@@ -71,55 +71,55 @@ A union type `A | B` represents an entity that is either of type `A` or type `B`
 
 ```ts
 function extend<T, U>(first: T, second: U): T & U {
-  let result = <T & U>{};
-  for (let id in first) {
-    result[id] = first[id];
+letresult = <T & U>{};
+for (letidinfirst) {
+result[id] = first[id];
   }
-  for (let id in second) {
-    if (!result.hasOwnProperty(id)) {
-      result[id] = second[id];
+for (letidinsecond) {
+if (!result.hasOwnProperty(id)) {
+result[id] = second[id];
     }
   }
-  return result;
+returnresult;
 }
 
-var x = extend({ a: "hello" }, { b: 42 });
-var s = x.a;
-var n = x.b;
+varx = extend({ a:"hello" }, { b:42 });
+vars = x.a;
+varn = x.b;
 ```
 
 ```ts
 type LinkedList<T> = T & { next: LinkedList<T> };
 
-interface Person {
-  name: string;
+interfacePerson {
+name: string;
 }
 
-var people: LinkedList<Person>;
-var s = people.name;
-var s = people.next.name;
-var s = people.next.next.name;
-var s = people.next.next.next.name;
+varpeople: LinkedList<Person>;
+vars = people.name;
+vars = people.next.name;
+vars = people.next.next.name;
+vars = people.next.next.next.name;
 ```
 
 ```ts
 interface A {
-  a: string;
+a: string;
 }
-interface B {
-  b: string;
+interfaceB {
+b: string;
 }
-interface C {
-  c: string;
+interfaceC {
+c: string;
 }
 
-var abc: A & B & C;
+varabc: A & B & C;
 abc.a = "hello";
 abc.b = "hello";
 abc.c = "hello";
 ```
 
-See [issue #1256](https://github.com/Microsoft/TypeScript/issues/1256) for more information.
+See [issue #1256 ↗](https://github.com/Microsoft/TypeScript/issues/1256) for more information.
 
 ## Local type declarations {#local-type-declarations}
 
@@ -127,18 +127,18 @@ Local class, interface, enum, and type alias declarations can now appear inside 
 
 ```ts
 function f() {
-  if (true) {
-    interface T {
-      x: number;
+if (true) {
+interfaceT {
+x: number;
     }
-    let v: T;
-    v.x = 5;
+letv: T;
+v.x = 5;
   } else {
-    interface T {
-      x: string;
+interfaceT {
+x: string;
     }
-    let v: T;
-    v.x = "hello";
+letv: T;
+v.x = "hello";
   }
 }
 ```
@@ -147,40 +147,40 @@ The inferred return type of a function may be a type declared locally within the
 
 ```ts
 interface Point {
-  x: number;
-  y: number;
+x: number;
+y: number;
 }
 
-function getPointFactory(x: number, y: number) {
-  class P {
-    x = x;
-    y = y;
+functiongetPointFactory(x: number, y: number) {
+classP {
+x = x;
+y = y;
   }
-  return P;
+returnP;
 }
 
-var PointZero = getPointFactory(0, 0);
-var PointOne = getPointFactory(1, 1);
-var p1 = new PointZero();
-var p2 = new PointZero();
-var p3 = new PointOne();
+varPointZero = getPointFactory(0, 0);
+varPointOne = getPointFactory(1, 1);
+varp1 = newPointZero();
+varp2 = newPointZero();
+varp3 = newPointOne();
 ```
 
 Local types may reference enclosing type parameters and local class and interfaces may themselves be generic. For example:
 
 ```ts
 function f3() {
-  function f<X, Y>(x: X, y: Y) {
-    class C {
-      public x = x;
-      public y = y;
+functionf<X, Y>(x: X, y: Y) {
+classC {
+publicx = x;
+publicy = y;
     }
-    return C;
+returnC;
   }
-  let C = f(10, "hello");
-  let v = new C();
-  let x = v.x; // number
-  let y = v.y; // string
+letC = f(10, "hello");
+letv = newC();
+letx = v.x; // number
+lety = v.y; // string
 }
 ```
 
@@ -190,12 +190,12 @@ TypeScript 1.6 adds support for ES6 class expressions. In a class expression, th
 
 ```ts
 let Point = class {
-  constructor(public x: number, public y: number) {}
-  public length() {
-    return Math.sqrt(this.x * this.x + this.y * this.y);
+constructor(publicx: number, publicy: number) {}
+publiclength() {
+returnMath.sqrt(this.x * this.x + this.y * this.y);
   }
 };
-var p = new Point(3, 4); // p has anonymous class type
+varp = newPoint(3, 4); // p has anonymous class type
 console.log(p.length());
 ```
 
@@ -210,38 +210,38 @@ Some examples:
 ```ts
 // Extend built-in types
 
-class MyArray extends Array<number> {}
-class MyError extends Error {}
+classMyArrayextendsArray<number> {}
+classMyErrorextendsError {}
 
 // Extend computed base class
 
-class ThingA {
-  getGreeting() {
-    return "Hello from A";
+classThingA {
+getGreeting() {
+return"Hello from A";
   }
 }
 
-class ThingB {
-  getGreeting() {
-    return "Hello from B";
+classThingB {
+getGreeting() {
+return"Hello from B";
   }
 }
 
-interface Greeter {
-  getGreeting(): string;
+interfaceGreeter {
+getGreeting(): string;
 }
 
-interface GreeterConstructor {
-  new (): Greeter;
+interfaceGreeterConstructor {
+new (): Greeter;
 }
 
-function getGreeterBase(): GreeterConstructor {
-  return Math.random() >= 0.5 ? ThingA : ThingB;
+functiongetGreeterBase(): GreeterConstructor {
+returnMath.random() >= 0.5 ? ThingA : ThingB;
 }
 
-class Test extends getGreeterBase() {
-  sayHello() {
-    console.log(this.getGreeting());
+classTestextendsgetGreeterBase() {
+sayHello() {
+console.log(this.getGreeting());
   }
 }
 ```
@@ -254,28 +254,28 @@ TypeScript 1.6 adds support for `abstract` keyword for classes and their methods
 
 ```ts
 abstract class Base {
-  abstract getThing(): string;
-  getOtherThing() {
-    return "hello";
+abstractgetThing(): string;
+getOtherThing() {
+return"hello";
   }
 }
 
-let x = new Base(); // Error, 'Base' is abstract
+letx = newBase(); // Error, 'Base' is abstract
 
 // Error, must either be 'abstract' or implement concrete 'getThing'
-class Derived1 extends Base {}
+classDerived1extendsBase {}
 
-class Derived2 extends Base {
-  getThing() {
-    return "hello";
+classDerived2extendsBase {
+getThing() {
+return"hello";
   }
-  foo() {
-    super.getThing(); // Error: cannot invoke abstract members through 'super'
+foo() {
+super.getThing(); // Error: cannot invoke abstract members through 'super'
   }
 }
 
-var x = new Derived2(); // OK
-var y: Base = new Derived2(); // Also OK
+varx = newDerived2(); // OK
+vary: Base = newDerived2(); // Also OK
 y.getThing(); // OK
 y.getOtherThing(); // OK
 ```
@@ -287,16 +287,16 @@ With TypeScript 1.6, type aliases can be generic. For example:
 ```ts
 type Lazy<T> = T | (() => T);
 
-var s: Lazy<string>;
+vars: Lazy<string>;
 s = "eager";
-s = () => "lazy";
+s = () =>"lazy";
 
-interface Tuple<A, B> {
-  a: A;
-  b: B;
+interfaceTuple<A, B> {
+a: A;
+b: B;
 }
 
-type Pair<T> = Tuple<T, T>;
+typePair<T> = Tuple<T, T>;
 ```
 
 ## Stricter object literal assignment checks {#stricter-object-literal-assignment-checks}
@@ -307,17 +307,17 @@ TypeScript 1.6 enforces stricter object literal assignment checks for the purpos
 
 ```ts
 var x: { foo: number };
-x = { foo: 1, baz: 2 }; // Error, excess property `baz`
+x = { foo:1, baz:2 }; // Error, excess property `baz`
 
-var y: { foo: number; bar?: number };
-y = { foo: 1, baz: 2 }; // Error, excess or misspelled property `baz`
+vary: { foo: number; bar?: number };
+y = { foo:1, baz:2 }; // Error, excess or misspelled property `baz`
 ```
 
 A type can include an index signature to explicitly indicate that excess properties are permitted:
 
 ```ts
 var x: { foo: number; [x: string]: any };
-x = { foo: 1, baz: 2 }; // Ok, `baz` matched by index signature
+x = { foo:1, baz:2 }; // Ok, `baz` matched by index signature
 ```
 
 ## ES6 generators {#es6-generators}
@@ -328,10 +328,10 @@ A generator function can have a return type annotation, just like a function. Th
 
 ```ts
 function* g(): Iterable<string> {
-  for (var i = 0; i < 100; i++) {
-    yield ""; // string is assignable to string
+for (vari = 0; i < 100; i++) {
+yield""; // string is assignable to string
   }
-  yield* otherStringGenerator(); // otherStringGenerator must be iterable and element type assignable to string
+yield*otherStringGenerator(); // otherStringGenerator must be iterable and element type assignable to string
 }
 ```
 
@@ -340,10 +340,10 @@ So in the following case, the type will be inferred from the yield statements:
 
 ```ts
 function* g() {
-  for (var i = 0; i < 100; i++) {
-    yield ""; // infer string
+for (vari = 0; i < 100; i++) {
+yield""; // infer string
   }
-  yield* otherStringGenerator(); // infer element type of otherStringGenerator
+yield*otherStringGenerator(); // infer element type of otherStringGenerator
 }
 ```
 
@@ -360,27 +360,27 @@ An *Async Function* must provide a return type annotation that points to a compa
 
 ```ts
 var p: Promise<number> = /* ... */;
-async function fn(): Promise<number> {
-  var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
-  return 1 + i;
+asyncfunctionfn(): Promise<number> {
+vari = awaitp; // suspend execution until 'p' is settled. 'i' has type "number"
+return1 + i;
 }
 
-var a = async (): Promise<number> => 1 + await p; // suspends execution.
-var a = async () => 1 + await p; // suspends execution. return type is inferred as "Promise<number>" when compiling with --target ES6
-var fe = async function(): Promise<number> {
-  var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
-  return 1 + i;
+vara = async (): Promise<number> =>1 + awaitp; // suspends execution.
+vara = async () =>1 + awaitp; // suspends execution. return type is inferred as "Promise<number>" when compiling with --target ES6
+varfe = asyncfunction(): Promise<number> {
+vari = awaitp; // suspend execution until 'p' is settled. 'i' has type "number"
+return1 + i;
 }
 
-class C {
-  async m(): Promise<number> {
-    var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
-    return 1 + i;
+classC {
+asyncm(): Promise<number> {
+vari = awaitp; // suspend execution until 'p' is settled. 'i' has type "number"
+return1 + i;
   }
 
-  async get p(): Promise<number> {
-    var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
-    return 1 + i;
+asyncgetp(): Promise<number> {
+vari = awaitp; // suspend execution until 'p' is settled. 'i' has type "number"
+return1 + i;
   }
 }
 ```
@@ -396,7 +396,7 @@ npm install -g typescript@next
 ## Adjustments in module resolution logic {#adjustments-in-module-resolution-logic}
 
 Starting from release 1.6 TypeScript compiler will use different set of rules to resolve module names when targeting ‘commonjs’.
-These [rules](https://github.com/Microsoft/TypeScript/issues/2338) attempted to model module lookup procedure used by Node.
+These [rules ↗](https://github.com/Microsoft/TypeScript/issues/2338) attempted to model module lookup procedure used by Node.
 This effectively mean that node modules can include information about its typings and TypeScript compiler will be able to find it.
 User however can override module resolution rules picked by the compiler by using [`moduleResolution` ↗](https://www.typescriptlang.org/tsconfig.html#moduleResolution) command line option. Possible values are:
 
@@ -410,16 +410,16 @@ For example:
 
 ```ts
 declare class Foo {
-  public x: number;
+publicx: number;
 }
 
-interface Foo {
-  y: string;
+interfaceFoo {
+y: string;
 }
 
-function bar(foo: Foo) {
-  foo.x = 1; // OK, declared in the class Foo
-  foo.y = "1"; // OK, declared in the interface Foo
+functionbar(foo: Foo) {
+foo.x = 1; // OK, declared in the class Foo
+foo.y = "1"; // OK, declared in the interface Foo
 }
 ```
 
@@ -433,12 +433,12 @@ When a user-defined type guard function is invoked on a variable in an `if` bloc
 
 ```ts
 function isCat(a: any): a is Cat {
-  return a.name === "kitty";
+returna.name === "kitty";
 }
 
-var x: Cat | Dog;
+varx: Cat | Dog;
 if (isCat(x)) {
-  x.meow(); // OK, x is Cat in this block
+x.meow(); // OK, x is Cat in this block
 }
 ```
 
@@ -450,10 +450,10 @@ For example:
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[out ↗](https://www.typescriptlang.org/tsconfig.html#out)": "test.js"
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[out ↗](https://www.typescriptlang.org/tsconfig.html#out)": "test.js"
   },
-  "[exclude ↗](https://www.typescriptlang.org/tsconfig.html#exclude)": ["node_modules", "test.ts", "utils/t2.ts"]
+"[exclude ↗](https://www.typescriptlang.org/tsconfig.html#exclude)": ["node_modules", "test.ts", "utils/t2.ts"]
 }
 ```
 

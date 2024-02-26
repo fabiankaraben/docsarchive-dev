@@ -21,11 +21,11 @@ See [Project References handbook page](/typescript/5.2/project-configuration/pro
 TypeScript 3.0 adds support to multiple new capabilities to interact with function parameter lists as tuple types.
 TypeScript 3.0 adds support for:
 
-- [Expansion of rest parameters with tuple types into discrete parameters. ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#rest-parameters-with-tuple-types)
-- [Expansion of spread expressions with tuple types into discrete arguments. ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#spread-expressions-with-tuple-types)
-- [Generic rest parameters and corresponding inference of tuple types. ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#generic-rest-parameters)
-- [Optional elements in tuple types. ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#optional-elements-in-tuple-types)
-- [Rest elements in tuple types. ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#rest-elements-in-tuple-types)
+- [Expansion of rest parameters with tuple types into discrete parameters.](/typescript/5.2/whats-new/typescript-3-0#rest-parameters-with-tuple-types)
+- [Expansion of spread expressions with tuple types into discrete arguments.](/typescript/5.2/whats-new/typescript-3-0#spread-expressions-with-tuple-types)
+- [Generic rest parameters and corresponding inference of tuple types.](/typescript/5.2/whats-new/typescript-3-0#generic-rest-parameters)
+- [Optional elements in tuple types.](/typescript/5.2/whats-new/typescript-3-0#optional-elements-in-tuple-types)
+- [Rest elements in tuple types.](/typescript/5.2/whats-new/typescript-3-0#rest-elements-in-tuple-types)
 
 With these features it becomes possible to strongly type a number of higher-order functions that transform functions and their parameter lists.
 
@@ -63,15 +63,15 @@ A rest parameter is permitted to have a generic type that is constrained to an a
 
 ```ts
 declare function bind<T, U extends any[], V>(
-  f: (x: T, ...args: U) => V,
-  x: T
-): (...args: U) => V;
+f: (x: T, ...args: U) =>V,
+x: T
+): (...args: U) =>V;
 
-declare function f3(x: number, y: string, z: boolean): void;
+declarefunctionf3(x: number, y: string, z: boolean): void;
 
-const f2 = bind(f3, 42); // (y: string, z: boolean) => void
-const f1 = bind(f2, "hello"); // (z: boolean) => void
-const f0 = bind(f1, true); // () => void
+constf2 = bind(f3, 42); // (y: string, z: boolean) => void
+constf1 = bind(f2, "hello"); // (z: boolean) => void
+constf0 = bind(f1, true); // () => void
 
 f3(42, "hello", true);
 f2("hello", true);
@@ -115,12 +115,12 @@ For example, `[number, ...string[]]` means tuples with a `number` element follow
 
 ```ts
 function tuple<T extends any[]>(...args: T): T {
-  return args;
+returnargs;
 }
 
-const numbers: number[] = getArrayOfNumbers();
-const t1 = tuple("foo", 1, true); // [string, number, boolean]
-const t2 = tuple("bar", ...numbers); // [string, ...number[]]
+constnumbers: number[] = getArrayOfNumbers();
+constt1 = tuple("foo", 1, true); // [string, number, boolean]
+constt2 = tuple("bar", ...numbers); // [string, ...number[]]
 ```
 
 The type of the `length` property of a tuple type with a rest element is `number`.
@@ -137,164 +137,164 @@ Likewise, no operations are permitted on an `unknown` without first asserting or
 ```ts
 // In an intersection everything absorbs unknown
 
-type T00 = unknown & null; // null
-type T01 = unknown & undefined; // undefined
-type T02 = unknown & null & undefined; // null & undefined (which becomes never)
-type T03 = unknown & string; // string
-type T04 = unknown & string[]; // string[]
-type T05 = unknown & unknown; // unknown
-type T06 = unknown & any; // any
+typeT00 = unknown & null; // null
+typeT01 = unknown & undefined; // undefined
+typeT02 = unknown & null & undefined; // null & undefined (which becomes never)
+typeT03 = unknown & string; // string
+typeT04 = unknown & string[]; // string[]
+typeT05 = unknown & unknown; // unknown
+typeT06 = unknown & any; // any
 
 // In a union an unknown absorbs everything
 
-type T10 = unknown | null; // unknown
-type T11 = unknown | undefined; // unknown
-type T12 = unknown | null | undefined; // unknown
-type T13 = unknown | string; // unknown
-type T14 = unknown | string[]; // unknown
-type T15 = unknown | unknown; // unknown
-type T16 = unknown | any; // any
+typeT10 = unknown | null; // unknown
+typeT11 = unknown | undefined; // unknown
+typeT12 = unknown | null | undefined; // unknown
+typeT13 = unknown | string; // unknown
+typeT14 = unknown | string[]; // unknown
+typeT15 = unknown | unknown; // unknown
+typeT16 = unknown | any; // any
 
 // Type variable and unknown in union and intersection
 
-type T20<T> = T & {}; // T & {}
-type T21<T> = T | {}; // T | {}
-type T22<T> = T & unknown; // T
-type T23<T> = T | unknown; // unknown
+typeT20<T> = T & {}; // T & {}
+typeT21<T> = T | {}; // T | {}
+typeT22<T> = T & unknown; // T
+typeT23<T> = T | unknown; // unknown
 
 // unknown in conditional types
 
-type T30<T> = unknown extends T ? true : false; // Deferred
-type T31<T> = T extends unknown ? true : false; // Deferred (so it distributes)
-type T32<T> = never extends T ? true : false; // true
-type T33<T> = T extends never ? true : false; // Deferred
+typeT30<T> = unknownextendsT ? true : false; // Deferred
+typeT31<T> = Textendsunknown ? true : false; // Deferred (so it distributes)
+typeT32<T> = neverextendsT ? true : false; // true
+typeT33<T> = Textendsnever ? true : false; // Deferred
 
 // keyof unknown
 
-type T40 = keyof any; // string | number | symbol
-type T41 = keyof unknown; // never
+typeT40 = keyofany; // string | number | symbol
+typeT41 = keyofunknown; // never
 
 // Only equality operators are allowed with unknown
 
-function f10(x: unknown) {
-  x == 5;
-  x !== 10;
-  x >= 0; // Error
-  x + 1; // Error
-  x * 2; // Error
+functionf10(x: unknown) {
+x == 5;
+x !== 10;
+x >= 0; // Error
+x + 1; // Error
+x * 2; // Error
   -x; // Error
   +x; // Error
 }
 
 // No property accesses, element accesses, or function calls
 
-function f11(x: unknown) {
-  x.foo; // Error
-  x[5]; // Error
-  x(); // Error
-  new x(); // Error
+functionf11(x: unknown) {
+x.foo; // Error
+x[5]; // Error
+x(); // Error
+newx(); // Error
 }
 
 // typeof, instanceof, and user defined type predicates
 
-declare function isFunction(x: unknown): x is Function;
+declarefunctionisFunction(x: unknown): xisFunction;
 
-function f20(x: unknown) {
-  if (typeof x === "string" || typeof x === "number") {
-    x; // string | number
+functionf20(x: unknown) {
+if (typeofx === "string" || typeofx === "number") {
+x; // string | number
   }
-  if (x instanceof Error) {
-    x; // Error
+if (xinstanceofError) {
+x; // Error
   }
-  if (isFunction(x)) {
-    x; // Function
+if (isFunction(x)) {
+x; // Function
   }
 }
 
 // Homomorphic mapped type over unknown
 
-type T50<T> = { [P in keyof T]: number };
-type T51 = T50<any>; // { [x: string]: number }
-type T52 = T50<unknown>; // {}
+typeT50<T> = { [PinkeyofT]: number };
+typeT51 = T50<any>; // { [x: string]: number }
+typeT52 = T50<unknown>; // {}
 
 // Anything is assignable to unknown
 
-function f21<T>(pAny: any, pNever: never, pT: T) {
-  let x: unknown;
-  x = 123;
-  x = "hello";
-  x = [1, 2, 3];
-  x = new Error();
-  x = x;
-  x = pAny;
-  x = pNever;
-  x = pT;
+functionf21<T>(pAny: any, pNever: never, pT: T) {
+letx: unknown;
+x = 123;
+x = "hello";
+x = [1, 2, 3];
+x = newError();
+x = x;
+x = pAny;
+x = pNever;
+x = pT;
 }
 
 // unknown assignable only to itself and any
 
-function f22(x: unknown) {
-  let v1: any = x;
-  let v2: unknown = x;
-  let v3: object = x; // Error
-  let v4: string = x; // Error
-  let v5: string[] = x; // Error
-  let v6: {} = x; // Error
-  let v7: {} | null | undefined = x; // Error
+functionf22(x: unknown) {
+letv1: any = x;
+letv2: unknown = x;
+letv3: object = x; // Error
+letv4: string = x; // Error
+letv5: string[] = x; // Error
+letv6: {} = x; // Error
+letv7: {} | null | undefined = x; // Error
 }
 
 // Type parameter 'T extends unknown' not related to object
 
-function f23<T extends unknown>(x: T) {
-  let y: object = x; // Error
+functionf23<Textendsunknown>(x: T) {
+lety: object = x; // Error
 }
 
 // Anything but primitive assignable to { [x: string]: unknown }
 
-function f24(x: { [x: string]: unknown }) {
-  x = {};
-  x = { a: 5 };
-  x = [1, 2, 3];
-  x = 123; // Error
+functionf24(x: { [x: string]: unknown }) {
+x = {};
+x = { a:5 };
+x = [1, 2, 3];
+x = 123; // Error
 }
 
 // Locals of type unknown always considered initialized
 
-function f25() {
-  let x: unknown;
-  let y = x;
+functionf25() {
+letx: unknown;
+lety = x;
 }
 
 // Spread of unknown causes result to be unknown
 
-function f26(x: {}, y: unknown, z: any) {
-  let o1 = { a: 42, ...x }; // { a: number }
-  let o2 = { a: 42, ...x, ...y }; // unknown
-  let o3 = { a: 42, ...x, ...y, ...z }; // any
+functionf26(x: {}, y: unknown, z: any) {
+leto1 = { a:42, ...x }; // { a: number }
+leto2 = { a:42, ...x, ...y }; // unknown
+leto3 = { a:42, ...x, ...y, ...z }; // any
 }
 
 // Functions with unknown return type don't need return expressions
 
-function f27(): unknown {}
+functionf27(): unknown {}
 
 // Rest type cannot be created from unknown
 
-function f28(x: unknown) {
-  let { ...a } = x; // Error
+functionf28(x: unknown) {
+let { ...a } = x; // Error
 }
 
 // Class properties of type unknown don't need definite assignment
 
-class C1 {
-  a: string; // Error
-  b: unknown;
-  c: any;
+classC1 {
+a: string; // Error
+b: unknown;
+c: any;
 }
 ```
 
 ## Support for `defaultProps` in JSX {#support-for-defaultprops-in-jsx}
 
-TypeScript 2.9 and earlier didn’t leverage [React `defaultProps`](https://reactjs.org/docs/typechecking-with-proptypes.html#default-prop-values) declarations inside JSX components.
+TypeScript 2.9 and earlier didn’t leverage [React `defaultProps` ↗](https://reactjs.org/docs/typechecking-with-proptypes.html#default-prop-values) declarations inside JSX components.
 Users would often have to declare properties optional and use non-null assertions inside of `render`, or they’d use type-assertions to fix up the type of the component before exporting it.
 
 TypeScript 3.0 adds support for a new type alias in the `JSX` namespace called `LibraryManagedAttributes`.
@@ -304,19 +304,19 @@ In short using this general type, we can model React’s specific behavior for t
 
 ```tsx
 export interface Props {
-  name: string;
+name: string;
 }
 
-export class Greet extends React.Component<Props> {
-  render() {
-    const { name } = this.props;
-    return <div>Hello {name.toUpperCase()}!</div>;
+exportclassGreetextendsReact.Component<Props> {
+render() {
+const { name } = this.props;
+return<div>Hello {name.toUpperCase()}!</div>;
   }
-  static defaultProps = { name: "world" };
+staticdefaultProps = { name:"world" };
 }
 
 // Type-checks! No type assertions needed!
-let el = <Greet />;
+letel = <Greet/>;
 ```
 
 ## Caveats {#caveats}
@@ -331,7 +331,7 @@ For function components (formerly known as SFCs) use ES2015 default initializers
 
 ```tsx
 function Greet({ name = "world" }: Props) {
-  return <div>Hello {name.toUpperCase()}!</div>;
+return<div>Hello {name.toUpperCase()}!</div>;
 }
 ```
 

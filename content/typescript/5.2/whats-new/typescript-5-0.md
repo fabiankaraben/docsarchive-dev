@@ -16,17 +16,17 @@ Let’s consider the following code:
 
 ```ts
 class Person {
-    name: string;
-    constructor(name: string) {
-        this.name = name;
+name: string;
+constructor(name: string) {
+this.name = name;
     }
 
-    greet() {
-        console.log(`Hello, my name is ${this.name}.`);
+greet() {
+console.log(`Hello, my name is ${this.name}.`);
     }
 }
 
-const p = new Person("Ray");
+constp = newPerson("Ray");
 p.greet();
 ```
 
@@ -35,17 +35,17 @@ Regardless of what kind of ball-of-mud you’re imagining, let’s say you throw
 
 ```ts
 class Person {
-    name: string;
-    constructor(name: string) {
-        this.name = name;
+name: string;
+constructor(name: string) {
+this.name = name;
     }
 
-    greet() {
-        console.log("LOG: Entering method.");
+greet() {
+console.log("LOG: Entering method.");
 
-        console.log(`Hello, my name is ${this.name}.`);
+console.log(`Hello, my name is ${this.name}.`);
 
-        console.log("LOG: Exiting method.")
+console.log("LOG: Exiting method.")
     }
 }
 ```
@@ -59,14 +59,14 @@ We can write a function called `loggedMethod` that looks like the following:
 ```ts
 function loggedMethod(originalMethod: any, _context: any) {
 
-    function replacementMethod(this: any, ...args: any[]) {
-        console.log("LOG: Entering method.")
-        const result = originalMethod.call(this, ...args);
-        console.log("LOG: Exiting method.")
-        return result;
+functionreplacementMethod(this: any, ...args: any[]) {
+console.log("LOG: Entering method.")
+constresult = originalMethod.call(this, ...args);
+console.log("LOG: Exiting method.")
+returnresult;
     }
 
-    return replacementMethod;
+returnreplacementMethod;
 }
 ```
 
@@ -85,18 +85,18 @@ Now we can use `loggedMethod` to *decorate* the method `greet`:
 
 ```ts
 class Person {
-    name: string;
-    constructor(name: string) {
-        this.name = name;
+name: string;
+constructor(name: string) {
+this.name = name;
     }
 
     @loggedMethod
-    greet() {
-        console.log(`Hello, my name is ${this.name}.`);
+greet() {
+console.log(`Hello, my name is ${this.name}.`);
     }
 }
 
-const p = new Person("Ray");
+constp = newPerson("Ray");
 p.greet();
 
 // Output:
@@ -116,16 +116,16 @@ Let’s rewrite `loggedMethod` to take advantage of that and print out the name 
 
 ```ts
 function loggedMethod(originalMethod: any, context: ClassMethodDecoratorContext) {
-    const methodName = String(context.name);
+constmethodName = String(context.name);
 
-    function replacementMethod(this: any, ...args: any[]) {
-        console.log(`LOG: Entering method '${methodName}'.`)
-        const result = originalMethod.call(this, ...args);
-        console.log(`LOG: Exiting method '${methodName}'.`)
-        return result;
+functionreplacementMethod(this: any, ...args: any[]) {
+console.log(`LOG: Entering method '${methodName}'.`)
+constresult = originalMethod.call(this, ...args);
+console.log(`LOG: Exiting method '${methodName}'.`)
+returnresult;
     }
 
-    return replacementMethod;
+returnreplacementMethod;
 }
 ```
 
@@ -139,15 +139,15 @@ As an example - in JavaScript, it’s common to write something like the followi
 
 ```ts
 class Person {
-    name: string;
-    constructor(name: string) {
-        this.name = name;
+name: string;
+constructor(name: string) {
+this.name = name;
 
-        this.greet = this.greet.bind(this);
+this.greet = this.greet.bind(this);
     }
 
-    greet() {
-        console.log(`Hello, my name is ${this.name}.`);
+greet() {
+console.log(`Hello, my name is ${this.name}.`);
     }
 }
 ```
@@ -156,13 +156,13 @@ Alternatively, `greet` might be declared as a property initialized to an arrow f
 
 ```ts
 class Person {
-    name: string;
-    constructor(name: string) {
-        this.name = name;
+name: string;
+constructor(name: string) {
+this.name = name;
     }
 
-    greet = () => {
-        console.log(`Hello, my name is ${this.name}.`);
+greet = () => {
+console.log(`Hello, my name is ${this.name}.`);
     };
 }
 ```
@@ -180,12 +180,12 @@ We can write a decorator that uses `addInitializer` to call `bind` in the constr
 
 ```ts
 function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
-    const methodName = context.name;
-    if (context.private) {
-        throw new Error(`'bound' cannot decorate private properties like ${methodName as string}.`);
+constmethodName = context.name;
+if (context.private) {
+thrownewError(`'bound' cannot decorate private properties like ${methodNameasstring}.`);
     }
-    context.addInitializer(function () {
-        this[methodName] = this[methodName].bind(this);
+context.addInitializer(function () {
+this[methodName] = this[methodName].bind(this);
     });
 }
 ```
@@ -195,20 +195,20 @@ Instead, it will add logic before any other fields are initialized.
 
 ```ts
 class Person {
-    name: string;
-    constructor(name: string) {
-        this.name = name;
+name: string;
+constructor(name: string) {
+this.name = name;
     }
 
     @bound
     @loggedMethod
-    greet() {
-        console.log(`Hello, my name is ${this.name}.`);
+greet() {
+console.log(`Hello, my name is ${this.name}.`);
     }
 }
 
-const p = new Person("Ray");
-const greet = p.greet;
+constp = newPerson("Ray");
+constgreet = p.greet;
 
 // Works!
 greet();
@@ -223,7 +223,7 @@ Also worth noting - if you’d prefer stylistically, you can put these decorator
 
 ```ts
     @bound @loggedMethod greet() {
-        console.log(`Hello, my name is ${this.name}.`);
+console.log(`Hello, my name is ${this.name}.`);
     }
 ```
 
@@ -233,17 +233,17 @@ If we wanted, we could have made `loggedMethod` return a decorator and customize
 
 ```ts
 function loggedMethod(headMessage = "LOG:") {
-    return function actualDecorator(originalMethod: any, context: ClassMethodDecoratorContext) {
-        const methodName = String(context.name);
+returnfunctionactualDecorator(originalMethod: any, context: ClassMethodDecoratorContext) {
+constmethodName = String(context.name);
 
-        function replacementMethod(this: any, ...args: any[]) {
-            console.log(`${headMessage} Entering method '${methodName}'.`)
-            const result = originalMethod.call(this, ...args);
-            console.log(`${headMessage} Exiting method '${methodName}'.`)
-            return result;
+functionreplacementMethod(this: any, ...args: any[]) {
+console.log(`${headMessage} Entering method '${methodName}'.`)
+constresult = originalMethod.call(this, ...args);
+console.log(`${headMessage} Exiting method '${methodName}'.`)
+returnresult;
         }
 
-        return replacementMethod;
+returnreplacementMethod;
     }
 }
 ```
@@ -253,18 +253,18 @@ We could then pass in any string as the prefix for messages that get logged to t
 
 ```ts
 class Person {
-    name: string;
-    constructor(name: string) {
-        this.name = name;
+name: string;
+constructor(name: string) {
+this.name = name;
     }
 
     @loggedMethod("⚠️")
-    greet() {
-        console.log(`Hello, my name is ${this.name}.`);
+greet() {
+console.log(`Hello, my name is ${this.name}.`);
     }
 }
 
-const p = new Person("Ray");
+constp = newPerson("Ray");
 p.greet();
 
 // Output:
@@ -278,9 +278,9 @@ Decorators can be used on more than just methods!
 They can be used on properties/fields, getters, setters, and auto-accessors.
 Even classes themselves can be decorated for things like subclassing and registration.
 
-To learn more about decorators in-depth, you can read up on [Axel Rauschmayer’s extensive summary](https://2ality.com/2022/10/javascript-decorators.html).
+To learn more about decorators in-depth, you can read up on [Axel Rauschmayer’s extensive summary ↗](https://2ality.com/2022/10/javascript-decorators.html).
 
-For more information about the changes involved, you can [view the original pull request](https://github.com/microsoft/TypeScript/pull/50820).
+For more information about the changes involved, you can [view the original pull request ↗](https://github.com/microsoft/TypeScript/pull/50820).
 
 ### Differences with Experimental Legacy Decorators {#differences-with-experimental-legacy-decorators}
 
@@ -301,18 +301,18 @@ The only exception is that mixing the two styles is not allowed.
 
 ```js
 // ✅ allowed
-@register export default class Foo {
-    // ...
+@registerexportdefaultclassFoo {
+// ...
 }
 
 // ✅ also allowed
-export default @register class Bar {
-    // ...
+exportdefault @registerclassBar {
+// ...
 }
 
 // ❌ error - before *and* after is not allowed
-@before export @after class Bar {
-    // ...
+@beforeexport @afterclassBar {
+// ...
 }
 ```
 
@@ -325,19 +325,19 @@ For example, a well-typed version of `loggedMethod` from above might look someth
 
 ```ts
 function loggedMethod<This, Args extends any[], Return>(
-    target: (this: This, ...args: Args) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+target: (this: This, ...args: Args) =>Return,
+context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) =>Return>
 ) {
-    const methodName = String(context.name);
+constmethodName = String(context.name);
 
-    function replacementMethod(this: This, ...args: Args): Return {
-        console.log(`LOG: Entering method '${methodName}'.`)
-        const result = target.call(this, ...args);
-        console.log(`LOG: Exiting method '${methodName}'.`)
-        return result;
+functionreplacementMethod(this: This, ...args: Args): Return {
+console.log(`LOG: Entering method '${methodName}'.`)
+constresult = target.call(this, ...args);
+console.log(`LOG: Exiting method '${methodName}'.`)
+returnresult;
     }
 
-    return replacementMethod;
+returnreplacementMethod;
 }
 ```
 
@@ -346,7 +346,7 @@ We had to separately model out the type of `this`, the parameters, and the retur
 Exactly how complex your decorators functions are defined depends on what you want to guarantee.
 Just keep in mind, your decorators will be used more than they’re written, so a well-typed version will usually be preferable - but there’s clearly a trade-off with readability, so try to keep things simple.
 
-More documentation on writing decorators will be available in the future - but [this post](https://2ality.com/2022/10/javascript-decorators.html) should have a good amount of detail for the mechanics of decorators.
+More documentation on writing decorators will be available in the future - but [this post ↗](https://2ality.com/2022/10/javascript-decorators.html) should have a good amount of detail for the mechanics of decorators.
 
 ## `const` Type Parameters {#const-type-parameters}
 
@@ -355,12 +355,12 @@ For example, in this case, the inferred type of `names` is `string[]`:
 
 ```ts
 type HasNames = { names: readonly string[] };
-function getNamesExactly<T extends HasNames>(arg: T): T["names"] {
-    return arg.names;
+functiongetNamesExactly<TextendsHasNames>(arg: T): T["names"] {
+returnarg.names;
 }
 
 // Inferred type: string[]
-const names = getNamesExactly({ names: ["Alice", "Bob", "Eve"]});
+constnames = getNamesExactly({ names: ["Alice", "Bob", "Eve"]});
 ```
 
 Usually the intent of this is to enable mutation down the line.
@@ -374,11 +374,11 @@ Up until now, API authors have typically had to recommend adding `as const` in c
 //    readonly ["Alice", "Bob", "Eve"]
 // The type we got:
 //    string[]
-const names1 = getNamesExactly({ names: ["Alice", "Bob", "Eve"]});
+constnames1 = getNamesExactly({ names: ["Alice", "Bob", "Eve"]});
 
 // Correctly gets what we wanted:
 //    readonly ["Alice", "Bob", "Eve"]
-const names2 = getNamesExactly({ names: ["Alice", "Bob", "Eve"]} as const);
+constnames2 = getNamesExactly({ names: ["Alice", "Bob", "Eve"]} asconst);
 ```
 
 This can be cumbersome and easy to forget.
@@ -386,14 +386,14 @@ In TypeScript 5.0, you can now add a `const` modifier to a type parameter declar
 
 ```ts
 type HasNames = { names: readonly string[] };
-function getNamesExactly<const T extends HasNames>(arg: T): T["names"] {
+functiongetNamesExactly<constTextendsHasNames>(arg: T): T["names"] {
 //                       ^^^^^
-    return arg.names;
+returnarg.names;
 }
 
 // Inferred type: readonly ["Alice", "Bob", "Eve"]
 // Note: Didn't need to write 'as const' here
-const names = getNamesExactly({ names: ["Alice", "Bob", "Eve"] });
+constnames = getNamesExactly({ names: ["Alice", "Bob", "Eve"] });
 ```
 
 Note that the `const` modifier doesn’t *reject* mutable values, and doesn’t require immutable constraints.
@@ -423,13 +423,13 @@ Similarly, remember to keep in mind that the `const` modifier only affects infer
 
 ```ts
 declare function fnGood<const T extends readonly string[]>(args: T): void;
-const arr = ["a", "b" ,"c"];
+constarr = ["a", "b" ,"c"];
 
 // 'T' is still 'string[]'-- the 'const' modifier has no effect here
 fnGood(arr);
 ```
 
-[See the pull request](https://github.com/microsoft/TypeScript/pull/51865) and the ([first](https://github.com/microsoft/TypeScript/issues/30680) and second [second](https://github.com/microsoft/TypeScript/issues/41114)) motivating issues for more details.
+[See the pull request ↗](https://github.com/microsoft/TypeScript/pull/51865) and the ([first ↗](https://github.com/microsoft/TypeScript/issues/30680) and second [second ↗](https://github.com/microsoft/TypeScript/issues/41114)) motivating issues for more details.
 
 ## Supporting Multiple Configuration Files in `extends` {#supporting-multiple-configuration-files-in-extends}
 
@@ -439,24 +439,24 @@ That’s why TypeScript supports an `extends` field for copying over fields from
 ```jsonc
 // packages/front-end/src/tsconfig.json
 {
-    "extends": "../../../tsconfig.base.json",
-    "compilerOptions": {
-        "outDir": "../lib",
-        // ...
+"extends": "../../../tsconfig.base.json",
+"compilerOptions": {
+"outDir": "../lib",
+// ...
     }
 }
 ```
 
 However, there are scenarios where you might want to extend from multiple configuration files.
-For example, imagine using [a TypeScript base configuration file shipped to npm](https://github.com/tsconfig/bases).
+For example, imagine using [a TypeScript base configuration file shipped to npm ↗](https://github.com/tsconfig/bases).
 If you want all your projects to also use the options from the `@tsconfig/strictest` package on npm, then there’s a simple solution: have `tsconfig.base.json` extend from `@tsconfig/strictest`:
 
 ```jsonc
 // tsconfig.base.json
 {
-    "extends": "@tsconfig/strictest/tsconfig.json",
-    "compilerOptions": {
-        // ...
+"extends": "@tsconfig/strictest/tsconfig.json",
+"compilerOptions": {
+// ...
     }
 }
 ```
@@ -469,9 +469,9 @@ For example, in this configuration file:
 
 ```jsonc
 {
-    "extends": ["a", "b", "c"],
-    "compilerOptions": {
-        // ...
+"extends": ["a", "b", "c"],
+"compilerOptions": {
+// ...
     }
 }
 ```
@@ -484,22 +484,22 @@ So in the following example, both `strictNullChecks` and `noImplicitAny` are ena
 ```jsonc
 // tsconfig1.json
 {
-    "compilerOptions": {
-        "strictNullChecks": true
+"compilerOptions": {
+"strictNullChecks": true
     }
 }
 
 // tsconfig2.json
 {
-    "compilerOptions": {
-        "noImplicitAny": true
+"compilerOptions": {
+"noImplicitAny": true
     }
 }
 
 // tsconfig.json
 {
-    "extends": ["./tsconfig1.json", "./tsconfig2.json"],
-    "files": ["./index.ts"]
+"extends": ["./tsconfig1.json", "./tsconfig2.json"],
+"files": ["./index.ts"]
 }
 ```
 
@@ -508,15 +508,15 @@ As another example, we can rewrite our original example in the following way.
 ```jsonc
 // packages/front-end/src/tsconfig.json
 {
-    "extends": ["@tsconfig/strictest/tsconfig.json", "../../../tsconfig.base.json"],
-    "compilerOptions": {
-        "outDir": "../lib",
-        // ...
+"extends": ["@tsconfig/strictest/tsconfig.json", "../../../tsconfig.base.json"],
+"compilerOptions": {
+"outDir": "../lib",
+// ...
     }
 }
 ```
 
-For more details, [read more on the original pull request](https://github.com/microsoft/TypeScript/pull/50403).
+For more details, [read more on the original pull request ↗](https://github.com/microsoft/TypeScript/pull/50403).
 
 ## All `enum`s Are Union `enum`s {#all-enums-are-union-enums}
 
@@ -524,8 +524,8 @@ When TypeScript originally introduced enums, they were nothing more than a set o
 
 ```ts
 enum E {
-    Foo = 10,
-    Bar = 20,
+Foo = 10,
+Bar = 20,
 }
 ```
 
@@ -545,19 +545,19 @@ They also allowed us to refer to only a subset of the types of an enum, and to n
 
 ```ts
 // Color is like a union of Red | Orange | Yellow | Green | Blue | Violet
-enum Color {
-    Red, Orange, Yellow, Green, Blue, /* Indigo, */ Violet
+enumColor {
+Red, Orange, Yellow, Green, Blue, /* Indigo, */Violet
 }
 
 // Each enum member has its own type that we can refer to!
-type PrimaryColor = Color.Red | Color.Green | Color.Blue;
+typePrimaryColor = Color.Red | Color.Green | Color.Blue;
 
-function isPrimaryColor(c: Color): c is PrimaryColor {
-    // Narrowing literal types can catch bugs.
-    // TypeScript will error here because
-    // we'll end up comparing 'Color.Red' to 'Color.Green'.
-    // We meant to use ||, but accidentally wrote &&.
-    return c === Color.Red && c === Color.Green && c === Color.Blue;
+functionisPrimaryColor(c: Color): cisPrimaryColor {
+// Narrowing literal types can catch bugs.
+// TypeScript will error here because
+// we'll end up comparing 'Color.Red' to 'Color.Green'.
+// We meant to use ||, but accidentally wrote &&.
+returnc === Color.Red && c === Color.Green && c === Color.Blue;
 }
 ```
 
@@ -566,7 +566,7 @@ In some cases it’s not possible to compute that value - for instance, an enum 
 
 ```ts
 enum E {
-    Blah = Math.random()
+Blah = Math.random()
 }
 ```
 
@@ -576,7 +576,7 @@ That meant giving up all the advantages of unions and literal types.
 TypeScript 5.0 manages to make all enums into union enums by creating a unique type for each computed member.
 That means that all enums can now be narrowed and have their members referenced as types as well.
 
-For more details on this change, you can [read the specifics on GitHub](https://github.com/microsoft/TypeScript/pull/50528).
+For more details on this change, you can [read the specifics on GitHub ↗](https://github.com/microsoft/TypeScript/pull/50528).
 
 ## `--moduleResolution bundler` {#--moduleresolution-bundler}
 
@@ -588,9 +588,9 @@ For example, in an ECMAScript module in Node.js, any relative import needs to in
 
 ```js
 // entry.mjs
-import * as utils from "./utils";     // ❌ wrong - we need to include the file extension.
+import*asutilsfrom"./utils";     // ❌ wrong - we need to include the file extension.
 
-import * as utils from "./utils.mjs"; // ✅ works
+import*asutilsfrom"./utils.mjs"; // ✅ works
 ```
 
 There are certain reasons for this in Node.js and the browser - it makes file lookups faster and works better for naive file servers.
@@ -599,15 +599,15 @@ In some ways, the `node` resolution mode was better for anyone using a bundler.
 
 But in some ways, the original `node` resolution mode was already out of date.
 Most modern bundlers use a fusion of the ECMAScript module and CommonJS lookup rules in Node.js.
-For example, extensionless imports work just fine just like in CommonJS, but when looking through the [`export` conditions](https://nodejs.org/api/packages.html#nested-conditions) of a package, they’ll prefer an `import` condition just like in an ECMAScript file.
+For example, extensionless imports work just fine just like in CommonJS, but when looking through the [`export` conditions ↗](https://nodejs.org/api/packages.html#nested-conditions) of a package, they’ll prefer an `import` condition just like in an ECMAScript file.
 
 To model how bundlers work, TypeScript now introduces a new strategy: `--moduleResolution bundler`.
 
 ```jsonc
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "moduleResolution": "bundler"
+"compilerOptions": {
+"target": "esnext",
+"moduleResolution": "bundler"
     }
 }
 ```
@@ -617,7 +617,7 @@ If you are using a modern bundler like Vite, esbuild, swc, Webpack, Parcel, and 
 On the other hand, if you’re writing a library that’s meant to be published on npm, using the `bundler` option can hide compatibility issues that may arise for your users who *aren’t* using a bundler.
 So in these cases, using the `node16` or `nodenext` resolution options is likely to be a better path.
 
-To read more on `--moduleResolution bundler`, [take a look at the implementing pull request](https://github.com/microsoft/TypeScript/pull/51669).
+To read more on `--moduleResolution bundler`, [take a look at the implementing pull request ↗](https://github.com/microsoft/TypeScript/pull/51669).
 
 ## Resolution Customization Flags {#resolution-customization-flags}
 
@@ -633,13 +633,13 @@ The expectation here is that your resolver (e.g. your bundler, a runtime, or som
 
 ### `resolvePackageJsonExports` {#resolvepackagejsonexports}
 
-`--resolvePackageJsonExports` forces TypeScript to consult [the `exports` field of `package.json` files](https://nodejs.org/api/packages.html#exports) if it ever reads from a package in `node_modules`.
+`--resolvePackageJsonExports` forces TypeScript to consult [the `exports` field of `package.json` files ↗](https://nodejs.org/api/packages.html#exports) if it ever reads from a package in `node_modules`.
 
 This option defaults to `true` under the `node16`, `nodenext`, and `bundler` options for `--moduleResolution`.
 
 ### `resolvePackageJsonImports` {#resolvepackagejsonimports}
 
-`--resolvePackageJsonImports` forces TypeScript to consult [the `imports` field of `package.json` files](https://nodejs.org/api/packages.html#imports) when performing a lookup that starts with `#` from a file whose ancestor directory contains a `package.json`.
+`--resolvePackageJsonImports` forces TypeScript to consult [the `imports` field of `package.json` files ↗](https://nodejs.org/api/packages.html#imports) when performing a lookup that starts with `#` from a file whose ancestor directory contains a `package.json`.
 
 This option defaults to `true` under the `node16`, `nodenext`, and `bundler` options for `--moduleResolution`.
 
@@ -651,21 +651,21 @@ For example, if you are using a CSS loader in a bundler project, you might want 
 ```css
 /* app.css */
 .cookie-banner {
-  display: none;
+display: none;
 }
 ```
 
 ```ts
 // app.d.css.ts
-declare const css: {
-  cookieBanner: string;
+declareconstcss: {
+cookieBanner: string;
 };
-export default css;
+exportdefaultcss;
 ```
 
 ```ts
 // App.tsx
-import styles from "./app.css";
+importstylesfrom"./app.css";
 
 styles.cookieBanner; // string
 ```
@@ -677,21 +677,21 @@ Note that historically, a similar effect has often been achievable by adding a d
 Strictly speaking, the former is interpreted as a declaration file for a JavaScript file named `app.css.js`.
 Because relative files imports need to include extensions in Node’s ESM support, TypeScript would error on our example in an ESM file under `--moduleResolution node16` or `nodenext`.
 
-For more information, read up [the proposalfor this feature](https://github.com/microsoft/TypeScript/issues/50133) and [its corresponding pull request](https://github.com/microsoft/TypeScript/pull/51435).
+For more information, read up [the proposalfor this feature ↗](https://github.com/microsoft/TypeScript/issues/50133) and [its corresponding pull request ↗](https://github.com/microsoft/TypeScript/pull/51435).
 
 ### `customConditions` {#customconditions}
 
-`--customConditions` takes a list of additional [conditions](https://nodejs.org/api/packages.html#nested-conditions) that should succeed when TypeScript resolves from an [`exports`](https://nodejs.org/api/packages.html#exports) or [`imports`](https://nodejs.org/api/packages.html#imports) field of a `package.json`.
+`--customConditions` takes a list of additional [conditions ↗](https://nodejs.org/api/packages.html#nested-conditions) that should succeed when TypeScript resolves from an [`exports` ↗](https://nodejs.org/api/packages.html#exports) or [`imports` ↗](https://nodejs.org/api/packages.html#imports) field of a `package.json`.
 These conditions are added to whatever existing conditions a resolver will use by default.
 
 For example, when this field is set in a `tsconfig.json` as so:
 
 ```jsonc
 {
-    "compilerOptions": {
-        "target": "es2022",
-        "moduleResolution": "bundler",
-        "customConditions": ["my-condition"]
+"compilerOptions": {
+"target": "es2022",
+"moduleResolution": "bundler",
+"customConditions": ["my-condition"]
     }
 }
 ```
@@ -702,13 +702,13 @@ So when importing from a package with the following `package.json`
 
 ```jsonc
 {
-    // ...
-    "exports": {
-        ".": {
-            "my-condition": "./foo.mjs",
-            "node": "./bar.mjs",
-            "import": "./baz.mjs",
-            "require": "./biz.mjs"
+// ...
+"exports": {
+".": {
+"my-condition": "./foo.mjs",
+"node": "./bar.mjs",
+"import": "./baz.mjs",
+"require": "./biz.mjs"
         }
     }
 }
@@ -726,8 +726,8 @@ Basically, if you write something like
 ```ts
 import { Car } from "./car";
 
-export function drive(car: Car) {
-    // ...
+exportfunctiondrive(car: Car) {
+// ...
 }
 ```
 
@@ -736,7 +736,7 @@ Your output JavaScript might look something like this:
 
 ```js
 export function drive(car) {
-    // ...
+// ...
 }
 ```
 
@@ -764,11 +764,11 @@ We can make it explicit whether an import or export is only being used for type 
 
 ```ts
 // This statement can be dropped entirely in JS output
-import type * as car from "./car";
+importtype*ascarfrom"./car";
 
 // The named import/export 'Car' can be dropped in JS output
-import { type Car } from "./car";
-export { type Car } from "./car";
+import { typeCar } from"./car";
+export { typeCar } from"./car";
 ```
 
 `type` modifiers are not quite useful on their own - by default, module elision will still drop imports, and nothing forces you to make the distinction between `type` and plain imports and exports.
@@ -781,13 +781,13 @@ Anything that uses the `type` modifier is dropped entirely.
 
 ```ts
 // Erased away entirely.
-import type { A } from "a";
+importtype { A } from"a";
 
 // Rewritten to 'import { b } from "bcd";'
-import { b, type c, type d } from "bcd";
+import { b, typec, typed } from"bcd";
 
 // Rewritten to 'import {} from "xyz";'
-import { type xyz } from "xyz";
+import { typexyz } from"xyz";
 ```
 
 With this new option, what you see is what you get.
@@ -800,17 +800,17 @@ If you need to emit code that uses `require` and `module.exports`, you’ll have
 |Input TypeScript|Output JavaScript|
 |---|---|
 |<div class="code-block relative mt-6 first:mt-0 group/code"><pre><code>import foo = require("foo");</code></pre></div>|<div class="code-block relative mt-6 first:mt-0 group/code"><pre><code>const foo = require("foo");</code></pre></div>|
-|<div class="code-block relative mt-6 first:mt-0 group/code"><pre><code>function foo() {}<br>function bar() {}<br>function baz() {}<br><br>export = {<br>    foo,<br>    bar,<br>    baz<br>};</code></pre></div>|<div class="code-block relative mt-6 first:mt-0 group/code"><pre><code>function foo() {}<br>function bar() {}<br>function baz() {}<br><br>module.exports = {<br>    foo,<br>    bar,<br>    baz<br>};</code></pre></div>|
+|<div class="code-block relative mt-6 first:mt-0 group/code"><pre><code>function foo() {}<br>functionbar() {}<br>functionbaz() {}<br><br>export = {<br>foo,<br>bar,<br>baz<br>};</code></pre></div>|<div class="code-block relative mt-6 first:mt-0 group/code"><pre><code>function foo() {}<br>functionbar() {}<br>functionbaz() {}<br><br>module.exports = {<br>foo,<br>bar,<br>baz<br>};</code></pre></div>|
 
 
 While this is a limitation, it does help make some issues more obvious.
-For example, it’s very common to forget to set the [`type` field in `package.json`](https://nodejs.org/api/packages.html#type) under `--module node16`.
+For example, it’s very common to forget to set the [`type` field in `package.json` ↗](https://nodejs.org/api/packages.html#type) under `--module node16`.
 As a result, developers would start writing CommonJS modules instead of an ES modules without realizing it, giving surprising lookup rules and JavaScript output.
 This new flag ensures that you’re intentional about the file type you’re using because the syntax is intentionally different.
 
 Because `--verbatimModuleSyntax` provides a more consistent story than `--importsNotUsedAsValues` and `--preserveValueImports`, those two existing flags are being deprecated in its favor.
 
-For more details, read up on [the original pull request][https://github.com/microsoft/TypeScript/pull/52203](https://github.com/microsoft/TypeScript/pull/52203) and [its proposal issue](https://github.com/microsoft/TypeScript/issues/51479).
+For more details, read up on [the original pull request][https://github.com/microsoft/TypeScript/pull/52203 ↗](https://github.com/microsoft/TypeScript/pull/52203) and [its proposal issue ↗](https://github.com/microsoft/TypeScript/issues/51479).
 
 ## Support for `export type *` {#support-for-export-type-}
 
@@ -818,28 +818,28 @@ When TypeScript 3.8 introduced type-only imports, the new syntax wasn’t allowe
 
 ```ts
 // models/vehicles.ts
-export class Spaceship {
-  // ...
+exportclassSpaceship {
+// ...
 }
 
 // models/index.ts
-export type * as vehicles from "./vehicles";
+exporttype*asvehiclesfrom"./vehicles";
 
 // main.ts
-import { vehicles } from "./models";
+import { vehicles } from"./models";
 
-function takeASpaceship(s: vehicles.Spaceship) {
-  // ✅ ok - `vehicles` only used in a type position
+functiontakeASpaceship(s: vehicles.Spaceship) {
+// ✅ ok - `vehicles` only used in a type position
 }
 
-function makeASpaceship() {
-  return new vehicles.Spaceship();
-  //         ^^^^^^^^
-  // 'vehicles' cannot be used as a value because it was exported using 'export type'.
+functionmakeASpaceship() {
+returnnewvehicles.Spaceship();
+//         ^^^^^^^^
+// 'vehicles' cannot be used as a value because it was exported using 'export type'.
 }
 ```
 
-You can [read more about the implementation here](https://github.com/microsoft/TypeScript/pull/52217).
+You can [read more about the implementation here ↗](https://github.com/microsoft/TypeScript/pull/52217).
 
 ## `@satisfies` Support in JSDoc {#satisfies-support-in-jsdoc}
 
@@ -849,30 +849,30 @@ For example, let’s take the following code:
 
 ```ts
 interface CompilerOptions {
-    strict?: boolean;
-    outDir?: string;
-    // ...
+strict?: boolean;
+outDir?: string;
+// ...
 }
 
-interface ConfigSettings {
-    compilerOptions?: CompilerOptions;
-    extends?: string | string[];
-    // ...
+interfaceConfigSettings {
+compilerOptions?: CompilerOptions;
+extends?: string | string[];
+// ...
 }
 
-let myConfigSettings = {
-    compilerOptions: {
-        strict: true,
-        outDir: "../lib",
-        // ...
+letmyConfigSettings = {
+compilerOptions: {
+strict:true,
+outDir:"../lib",
+// ...
     },
 
-    extends: [
-        "@tsconfig/strictest/tsconfig.json",
-        "../../../tsconfig.base.json"
+extends: [
+"@tsconfig/strictest/tsconfig.json",
+"../../../tsconfig.base.json"
     ],
 
-} satisfies ConfigSettings;
+} satisfiesConfigSettings;
 ```
 
 Here, TypeScript knows that `myConfigSettings.extends` was declared with an array - because while `satisfies` validated the type of our object, it didn’t bluntly change it to `CompilerOptions` and lose information.
@@ -881,7 +881,7 @@ So if we want to map over `extends`, that’s fine.
 ```ts
 declare function resolveConfig(configPath: string): CompilerOptions;
 
-let inheritedConfigs = myConfigSettings.extends.map(resolveConfig);
+letinheritedConfigs = myConfigSettings.extends.map(resolveConfig);
 ```
 
 This was helpful for TypeScript users, but plenty of people use TypeScript to type-check their JavaScript code using JSDoc annotations.
@@ -893,16 +893,16 @@ That’s why TypeScript 5.0 is supporting a new JSDoc tag called `@satisfies` th
 // @ts-check
 
 /**
- * @typedef CompilerOptions
- * @prop {boolean} [strict]
- * @prop {string} [outDir]
+ * @typedefCompilerOptions
+ * @prop{boolean}[strict]
+ * @prop{string}[outDir]
  */
 
 /**
  * @satisfies {CompilerOptions}
  */
-let myCompilerOptions = {
-    outdir: "../lib",
+letmyCompilerOptions = {
+outdir:"../lib",
 //  ~~~~~~ oops! we meant outDir
 };
 ```
@@ -913,33 +913,33 @@ But it will preserve the original type of our expressions, allowing us to use ou
 // @ts-check
 
 /**
- * @typedef CompilerOptions
- * @prop {boolean} [strict]
- * @prop {string} [outDir]
+ * @typedefCompilerOptions
+ * @prop{boolean}[strict]
+ * @prop{string}[outDir]
  */
 
 /**
- * @typedef ConfigSettings
- * @prop {CompilerOptions} [compilerOptions]
- * @prop {string | string[]} [extends]
+ * @typedefConfigSettings
+ * @prop{CompilerOptions}[compilerOptions]
+ * @prop{string | string[]}[extends]
  */
 
 
 /**
  * @satisfies {ConfigSettings}
  */
-let myConfigSettings = {
-    compilerOptions: {
-        strict: true,
-        outDir: "../lib",
+letmyConfigSettings = {
+compilerOptions: {
+strict:true,
+outDir:"../lib",
     },
-    extends: [
-        "@tsconfig/strictest/tsconfig.json",
-        "../../../tsconfig.base.json"
+extends: [
+"@tsconfig/strictest/tsconfig.json",
+"../../../tsconfig.base.json"
     ],
 };
 
-let inheritedConfigs = myConfigSettings.extends.map(resolveConfig);
+letinheritedConfigs = myConfigSettings.extends.map(resolveConfig);
 ```
 
 `/** @satisfies */` can also be used inline on any parenthesized expression.
@@ -947,13 +947,13 @@ We could have written `myCompilerOptions` like this:
 
 ```ts
 let myConfigSettings = /** @satisfies {ConfigSettings} */ ({
-    compilerOptions: {
-        strict: true,
-        outDir: "../lib",
+compilerOptions: {
+strict:true,
+outDir:"../lib",
     },
-    extends: [
-        "@tsconfig/strictest/tsconfig.json",
-        "../../../tsconfig.base.json"
+extends: [
+"@tsconfig/strictest/tsconfig.json",
+"../../../tsconfig.base.json"
     ],
 });
 ```
@@ -963,11 +963,11 @@ Well, it usually makes more sense when you’re deeper in some other code, like 
 
 ```js
 compileCode(/** @satisfies {CompilerOptions} */ ({
-    // ...
+// ...
 }));
 ```
 
-[This feature](https://github.com/microsoft/TypeScript/pull/51753) was provided thanks to [Oleksandr Tarasiuk](https://github.com/a-tarasyuk)!
+[This feature ↗](https://github.com/microsoft/TypeScript/pull/51753) was provided thanks to [Oleksandr Tarasiuk ↗](https://github.com/a-tarasyuk)!
 
 ## `@overload` Support in JSDoc {#overload-support-in-jsdoc}
 
@@ -977,19 +977,19 @@ They can restrict how callers can actually use our functions, and refine what re
 
 ```ts
 // Our overloads:
-function printValue(str: string): void;
-function printValue(num: number, maxFractionDigits?: number): void;
+functionprintValue(str: string): void;
+functionprintValue(num: number, maxFractionDigits?: number): void;
 
 // Our implementation:
-function printValue(value: string | number, maximumFractionDigits?: number) {
-    if (typeof value === "number") {
-        const formatter = Intl.NumberFormat("en-US", {
-            maximumFractionDigits,
+functionprintValue(value: string | number, maximumFractionDigits?: number) {
+if (typeofvalue === "number") {
+constformatter = Intl.NumberFormat("en-US", {
+maximumFractionDigits,
         });
-        value = formatter.format(value);
+value = formatter.format(value);
     }
 
-    console.log(value);
+console.log(value);
 }
 ```
 
@@ -1004,30 +1004,30 @@ Each JSDoc comment with an `@overload` tag is treated as a distinct overload for
 
 /**
  * @overload
- * @param {string} value
- * @return {void}
+ * @param{string}value
+ * @return{void}
  */
 
 /**
  * @overload
- * @param {number} value
- * @param {number} [maximumFractionDigits]
- * @return {void}
+ * @param{number}value
+ * @param{number}[maximumFractionDigits]
+ * @return{void}
  */
 
 /**
- * @param {string | number} value
- * @param {number} [maximumFractionDigits]
+ * @param{string | number}value
+ * @param{number}[maximumFractionDigits]
  */
-function printValue(value, maximumFractionDigits) {
-    if (typeof value === "number") {
-        const formatter = Intl.NumberFormat("en-US", {
-            maximumFractionDigits,
+functionprintValue(value, maximumFractionDigits) {
+if (typeofvalue === "number") {
+constformatter = Intl.NumberFormat("en-US", {
+maximumFractionDigits,
         });
-        value = formatter.format(value);
+value = formatter.format(value);
     }
 
-    console.log(value);
+console.log(value);
 }
 ```
 
@@ -1042,7 +1042,7 @@ printValue(123.45, 2);
 printValue("hello!", 123); // error!
 ```
 
-This new tag [was implemented](https://github.com/microsoft/TypeScript/pull/51234) thanks to [Tomasz Lenarcik](https://github.com/apendua).
+This new tag [was implemented ↗](https://github.com/microsoft/TypeScript/pull/51234) thanks to [Tomasz Lenarcik ↗](https://github.com/apendua).
 
 ## Passing Emit-Specific Flags Under `--build` {#passing-emit-specific-flags-under---build}
 
@@ -1069,7 +1069,7 @@ Once you’re done iterating in the inner loop, a “production” build can jus
 tsc --build -p ./my-project-dir --declaration
 ```
 
-[More information on this change is available here](https://github.com/microsoft/TypeScript/pull/51241).
+[More information on this change is available here ↗](https://github.com/microsoft/TypeScript/pull/51241).
 
 ## Case-Insensitive Import Sorting in Editors {#case-insensitive-import-sorting-in-editors}
 
@@ -1080,10 +1080,10 @@ For example, is the following import list sorted?
 
 ```ts
 import {
-    Toggle,
-    freeze,
-    toBoolean,
-} from "./utils";
+Toggle,
+freeze,
+toBoolean,
+} from"./utils";
 ```
 
 The answer might surprisingly be “it depends”.
@@ -1091,7 +1091,7 @@ If we *don’t* care about case-sensitivity, then this list is clearly not sorte
 The letter `f` comes before both `t` and `T`.
 
 But in most programming languages, sorting defaults to comparing the byte values of strings.
-The way JavaScript compares strings means that `"Toggle"` always comes before `"freeze"` because according to the [ASCII character encoding](https://en.wikipedia.org/wiki/ASCII), uppercase letters come before lowercase.
+The way JavaScript compares strings means that `"Toggle"` always comes before `"freeze"` because according to the [ASCII character encoding ↗](https://en.wikipedia.org/wiki/ASCII), uppercase letters come before lowercase.
 So from that perspective, the import list is sorted.
 
 TypeScript previously considered the import list to be sorted because it was doing a basic case-sensitive sort.
@@ -1100,58 +1100,58 @@ This could be a point of frustration for developers who preferred a case-*insens
 TypeScript now detects case sensitivity by default.
 This means that TypeScript and tools like ESLint typically won’t “fight” each other over how to best sort imports.
 
-Our team has also been experimenting [with further sorting strategies which you can read about here](https://github.com/microsoft/TypeScript/pull/52115).
+Our team has also been experimenting [with further sorting strategies which you can read about here ↗](https://github.com/microsoft/TypeScript/pull/52115).
 These options may eventually be configurable by editors.
 For now, they are still unstable and experimental, and you can opt into them in VS Code today by using the `typescript.unstable` entry in your JSON options.
 Below are all of the options you can try out (set to their defaults):
 
 ```jsonc
 {
-    "typescript.unstable": {
-        // Should sorting be case-sensitive? Can be:
-        // - true
-        // - false
-        // - "auto" (auto-detect)
-        "organizeImportsIgnoreCase": "auto",
+"typescript.unstable": {
+// Should sorting be case-sensitive? Can be:
+// - true
+// - false
+// - "auto" (auto-detect)
+"organizeImportsIgnoreCase": "auto",
 
-        // Should sorting be "ordinal" and use code points or consider Unicode rules? Can be:
-        // - "ordinal"
-        // - "unicode"
-        "organizeImportsCollation": "ordinal",
+// Should sorting be "ordinal" and use code points or consider Unicode rules? Can be:
+// - "ordinal"
+// - "unicode"
+"organizeImportsCollation": "ordinal",
 
-        // Under `"organizeImportsCollation": "unicode"`,
-        // what is the current locale? Can be:
-        // - [any other locale code]
-        // - "auto" (use the editor's locale)
-        "organizeImportsLocale": "en",
+// Under `"organizeImportsCollation": "unicode"`,
+// what is the current locale? Can be:
+// - [any other locale code]
+// - "auto" (use the editor's locale)
+"organizeImportsLocale": "en",
 
-        // Under `"organizeImportsCollation": "unicode"`,
-        // should upper-case letters or lower-case letters come first? Can be:
-        // - false (locale-specific)
-        // - "upper"
-        // - "lower"
-        "organizeImportsCaseFirst": false,
+// Under `"organizeImportsCollation": "unicode"`,
+// should upper-case letters or lower-case letters come first? Can be:
+// - false (locale-specific)
+// - "upper"
+// - "lower"
+"organizeImportsCaseFirst": false,
 
-        // Under `"organizeImportsCollation": "unicode"`,
-        // do runs of numbers get compared numerically (i.e. "a1" < "a2" < "a100")? Can be:
-        // - true
-        // - false
-        "organizeImportsNumericCollation": true,
+// Under `"organizeImportsCollation": "unicode"`,
+// do runs of numbers get compared numerically (i.e. "a1" < "a2" < "a100")? Can be:
+// - true
+// - false
+"organizeImportsNumericCollation": true,
 
-        // Under `"organizeImportsCollation": "unicode"`,
-        // do letters with accent marks/diacritics get sorted distinctly
-        // from their "base" letter (i.e. is é different from e)? Can be
-        // - true
-        // - false
-        "organizeImportsAccentCollation": true
+// Under `"organizeImportsCollation": "unicode"`,
+// do letters with accent marks/diacritics get sorted distinctly
+// from their "base" letter (i.e. is é different from e)? Can be
+// - true
+// - false
+"organizeImportsAccentCollation": true
     },
-    "javascript.unstable": {
-        // same options valid here...
+"javascript.unstable": {
+// same options valid here...
     },
 }
 ```
 
-You can read more details on [the original work for auto-detecting and specifying case-insensitivity](https://github.com/microsoft/TypeScript/pull/51733), followed by the [the broader set of options](https://github.com/microsoft/TypeScript/pull/52115).
+You can read more details on [the original work for auto-detecting and specifying case-insensitivity ↗](https://github.com/microsoft/TypeScript/pull/51733), followed by the [the broader set of options ↗](https://github.com/microsoft/TypeScript/pull/52115).
 
 ## Exhaustive `switch`/`case` Completions {#exhaustive-switchcase-completions}
 
@@ -1235,7 +1235,7 @@ Certain operations in TypeScript will already warn you if you write code which m
 
 ```ts
 function func(ns: number | string) {
-  return ns * 4; // Error, possible implicit coercion
+returnns * 4; // Error, possible implicit coercion
 }
 ```
 
@@ -1243,7 +1243,7 @@ In 5.0, this will also be applied to the relational operators `>`, `<`, `<=`, an
 
 ```ts
 function func(ns: number | string) {
-  return ns > 4; // Now also an error
+returnns > 4; // Now also an error
 }
 ```
 
@@ -1251,7 +1251,7 @@ To allow this if desired, you can explicitly coerce the operand to a `number` us
 
 ```ts
 function func(ns: number | string) {
-  return +ns > 4; // OK
+return +ns > 4; // OK
 }
 ```
 
@@ -1267,28 +1267,28 @@ The first is that assigning an out-of-domain literal to an `enum` type will now 
 
 ```ts
 enum SomeEvenDigit {
-    Zero = 0,
-    Two = 2,
-    Four = 4
+Zero = 0,
+Two = 2,
+Four = 4
 }
 
 // Now correctly an error
-let m: SomeEvenDigit = 1;
+letm: SomeEvenDigit = 1;
 ```
 
 The other is that declaration of certain kinds of indirected mixed string/number `enum` forms would, incorrectly, create an all-number `enum`:
 
 ```ts
 enum Letters {
-    A = "a"
+A = "a"
 }
-enum Numbers {
-    one = 1,
-    two = Letters.A
+enumNumbers {
+one = 1,
+two = Letters.A
 }
 
 // Now correctly an error
-const t: number = Numbers.two;
+constt: number = Numbers.two;
 ```
 
 You can [see more details in relevant change](https://github.com/microsoft/TypeScript/pull/50528).
@@ -1301,12 +1301,12 @@ One place where this becomes apparent is when using a decorator on a constructor
 ```ts
 export declare const inject:
   (entity: any) =>
-    (target: object, key: string | symbol, index?: number) => void;
+    (target: object, key: string | symbol, index?: number) =>void;
 
-export class Foo {}
+exportclassFoo {}
 
-export class C {
-    constructor(@inject(Foo) private x: any) {
+exportclassC {
+constructor(@inject(Foo) privatex: any) {
     }
 }
 ```

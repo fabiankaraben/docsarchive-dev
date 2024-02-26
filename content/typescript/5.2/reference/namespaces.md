@@ -11,7 +11,7 @@ type: docs
 > **A note about terminology:**
 > It’s important to note that in TypeScript 1.5, the nomenclature has changed.
 > “Internal modules” are now “namespaces”.
-> “External modules” are now simply “modules”, as to align with [ECMAScript 2015](https://www.ecma-international.org/ecma-262/6.0/)’s terminology, (namely that `module X {` is equivalent to the now-preferred `namespace X {`).
+> “External modules” are now simply “modules”, as to align with [ECMAScript 2015 ↗](https://www.ecma-international.org/ecma-262/6.0/)’s terminology, (namely that `module X {` is equivalent to the now-preferred `namespace X {`).
 > 
 
 This post outlines the various ways to organize your code using namespaces (previously “internal modules”) in TypeScript.
@@ -28,37 +28,37 @@ We’ve written a small set of simplistic string validators, as you might write 
 
 ```ts
 interface StringValidator {
-  isAcceptable(s: string): boolean;
+isAcceptable(s: string): boolean;
 }
 
-let lettersRegexp = /^[A-Za-z]+$/;
-let numberRegexp = /^[0-9]+$/;
+letlettersRegexp = /^[A-Za-z]+$/;
+letnumberRegexp = /^[0-9]+$/;
 
-class LettersOnlyValidator implements StringValidator {
-  isAcceptable(s: string) {
-    return lettersRegexp.test(s);
+classLettersOnlyValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returnlettersRegexp.test(s);
   }
 }
 
-class ZipCodeValidator implements StringValidator {
-  isAcceptable(s: string) {
-    return s.length === 5 && numberRegexp.test(s);
+classZipCodeValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returns.length === 5 && numberRegexp.test(s);
   }
 }
 
 // Some samples to try
-let strings = ["Hello", "98052", "101"];
+letstrings = ["Hello", "98052", "101"];
 
 // Validators to use
-let validators: { [s: string]: StringValidator } = {};
-validators["ZIP code"] = new ZipCodeValidator();
-validators["Letters only"] = new LettersOnlyValidator();
+letvalidators: { [s: string]: StringValidator } = {};
+validators["ZIP code"] = newZipCodeValidator();
+validators["Letters only"] = newLettersOnlyValidator();
 
 // Show whether each string passed each validator
-for (let s of strings) {
-  for (let name in validators) {
-    let isMatch = validators[name].isAcceptable(s);
-    console.log(`'${s}' ${isMatch ? "matches" : "does not match"} '${name}'.`);
+for (letsofstrings) {
+for (letnameinvalidators) {
+letisMatch = validators[name].isAcceptable(s);
+console.log(`'${s}' ${isMatch?"matches":"does not match"} '${name}'.`);
   }
 }
 ```
@@ -77,41 +77,41 @@ In the test code at the bottom of the file, we now need to qualify the names of 
 
 ```ts
 namespace Validation {
-  export interface StringValidator {
-    isAcceptable(s: string): boolean;
+exportinterfaceStringValidator {
+isAcceptable(s: string): boolean;
   }
 
-  const lettersRegexp = /^[A-Za-z]+$/;
-  const numberRegexp = /^[0-9]+$/;
+constlettersRegexp = /^[A-Za-z]+$/;
+constnumberRegexp = /^[0-9]+$/;
 
-  export class LettersOnlyValidator implements StringValidator {
-    isAcceptable(s: string) {
-      return lettersRegexp.test(s);
+exportclassLettersOnlyValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returnlettersRegexp.test(s);
     }
   }
 
-  export class ZipCodeValidator implements StringValidator {
-    isAcceptable(s: string) {
-      return s.length === 5 && numberRegexp.test(s);
+exportclassZipCodeValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returns.length === 5 && numberRegexp.test(s);
     }
   }
 }
 
 // Some samples to try
-let strings = ["Hello", "98052", "101"];
+letstrings = ["Hello", "98052", "101"];
 
 // Validators to use
-let validators: { [s: string]: Validation.StringValidator } = {};
-validators["ZIP code"] = new Validation.ZipCodeValidator();
-validators["Letters only"] = new Validation.LettersOnlyValidator();
+letvalidators: { [s: string]: Validation.StringValidator } = {};
+validators["ZIP code"] = newValidation.ZipCodeValidator();
+validators["Letters only"] = newValidation.LettersOnlyValidator();
 
 // Show whether each string passed each validator
-for (let s of strings) {
-  for (let name in validators) {
-    console.log(
-      `"${s}" - ${
-        validators[name].isAcceptable(s) ? "matches" : "does not match"
-      } ${name}`
+for (letsofstrings) {
+for (letnameinvalidators) {
+console.log(
+`"${s}" - ${
+validators[name].isAcceptable(s) ?"matches":"does not match"
+}${name}`
     );
   }
 }
@@ -132,8 +132,8 @@ Our test code is otherwise unchanged.
 
 ```ts
 namespace Validation {
-  export interface StringValidator {
-    isAcceptable(s: string): boolean;
+exportinterfaceStringValidator {
+isAcceptable(s: string): boolean;
   }
 }
 ```
@@ -142,11 +142,11 @@ namespace Validation {
 
 ```ts
 /// <reference path="Validation.ts" />
-namespace Validation {
-  const lettersRegexp = /^[A-Za-z]+$/;
-  export class LettersOnlyValidator implements StringValidator {
-    isAcceptable(s: string) {
-      return lettersRegexp.test(s);
+namespaceValidation {
+constlettersRegexp = /^[A-Za-z]+$/;
+exportclassLettersOnlyValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returnlettersRegexp.test(s);
     }
   }
 }
@@ -156,11 +156,11 @@ namespace Validation {
 
 ```ts
 /// <reference path="Validation.ts" />
-namespace Validation {
-  const numberRegexp = /^[0-9]+$/;
-  export class ZipCodeValidator implements StringValidator {
-    isAcceptable(s: string) {
-      return s.length === 5 && numberRegexp.test(s);
+namespaceValidation {
+constnumberRegexp = /^[0-9]+$/;
+exportclassZipCodeValidatorimplementsStringValidator {
+isAcceptable(s: string) {
+returns.length === 5 && numberRegexp.test(s);
     }
   }
 }
@@ -170,24 +170,24 @@ namespace Validation {
 
 ```ts
 /// <reference path="Validation.ts" />
-/// <reference path="LettersOnlyValidator.ts" />
-/// <reference path="ZipCodeValidator.ts" />
+/// <referencepath="LettersOnlyValidator.ts"/>
+/// <referencepath="ZipCodeValidator.ts"/>
 
 // Some samples to try
-let strings = ["Hello", "98052", "101"];
+letstrings = ["Hello", "98052", "101"];
 
 // Validators to use
-let validators: { [s: string]: Validation.StringValidator } = {};
-validators["ZIP code"] = new Validation.ZipCodeValidator();
-validators["Letters only"] = new Validation.LettersOnlyValidator();
+letvalidators: { [s: string]: Validation.StringValidator } = {};
+validators["ZIP code"] = newValidation.ZipCodeValidator();
+validators["Letters only"] = newValidation.LettersOnlyValidator();
 
 // Show whether each string passed each validator
-for (let s of strings) {
-  for (let name in validators) {
-    console.log(
-      `"${s}" - ${
-        validators[name].isAcceptable(s) ? "matches" : "does not match"
-      } ${name}`
+for (letsofstrings) {
+for (letnameinvalidators) {
+console.log(
+`"${s}" - ${
+validators[name].isAcceptable(s) ?"matches":"does not match"
+}${name}`
     );
   }
 }
@@ -215,9 +215,9 @@ If multiple JS files get produced, we’ll need to use `<script>` tags on our we
 
 ```html
 <script src="Validation.js" type="text/javascript" />
-<script src="LettersOnlyValidator.js" type="text/javascript" />
-<script src="ZipCodeValidator.js" type="text/javascript" />
-<script src="Test.js" type="text/javascript" />
+<scriptsrc="LettersOnlyValidator.js"type="text/javascript"/>
+<scriptsrc="ZipCodeValidator.js"type="text/javascript"/>
+<scriptsrc="Test.js"type="text/javascript"/>
 ```
 
 ## Aliases {#aliases}
@@ -228,14 +228,14 @@ You can use these sorts of imports (commonly referred to as aliases) for any kin
 
 ```ts
 namespace Shapes {
-  export namespace Polygons {
-    export class Triangle {}
-    export class Square {}
+exportnamespacePolygons {
+exportclassTriangle {}
+exportclassSquare {}
   }
 }
 
-import polygons = Shapes.Polygons;
-let sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
+importpolygons = Shapes.Polygons;
+letsq = newpolygons.Square(); // Same as 'new Shapes.Polygons.Square()'
 ```
 
 Notice that we don’t use the `require` keyword; instead we assign directly from the qualified name of the symbol we’re importing.
@@ -263,22 +263,22 @@ For example, we could begin writing it as follows:
 
 ```ts
 declare namespace D3 {
-  export interface Selectors {
-    select: {
+exportinterfaceSelectors {
+select: {
       (selector: string): Selection;
       (element: EventTarget): Selection;
     };
   }
 
-  export interface Event {
-    x: number;
-    y: number;
+exportinterfaceEvent {
+x: number;
+y: number;
   }
 
-  export interface Base extends Selectors {
-    event: Event;
+exportinterfaceBaseextendsSelectors {
+event: Event;
   }
 }
 
-declare var d3: D3.Base;
+declarevard3: D3.Base;
 ```

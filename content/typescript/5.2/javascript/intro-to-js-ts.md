@@ -34,8 +34,8 @@ JSDoc annotations come before a declaration will be used to set the type of that
 
 ```js
 /** @type {number} */
-var x;
- 
+varx;
+
 x = 0; // OK
 x = false; // OK?!
 ```
@@ -51,9 +51,9 @@ To enable errors in your JavaScript files add: `// @ts-check` to the first line 
 
 ```js
 // @ts-check
-/** @type {number} */
-var x;
- 
+/** @type{number} */
+varx;
+
 x = 0; // OK
 x = false; // Not OK
 ```
@@ -71,9 +71,9 @@ TypeScript may offer you errors which you disagree with, in those cases you can 
 
 ```js
 // @ts-check
-/** @type {number} */
-var x;
- 
+/** @type{number} */
+varx;
+
 x = 0; // OK
 // @ts-expect-error
 x = false; // Not OK

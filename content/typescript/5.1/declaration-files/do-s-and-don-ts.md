@@ -17,22 +17,22 @@ These types refer to non-primitive boxed objects that are almost never used appr
 
 ```ts
 /* WRONG */
-function reverse(s: String): String;
+functionreverse(s: String): String;
 ```
 
 ✅ **Do** use the types `number`, `string`, `boolean`, and `symbol`.
 
 ```ts
 /* OK */
-function reverse(s: string): string;
+functionreverse(s: string): string;
 ```
 
-Instead of `Object`, use the non-primitive `object` type ([added in TypeScript 2.2 ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html#object-type)).
+Instead of `Object`, use the non-primitive `object` type ([added in TypeScript 2.2](/typescript/5.1/whats-new/typescript-2-2#object-type)).
 
 ### Generics {#generics}
 
 ❌ **Don’t** ever have a generic type which doesn’t use its type parameter.
-See more details in [TypeScript FAQ page](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-doesnt-type-inference-work-on-this-interface-interface-foot--).
+See more details in [TypeScript FAQ page ↗](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-doesnt-type-inference-work-on-this-interface-interface-foot--).
 
 ### any {#any}
 
@@ -48,8 +48,8 @@ In cases where you don’t know what type you want to accept, or when you want t
 
 ```ts
 /* WRONG */
-function fn(x: () => any) {
-  x();
+functionfn(x: () =>any) {
+x();
 }
 ```
 
@@ -57,8 +57,8 @@ function fn(x: () => any) {
 
 ```ts
 /* OK */
-function fn(x: () => void) {
-  x();
+functionfn(x: () =>void) {
+x();
 }
 ```
 
@@ -66,8 +66,8 @@ function fn(x: () => void) {
 
 ```ts
 function fn(x: () => void) {
-  var k = x(); // oops! meant to do something else
-  k.doSomething(); // error, but would be OK if the return type had been 'any'
+vark = x(); // oops! meant to do something else
+k.doSomething(); // error, but would be OK if the return type had been 'any'
 }
 ```
 
@@ -77,8 +77,8 @@ function fn(x: () => void) {
 
 ```ts
 /* WRONG */
-interface Fetcher {
-  getObject(done: (data: unknown, elapsedTime?: number) => void): void;
+interfaceFetcher {
+getObject(done: (data: unknown, elapsedTime?: number) =>void): void;
 }
 ```
 
@@ -91,8 +91,8 @@ it’s always legal to provide a callback that accepts fewer arguments.
 
 ```ts
 /* OK */
-interface Fetcher {
-  getObject(done: (data: unknown, elapsedTime: number) => void): void;
+interfaceFetcher {
+getObject(done: (data: unknown, elapsedTime: number) =>void): void;
 }
 ```
 
@@ -102,10 +102,10 @@ interface Fetcher {
 
 ```ts
 /* WRONG */
-declare function beforeAll(action: () => void, timeout?: number): void;
-declare function beforeAll(
-  action: (done: DoneFn) => void,
-  timeout?: number
+declarefunctionbeforeAll(action: () =>void, timeout?: number): void;
+declarefunctionbeforeAll(
+action: (done: DoneFn) =>void,
+timeout?: number
 ): void;
 ```
 
@@ -113,9 +113,9 @@ declare function beforeAll(
 
 ```ts
 /* OK */
-declare function beforeAll(
-  action: (done: DoneFn) => void,
-  timeout?: number
+declarefunctionbeforeAll(
+action: (done: DoneFn) =>void,
+timeout?: number
 ): void;
 ```
 
@@ -130,24 +130,24 @@ Providing a shorter callback first allows incorrectly-typed functions to be pass
 
 ```ts
 /* WRONG */
-declare function fn(x: unknown): unknown;
-declare function fn(x: HTMLElement): number;
-declare function fn(x: HTMLDivElement): string;
+declarefunctionfn(x: unknown): unknown;
+declarefunctionfn(x: HTMLElement): number;
+declarefunctionfn(x: HTMLDivElement): string;
 
-var myElem: HTMLDivElement;
-var x = fn(myElem); // x: unknown, wat?
+varmyElem: HTMLDivElement;
+varx = fn(myElem); // x: unknown, wat?
 ```
 
 ✅ **Do** sort overloads by putting the more general signatures after more specific signatures:
 
 ```ts
 /* OK */
-declare function fn(x: HTMLDivElement): string;
-declare function fn(x: HTMLElement): number;
-declare function fn(x: unknown): unknown;
+declarefunctionfn(x: HTMLDivElement): string;
+declarefunctionfn(x: HTMLElement): number;
+declarefunctionfn(x: unknown): unknown;
 
-var myElem: HTMLDivElement;
-var x = fn(myElem); // x: string, :)
+varmyElem: HTMLDivElement;
+varx = fn(myElem); // x: string, :)
 ```
 
 ❔ **Why:** TypeScript chooses the *first matching overload* when resolving function calls.
@@ -159,10 +159,10 @@ When an earlier overload is “more general” than a later one, the later one i
 
 ```ts
 /* WRONG */
-interface Example {
-  diff(one: string): number;
-  diff(one: string, two: string): number;
-  diff(one: string, two: string, three: boolean): number;
+interfaceExample {
+diff(one: string): number;
+diff(one: string, two: string): number;
+diff(one: string, two: string, three: boolean): number;
 }
 ```
 
@@ -170,8 +170,8 @@ interface Example {
 
 ```ts
 /* OK */
-interface Example {
-  diff(one: string, two?: string, three?: boolean): number;
+interfaceExample {
+diff(one: string, two?: string, three?: boolean): number;
 }
 ```
 
@@ -185,7 +185,7 @@ This code, for example, exposes a bug only when the signature is correctly writt
 
 ```ts
 function fn(x: (a: string, b: number, c: number) => void) {}
-var x: Example;
+varx: Example;
 // When written with overloads, OK -- used first overload
 // When written with optionals, correctly an error
 fn(x.diff);
@@ -208,10 +208,10 @@ x.diff("something", true ? undefined : "hour");
 
 ```ts
 /* WRONG */
-interface Moment {
-  utcOffset(): number;
-  utcOffset(b: number): Moment;
-  utcOffset(b: string): Moment;
+interfaceMoment {
+utcOffset(): number;
+utcOffset(b: number): Moment;
+utcOffset(b: string): Moment;
 }
 ```
 
@@ -219,9 +219,9 @@ interface Moment {
 
 ```ts
 /* OK */
-interface Moment {
-  utcOffset(): number;
-  utcOffset(b: number | string): Moment;
+interfaceMoment {
+utcOffset(): number;
+utcOffset(b: number | string): Moment;
 }
 ```
 
@@ -231,10 +231,10 @@ Note that we didn’t make `b` optional here because the return types of the sig
 
 ```ts
 function fn(x: string): Moment;
-function fn(x: number): Moment;
-function fn(x: number | string) {
-  // When written with separate overloads, incorrectly an error
-  // When written with union types, correctly OK
-  return moment().utcOffset(x);
+functionfn(x: number): Moment;
+functionfn(x: number | string) {
+// When written with separate overloads, incorrectly an error
+// When written with union types, correctly OK
+returnmoment().utcOffset(x);
 }
 ```

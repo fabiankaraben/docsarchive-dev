@@ -27,9 +27,9 @@ So, whereas `T` and `T | undefined` are considered synonymous in regular type ch
 
 ```ts
 // Compiled with --strictNullChecks
-let x: number;
-let y: number | undefined;
-let z: number | null | undefined;
+letx: number;
+lety: number | undefined;
+letz: number | null | undefined;
 x = 1; // Ok
 y = 1; // Ok
 z = 1; // Ok
@@ -55,9 +55,9 @@ In strict null checking mode the compiler requires every reference to a local va
 
 ```ts
 // Compiled with --strictNullChecks
-let x: number;
-let y: number | null;
-let z: number | undefined;
+letx: number;
+lety: number | null;
+letz: number | undefined;
 x; // Error, reference not preceded by assignment
 y; // Error, reference not preceded by assignment
 z; // Ok
@@ -76,8 +76,8 @@ For example, the following two types are identical:
 
 ```ts
 // Compiled with --strictNullChecks
-type T1 = (x?: number) => string; // x has type number | undefined
-type T2 = (x?: number | undefined) => string; // x has type number | undefined
+typeT1 = (x?: number) =>string; // x has type number | undefined
+typeT2 = (x?: number | undefined) =>string; // x has type number | undefined
 ```
 
 ## Non-null and non-undefined type guards {#non-null-and-non-undefined-type-guards}
@@ -89,15 +89,15 @@ However, type guards are extended to support non-null and non-undefined checks.
 
 ```ts
 // Compiled with --strictNullChecks
-declare function f(x: number): string;
-let x: number | null | undefined;
+declarefunctionf(x: number): string;
+letx: number | null | undefined;
 if (x) {
-  f(x); // Ok, type of x is number here
+f(x); // Ok, type of x is number here
 } else {
-  f(x); // Error, type of x is number? here
+f(x); // Error, type of x is number? here
 }
-let a = x != null ? f(x) : ""; // Type of a is string
-let b = x && f(x); // Type of b is string | 0 | null | undefined
+leta = x != null ? f(x) : ""; // Type of a is string
+letb = x && f(x); // Type of b is string | 0 | null | undefined
 ```
 
 Non-null and non-undefined type guards may use the `==`, `!=`, `===`, or `!==` operator to compare to `null` or `undefined`, as in `x != null` or `x === undefined`.
@@ -112,15 +112,15 @@ Type guards now support checking “dotted names” consisting of a variable or 
 
 ```ts
 interface Options {
-  location?: {
-    x?: number;
-    y?: number;
+location?: {
+x?: number;
+y?: number;
   };
 }
 
-function foo(options?: Options) {
-  if (options && options.location && options.location.x) {
-    const x = options.location.x; // Type of x is number
+functionfoo(options?: Options) {
+if (options && options.location && options.location.x) {
+constx = options.location.x; // Type of x is number
   }
 }
 ```
@@ -136,8 +136,8 @@ Expression operators permit operand types to include `null` and/or `undefined` b
 
 ```ts
 // Compiled with --strictNullChecks
-function sum(a: number | null, b: number | null) {
-  return a + b; // Produces value of type number
+functionsum(a: number | null, b: number | null) {
+returna + b; // Produces value of type number
 }
 ```
 
@@ -145,12 +145,12 @@ The `&&` operator adds `null` and/or `undefined` to the type of the right operan
 
 ```ts
 // Compiled with --strictNullChecks
-interface Entity {
-  name: string;
+interfaceEntity {
+name: string;
 }
-let x: Entity | null;
-let s = x && x.name; // s is of type string | null
-let y = x || { name: "test" }; // y is of type Entity
+letx: Entity | null;
+lets = x && x.name; // s is of type string | null
+lety = x || { name:"test" }; // y is of type Entity
 ```
 
 ## Type widening {#type-widening}
@@ -171,13 +171,13 @@ Similar to type assertions of the forms `<T>x` and `x as T`, the `!` non-null as
 
 ```ts
 // Compiled with --strictNullChecks
-function validateEntity(e?: Entity) {
-  // Throw exception if e is null or invalid entity
+functionvalidateEntity(e?: Entity) {
+// Throw exception if e is null or invalid entity
 }
 
-function processEntity(e?: Entity) {
-  validateEntity(e);
-  let s = e!.name; // Assert that e is non-null and access name
+functionprocessEntity(e?: Entity) {
+validateEntity(e);
+lets = e!.name; // Assert that e is non-null and access name
 }
 ```
 
@@ -198,19 +198,19 @@ With TypeScript 2.0, the type checker analyses all possible flows of control in 
 
 ```ts
 function foo(x: string | number | boolean) {
-  if (typeof x === "string") {
-    x; // type of x is string here
-    x = 1;
-    x; // type of x is number here
+if (typeofx === "string") {
+x; // type of x is string here
+x = 1;
+x; // type of x is number here
   }
-  x; // type of x is number | boolean here
+x; // type of x is number | boolean here
 }
 
-function bar(x: string | number) {
-  if (typeof x === "number") {
-    return;
+functionbar(x: string | number) {
+if (typeofx === "number") {
+return;
   }
-  x; // type of x is string here
+x; // type of x is string here
 }
 ```
 
@@ -218,10 +218,10 @@ Control flow based type analysis is particularly relevant in [`strictNullChecks`
 
 ```ts
 function test(x: string | null) {
-  if (x === null) {
-    return;
+if (x === null) {
+return;
   }
-  x; // type of x is string in remainder of function
+x; // type of x is string in remainder of function
 }
 ```
 
@@ -229,15 +229,15 @@ Furthermore, in [`strictNullChecks` ↗](https://www.typescriptlang.org/tsconfig
 
 ```ts
 function mumble(check: boolean) {
-  let x: number; // Type doesn't permit undefined
-  x; // Error, x is undefined
-  if (check) {
-    x = 1;
-    x; // Ok
+letx: number; // Type doesn't permit undefined
+x; // Error, x is undefined
+if (check) {
+x = 1;
+x; // Ok
   }
-  x; // Error, x is possibly undefined
-  x = 2;
-  x; // Ok
+x; // Error, x is possibly undefined
+x = 2;
+x; // Ok
 }
 ```
 
@@ -250,50 +250,50 @@ Specifically, the TS compiler now support type guards that narrow union types ba
 
 ```ts
 interface Square {
-  kind: "square";
-  size: number;
+kind: "square";
+size: number;
 }
 
-interface Rectangle {
-  kind: "rectangle";
-  width: number;
-  height: number;
+interfaceRectangle {
+kind: "rectangle";
+width: number;
+height: number;
 }
 
-interface Circle {
-  kind: "circle";
-  radius: number;
+interfaceCircle {
+kind: "circle";
+radius: number;
 }
 
-type Shape = Square | Rectangle | Circle;
+typeShape = Square | Rectangle | Circle;
 
-function area(s: Shape) {
-  // In the following switch statement, the type of s is narrowed in each case clause
-  // according to the value of the discriminant property, thus allowing the other properties
-  // of that variant to be accessed without a type assertion.
-  switch (s.kind) {
-    case "square":
-      return s.size * s.size;
-    case "rectangle":
-      return s.width * s.height;
-    case "circle":
-      return Math.PI * s.radius * s.radius;
+functionarea(s: Shape) {
+// In the following switch statement, the type of s is narrowed in each case clause
+// according to the value of the discriminant property, thus allowing the other properties
+// of that variant to be accessed without a type assertion.
+switch (s.kind) {
+case"square":
+returns.size * s.size;
+case"rectangle":
+returns.width * s.height;
+case"circle":
+returnMath.PI * s.radius * s.radius;
   }
 }
 
-function test1(s: Shape) {
-  if (s.kind === "square") {
-    s; // Square
+functiontest1(s: Shape) {
+if (s.kind === "square") {
+s; // Square
   } else {
-    s; // Rectangle | Circle
+s; // Rectangle | Circle
   }
 }
 
-function test2(s: Shape) {
-  if (s.kind === "square" || s.kind === "rectangle") {
-    return;
+functiontest2(s: Shape) {
+if (s.kind === "square" || s.kind === "rectangle") {
+return;
   }
-  s; // Circle
+s; // Circle
 }
 ```
 
@@ -322,18 +322,18 @@ Some examples of functions returning `never`:
 
 ```ts
 // Function returning never must have unreachable end point
-function error(message: string): never {
-  throw new Error(message);
+functionerror(message: string): never {
+thrownewError(message);
 }
 
 // Inferred return type is never
-function fail() {
-  return error("Something failed");
+functionfail() {
+returnerror("Something failed");
 }
 
 // Function returning never must have unreachable end point
-function infiniteLoop(): never {
-  while (true) {}
+functioninfiniteLoop(): never {
+while (true) {}
 }
 ```
 
@@ -341,19 +341,19 @@ Some examples of use of functions returning `never`:
 
 ```ts
 // Inferred return type is number
-function move1(direction: "up" | "down") {
-  switch (direction) {
-    case "up":
-      return 1;
-    case "down":
-      return -1;
+functionmove1(direction: "up" | "down") {
+switch (direction) {
+case"up":
+return1;
+case"down":
+return -1;
   }
-  return error("Should never get here");
+returnerror("Should never get here");
 }
 
 // Inferred return type is number
-function move2(direction: "up" | "down") {
-  return direction === "up"
+functionmove2(direction: "up" | "down") {
+returndirection === "up"
     ? 1
     : direction === "down"
     ? -1
@@ -361,8 +361,8 @@ function move2(direction: "up" | "down") {
 }
 
 // Inferred return type is T
-function check<T>(x: T | undefined) {
-  return x || error("Undefined value");
+functioncheck<T>(x: T | undefined) {
+returnx || error("Undefined value");
 }
 ```
 
@@ -370,14 +370,14 @@ Because `never` is assignable to every type, a function returning `never` can be
 
 ```ts
 function test(cb: () => string) {
-  let s = cb();
-  return s;
+lets = cb();
+returns;
 }
 
-test(() => "hello");
-test(() => fail());
+test(() =>"hello");
+test(() =>fail());
 test(() => {
-  throw new Error();
+thrownewError();
 });
 ```
 
@@ -399,32 +399,32 @@ In addition, entities are *implicitly* read-only in several situations:
 
 ```ts
 interface Point {
-  readonly x: number;
-  readonly y: number;
+readonlyx: number;
+readonlyy: number;
 }
 
-var p1: Point = { x: 10, y: 20 };
+varp1: Point = { x:10, y:20 };
 p1.x = 5; // Error, p1.x is read-only
 
-var p2 = { x: 1, y: 1 };
-var p3: Point = p2; // Ok, read-only alias for p2
+varp2 = { x:1, y:1 };
+varp3: Point = p2; // Ok, read-only alias for p2
 p3.x = 5; // Error, p3.x is read-only
 p2.x = 5; // Ok, but also changes p3.x because of aliasing
 ```
 
 ```ts
 class Foo {
-  readonly a = 1;
-  readonly b: string;
-  constructor() {
-    this.b = "hello"; // Assignment permitted in constructor
+readonlya = 1;
+readonlyb: string;
+constructor() {
+this.b = "hello"; // Assignment permitted in constructor
   }
 }
 ```
 
 ```ts
 let a: Array<number> = [0, 1, 2, 3, 4];
-let b: ReadonlyArray<number> = a;
+letb: ReadonlyArray<number> = a;
 b[5] = 5; // Error, elements are read-only
 b.push(5); // Error, no push method (because it mutates array)
 b.length = 3; // Error, length is read-only
@@ -441,7 +441,7 @@ Starting with TypeScript 2.0, you can provide an explicit `this` parameter.
 
 ```ts
 function f(this: void) {
-  // make sure `this` is unusable in this standalone function
+// make sure `this` is unusable in this standalone function
 }
 ```
 
@@ -453,7 +453,7 @@ Libraries can also use `this` parameters to declare how callbacks will be invoke
 
 ```ts
 interface UIElement {
-  addClickListener(onclick: (this: void, e: Event) => void): void;
+addClickListener(onclick: (this: void, e: Event) =>void): void;
 }
 ```
 
@@ -463,13 +463,13 @@ Now if you annotate calling code with `this`:
 
 ```ts
 class Handler {
-  info: string;
-  onClickBad(this: Handler, e: Event) {
-    // oops, used this here. using this callback would crash at runtime
-    this.info = e.message;
+info: string;
+onClickBad(this: Handler, e: Event) {
+// oops, used this here. using this callback would crash at runtime
+this.info = e.message;
   }
 }
-let h = new Handler();
+leth = newHandler();
 uiElement.addClickListener(h.onClickBad); // error!
 ```
 
@@ -479,7 +479,7 @@ A new flag is also added in TypeScript 2.0 to flag all uses of `this` in functio
 
 ## Glob support in `tsconfig.json` {#glob-support-in-tsconfigjson}
 
-Glob support is here!! Glob support has been [one of the most requested features](https://github.com/Microsoft/TypeScript/issues/1927).
+Glob support is here!! Glob support has been [one of the most requested features ↗](https://github.com/Microsoft/TypeScript/issues/1927).
 
 Glob-like file patterns are supported two properties [`include` ↗](https://www.typescriptlang.org/tsconfig.html#include) and [`exclude` ↗](https://www.typescriptlang.org/tsconfig.html#exclude).
 
@@ -487,16 +487,16 @@ Glob-like file patterns are supported two properties [`include` ↗](https://www
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "commonjs",
-    "[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
-    "[removeComments ↗](https://www.typescriptlang.org/tsconfig.html#removeComments)": true,
-    "[preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)": true,
-    "[outFile ↗](https://www.typescriptlang.org/tsconfig.html#outFile)": "../../built/local/tsc.js",
-    "[sourceMap ↗](https://www.typescriptlang.org/tsconfig.html#sourceMap)": true
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "commonjs",
+"[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
+"[removeComments ↗](https://www.typescriptlang.org/tsconfig.html#removeComments)": true,
+"[preserveConstEnums ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums)": true,
+"[outFile ↗](https://www.typescriptlang.org/tsconfig.html#outFile)": "../../built/local/tsc.js",
+"[sourceMap ↗](https://www.typescriptlang.org/tsconfig.html#sourceMap)": true
   },
-  "[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["src/**/*"],
-  "[exclude ↗](https://www.typescriptlang.org/tsconfig.html#exclude)": ["node_modules", "**/*.spec.ts"]
+"[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["src/**/*"],
+"[exclude ↗](https://www.typescriptlang.org/tsconfig.html#exclude)": ["node_modules", "**/*.spec.ts"]
 }
 ```
 
@@ -521,7 +521,7 @@ The [`exclude` ↗](https://www.typescriptlang.org/tsconfig.html#exclude) proper
 
 TypeScript 2.0 provides a set of additional module resolution knops to *inform* the compiler where to find declarations for a given module.
 
-See [Module Resolution](http://www.typescriptlang.org/docs/handbook/module-resolution.html) documentation for more details.
+See [Module Resolution ↗](http://www.typescriptlang.org/docs/handbook/module-resolution.html) documentation for more details.
 
 ## Base URL {#base-url}
 
@@ -532,8 +532,8 @@ All module imports with non-relative names are assumed to be relative to the [`b
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)": "./modules"
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)": "./modules"
   }
 }
 ```
@@ -547,7 +547,7 @@ import A from "moduleA";
 ## Path mapping {#path-mapping}
 
 Sometimes modules are not directly located under *baseUrl*.
-Loaders use a mapping configuration to map module names to files at run-time, see [RequireJs documentation](http://requirejs.org/docs/api.html#config-paths) and [SystemJS documentation](https://github.com/systemjs/systemjs/blob/main/docs/import-maps.md).
+Loaders use a mapping configuration to map module names to files at run-time, see [RequireJs documentation ↗](http://requirejs.org/docs/api.html#config-paths) and [SystemJS documentation ↗](https://github.com/systemjs/systemjs/blob/main/docs/import-maps.md).
 
 The TypeScript compiler supports the declaration of such mappings using [`paths` ↗](https://www.typescriptlang.org/tsconfig.html#paths) property in `tsconfig.json` files.
 
@@ -557,10 +557,10 @@ For instance, an import to a module `"jquery"` would be translated at runtime to
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)": "./node_modules",
-    "[paths ↗](https://www.typescriptlang.org/tsconfig.html#paths)": {
-      "jquery": ["jquery/dist/jquery.slim.min"]
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)": "./node_modules",
+"[paths ↗](https://www.typescriptlang.org/tsconfig.html#paths)": {
+"jquery": ["jquery/dist/jquery.slim.min"]
     }
 }
 ```
@@ -597,8 +597,8 @@ So following our example, the `tsconfig.json` file should look like:
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[rootDirs ↗](https://www.typescriptlang.org/tsconfig.html#rootDirs)": ["src/views", "generated/templates/views"]
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[rootDirs ↗](https://www.typescriptlang.org/tsconfig.html#rootDirs)": ["src/views", "generated/templates/views"]
   }
 }
 ```
@@ -630,7 +630,7 @@ x(y);
 
 ## Wildcard character in module names {#wildcard-character-in-module-names}
 
-Importing none-code resources using module loaders extension (e.g. [AMD](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md) or [SystemJS](https://github.com/systemjs/systemjs/blob/main/docs/module-types.md)) has not been easy before;
+Importing none-code resources using module loaders extension (e.g. [AMD ↗](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md) or [SystemJS ↗](https://github.com/systemjs/systemjs/blob/main/docs/module-types.md)) has not been easy before;
 previously an ambient module declaration had to be defined for each resource.
 
 TypeScript 2.0 supports the use of the wildcard character (`*`) to declare a “family” of module names;
@@ -640,13 +640,13 @@ this way, a declaration is only required once for an extension, and not for ever
 
 ```ts
 declare module "*!text" {
-  const content: string;
-  export default content;
+constcontent: string;
+exportdefaultcontent;
 }
 // Some do it the other way around.
-declare module "json!*" {
-  const value: any;
-  export default value;
+declaremodule"json!*" {
+constvalue: any;
+exportdefaultvalue;
 }
 ```
 
@@ -654,7 +654,7 @@ Now you can import things that match `"*!text"` or `"json!*"`.
 
 ```ts
 import fileContent from "./xyz.txt!text";
-import data from "json!http://example.com/data.json";
+importdatafrom"json!http://example.com/data.json";
 console.log(data, fileContent);
 ```
 
@@ -679,7 +679,7 @@ readFile(); // readFile is 'any'
 ## Support for UMD module definitions {#support-for-umd-module-definitions}
 
 Some libraries are designed to be used in many module loaders, or with no module loading (global variables).
-These are known as [UMD](https://github.com/umdjs/umd) or [Isomorphic](http://isomorphic.net) modules.
+These are known as [UMD ↗](https://github.com/umdjs/umd) or [Isomorphic ↗](http://isomorphic.net) modules.
 These libraries can be accessed through either an import or a global variable.
 
 For example:
@@ -688,7 +688,7 @@ For example:
 
 ```ts
 export const isPrime(x: number): boolean;
-export as namespace mathLib;
+exportasnamespacemathLib;
 ```
 
 The library can then be used as an import within modules:
@@ -714,14 +714,14 @@ Optional properties and methods can now be declared in classes, similar to what 
 
 ```ts
 class Bar {
-  a: number;
-  b?: number;
-  f() {
-    return 1;
+a: number;
+b?: number;
+f() {
+return1;
   }
-  g?(): number; // Body of optional method can be omitted
-  h?() {
-    return 2;
+g?(): number; // Body of optional method can be omitted
+h?() {
+return2;
   }
 }
 ```
@@ -731,13 +731,13 @@ Type guards can be used to strip away the `undefined` part of the type:
 
 ```ts
 function test(x: Bar) {
-  x.a; // number
-  x.b; // number | undefined
-  x.f; // () => number
-  x.g; // (() => number) | undefined
-  let f1 = x.f(); // number
-  let g1 = x.g && x.g(); // number | undefined
-  let g2 = x.g ? x.g() : 0; // number
+x.a; // number
+x.b; // number | undefined
+x.f; // () => number
+x.g; // (() => number) | undefined
+letf1 = x.f(); // number
+letg1 = x.g && x.g(); // number | undefined
+letg2 = x.g ? x.g() : 0; // number
 }
 ```
 
@@ -751,20 +751,20 @@ A class with protected constructor cannot be instantiated outside the class body
 
 ```ts
 class Singleton {
-  private static instance: Singleton;
+privatestaticinstance: Singleton;
 
-  private constructor() {}
+privateconstructor() {}
 
-  static getInstance() {
-    if (!Singleton.instance) {
-      Singleton.instance = new Singleton();
+staticgetInstance() {
+if (!Singleton.instance) {
+Singleton.instance = newSingleton();
     }
-    return Singleton.instance;
+returnSingleton.instance;
   }
 }
 
-let e = new Singleton(); // Error: constructor of 'Singleton' is private.
-let v = Singleton.getInstance();
+lete = newSingleton(); // Error: constructor of 'Singleton' is private.
+letv = Singleton.getInstance();
 ```
 
 ## Abstract properties and accessors {#abstract-properties-and-accessors}
@@ -778,15 +778,15 @@ Abstract accessors cannot have bodies.
 
 ```ts
 abstract class Base {
-  abstract name: string;
-  abstract get value();
-  abstract set value(v: number);
+abstractname: string;
+abstractgetvalue();
+abstractsetvalue(v: number);
 }
 
-class Derived extends Base {
-  name = "derived";
+classDerivedextendsBase {
+name = "derived";
 
-  value = 1;
+value = 1;
 }
 ```
 
@@ -797,11 +797,11 @@ An object literal type is now assignable to a type with an index signature if al
 ```ts
 function httpService(path: string, headers: { [x: string]: string }) {}
 
-const headers = {
-  "Content-Type": "application/x-www-form-urlencoded",
+constheaders = {
+"Content-Type":"application/x-www-form-urlencoded",
 };
 
-httpService("", { "Content-Type": "application/x-www-form-urlencoded" }); // Ok
+httpService("", { "Content-Type":"application/x-www-form-urlencoded" }); // Ok
 httpService("", headers); // Now ok, previously wasn't
 ```
 
@@ -842,7 +842,7 @@ tsc --target es5 --lib es5,es2015.promise
 
 ```
 "compilerOptions": {
-    "[lib ↗](https://www.typescriptlang.org/tsconfig.html#lib)": ["es5", "es2015.promise"]
+"[lib ↗](https://www.typescriptlang.org/tsconfig.html#lib)": ["es5", "es2015.promise"]
 }
 ```
 
@@ -860,9 +860,9 @@ import B, { readFile } from "./b";
 //     ^ Error: `B` declared but never used
 readFile();
 
-export function write(message: string, args: string[]) {
-  //                                 ^^^^  Error: 'arg' declared but never used.
-  console.log(message);
+exportfunctionwrite(message: string, args: string[]) {
+//                                 ^^^^  Error: 'arg' declared but never used.
+console.log(message);
 }
 ```
 
@@ -871,8 +871,8 @@ e.g.:
 
 ```ts
 function returnNull(_a) {
-  // OK
-  return null;
+// OK
+returnnull;
 }
 ```
 
@@ -880,33 +880,33 @@ function returnNull(_a) {
 
 Before TypeScript 2.0, a module identifier was always assumed to be extension-less;
 for instance, given an import as `import d from "./moduleA.js"`, the compiler looked up the definition of `"moduleA.js"` in `./moduleA.js.ts` or `./moduleA.js.d.ts`.
-This made it hard to use bundling/loading tools like [SystemJS](https://github.com/systemjs/systemjs) that expect URI’s in their module identifier.
+This made it hard to use bundling/loading tools like [SystemJS ↗](https://github.com/systemjs/systemjs) that expect URI’s in their module identifier.
 
 With TypeScript 2.0, the compiler will look up definition of `"moduleA.js"` in `./moduleA.ts` or `./moduleA.d.t`.
 
 ## Support ‘target : es5’ with ‘module: es6’ {#support-target--es5-with-module-es6}
 
 Previously flagged as an invalid flag combination, `target: es5` and ‘module: es6’ is now supported.
-This should facilitate using ES2015-based tree shakers like [rollup](https://github.com/rollup/rollup).
+This should facilitate using ES2015-based tree shakers like [rollup ↗](https://github.com/rollup/rollup).
 
 ## Trailing commas in function parameter and argument lists {#trailing-commas-in-function-parameter-and-argument-lists}
 
 Trailing comma in function parameter and argument lists are now allowed.
-This is an implementation for a [Stage-3 ECMAScript proposal](https://jeffmo.github.io/es-trailing-function-commas/) that emits down to valid ES3/ES5/ES6.
+This is an implementation for a [Stage-3 ECMAScript proposal ↗](https://jeffmo.github.io/es-trailing-function-commas/) that emits down to valid ES3/ES5/ES6.
 
 ##### Example {#example-19}
 
 ```ts
 function foo(
-  bar: Bar,
-  baz: Baz // trailing commas are OK in parameter lists
+bar: Bar,
+baz: Baz// trailing commas are OK in parameter lists
 ) {
-  // Implementation...
+// Implementation...
 }
 
 foo(
-  bar,
-  baz // and in argument lists
+bar,
+baz// and in argument lists
 );
 ```
 
@@ -932,13 +932,13 @@ Within the same block duplicate definitions are still disallowed.
 
 ```ts
 interface Error {
-  stack?: string;
+stack?: string;
 }
 
-interface Error {
-  code?: string;
-  path?: string;
-  stack?: string; // OK
+interfaceError {
+code?: string;
+path?: string;
+stack?: string; // OK
 }
 ```
 

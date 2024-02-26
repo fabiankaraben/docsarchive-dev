@@ -16,9 +16,9 @@ String literal types in TypeScript allow us to model functions and APIs that exp
 
 ```ts
 function setVerticalAlignment(location: "top" | "middle" | "bottom") {
-  // ...
+// ...
 }
- 
+
 setVerticalAlignment("middel");
 ```
 
@@ -33,7 +33,7 @@ In this sense, they’re also usable as building blocks:
 
 ```ts
 type Options = {
-  [K in "noImplicitAny" | "strictNullChecks" | "strictFunctionTypes"]?: boolean;
+  [Kin"noImplicitAny" | "strictNullChecks" | "strictFunctionTypes"]?: boolean;
 };
 // same as
 //   type Options = {
@@ -46,16 +46,16 @@ type Options = {
 But there’s another place that that string literal types could be used as building blocks: building other string literal types.
 
 That’s why TypeScript 4.1 brings the template literal string type.
-It has the same syntax as [template literal strings in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), but is used in type positions.
+It has the same syntax as [template literal strings in JavaScript ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), but is used in type positions.
 When you use it with concrete literal types, it produces a new string literal type by concatenating the contents.
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBA6g9gJwDYBMoF4oCIDujVYDcAUMaJFAOIIQTACWAdgOYZQAGAFhEknFABIA3vGQoAvuxIB6aVHkA9APxA)
 
 ```ts
 type World = "world";
- 
-type Greeting = `hello ${World}`;
-        
+
+typeGreeting = `hello ${World}`;
+
 type Greeting = "hello world"
 ```
 
@@ -66,9 +66,9 @@ It produces the set of every possible string literal that could be represented b
 
 ```ts
 type Color = "red" | "blue";
-type Quantity = "one" | "two";
- 
-type SeussFish = `${Quantity | Color} fish`;
+typeQuantity = "one" | "two";
+
+typeSeussFish = `${Quantity|Color} fish`;
 
 type SeussFish = "one fish" | "two fish" | "red fish" | "blue fish"
 ```
@@ -81,15 +81,15 @@ Between vertically aligning with `"top"`, `"middle"`, and `"bottom"`, and horizo
 
 ```ts
 type VerticalAlignment = "top" | "middle" | "bottom";
-type HorizontalAlignment = "left" | "center" | "right";
- 
+typeHorizontalAlignment = "left" | "center" | "right";
+
 // Takes
 //   | "top-left"    | "top-center"    | "top-right"
 //   | "middle-left" | "middle-center" | "middle-right"
 //   | "bottom-left" | "bottom-center" | "bottom-right"
- 
-declare function setAlignment(value: `${VerticalAlignment}-${HorizontalAlignment}`): void;
- 
+
+declarefunctionsetAlignment(value: `${VerticalAlignment}-${HorizontalAlignment}`): void;
+
 setAlignment("top-left");   // works!
 setAlignment("top-middel"); // error!
 setAlignment("top-pot");    // error! but good doughnuts if you're ever in Seattle
@@ -108,13 +108,13 @@ For example, imagine a `makeWatchedObject` API that takes an object and produces
 
 ```ts
 let person = makeWatchedObject({
-  firstName: "Homer",
-  age: 42, // give-or-take
-  location: "Springfield",
+firstName:"Homer",
+age:42, // give-or-take
+location:"Springfield",
 });
 
 person.on("firstNameChanged", () => {
-  console.log(`firstName was changed!`);
+console.log(`firstName was changed!`);
 });
 ```
 
@@ -123,12 +123,12 @@ How would we type this?
 
 ```ts
 type PropEventSource<T> = {
-    on(eventName: `${string & keyof T}Changed`, callback: () => void): void;
+on(eventName: `${string&keyofT}Changed`, callback: () =>void): void;
 };
 
 /// Create a "watched object" with an 'on' method
 /// so that you can watch for changes to properties.
-declare function makeWatchedObject<T>(obj: T): T & PropEventSource<T>;
+declarefunctionmakeWatchedObject<T>(obj: T): T & PropEventSource<T>;
 ```
 
 With this, we can build something that errors when we give the wrong property!
@@ -138,7 +138,7 @@ With this, we can build something that errors when we give the wrong property!
 ```ts
 // error!
 person.on("firstName", () => {});
- 
+
 // error!
 person.on("frstNameChanged", () => {});
 Argument of type '"frstNameChanged"' is not assignable to parameter of type '"firstNameChanged" | "ageChanged" | "locationChanged"'.2345Argument of type '"frstNameChanged"' is not assignable to parameter of type '"firstNameChanged" | "ageChanged" | "locationChanged"'.
@@ -155,28 +155,28 @@ We can make our last example generic to infer from parts of the `eventName` stri
 
 ```ts
 type PropEventSource<T> = {
-    on<K extends string & keyof T>
-        (eventName: `${K}Changed`, callback: (newValue: T[K]) => void ): void;
+on<Kextendsstring & keyofT>
+        (eventName: `${K}Changed`, callback: (newValue: T[K]) =>void ): void;
 };
- 
-declare function makeWatchedObject<T>(obj: T): T & PropEventSource<T>;
- 
-let person = makeWatchedObject({
-    firstName: "Homer",
-    age: 42,
-    location: "Springfield",
+
+declarefunctionmakeWatchedObject<T>(obj: T): T & PropEventSource<T>;
+
+letperson = makeWatchedObject({
+firstName: "Homer",
+age: 42,
+location: "Springfield",
 });
- 
+
 // works! 'newName' is typed as 'string'
-person.on("firstNameChanged", newName => {
-    // 'newName' has the type of 'firstName'
-    console.log(`new name is ${newName.toUpperCase()}`);
+person.on("firstNameChanged", newName=> {
+// 'newName' has the type of 'firstName'
+console.log(`new name is ${newName.toUpperCase()}`);
 });
- 
+
 // works! 'newAge' is typed as 'number'
-person.on("ageChanged", newAge => {
-    if (newAge < 0) {
-        console.log("warning! negative age");
+person.on("ageChanged", newAge=> {
+if (newAge < 0) {
+console.log("warning! negative age");
     }
 })
 ```
@@ -194,16 +194,16 @@ In fact, to help with modifying these string literal types, we’ve added a few 
 
 ```ts
 type EnthusiasticGreeting<T extends string> = `${Uppercase<T>}`
- 
-type HELLO = EnthusiasticGreeting<"hello">;
-      
+
+typeHELLO = EnthusiasticGreeting<"hello">;
+
 type HELLO = "HELLO"
 ```
 
 The new type aliases are `Uppercase`, `Lowercase`, `Capitalize` and `Uncapitalize`.
 The first two transform every character in a string, and the latter two transform only the first character in a string.
 
-For more details, [see the original pull request](https://github.com/microsoft/TypeScript/pull/40336) and [the in-progress pull request to switch to type alias helpers](https://github.com/microsoft/TypeScript/pull/40580).
+For more details, [see the original pull request ↗](https://github.com/microsoft/TypeScript/pull/40336) and [the in-progress pull request to switch to type alias helpers ↗](https://github.com/microsoft/TypeScript/pull/40580).
 
 ## Key Remapping in Mapped Types {#key-remapping-in-mapped-types}
 
@@ -211,7 +211,7 @@ Just as a refresher, a mapped type can create new object types based on arbitrar
 
 ```ts
 type Options = {
-  [K in "noImplicitAny" | "strictNullChecks" | "strictFunctionTypes"]?: boolean;
+  [Kin"noImplicitAny" | "strictNullChecks" | "strictFunctionTypes"]?: boolean;
 };
 // same as
 //   type Options = {
@@ -225,8 +225,8 @@ or new object types based on other object types.
 
 ```ts
 /// 'Partial<T>' is the same as 'T', but with each property marked optional.
-type Partial<T> = {
-  [K in keyof T]?: T[K];
+typePartial<T> = {
+  [KinkeyofT]?: T[K];
 };
 ```
 
@@ -236,9 +236,9 @@ That’s why TypeScript 4.1 allows you to re-map keys in mapped types with a new
 
 ```ts
 type MappedTypeWithNewKeys<T> = {
-    [K in keyof T as NewKeyType]: T[K]
-    //            ^^^^^^^^^^^^^
-    //            This is the new syntax!
+    [KinkeyofTasNewKeyType]: T[K]
+//            ^^^^^^^^^^^^^
+//            This is the new syntax!
 }
 ```
 
@@ -248,17 +248,17 @@ With this new `as` clause, you can leverage features like template literal types
 
 ```ts
 type Getters<T> = {
-    [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K]
+    [KinkeyofTas`get${Capitalize<string&K>}`]: () =>T[K]
 };
- 
-interface Person {
-    name: string;
-    age: number;
-    location: string;
+
+interfacePerson {
+name: string;
+age: number;
+location: string;
 }
- 
-type LazyPerson = Getters<Person>;
-         
+
+typeLazyPerson = Getters<Person>;
+
 type LazyPerson = {
     getName: () => string;
     getAge: () => number;
@@ -273,23 +273,23 @@ That means you don’t have to use an extra `Omit` helper type in some cases.
 
 ```ts
 // Remove the 'kind' property
-type RemoveKindField<T> = {
-    [K in keyof T as Exclude<K, "kind">]: T[K]
+typeRemoveKindField<T> = {
+    [KinkeyofTasExclude<K, "kind">]: T[K]
 };
- 
-interface Circle {
-    kind: "circle";
-    radius: number;
+
+interfaceCircle {
+kind: "circle";
+radius: number;
 }
- 
-type KindlessCircle = RemoveKindField<Circle>;
-           
+
+typeKindlessCircle = RemoveKindField<Circle>;
+
 type KindlessCircle = {
     radius: number;
 }
 ```
 
-For more information, take a look at [the original pull request over on GitHub](https://github.com/microsoft/TypeScript/pull/40336).
+For more information, take a look at [the original pull request over on GitHub ↗](https://github.com/microsoft/TypeScript/pull/40336).
 
 ## Recursive Conditional Types {#recursive-conditional-types}
 
@@ -309,8 +309,8 @@ For example, if we wanted to write a type to get the element types of nested arr
 ```ts
 type ElementType<T> = T extends ReadonlyArray<infer U> ? ElementType<U> : T;
 
-function deepFlatten<T extends readonly unknown[]>(x: T): ElementType<T>[] {
-  throw "not implemented";
+functiondeepFlatten<Textendsreadonlyunknown[]>(x: T): ElementType<T>[] {
+throw"not implemented";
 }
 
 // All of these return the type 'number[]':
@@ -325,9 +325,9 @@ Similarly, in TypeScript 4.1 we can write an `Awaited` type to deeply unwrap `Pr
 type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T;
 
 /// Like `promise.then(...)`, but more accurate in types.
-declare function customThen<T, U>(
-  p: Promise<T>,
-  onFulfilled: (value: Awaited<T>) => U
+declarefunctioncustomThen<T, U>(
+p: Promise<T>,
+onFulfilled: (value: Awaited<T>) =>U
 ): Promise<Awaited<U>>;
 ```
 
@@ -340,7 +340,7 @@ But apart from being computationally intensive, these types can hit an internal 
 When that recursion limit is hit, that results in a compile-time error.
 In general, it’s better not to use these types at all than to write something that fails on more realistic examples.
 
-See more [at the implementation](https://github.com/microsoft/TypeScript/pull/40002).
+See more [at the implementation ↗](https://github.com/microsoft/TypeScript/pull/40002).
 
 ## Checked Indexed Accesses (`--noUncheckedIndexedAccess`) {#checked-indexed-accesses---nouncheckedindexedaccess}
 
@@ -351,22 +351,22 @@ These signatures are a way to signal to the type system that users can access ar
 
 ```ts
 interface Options {
-  path: string;
-  permissions: number;
- 
-  // Extra properties are caught by this index signature.
+path: string;
+permissions: number;
+
+// Extra properties are caught by this index signature.
   [propName: string]: string | number;
 }
- 
-function checkOptions(opts: Options) {
-  opts.path; // string
-  opts.permissions; // number
- 
-  // These are all allowed too!
-  // They have the type 'string | number'.
-  opts.yadda.toString();
-  opts["foo bar baz"].toString();
-  opts[Math.random()].toString();
+
+functioncheckOptions(opts: Options) {
+opts.path; // string
+opts.permissions; // number
+
+// These are all allowed too!
+// They have the type 'string | number'.
+opts.yadda.toString();
+opts["foo bar baz"].toString();
+opts[Math.random()].toString();
 }
 ```
 
@@ -384,22 +384,22 @@ If you need to access that property, you’ll either have to check for its exist
 
 ```ts
 function checkOptions(opts: Options) {
-  opts.path; // string
-  opts.permissions; // number
- 
-  // These are not allowed with noUncheckedIndexedAccess
-  opts.yadda.toString();
-  opts["foo bar baz"].toString();
-Object is possibly 'undefined'.2532Object is possibly 'undefined'.  opts[Math.random()].toString();
-Object is possibly 'undefined'.2532Object is possibly 'undefined'. 
-  // Checking if it's really there first.
-  if (opts.yadda) {
-    console.log(opts.yadda.toString());
+opts.path; // string
+opts.permissions; // number
+
+// These are not allowed with noUncheckedIndexedAccess
+opts.yadda.toString();
+opts["foo bar baz"].toString();
+Object is possibly 'undefined'.2532Object is possibly 'undefined'.opts[Math.random()].toString();
+Object is possibly 'undefined'.2532Object is possibly 'undefined'.
+// Checking if it's really there first.
+if (opts.yadda) {
+console.log(opts.yadda.toString());
   }
- 
-  // Basically saying "trust me I know what I'm doing"
-  // with the '!' non-null assertion operator.
-  opts.yadda!.toString();
+
+// Basically saying "trust me I know what I'm doing"
+// with the '!' non-null assertion operator.
+opts.yadda!.toString();
 }
 ```
 
@@ -413,9 +413,9 @@ One consequence of using [`noUncheckedIndexedAccess` ↗](https://www.typescript
 
 ```ts
 function screamLines(strs: string[]) {
-  // This will have issues
-  for (let i = 0; i < strs.length; i++) {
-    console.log(strs[i].toUpperCase());
+// This will have issues
+for (leti = 0; i < strs.length; i++) {
+console.log(strs[i].toUpperCase());
   }
 }
 ```
@@ -430,21 +430,21 @@ If you don’t need the indexes, you can iterate over individual elements by usi
 
 ```ts
 function screamLines(strs: string[]) {
-  // This works fine
-  for (const str of strs) {
-    console.log(str.toUpperCase());
+// This works fine
+for (conststrofstrs) {
+console.log(str.toUpperCase());
   }
- 
-  // This works fine
-  strs.forEach((str) => {
-    console.log(str.toUpperCase());
+
+// This works fine
+strs.forEach((str) => {
+console.log(str.toUpperCase());
   });
 }
 ```
 
 This flag can be handy for catching out-of-bounds errors, but it might be noisy for a lot of code, so it is not automatically enabled by the [`strict` ↗](https://www.typescriptlang.org/tsconfig.html#strict) flag; however, if this feature is interesting to you, you should feel free to try it and determine whether it makes sense for your team’s codebase!
 
-You can learn more [at the implementing pull request](https://github.com/microsoft/TypeScript/pull/39560).
+You can learn more [at the implementing pull request ↗](https://github.com/microsoft/TypeScript/pull/39560).
 
 ## `paths` without `baseUrl` {#paths-without-baseurl}
 
@@ -461,7 +461,7 @@ This helps avoid some of these issues.
 Previously if you were starting a checked JavaScript project, you had to set both [`allowJs` ↗](https://www.typescriptlang.org/tsconfig.html#allowJs) and [`checkJs` ↗](https://www.typescriptlang.org/tsconfig.html#checkJs).
 This was a slightly annoying bit of friction in the experience, so [`checkJs` ↗](https://www.typescriptlang.org/tsconfig.html#checkJs) now implies [`allowJs` ↗](https://www.typescriptlang.org/tsconfig.html#allowJs) by default.
 
-[See more details at the pull request](https://github.com/microsoft/TypeScript/pull/40275).
+[See more details at the pull request ↗](https://github.com/microsoft/TypeScript/pull/40275).
 
 ## React 17 JSX Factories {#react-17-jsx-factories}
 
@@ -477,13 +477,13 @@ For example, a `tsconfig.json` for production builds might look like the followi
 ```
 // ./src/tsconfig.json
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "esnext",
-    "[target ↗](https://www.typescriptlang.org/tsconfig.html#target)": "es2015",
-    "[jsx ↗](https://www.typescriptlang.org/tsconfig.html#jsx)": "react-jsx",
-    "[strict ↗](https://www.typescriptlang.org/tsconfig.html#strict)": true
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "esnext",
+"[target ↗](https://www.typescriptlang.org/tsconfig.html#target)": "es2015",
+"[jsx ↗](https://www.typescriptlang.org/tsconfig.html#jsx)": "react-jsx",
+"[strict ↗](https://www.typescriptlang.org/tsconfig.html#strict)": true
   },
-  "[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["./**/*"]
+"[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["./**/*"]
 }
 ```
 
@@ -492,14 +492,14 @@ and one for development builds might look like the following:
 ```
 // ./src/tsconfig.dev.json
 {
-  "[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "./tsconfig.json",
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[jsx ↗](https://www.typescriptlang.org/tsconfig.html#jsx)": "react-jsxdev"
+"[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "./tsconfig.json",
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[jsx ↗](https://www.typescriptlang.org/tsconfig.html#jsx)": "react-jsxdev"
   }
 }
 ```
 
-For more information, [check out the corresponding PR](https://github.com/microsoft/TypeScript/pull/39199).
+For more information, [check out the corresponding PR ↗](https://github.com/microsoft/TypeScript/pull/39199).
 
 ## Editor Support for the JSDoc `@see` Tag {#editor-support-for-the-jsdoc-see-tag}
 
@@ -509,18 +509,18 @@ For example, going to definition on `first` or `C` in the JSDoc comment just wor
 
 ```ts
 // @filename: first.ts
-export class C {}
+exportclassC {}
 
 // @filename: main.ts
-import * as first from "./first";
+import*asfirstfrom"./first";
 
 /**
- * @see first.C
+ * @seefirst.C
  */
-function related() {}
+functionrelated() {}
 ```
 
-Thanks to frequent contributor [Wenlu Wang](https://github.com/Kingwl)[for implementing this](https://github.com/microsoft/TypeScript/pull/39760)!
+Thanks to frequent contributor [Wenlu Wang ↗](https://github.com/Kingwl)[for implementing this ↗](https://github.com/microsoft/TypeScript/pull/39760)!
 
 ## Breaking Changes {#breaking-changes}
 
@@ -542,9 +542,9 @@ For example, previously the type for `x` here was `{ someProp: string }`.
 
 ```ts
 declare let foo: unknown;
-declare let somethingElse: { someProp: string };
+declareletsomethingElse: { someProp: string };
 
-let x = foo && somethingElse;
+letx = foo && somethingElse;
 ```
 
 However, in TypeScript 4.1, we are more careful about how we determine this type.
@@ -554,7 +554,7 @@ The most common pattern we saw of this tended to be when checking compatibility 
 
 ```ts
 function isThing(x: any): boolean {
-  return x && typeof x === "object" && x.blah === "foo";
+returnx && typeofx === "object" && x.blah === "foo";
 }
 ```
 
@@ -566,9 +566,9 @@ When writing code like the following
 
 ```ts
 new Promise((resolve) => {
-  doSomethingAsync(() => {
-    doSomething();
-    resolve();
+doSomethingAsync(() => {
+doSomething();
+resolve();
   });
 });
 ```
@@ -588,11 +588,11 @@ The typical fix is to pass it the correct argument, and sometimes to add an expl
 
 ```ts
 new Promise<number>((resolve) => {
-  //     ^^^^^^^^
-  doSomethingAsync((value) => {
-    doSomething();
-    resolve(value);
-    //      ^^^^^
+//     ^^^^^^^^
+doSomethingAsync((value) => {
+doSomething();
+resolve(value);
+//      ^^^^^
   });
 });
 ```
@@ -603,10 +603,10 @@ This leverages new functionality in TypeScript 4.1 where a potentially-`void` tr
 
 ```ts
 new Promise<void>((resolve) => {
-  //     ^^^^^^
-  doSomethingAsync(() => {
-    doSomething();
-    resolve();
+//     ^^^^^^
+doSomethingAsync(() => {
+doSomething();
+resolve();
   });
 });
 ```
@@ -622,29 +622,29 @@ Many users take advantage of this to spread in properties “conditionally”.
 
 ```ts
 interface Person {
-  name: string;
-  age: number;
-  location: string;
+name: string;
+age: number;
+location: string;
 }
 
-interface Animal {
-  name: string;
-  owner: Person;
+interfaceAnimal {
+name: string;
+owner: Person;
 }
 
-function copyOwner(pet?: Animal) {
-  return {
+functioncopyOwner(pet?: Animal) {
+return {
     ...(pet && pet.owner),
-    otherStuff: 123,
+otherStuff:123,
   };
 }
 
 // We could also use optional chaining here:
 
-function copyOwner(pet?: Animal) {
-  return {
+functioncopyOwner(pet?: Animal) {
+return {
     ...pet?.owner,
-    otherStuff: 123,
+otherStuff:123,
   };
 }
 ```
@@ -676,13 +676,13 @@ In TypeScript 4.1, the returned type sometimes uses all-optional properties.
 
 This ends up performing better and generally displaying better too.
 
-For more details, [see the original change](https://github.com/microsoft/TypeScript/pull/40778).
+For more details, [see the original change ↗](https://github.com/microsoft/TypeScript/pull/40778).
 While this behavior is not entirely consistent right now, we expect a future release will produce cleaner and more predictable results.
 
 ### Unmatched parameters are no longer related {#unmatched-parameters-are-no-longer-related}
 
 TypeScript would previously relate parameters that didn’t correspond to each other by relating them to the type `any`.
-With [changes in TypeScript 4.1](https://github.com/microsoft/TypeScript/pull/41308), the language now skips this process entirely.
+With [changes in TypeScript 4.1 ↗](https://github.com/microsoft/TypeScript/pull/41308), the language now skips this process entirely.
 This means that some cases of assignability will now fail, but it also means that some cases of overload resolution can fail as well.
 For example, overload resolution on `util.promisify` in Node.js may select a different overload in TypeScript 4.1, sometimes causing new or different errors downstream.
 

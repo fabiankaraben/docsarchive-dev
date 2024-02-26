@@ -18,13 +18,13 @@ A module using CommonJS patterns uses `module.exports` to describe the exported 
 ```js
 const maxInterval = 12;
 
-function getArrayLength(arr) {
-  return arr.length;
+functiongetArrayLength(arr) {
+returnarr.length;
 }
 
 module.exports = {
-  getArrayLength,
-  maxInterval,
+getArrayLength,
+maxInterval,
 };
 ```
 
@@ -32,17 +32,17 @@ This can be described by the following `.d.ts`:
 
 ```ts
 export function getArrayLength(arr: any[]): number;
-export const maxInterval: 12;
+exportconstmaxInterval: 12;
 ```
 
 The TypeScript playground can show you the `.d.ts` equivalent for JavaScript code. You can [try it yourself here ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABAcwKZQIICcsEMCeAMqmMlABYAUuOAlIgN6IBQiiW6IWSNWAdABsSZcswC+zCAgDOURAFtcADwAq5GKUQBeRAEYATM2by4AExBC+qJQAc4WKNO2NWKdNjxFhFADSvFquqk4sxAA).
 
-The `.d.ts` syntax intentionally looks like [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) syntax.
+The `.d.ts` syntax intentionally looks like [ES Modules ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) syntax.
 ES Modules was ratified by TC39 in 2015 as part of ES2015 (ES6), while it has been available via transpilers for a long time, however if you have a JavaScript codebase using ES Modules:
 
 ```js
 export function getArrayLength(arr) {
-  return arr.length;
+returnarr.length;
 }
 ```
 
@@ -64,7 +64,7 @@ Which can be described by the following .d.ts:
 
 ```ts
 declare const helloWorld: RegExp;
-export default helloWorld;
+exportdefaulthelloWorld;
 ```
 
 Or a number:
@@ -75,7 +75,7 @@ module.exports = 3.142;
 
 ```ts
 declare const pi: number;
-export default pi;
+exportdefaultpi;
 ```
 
 One style of exporting in CommonJS is to export a function.
@@ -83,7 +83,7 @@ Because a function is also an object, then extra fields can be added and are inc
 
 ```js
 function getArrayLength(arr) {
-  return arr.length;
+returnarr.length;
 }
 getArrayLength.maxInterval = 12;
 
@@ -94,7 +94,7 @@ Which can be described with:
 
 ```ts
 export default function getArrayLength(arr: any[]): number;
-export const maxInterval: 12;
+exportconstmaxInterval: 12;
 ```
 
 Note that using `export default` in your .d.ts files requires [`esModuleInterop: true` ↗](https://www.typescriptlang.org/tsconfig.html#esModuleInterop) to work.
@@ -103,8 +103,8 @@ Here’s how the above example would have to be written using `export=`:
 
 ```ts
 declare function getArrayLength(arr: any[]): number;
-declare namespace getArrayLength {
-  declare const maxInterval: 12;
+declarenamespacegetArrayLength {
+declareconstmaxInterval: 12;
 }
 
 export = getArrayLength;
@@ -119,11 +119,11 @@ There are many ways to import a module in modern consuming code:
 ```ts
 const fastify = require("fastify");
 const { fastify } = require("fastify");
-import fastify = require("fastify");
-import * as Fastify from "fastify";
-import { fastify, FastifyInstance } from "fastify";
-import fastify from "fastify";
-import fastify, { FastifyInstance } from "fastify";
+importfastify = require("fastify");
+import*asFastifyfrom"fastify";
+import { fastify, FastifyInstance } from"fastify";
+importfastifyfrom"fastify";
+importfastify, { FastifyInstance } from"fastify";
 ```
 
 Covering all of these cases requires the JavaScript code to actually support all of these patterns.
@@ -132,8 +132,8 @@ To support many of these patterns, a CommonJS module would need to look somethin
 ```js
 class FastifyInstance {}
 
-function fastify() {
-  return new FastifyInstance();
+functionfastify() {
+returnnewFastifyInstance();
 }
 
 fastify.FastifyInstance = FastifyInstance;
@@ -152,14 +152,14 @@ You may want to provide a type for JavaScript code which does not exist
 
 ```js
 function getArrayMetadata(arr) {
-  return {
-    length: getArrayLength(arr),
-    firstObject: arr[0],
+return {
+length:getArrayLength(arr),
+firstObject:arr[0],
   };
 }
 
 module.exports = {
-  getArrayMetadata,
+getArrayMetadata,
 };
 ```
 
@@ -167,28 +167,28 @@ This can be described with:
 
 ```ts
 export type ArrayMetadata = {
-  length: number;
-  firstObject: any | undefined;
+length: number;
+firstObject: any | undefined;
 };
-export function getArrayMetadata(arr: any[]): ArrayMetadata;
+exportfunctiongetArrayMetadata(arr: any[]): ArrayMetadata;
 ```
 
 This example is a good case for [using generics ↗](https://www.typescriptlang.org/docs/handbook/generics.html#generic-types) to provide richer type information:
 
 ```ts
 export type ArrayMetadata<ArrType> = {
-  length: number;
-  firstObject: ArrType | undefined;
+length: number;
+firstObject: ArrType | undefined;
 };
 
-export function getArrayMetadata<ArrType>(
-  arr: ArrType[]
+exportfunctiongetArrayMetadata<ArrType>(
+arr: ArrType[]
 ): ArrayMetadata<ArrType>;
 ```
 
 Now the type of the array propagates into the `ArrayMetadata` type.
 
-The types which are exported can then be re-used by consumers of the modules using either `import` or `import type` in TypeScript code or [JSDoc imports ↗](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#import-types).
+The types which are exported can then be re-used by consumers of the modules using either `import` or `import type` in TypeScript code or [JSDoc imports](/typescript/5.1/javascript/jsdoc-supported-types#import-types).
 
 ### Namespaces in Module Code {#namespaces-in-module-code}
 
@@ -199,21 +199,21 @@ For example, you may have complex enough types to describe that you choose to na
 
 ```ts
 // This represents the JavaScript class which would be available at runtime
-export class API {
-  constructor(baseURL: string);
-  getInfo(opts: API.InfoRequest): API.InfoResponse;
+exportclassAPI {
+constructor(baseURL: string);
+getInfo(opts: API.InfoRequest): API.InfoResponse;
 }
 
 // This namespace is merged with the API class and allows for consumers, and this file
 // to have types which are nested away in their own sections.
-declare namespace API {
-  export interface InfoRequest {
-    id: string;
+declarenamespaceAPI {
+exportinterfaceInfoRequest {
+id: string;
   }
 
-  export interface InfoResponse {
-    width: number;
-    height: number;
+exportinterfaceInfoResponse {
+width: number;
+height: number;
   }
 }
 ```
@@ -247,22 +247,22 @@ To give you an idea of how all these pieces can come together, here is a referen
  *~ loaded outside a module loader environment, declare that global here.
  *~ Otherwise, delete this declaration.
  */
-export as namespace myLib;
+exportasnamespacemyLib;
 
 /*~ If this module exports functions, declare them like so.
  */
-export function myFunction(a: string): string;
-export function myOtherFunction(a: number): number;
+exportfunctionmyFunction(a: string): string;
+exportfunctionmyOtherFunction(a: number): number;
 
 /*~ You can declare types that are available via importing the module */
-export interface SomeType {
-  name: string;
-  length: number;
-  extras?: string[];
+exportinterfaceSomeType {
+name: string;
+length: number;
+extras?: string[];
 }
 
 /*~ You can declare properties of the module using const, let, or var */
-export const myField: number;
+exportconstmyField: number;
 ```
 
 ### Library file layout {#library-file-layout}
@@ -284,9 +284,9 @@ These could be imported as
 
 ```js
 var a = require("myLib");
-var b = require("myLib/foo");
-var c = require("myLib/bar");
-var d = require("myLib/bar/baz");
+varb = require("myLib/foo");
+varc = require("myLib/bar");
+vard = require("myLib/bar/baz");
 ```
 
 Your declaration files should thus be
@@ -307,7 +307,7 @@ If you are planning on submitting these changes to DefinitelyTyped for everyone 
 > 1. Create a new folder in `node_modules/@types/[libname]`
 > 2. Create an `index.d.ts` in that folder, and copy the example in
 > 3. See where your usage of the module breaks, and start to fill out the index.d.ts
-> 4. When you’re happy, clone [DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped) and follow the instructions in the README.
+> 4. When you’re happy, clone [DefinitelyTyped/DefinitelyTyped ↗](https://github.com/DefinitelyTyped) and follow the instructions in the README.
 > 
 
 Otherwise

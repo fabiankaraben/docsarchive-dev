@@ -46,15 +46,15 @@ At the most basic level, the merge mechanically joins the members of both declar
 
 ```ts
 interface Box {
-  height: number;
-  width: number;
+height: number;
+width: number;
 }
 
-interface Box {
-  scale: number;
+interfaceBox {
+scale: number;
 }
 
-let box: Box = { height: 5, width: 6, scale: 10 };
+letbox: Box = { height:5, width:6, scale:10 };
 ```
 
 Non-function members of the interfaces should be unique.
@@ -68,16 +68,16 @@ That is, in the example:
 
 ```ts
 interface Cloner {
-  clone(animal: Animal): Animal;
+clone(animal: Animal): Animal;
 }
 
-interface Cloner {
-  clone(animal: Sheep): Sheep;
+interfaceCloner {
+clone(animal: Sheep): Sheep;
 }
 
-interface Cloner {
-  clone(animal: Dog): Dog;
-  clone(animal: Cat): Cat;
+interfaceCloner {
+clone(animal: Dog): Dog;
+clone(animal: Cat): Cat;
 }
 ```
 
@@ -85,10 +85,10 @@ The three interfaces will merge to create a single declaration as so:
 
 ```ts
 interface Cloner {
-  clone(animal: Dog): Dog;
-  clone(animal: Cat): Cat;
-  clone(animal: Sheep): Sheep;
-  clone(animal: Animal): Animal;
+clone(animal: Dog): Dog;
+clone(animal: Cat): Cat;
+clone(animal: Sheep): Sheep;
+clone(animal: Animal): Animal;
 }
 ```
 
@@ -101,15 +101,15 @@ For instance, the following interfaces will merge together:
 
 ```ts
 interface Document {
-  createElement(tagName: any): Element;
+createElement(tagName: any): Element;
 }
-interface Document {
-  createElement(tagName: "div"): HTMLDivElement;
-  createElement(tagName: "span"): HTMLSpanElement;
+interfaceDocument {
+createElement(tagName: "div"): HTMLDivElement;
+createElement(tagName: "span"): HTMLSpanElement;
 }
-interface Document {
-  createElement(tagName: string): HTMLElement;
-  createElement(tagName: "canvas"): HTMLCanvasElement;
+interfaceDocument {
+createElement(tagName: string): HTMLElement;
+createElement(tagName: "canvas"): HTMLCanvasElement;
 }
 ```
 
@@ -117,11 +117,11 @@ The resulting merged declaration of `Document` will be the following:
 
 ```ts
 interface Document {
-  createElement(tagName: "canvas"): HTMLCanvasElement;
-  createElement(tagName: "div"): HTMLDivElement;
-  createElement(tagName: "span"): HTMLSpanElement;
-  createElement(tagName: string): HTMLElement;
-  createElement(tagName: any): Element;
+createElement(tagName: "canvas"): HTMLCanvasElement;
+createElement(tagName: "div"): HTMLDivElement;
+createElement(tagName: "span"): HTMLSpanElement;
+createElement(tagName: string): HTMLElement;
+createElement(tagName: any): Element;
 }
 ```
 
@@ -138,14 +138,14 @@ The declaration merge of `Animals` in this example:
 
 ```ts
 namespace Animals {
-  export class Zebra {}
+exportclassZebra {}
 }
 
-namespace Animals {
-  export interface Legged {
-    numberOfLegs: number;
+namespaceAnimals {
+exportinterfaceLegged {
+numberOfLegs: number;
   }
-  export class Dog {}
+exportclassDog {}
 }
 ```
 
@@ -153,12 +153,12 @@ is equivalent to:
 
 ```ts
 namespace Animals {
-  export interface Legged {
-    numberOfLegs: number;
+exportinterfaceLegged {
+numberOfLegs: number;
   }
 
-  export class Zebra {}
-  export class Dog {}
+exportclassZebra {}
+exportclassDog {}
 }
 ```
 
@@ -169,16 +169,16 @@ We can see this more clearly in this example:
 
 ```ts
 namespace Animal {
-  let haveMuscles = true;
+lethaveMuscles = true;
 
-  export function animalsHaveMuscles() {
-    return haveMuscles;
+exportfunctionanimalsHaveMuscles() {
+returnhaveMuscles;
   }
 }
 
-namespace Animal {
-  export function doAnimalsHaveMuscles() {
-    return haveMuscles; // Error, because haveMuscles is not accessible here
+namespaceAnimal {
+exportfunctiondoAnimalsHaveMuscles() {
+returnhaveMuscles; // Error, because haveMuscles is not accessible here
   }
 }
 ```
@@ -198,14 +198,14 @@ This gives the user a way of describing inner classes.
 
 ```ts
 class Album {
-  label: Album.AlbumLabel;
+label: Album.AlbumLabel;
 }
-namespace Album {
-  export class AlbumLabel {}
+namespaceAlbum {
+exportclassAlbumLabel {}
 }
 ```
 
-The visibility rules for merged members is the same as described in the [Merging Namespaces ↗](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-namespaces) section, so we must export the `AlbumLabel` class for the merged class to see it.
+The visibility rules for merged members is the same as described in the [Merging Namespaces](/typescript/5.1/reference/declaration-merging#merging-namespaces) section, so we must export the `AlbumLabel` class for the merged class to see it.
 The end result is a class managed inside of another class.
 You can also use namespaces to add more static members to an existing class.
 
@@ -214,12 +214,12 @@ TypeScript uses declaration merging to build up definitions like this in a type-
 
 ```ts
 function buildLabel(name: string): string {
-  return buildLabel.prefix + name + buildLabel.suffix;
+returnbuildLabel.prefix + name + buildLabel.suffix;
 }
 
-namespace buildLabel {
-  export let suffix = "";
-  export let prefix = "Hello, ";
+namespacebuildLabel {
+exportletsuffix = "";
+exportletprefix = "Hello, ";
 }
 
 console.log(buildLabel("Sam Smith"));
@@ -229,21 +229,21 @@ Similarly, namespaces can be used to extend enums with static members:
 
 ```ts
 enum Color {
-  red = 1,
-  green = 2,
-  blue = 4,
+red = 1,
+green = 2,
+blue = 4,
 }
 
-namespace Color {
-  export function mixColor(colorName: string) {
-    if (colorName == "yellow") {
-      return Color.red + Color.green;
-    } else if (colorName == "white") {
-      return Color.red + Color.green + Color.blue;
-    } else if (colorName == "magenta") {
-      return Color.red + Color.blue;
-    } else if (colorName == "cyan") {
-      return Color.green + Color.blue;
+namespaceColor {
+exportfunctionmixColor(colorName: string) {
+if (colorName == "yellow") {
+returnColor.red + Color.green;
+    } elseif (colorName == "white") {
+returnColor.red + Color.green + Color.blue;
+    } elseif (colorName == "magenta") {
+returnColor.red + Color.blue;
+    } elseif (colorName == "cyan") {
+returnColor.green + Color.blue;
     }
   }
 }
@@ -262,14 +262,14 @@ Let’s look at a toy Observable example:
 
 ```ts
 // observable.ts
-export class Observable<T> {
-  // ... implementation left as an exercise for the reader ...
+exportclassObservable<T> {
+// ... implementation left as an exercise for the reader ...
 }
 
 // map.ts
-import { Observable } from "./observable";
+import { Observable } from"./observable";
 Observable.prototype.map = function (f) {
-  // ... another exercise for the reader
+// ... another exercise for the reader
 };
 ```
 
@@ -278,26 +278,26 @@ You can use module augmentation to tell the compiler about it:
 
 ```ts
 // observable.ts
-export class Observable<T> {
-  // ... implementation left as an exercise for the reader ...
+exportclassObservable<T> {
+// ... implementation left as an exercise for the reader ...
 }
 
 // map.ts
-import { Observable } from "./observable";
-declare module "./observable" {
-  interface Observable<T> {
-    map<U>(f: (x: T) => U): Observable<U>;
+import { Observable } from"./observable";
+declaremodule"./observable" {
+interfaceObservable<T> {
+map<U>(f: (x: T) =>U): Observable<U>;
   }
 }
 Observable.prototype.map = function (f) {
-  // ... another exercise for the reader
+// ... another exercise for the reader
 };
 
 // consumer.ts
-import { Observable } from "./observable";
-import "./map";
-let o: Observable<number>;
-o.map((x) => x.toFixed());
+import { Observable } from"./observable";
+import"./map";
+leto: Observable<number>;
+o.map((x) =>x.toFixed());
 ```
 
 The module name is resolved the same way as module specifiers in `import`/`export`.
@@ -307,7 +307,7 @@ Then the declarations in an augmentation are merged as if they were declared in 
 However, there are two limitations to keep in mind:
 
 1. You can’t declare new top-level declarations in the augmentation — just patches to existing declarations.
-2. Default exports also cannot be augmented, only named exports (since you need to augment an export by its exported name, and `default` is a reserved word - see [#14080](https://github.com/Microsoft/TypeScript/issues/14080) for details)
+2. Default exports also cannot be augmented, only named exports (since you need to augment an export by its exported name, and `default` is a reserved word - see [#14080 ↗](https://github.com/Microsoft/TypeScript/issues/14080) for details)
 
 ### Global augmentation {#global-augmentation}
 
@@ -315,18 +315,18 @@ You can also add declarations to the global scope from inside a module:
 
 ```ts
 // observable.ts
-export class Observable<T> {
-  // ... still no implementation ...
+exportclassObservable<T> {
+// ... still no implementation ...
 }
 
-declare global {
-  interface Array<T> {
-    toObservable(): Observable<T>;
+declareglobal {
+interfaceArray<T> {
+toObservable(): Observable<T>;
   }
 }
 
 Array.prototype.toObservable = function () {
-  // ...
+// ...
 };
 ```
 

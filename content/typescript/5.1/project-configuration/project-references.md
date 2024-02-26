@@ -34,7 +34,7 @@ The test files import the implementation files and do some testing:
 
 ```ts
 // converter-tests.ts
-import * as converter from "../src/converter";
+import*asconverterfrom"../src/converter";
 
 assert.areEqual(converter.celsiusToFahrenheit(0), 32);
 ```
@@ -60,11 +60,11 @@ Project references can solve all of these problems and more.
 
 ```js
 {
-    "compilerOptions": {
-        // The usual
+"compilerOptions": {
+// The usual
     },
-    "references": [
-        { "path": "../src" }
+"references": [
+        { "path":"../src" }
     ]
 }
 ```
@@ -91,7 +91,7 @@ Enabling the [`composite` ↗](https://www.typescriptlang.org/tsconfig.html#comp
 
 ## `declarationMap` {#declarationmap}
 
-We’ve also added support for [declaration source maps](https://github.com/Microsoft/TypeScript/issues/14479).
+We’ve also added support for [declaration source maps ↗](https://github.com/Microsoft/TypeScript/issues/14479).
 If you enable [`declarationMap` ↗](https://www.typescriptlang.org/tsconfig.html#declarationMap), you’ll be able to use editor features like “Go to Definition” and Rename to transparently navigate and edit code across project boundaries in supported editors.
 
 ## `prepend` with `outFile` {#prepend-with-outfile}
@@ -100,7 +100,7 @@ You can also enable prepending the output of a dependency using the `prepend` op
 
 ```js
    "references": [
-       { "path": "../utils", "prepend": true }
+       { "path":"../utils", "prepend":true }
    ]
 ```
 

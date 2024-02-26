@@ -12,7 +12,7 @@ type: docs
 
 [Playground ↗](https://www.typescriptlang.org/play#example/optional-chaining)
 
-Optional chaining is [issue #16](https://github.com/microsoft/TypeScript/issues/16) on our issue tracker. For context, there have been over 23,000 issues on the TypeScript issue tracker since then.
+Optional chaining is [issue #16 ↗](https://github.com/microsoft/TypeScript/issues/16) on our issue tracker. For context, there have been over 23,000 issues on the TypeScript issue tracker since then.
 
 At its core, optional chaining lets us write code where TypeScript can immediately stop running some expressions if we run into a `null` or `undefined`.
 The star of the show in optional chaining is the new `?.` operator for *optional property accesses*.
@@ -39,12 +39,12 @@ You might find yourself using `?.` to replace a lot of code that performs repeti
 ```ts
 // Before
 if (foo && foo.bar && foo.bar.baz) {
-  // ...
+// ...
 }
 
 // After-ish
 if (foo?.bar?.baz) {
-  // ...
+// ...
 }
 ```
 
@@ -59,12 +59,12 @@ First there’s the *optional element access* which acts similarly to optional p
  * Get the first element of the array if we have an array.
  * Otherwise return undefined.
  */
-function tryGetFirstElement<T>(arr?: T[]) {
-  return arr?.[0];
-  // equivalent to
-  //   return (arr === null || arr === undefined) ?
-  //       undefined :
-  //       arr[0];
+functiontryGetFirstElement<T>(arr?: T[]) {
+returnarr?.[0];
+// equivalent to
+//   return (arr === null || arr === undefined) ?
+//       undefined :
+//       arr[0];
 }
 ```
 
@@ -72,17 +72,17 @@ There’s also *optional call*, which allows us to conditionally call expression
 
 ```ts
 async function makeRequest(url: string, log?: (msg: string) => void) {
-  log?.(`Request started at ${new Date().toISOString()}`);
-  // roughly equivalent to
-  //   if (log != null) {
-  //       log(`Request started at ${new Date().toISOString()}`);
-  //   }
+log?.(`Request started at ${newDate().toISOString()}`);
+// roughly equivalent to
+//   if (log != null) {
+//       log(`Request started at ${new Date().toISOString()}`);
+//   }
 
-  const result = (await fetch(url)).json();
+constresult = (awaitfetch(url)).json();
 
-  log?.(`Request finished at ${new Date().toISOString()}`);
+log?.(`Request finished at ${newDate().toISOString()}`);
 
-  return result;
+returnresult;
 }
 ```
 
@@ -99,20 +99,20 @@ It’s equivalent to
 ```ts
 let temp = foo === null || foo === undefined ? undefined : foo.bar;
 
-let result = temp / someComputation();
+letresult = temp / someComputation();
 ```
 
 That might result in dividing `undefined`, which is why in [`strictNullChecks` ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks), the following is an error.
 
 ```ts
 function barPercentage(foo?: { bar: number }) {
-  return foo?.bar / 100;
-  //     ~~~~~~~~
-  // Error: Object is possibly undefined.
+returnfoo?.bar / 100;
+//     ~~~~~~~~
+// Error: Object is possibly undefined.
 }
 ```
 
-More more details, you can [read up on the proposal](https://github.com/tc39/proposal-optional-chaining/) and [view the original pull request](https://github.com/microsoft/TypeScript/pull/33294).
+More more details, you can [read up on the proposal ↗](https://github.com/tc39/proposal-optional-chaining/) and [view the original pull request ↗](https://github.com/microsoft/TypeScript/pull/33294).
 
 ## Nullish Coalescing {#nullish-coalescing}
 
@@ -137,22 +137,22 @@ let x = foo !== null && foo !== undefined ? foo : bar();
 ```
 
 The `??` operator can replace uses of `||` when trying to use a default value.
-For example, the following code snippet tries to fetch the volume that was last saved in [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) (if it ever was);
+For example, the following code snippet tries to fetch the volume that was last saved in [`localStorage` ↗](https://developer.mozilla.org/docs/Web/API/Window/localStorage) (if it ever was);
 however, it has a bug because it uses `||`.
 
 ```ts
 function initializeAudio() {
-  let volume = localStorage.volume || 0.5;
+letvolume = localStorage.volume || 0.5;
 
-  // ...
+// ...
 }
 ```
 
 When `localStorage.volume` is set to `0`, the page will set the volume to `0.5` which is unintended.
 `??` avoids some unintended behavior from `0`, `NaN` and `""` being treated as falsy values.
 
-We owe a large thanks to community members [Wenlu Wang](https://github.com/Kingwl) and [Titian Cernicova Dragomir](https://github.com/dragomirtitian) for implementing this feature!
-For more details, [check out their pull request](https://github.com/microsoft/TypeScript/pull/32883) and [the nullish coalescing proposal repository](https://github.com/tc39/proposal-nullish-coalescing/).
+We owe a large thanks to community members [Wenlu Wang ↗](https://github.com/Kingwl) and [Titian Cernicova Dragomir ↗](https://github.com/dragomirtitian) for implementing this feature!
+For more details, [check out their pull request ↗](https://github.com/microsoft/TypeScript/pull/32883) and [the nullish coalescing proposal repository ↗](https://github.com/tc39/proposal-nullish-coalescing/).
 
 ## Assertion Functions {#assertion-functions}
 
@@ -173,10 +173,10 @@ For example,
 
 ```js
 function multiply(x, y) {
-  assert(typeof x === "number");
-  assert(typeof y === "number");
+assert(typeofx === "number");
+assert(typeofy === "number");
 
-  return x * y;
+returnx * y;
 }
 ```
 
@@ -185,11 +185,11 @@ For loosely-typed code this meant TypeScript was checking less, and for slightly
 
 ```ts
 function yell(str) {
-  assert(typeof str === "string");
+assert(typeofstr === "string");
 
-  return str.toUppercase();
-  // Oops! We misspelled 'toUpperCase'.
-  // Would be great if TypeScript still caught this!
+returnstr.toUppercase();
+// Oops! We misspelled 'toUpperCase'.
+// Would be great if TypeScript still caught this!
 }
 ```
 
@@ -197,11 +197,11 @@ The alternative was to instead rewrite the code so that the language could analy
 
 ```ts
 function yell(str) {
-  if (typeof str !== "string") {
-    throw new TypeError("str should have been a string.");
+if (typeofstr !== "string") {
+thrownewTypeError("str should have been a string.");
   }
-  // Error caught!
-  return str.toUppercase();
+// Error caught!
+returnstr.toUppercase();
 }
 ```
 
@@ -213,8 +213,8 @@ It ensures that whatever condition is being checked must be true for the remaind
 
 ```ts
 function assert(condition: any, msg?: string): asserts condition {
-  if (!condition) {
-    throw new AssertionError(msg);
+if (!condition) {
+thrownewAssertionError(msg);
   }
 }
 ```
@@ -225,17 +225,17 @@ As an example, using this assertion function means we *do* catch our original `y
 
 ```ts
 function yell(str) {
-  assert(typeof str === "string");
+assert(typeofstr === "string");
 
-  return str.toUppercase();
-  //         ~~~~~~~~~~~
-  // error: Property 'toUppercase' does not exist on type 'string'.
-  //        Did you mean 'toUpperCase'?
+returnstr.toUppercase();
+//         ~~~~~~~~~~~
+// error: Property 'toUppercase' does not exist on type 'string'.
+//        Did you mean 'toUpperCase'?
 }
 
-function assert(condition: any, msg?: string): asserts condition {
-  if (!condition) {
-    throw new AssertionError(msg);
+functionassert(condition: any, msg?: string): asserts condition {
+if (!condition) {
+thrownewAssertionError(msg);
   }
 }
 ```
@@ -244,8 +244,8 @@ The other type of assertion signature doesn’t check for a condition, but inste
 
 ```ts
 function assertIsString(val: any): asserts val is string {
-  if (typeof val !== "string") {
-    throw new AssertionError("Not a string!");
+if (typeofval !== "string") {
+thrownewAssertionError("Not a string!");
   }
 }
 ```
@@ -254,14 +254,14 @@ Here `asserts val is string` ensures that after any call to `assertIsString`, an
 
 ```ts
 function yell(str: any) {
-  assertIsString(str);
+assertIsString(str);
 
-  // Now TypeScript knows that 'str' is a 'string'.
+// Now TypeScript knows that 'str' is a 'string'.
 
-  return str.toUppercase();
-  //         ~~~~~~~~~~~
-  // error: Property 'toUppercase' does not exist on type 'string'.
-  //        Did you mean 'toUpperCase'?
+returnstr.toUppercase();
+//         ~~~~~~~~~~~
+// error: Property 'toUppercase' does not exist on type 'string'.
+//        Did you mean 'toUpperCase'?
 }
 ```
 
@@ -269,14 +269,14 @@ These assertion signatures are very similar to writing type predicate signatures
 
 ```ts
 function isString(val: any): val is string {
-  return typeof val === "string";
+returntypeofval === "string";
 }
 
-function yell(str: any) {
-  if (isString(str)) {
-    return str.toUppercase();
+functionyell(str: any) {
+if (isString(str)) {
+returnstr.toUppercase();
   }
-  throw "Oops!";
+throw"Oops!";
 }
 ```
 
@@ -285,15 +285,15 @@ We can express some fairly sophisticated ideas with these.
 
 ```ts
 function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {
-  if (val === undefined || val === null) {
-    throw new AssertionError(
-      `Expected 'val' to be defined, but received ${val}`
+if (val === undefined || val === null) {
+thrownewAssertionError(
+`Expected 'val' to be defined, but received ${val}`
     );
   }
 }
 ```
 
-To read up more about assertion signatures, [check out the original pull request](https://github.com/microsoft/TypeScript/pull/32695).
+To read up more about assertion signatures, [check out the original pull request ↗](https://github.com/microsoft/TypeScript/pull/32695).
 
 ## Better Support for `never`-Returning Functions {#better-support-for-never-returning-functions}
 
@@ -302,19 +302,19 @@ This gave us the opportunity to expand support for another class of functions: f
 
 The intent of any function that returns `never` is that it never returns.
 It indicates that an exception was thrown, a halting error condition occurred, or that the program exited.
-For example, [`process.exit(...)` in `@types/node`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/5299d372a220584e75a031c13b3d555607af13f8/types/node/globals.d.ts#l874) is specified to return `never`.
+For example, [`process.exit(...)` in `@types/node` ↗](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/5299d372a220584e75a031c13b3d555607af13f8/types/node/globals.d.ts#l874) is specified to return `never`.
 
 In order to ensure that a function never potentially returned `undefined` or effectively returned from all code paths, TypeScript needed some syntactic signal - either a `return` or `throw` at the end of a function.
 So users found themselves `return`-ing their failure functions.
 
 ```ts
 function dispatch(x: string | number): SomeType {
-  if (typeof x === "string") {
-    return doThingWithString(x);
-  } else if (typeof x === "number") {
-    return doThingWithNumber(x);
+if (typeofx === "string") {
+returndoThingWithString(x);
+  } elseif (typeofx === "number") {
+returndoThingWithNumber(x);
   }
-  return process.exit(1);
+returnprocess.exit(1);
 }
 ```
 
@@ -322,16 +322,16 @@ Now when these `never`-returning functions are called, TypeScript recognizes tha
 
 ```ts
 function dispatch(x: string | number): SomeType {
-  if (typeof x === "string") {
-    return doThingWithString(x);
-  } else if (typeof x === "number") {
-    return doThingWithNumber(x);
+if (typeofx === "string") {
+returndoThingWithString(x);
+  } elseif (typeofx === "number") {
+returndoThingWithNumber(x);
   }
-  process.exit(1);
+process.exit(1);
 }
 ```
 
-As with assertion functions, you can [read up more at the same pull request](https://github.com/microsoft/TypeScript/pull/32695).
+As with assertion functions, you can [read up more at the same pull request ↗](https://github.com/microsoft/TypeScript/pull/32695).
 
 ## (More) Recursive Type Aliases {#more-recursive-type-aliases}
 
@@ -348,7 +348,7 @@ type Foo = Foo;
 This is a reasonable restriction because any use of `Foo` would need to be replaced with `Foo` which would need to be replaced with `Foo` which would need to be replaced with `Foo` which… well, hopefully you get the idea!
 In the end, there isn’t a type that makes sense in place of `Foo`.
 
-This is fairly [consistent with how other languages treat type aliases](https://wikipedia.org/w/index.php?title=Recursive_data_type&oldid=913091335#in_type_synonyms), but it does give rise to some slightly surprising scenarios for how users leverage the feature.
+This is fairly [consistent with how other languages treat type aliases ↗](https://wikipedia.org/w/index.php?title=Recursive_data_type&oldid=913091335#in_type_synonyms), but it does give rise to some slightly surprising scenarios for how users leverage the feature.
 For example, in TypeScript 3.6 and prior, the following causes an error.
 
 ```ts
@@ -362,7 +362,7 @@ This is strange because there is technically nothing wrong with any use users co
 ```ts
 type ValueOrArray<T> = T | ArrayOfValueOrArray<T>;
 
-interface ArrayOfValueOrArray<T> extends Array<ValueOrArray<T>> {}
+interfaceArrayOfValueOrArray<T> extendsArray<ValueOrArray<T>> {}
 ```
 
 Because interfaces (and other object types) introduce a level of indirection and their full structure doesn’t need to be eagerly built out, TypeScript has no problem working with this structure.
@@ -379,11 +379,11 @@ This means that code like the following that was trying to represent JSON…
 ```ts
 type Json = string | number | boolean | null | JsonObject | JsonArray;
 
-interface JsonObject {
+interfaceJsonObject {
   [property: string]: Json;
 }
 
-interface JsonArray extends Array<Json> {}
+interfaceJsonArrayextendsArray<Json> {}
 ```
 
 can finally be rewritten without helper interfaces.
@@ -404,15 +404,15 @@ The following code which used to error is now valid TypeScript code.
 ```ts
 type VirtualNode = string | [string, { [key: string]: any }, ...VirtualNode[]];
 
-const myNode: VirtualNode = [
-  "div",
-  { id: "parent" },
-  ["div", { id: "first-child" }, "I'm the first child"],
-  ["div", { id: "second-child" }, "I'm the second child"],
+constmyNode: VirtualNode = [
+"div",
+  { id:"parent" },
+  ["div", { id:"first-child" }, "I'm the first child"],
+  ["div", { id:"second-child" }, "I'm the second child"],
 ];
 ```
 
-For more information, you can [read up on the original pull request](https://github.com/microsoft/TypeScript/pull/33050).
+For more information, you can [read up on the original pull request ↗](https://github.com/microsoft/TypeScript/pull/33050).
 
 ## `--declaration` and `--allowJs` {#--declaration-and---allowjs}
 
@@ -442,18 +442,18 @@ module.exports.blurImage = blurImage;
 /**
  * Produces a blurred image from an input buffer.
  *
- * @param input {Uint8Array}
- * @param width {number}
- * @param height {number}
+ * @paraminput {Uint8Array}
+ * @paramwidth {number}
+ * @paramheight {number}
  */
-function blurImage(input, width, height) {
-  const numPixels = width * height * 4;
-  assert(input.length === numPixels);
-  const result = new Uint8Array(numPixels);
+functionblurImage(input, width, height) {
+constnumPixels = width * height * 4;
+assert(input.length === numPixels);
+constresult = newUint8Array(numPixels);
 
-  // TODO
+// TODO
 
-  return result;
+returnresult;
 }
 ```
 
@@ -463,14 +463,14 @@ Will produce a `.d.ts` file like
 /**
  * Produces a blurred image from an input buffer.
  *
- * @param input {Uint8Array}
- * @param width {number}
- * @param height {number}
+ * @paraminput {Uint8Array}
+ * @paramwidth {number}
+ * @paramheight {number}
  */
-export function blurImage(
-  input: Uint8Array,
-  width: number,
-  height: number
+exportfunctionblurImage(
+input: Uint8Array,
+width: number,
+height: number
 ): Uint8Array;
 ```
 
@@ -478,39 +478,39 @@ This can go beyond basic functions with `@param` tags too, where the following e
 
 ```js
 /**
- * @callback Job
- * @returns {void}
+ * @callbackJob
+ * @returns{void}
  */
 
 /** Queues work */
-export class Worker {
-  constructor(maxDepth = 10) {
-    this.started = false;
-    this.depthLimit = maxDepth;
-    /**
+exportclassWorker {
+constructor(maxDepth = 10) {
+this.started = false;
+this.depthLimit = maxDepth;
+/**
      * NOTE: queued jobs may add more items to queue
-     * @type {Job[]}
+     * @type{Job[]}
      */
-    this.queue = [];
+this.queue = [];
   }
-  /**
+/**
    * Adds a work item to the queue
-   * @param {Job} work
+   * @param{Job}work
    */
-  push(work) {
-    if (this.queue.length + 1 > this.depthLimit) throw new Error("Queue full!");
-    this.queue.push(work);
+push(work) {
+if (this.queue.length + 1 > this.depthLimit) thrownewError("Queue full!");
+this.queue.push(work);
   }
-  /**
+/**
    * Starts the queue if it has not yet started
    */
-  start() {
-    if (this.started) return false;
-    this.started = true;
-    while (this.queue.length) {
-      /** @type {Job} */ (this.queue.shift())();
+start() {
+if (this.started) returnfalse;
+this.started = true;
+while (this.queue.length) {
+/** @type{Job} */ (this.queue.shift())();
     }
-    return true;
+returntrue;
   }
 }
 ```
@@ -519,36 +519,36 @@ will be transformed into the following `.d.ts` file:
 
 ```ts
 /**
- * @callback Job
- * @returns {void}
+ * @callbackJob
+ * @returns{void}
  */
 /** Queues work */
-export class Worker {
-  constructor(maxDepth?: number);
-  started: boolean;
-  depthLimit: number;
-  /**
+exportclassWorker {
+constructor(maxDepth?: number);
+started: boolean;
+depthLimit: number;
+/**
    * NOTE: queued jobs may add more items to queue
-   * @type {Job[]}
+   * @type{Job[]}
    */
-  queue: Job[];
-  /**
+queue: Job[];
+/**
    * Adds a work item to the queue
-   * @param {Job} work
+   * @param{Job}work
    */
-  push(work: Job): void;
-  /**
+push(work: Job): void;
+/**
    * Starts the queue if it has not yet started
    */
-  start(): boolean;
+start(): boolean;
 }
-export type Job = () => void;
+exporttypeJob = () =>void;
 ```
 
 Note that when using these flags together, TypeScript doesn’t necessarily have to downlevel `.js` files.
 If you simply want TypeScript to create `.d.ts` files, you can use the [`emitDeclarationOnly` ↗](https://www.typescriptlang.org/tsconfig.html#emitDeclarationOnly) compiler option.
 
-For more details, you can [check out the original pull request](https://github.com/microsoft/TypeScript/pull/32372).
+For more details, you can [check out the original pull request ↗](https://github.com/microsoft/TypeScript/pull/32372).
 
 ## The `useDefineForClassFields` Flag and The `declare` Property Modifier {#the-usedefineforclassfields-flag-and-the-declare-property-modifier}
 
@@ -556,8 +556,8 @@ Back when TypeScript implemented public class fields, we assumed to the best of 
 
 ```ts
 class C {
-  foo = 100;
-  bar: string;
+foo = 100;
+bar: string;
 }
 ```
 
@@ -565,8 +565,8 @@ would be equivalent to a similar assignment within a constructor body.
 
 ```ts
 class C {
-  constructor() {
-    this.foo = 100;
+constructor() {
+this.foo = 100;
   }
 }
 ```
@@ -576,18 +576,18 @@ Instead, the original code sample might need to de-sugar to something closer to 
 
 ```ts
 class C {
-  constructor() {
-    Object.defineProperty(this, "foo", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: 100,
+constructor() {
+Object.defineProperty(this, "foo", {
+enumerable:true,
+configurable:true,
+writable:true,
+value:100,
     });
-    Object.defineProperty(this, "bar", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: void 0,
+Object.defineProperty(this, "bar", {
+enumerable:true,
+configurable:true,
+writable:true,
+value:void0,
     });
   }
 }
@@ -605,15 +605,15 @@ This can cause quite a bit of fallout for existing code that use inheritance. Fi
 
 ```ts
 class Base {
-  set data(value: string) {
-    console.log("data changed to " + value);
+setdata(value: string) {
+console.log("data changed to " + value);
   }
 }
 
-class Derived extends Base {
-  // No longer triggers a 'console.log'
-  // when using 'useDefineForClassFields'.
-  data = 10;
+classDerivedextendsBase {
+// No longer triggers a 'console.log'
+// when using 'useDefineForClassFields'.
+data = 10;
 }
 ```
 
@@ -621,27 +621,27 @@ Secondly, using class fields to specialize properties from base classes also won
 
 ```ts
 interface Animal {
-  animalStuff: any;
+animalStuff: any;
 }
-interface Dog extends Animal {
-  dogStuff: any;
+interfaceDogextendsAnimal {
+dogStuff: any;
 }
 
-class AnimalHouse {
-  resident: Animal;
-  constructor(animal: Animal) {
-    this.resident = animal;
+classAnimalHouse {
+resident: Animal;
+constructor(animal: Animal) {
+this.resident = animal;
   }
 }
 
-class DogHouse extends AnimalHouse {
-  // Initializes 'resident' to 'undefined'
-  // after the call to 'super()' when
-  // using 'useDefineForClassFields'!
-  resident: Dog;
+classDogHouseextendsAnimalHouse {
+// Initializes 'resident' to 'undefined'
+// after the call to 'super()' when
+// using 'useDefineForClassFields'!
+resident: Dog;
 
-  constructor(dog: Dog) {
-    super(dog);
+constructor(dog: Dog) {
+super(dog);
   }
 }
 ```
@@ -654,14 +654,14 @@ Code that’s impacted by the class fields change can get around the issue by co
 
 ```ts
 class Base {
-  set data(value: string) {
-    console.log("data changed to " + value);
+setdata(value: string) {
+console.log("data changed to " + value);
   }
 }
 
-class Derived extends Base {
-  constructor() {
-    this.data = 10;
+classDerivedextendsBase {
+constructor() {
+this.data = 10;
   }
 }
 ```
@@ -670,27 +670,27 @@ To help mitigate the second issue, you can either add an explicit initializer or
 
 ```ts
 interface Animal {
-  animalStuff: any;
+animalStuff: any;
 }
-interface Dog extends Animal {
-  dogStuff: any;
+interfaceDogextendsAnimal {
+dogStuff: any;
 }
 
-class AnimalHouse {
-  resident: Animal;
-  constructor(animal: Animal) {
-    this.resident = animal;
+classAnimalHouse {
+resident: Animal;
+constructor(animal: Animal) {
+this.resident = animal;
   }
 }
 
-class DogHouse extends AnimalHouse {
-  declare resident: Dog;
-  //  ^^^^^^^
-  // 'resident' now has a 'declare' modifier,
-  // and won't produce any output code.
+classDogHouseextendsAnimalHouse {
+declareresident: Dog;
+//  ^^^^^^^
+// 'resident' now has a 'declare' modifier,
+// and won't produce any output code.
 
-  constructor(dog: Dog) {
-    super(dog);
+constructor(dog: Dog) {
+super(dog);
   }
 }
 ```
@@ -698,7 +698,7 @@ class DogHouse extends AnimalHouse {
 Currently [`useDefineForClassFields` ↗](https://www.typescriptlang.org/tsconfig.html#useDefineForClassFields) is only available when targeting ES5 and upwards, since `Object.defineProperty` doesn’t exist in ES3.
 To achieve similar checking for issues, you can create a separate project that targets ES5 and uses [`noEmit` ↗](https://www.typescriptlang.org/tsconfig.html#noEmit) to avoid a full build.
 
-For more information, you can [take a look at the original pull request for these changes](https://github.com/microsoft/TypeScript/pull/33509).
+For more information, you can [take a look at the original pull request for these changes ↗](https://github.com/microsoft/TypeScript/pull/33509).
 
 We strongly encourage users to try the [`useDefineForClassFields` ↗](https://www.typescriptlang.org/tsconfig.html#useDefineForClassFields) flag and report back on our issue tracker or in the comments below.
 This includes feedback on difficulty of adopting the flag so we can understand how we can make migration easier.
@@ -712,7 +712,7 @@ In TypeScript 3.7, when opening a project with dependencies, TypeScript will aut
 This means projects using project references will now see an improved editing experience where semantic operations are up-to-date and “just work”.
 You can disable this behavior with the compiler option [`disableSourceOfProjectReferenceRedirect` ↗](https://www.typescriptlang.org/tsconfig.html#disableSourceOfProjectReferenceRedirect) which may be appropriate when working in very large projects where this change may impact editing performance.
 
-You can [read up more about this change by reading up on its pull request](https://github.com/microsoft/TypeScript/pull/32028).
+You can [read up more about this change by reading up on its pull request ↗](https://github.com/microsoft/TypeScript/pull/32028).
 
 ## Uncalled Function Checks {#uncalled-function-checks}
 
@@ -720,21 +720,21 @@ A common and dangerous error is to forget to invoke a function, especially if th
 
 ```ts
 interface User {
-  isAdministrator(): boolean;
-  notify(): void;
-  doNotDisturb?(): boolean;
+isAdministrator(): boolean;
+notify(): void;
+doNotDisturb?(): boolean;
 }
 
 // later...
 
 // Broken code, do not use!
-function doAdminThing(user: User) {
-  // oops!
-  if (user.isAdministrator) {
-    sudo();
-    editTheConfiguration();
+functiondoAdminThing(user: User) {
+// oops!
+if (user.isAdministrator) {
+sudo();
+editTheConfiguration();
   } else {
-    throw new AccessDeniedError("User is not an admin");
+thrownewAccessDeniedError("User is not an admin");
   }
 }
 ```
@@ -745,10 +745,10 @@ In TypeScript 3.7, this is identified as a likely error:
 
 ```ts
 function doAdminThing(user: User) {
-    if (user.isAdministrator) {
-    //  ~~~~~~~~~~~~~~~~~~~~
-    // error! This condition will always return true since the function is always defined.
-    //        Did you mean to call it instead?
+if (user.isAdministrator) {
+//  ~~~~~~~~~~~~~~~~~~~~
+// error! This condition will always return true since the function is always defined.
+//        Did you mean to call it instead?
 ```
 
 This check is a breaking change, but for that reason the checks are very conservative.
@@ -756,25 +756,25 @@ This error is only issued in `if` conditions, and it is not issued on optional p
 
 ```ts
 interface User {
-  isAdministrator(): boolean;
-  notify(): void;
-  doNotDisturb?(): boolean;
+isAdministrator(): boolean;
+notify(): void;
+doNotDisturb?(): boolean;
 }
 
-function issueNotification(user: User) {
-  if (user.doNotDisturb) {
-    // OK, property is optional
+functionissueNotification(user: User) {
+if (user.doNotDisturb) {
+// OK, property is optional
   }
-  if (user.notify) {
-    // OK, called the function
-    user.notify();
+if (user.notify) {
+// OK, called the function
+user.notify();
   }
 }
 ```
 
 If you intended to test the function without calling it, you can correct the definition of it to include `undefined`/`null`, or use `!!` to write something like `if (!!user.isAdministrator)` to indicate that the coercion is intentional.
 
-We owe a big thanks to GitHub user [@jwbay](https://github.com/jwbay) who took the initiative to create a [proof-of-concept](https://github.com/microsoft/TypeScript/pull/32802) and iterated to provide us with [the current version](https://github.com/microsoft/TypeScript/pull/33178).
+We owe a big thanks to GitHub user [@jwbay ↗](https://github.com/jwbay) who took the initiative to create a [proof-of-concept ↗](https://github.com/microsoft/TypeScript/pull/32802) and iterated to provide us with [the current version ↗](https://github.com/microsoft/TypeScript/pull/33178).
 
 ## `// @ts-nocheck` in TypeScript Files {#-ts-nocheck-in-typescript-files}
 
@@ -783,7 +783,7 @@ Historically this comment was only respected in JavaScript source files in the p
 
 ## Semicolon Formatter Option {#semicolon-formatter-option}
 
-TypeScript’s built-in formatter now supports semicolon insertion and removal at locations where a trailing semicolon is optional due to JavaScript’s automatic semicolon insertion (ASI) rules. The setting is available now in [Visual Studio Code Insiders](https://code.visualstudio.com/insiders/), and will be available in Visual Studio 16.4 Preview 2 in the Tools Options menu.
+TypeScript’s built-in formatter now supports semicolon insertion and removal at locations where a trailing semicolon is optional due to JavaScript’s automatic semicolon insertion (ASI) rules. The setting is available now in [Visual Studio Code Insiders ↗](https://code.visualstudio.com/insiders/), and will be available in Visual Studio 16.4 Preview 2 in the Tools Options menu.
 
 ![New semicolon formatter option in VS Code](/assets/typescript/5.1/external/user-images.githubusercontent.com/3277153/65913194-10066e80-e395-11e9-8a3a-4f7305c397d5.png)
 
@@ -823,18 +823,18 @@ Due to a bug, the following construct was previously allowed in TypeScript:
 
 ```ts
 // ./someOtherModule.ts
-interface SomeType {
-  y: string;
+interfaceSomeType {
+y: string;
 }
 
 // ./myModule.ts
-import { SomeType } from "./someOtherModule";
-export interface SomeType {
-  x: number;
+import { SomeType } from"./someOtherModule";
+exportinterfaceSomeType {
+x: number;
 }
 
-function fn(arg: SomeType) {
-  console.log(arg.x); // Error! 'x' doesn't exist on 'SomeType'
+functionfn(arg: SomeType) {
+console.log(arg.x); // Error! 'x' doesn't exist on 'SomeType'
 }
 ```
 

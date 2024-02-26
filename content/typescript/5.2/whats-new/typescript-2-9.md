@@ -38,23 +38,23 @@ Furthermore, if `K` includes type `string`, a string index signature is introduc
 
 ```ts
 const c = "c";
-const d = 10;
-const e = Symbol();
+constd = 10;
+conste = Symbol();
 
-const enum E1 {
-  A,
-  B,
-  C,
+constenumE1 {
+A,
+B,
+C,
 }
-const enum E2 {
-  A = "A",
-  B = "B",
-  C = "C",
+constenumE2 {
+A = "A",
+B = "B",
+C = "C",
 }
 
-type Foo = {
-  a: string; // String-like name
-  5: string; // Number-like name
+typeFoo = {
+a: string; // String-like name
+5: string; // Number-like name
   [c]: string; // String-like name
   [d]: string; // Number-like name
   [e]: string; // Symbol-like name
@@ -62,61 +62,61 @@ type Foo = {
   [E2.A]: string; // String-like name
 };
 
-type K1 = keyof Foo; // "a" | 5 | "c" | 10 | typeof e | E1.A | E2.A
-type K2 = Extract<keyof Foo, string>; // "a" | "c" | E2.A
-type K3 = Extract<keyof Foo, number>; // 5 | 10 | E1.A
-type K4 = Extract<keyof Foo, symbol>; // typeof e
+typeK1 = keyofFoo; // "a" | 5 | "c" | 10 | typeof e | E1.A | E2.A
+typeK2 = Extract<keyofFoo, string>; // "a" | "c" | E2.A
+typeK3 = Extract<keyofFoo, number>; // 5 | 10 | E1.A
+typeK4 = Extract<keyofFoo, symbol>; // typeof e
 ```
 
 Since `keyof` now reflects the presence of a numeric index signature by including type `number` in the key type, mapped types such as `Partial<T>` and `Readonly<T>` work correctly when applied to object types with numeric index signatures:
 
 ```ts
 type Arrayish<T> = {
-  length: number;
+length: number;
   [x: number]: T;
 };
 
-type ReadonlyArrayish<T> = Readonly<Arrayish<T>>;
+typeReadonlyArrayish<T> = Readonly<Arrayish<T>>;
 
-declare const map: ReadonlyArrayish<string>;
-let n = map.length;
-let x = map[123]; // Previously of type any (or an error with --noImplicitAny)
+declareconstmap: ReadonlyArrayish<string>;
+letn = map.length;
+letx = map[123]; // Previously of type any (or an error with --noImplicitAny)
 ```
 
 Furthermore, with the `keyof` operator’s support for `number` and `symbol` named keys, it is now possible to abstract over access to properties of objects that are indexed by numeric literals (such as numeric enum types) and unique symbols.
 
 ```ts
 const enum Enum {
-  A,
-  B,
-  C,
+A,
+B,
+C,
 }
 
-const enumToStringMap = {
-  [Enum.A]: "Name A",
-  [Enum.B]: "Name B",
-  [Enum.C]: "Name C",
+constenumToStringMap = {
+[Enum.A]:"Name A",
+[Enum.B]:"Name B",
+[Enum.C]:"Name C",
 };
 
-const sym1 = Symbol();
-const sym2 = Symbol();
-const sym3 = Symbol();
+constsym1 = Symbol();
+constsym2 = Symbol();
+constsym3 = Symbol();
 
-const symbolToNumberMap = {
-  [sym1]: 1,
-  [sym2]: 2,
-  [sym3]: 3,
+constsymbolToNumberMap = {
+[sym1]:1,
+[sym2]:2,
+[sym3]:3,
 };
 
-type KE = keyof typeof enumToStringMap; // Enum (i.e. Enum.A | Enum.B | Enum.C)
-type KS = keyof typeof symbolToNumberMap; // typeof sym1 | typeof sym2 | typeof sym3
+typeKE = keyoftypeofenumToStringMap; // Enum (i.e. Enum.A | Enum.B | Enum.C)
+typeKS = keyoftypeofsymbolToNumberMap; // typeof sym1 | typeof sym2 | typeof sym3
 
-function getValue<T, K extends keyof T>(obj: T, key: K): T[K] {
-  return obj[key];
+functiongetValue<T, KextendskeyofT>(obj: T, key: K): T[K] {
+returnobj[key];
 }
 
-let x1 = getValue(enumToStringMap, Enum.C); // Returns "Name C"
-let x2 = getValue(symbolToNumberMap, sym3); // Returns 3
+letx1 = getValue(enumToStringMap, Enum.C); // Returns "Name C"
+letx2 = getValue(symbolToNumberMap, sym3); // Returns 3
 ```
 
 This is a breaking change; previously, the `keyof` operator and mapped types only supported `string` named properties.
@@ -126,7 +126,7 @@ Code that assumed values typed with `keyof T` were always `string`s, will now be
 
 ```ts
 function useKey<T, K extends keyof T>(o: T, k: K) {
-  var name: string = k; // Error: keyof T is not assignable to string
+varname: string = k; // Error: keyof T is not assignable to string
 }
 ```
 
@@ -136,7 +136,7 @@ function useKey<T, K extends keyof T>(o: T, k: K) {
 
   ```ts
   function useKey<T, K extends Extract<keyof T, string>>(o: T, k: K) {
-    var name: string = k; // OK
+  varname: string = k; // OK
   }
   ```
 
@@ -144,7 +144,7 @@ function useKey<T, K extends keyof T>(o: T, k: K) {
 
   ```ts
   function useKey<T, K extends keyof T>(o: T, k: K) {
-    var name: string | number | symbol = k;
+  varname: string | number | symbol = k;
   }
   ```
 
@@ -158,14 +158,14 @@ JSX elements now allow passing type arguments to generic components.
 
 ```ts
 class GenericComponent<P> extends React.Component<P> {
-  internalProp: P;
+internalProp: P;
 }
 
-type Props = { a: number; b: string };
+typeProps = { a: number; b: string };
 
-const x = <GenericComponent<Props> a={10} b="hi" />; // OK
+constx = <GenericComponent<Props> a={10} b="hi" />; // OK
 
-const y = <GenericComponent<Props> a={10} b={20} />; // Error
+consty = <GenericComponent<Props> a={10} b={20} />; // Error
 ```
 
 ## Generic type arguments in generic tagged templates {#generic-type-arguments-in-generic-tagged-templates}
@@ -179,12 +179,12 @@ TypeScript 2.9 allows passing generic type arguments to tagged template strings.
 
 ```ts
 declare function styledComponent<Props>(
-  strs: TemplateStringsArray
+strs: TemplateStringsArray
 ): Component<Props>;
 
-interface MyProps {
-  name: string;
-  age: number;
+interfaceMyProps {
+name: string;
+age: number;
 }
 
 styledComponent<MyProps>`
@@ -193,10 +193,10 @@ styledComponent<MyProps>`
   color: palevioletred;
 `;
 
-declare function tag<T>(strs: TemplateStringsArray, ...args: T[]): T;
+declarefunctiontag<T>(strs: TemplateStringsArray, ...args: T[]): T;
 
 // inference fails because 'number' and 'string' are both candidates that conflict
-let a = tag<string | number>`${100} ${"hello"}`;
+leta = tag<string|number>`${100}${"hello"}`;
 ```
 
 ## `import` types {#import-types}
@@ -212,8 +212,8 @@ Given a declaration of a class `Pet` in a module file:
 ```ts
 // module.d.ts
 
-export declare class Pet {
-  name: string;
+exportdeclareclassPet {
+name: string;
 }
 ```
 
@@ -222,8 +222,8 @@ Can be used in a non-module file `global-script.ts`:
 ```ts
 // global-script.ts
 
-function adopt(p: import("./module").Pet) {
-  console.log(`Adopting ${p.name}...`);
+functionadopt(p: import("./module").Pet) {
+console.log(`Adopting ${p.name}...`);
 }
 ```
 
@@ -233,10 +233,10 @@ This also works in JSDoc comments to refer to types from other modules in `.js`:
 // a.js
 
 /**
- * @param p { import("./module").Pet }
+ * @paramp { import("./module").Pet }
  */
-function walk(p) {
-  console.log(`Walking ${p.name}...`);
+functionwalk(p) {
+console.log(`Walking ${p.name}...`);
 }
 ```
 
@@ -249,7 +249,7 @@ For instance:
 ```ts
 import { createHash } from "crypto";
 
-export const hash = createHash("sha256");
+exportconsthash = createHash("sha256");
 //           ^^^^
 // Exported variable 'hash' has or is using name 'Hash' from external module "crypto" but cannot be named.
 ```
@@ -262,7 +262,7 @@ export declare const hash: import("crypto").Hash;
 
 ## Support for `import.meta` {#support-for-importmeta}
 
-TypeScript 2.9 introduces support for `import.meta`, a new meta-property as described by the current [TC39 proposal](https://github.com/tc39/proposal-import-meta).
+TypeScript 2.9 introduces support for `import.meta`, a new meta-property as described by the current [TC39 proposal ↗](https://github.com/tc39/proposal-import-meta).
 
 The type of `import.meta` is the global `ImportMeta` type which is defined in `lib.es5.d.ts`.
 This interface is extremely limited.
@@ -274,8 +274,8 @@ Assuming that `__dirname` is always available on `import.meta`, the declaration 
 
 ```ts
 // node.d.ts
-interface ImportMeta {
-  __dirname: string;
+interfaceImportMeta {
+__dirname: string;
 }
 ```
 
@@ -297,16 +297,16 @@ Often in Node.js applications a `.json` is needed. With TypeScript 2.9, [`resolv
 // settings.json
 
 {
-    "repo": "TypeScript",
-    "dry": false,
-    "debug": false
+"repo": "TypeScript",
+"dry": false,
+"debug": false
 }
 ```
 
 ```ts
 // a.ts
 
-import settings from "./settings.json";
+importsettingsfrom"./settings.json";
 
 settings.debug === true; // OK
 settings.dry === 2; // Error: Operator '===' cannot be applied boolean and number
@@ -316,10 +316,10 @@ settings.dry === 2; // Error: Operator '===' cannot be applied boolean and numbe
 // tsconfig.json
 
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "commonjs",
-    "[resolveJsonModule ↗](https://www.typescriptlang.org/tsconfig.html#resolveJsonModule)": true,
-    "[esModuleInterop ↗](https://www.typescriptlang.org/tsconfig.html#esModuleInterop)": true
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "commonjs",
+"[resolveJsonModule ↗](https://www.typescriptlang.org/tsconfig.html#resolveJsonModule)": true,
+"[esModuleInterop ↗](https://www.typescriptlang.org/tsconfig.html#esModuleInterop)": true
   }
 }
 ```
@@ -327,7 +327,7 @@ settings.dry === 2; // Error: Operator '===' cannot be applied boolean and numbe
 ## `--pretty` output by default {#--pretty-output-by-default}
 
 Starting TypeScript 2.9 errors are displayed under [`pretty` ↗](https://www.typescriptlang.org/tsconfig.html#pretty) by default if the output device is applicable for colorful text.
-TypeScript will check if the output stream has [`isTty`](https://nodejs.org/api/tty.html) property set.
+TypeScript will check if the output stream has [`isTty` ↗](https://nodejs.org/api/tty.html) property set.
 
 Use `--pretty false` on the command line or set `"pretty": false` in your `tsconfig.json` to disable [`pretty` ↗](https://www.typescriptlang.org/tsconfig.html#pretty) output.
 

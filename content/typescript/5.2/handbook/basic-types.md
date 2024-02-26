@@ -59,7 +59,7 @@ For example, consider this function:
 
 ```js
 function fn(x) {
-  return x.flip();
+returnx.flip();
 }
 ```
 
@@ -91,7 +91,7 @@ A type-checker like TypeScript uses that information and tells us when things mi
 
 ```ts
 const message = "hello!";
- 
+
 message();
 ```
 
@@ -105,7 +105,7 @@ Running that last sample with TypeScript will give us an error message before we
 ## Non-exception Failures {#non-exception-failures}
 
 So far we’ve been discussing certain things like runtime errors - cases where the JavaScript runtime tells us that it thinks something is nonsensical.
-Those cases come up because [the ECMAScript specification](https://tc39.github.io/ecma262/) has explicit instructions on how the language should behave when it runs into something unexpected.
+Those cases come up because [the ECMAScript specification ↗](https://tc39.github.io/ecma262/) has explicit instructions on how the language should behave when it runs into something unexpected.
 
 For example, the specification says that trying to call something that isn’t callable should throw an error.
 Maybe that sounds like “obvious behavior”, but you could imagine that accessing a property that doesn’t exist on an object should throw an error too.
@@ -113,8 +113,8 @@ Instead, JavaScript gives us different behavior and returns the value `undefined
 
 ```js
 const user = {
-  name: "Daniel",
-  age: 26,
+name:"Daniel",
+age:26,
 };
 
 user.location; // returns undefined
@@ -127,10 +127,10 @@ In TypeScript, the following code produces an error about `location` not being d
 
 ```ts
 const user = {
-  name: "Daniel",
-  age: 26,
+name:"Daniel",
+age:26,
 };
- 
+
 user.location;
 ```
 
@@ -147,11 +147,11 @@ For example: typos,
 
 ```ts
 const announcement = "Hello World!";
- 
+
 // How quickly can you spot the typos?
 announcement.toLocaleLowercase();
 announcement.toLocalLowerCase();
- 
+
 // We probably meant to write this...
 announcement.toLocaleLowerCase();
 ```
@@ -162,8 +162,8 @@ uncalled functions,
 
 ```ts
 function flipCoin() {
-  // Meant to be Math.random()
-  return Math.random < 0.5;
+// Meant to be Math.random()
+returnMath.random < 0.5;
 }
 ```
 
@@ -178,9 +178,9 @@ or basic logic errors.
 ```ts
 const value = Math.random() < 0.5 ? "a" : "b";
 if (value !== "a") {
-  // ...
-} else if (value === "b") {
-  // Oops, unreachable
+// ...
+} elseif (value === "b") {
+// Oops, unreachable
 }
 ```
 
@@ -203,23 +203,23 @@ That’s part of what people often refer to when they talk about tooling in Type
 
 ```ts
 import express from "express";
-const app = express();
- 
+constapp = express();
+
 app.get("/", function (req, res) {
-  res.sen
-         - send
+res.sen
+- send
 - sendDate
 - sendfile
 - sendFile
 - sendStatus
 });
- 
+
 app.listen(3000);
 ```
 
 TypeScript takes tooling seriously, and that goes beyond completions and errors as you type.
 An editor that supports TypeScript can deliver “quick fixes” to automatically fix errors, refactorings to easily re-organize code, and useful navigation features for jumping to definitions of a variable, or finding all references to a given variable.
-All of this is built on top of the type-checker and is fully cross-platform, so it’s likely that [your favorite editor has TypeScript support available](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support).
+All of this is built on top of the type-checker and is fully cross-platform, so it’s likely that [your favorite editor has TypeScript support available ↗](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support).
 
 ## `tsc`, the TypeScript compiler {#tsc-the-typescript-compiler}
 
@@ -278,10 +278,10 @@ Let’s rewrite `hello.ts`:
 
 ```ts
 // This is an industrial-grade general-purpose greeter function:
-function greet(person, date) {
-  console.log(`Hello ${person}, today is ${date}!`);
+functiongreet(person, date) {
+console.log(`Hello ${person}, today is ${date}!`);
 }
- 
+
 greet("Brendan");
 ```
 
@@ -328,7 +328,7 @@ We’ll also use the `toDateString()` method on `date`.
 
 ```ts
 function greet(person: string, date: Date) {
-  console.log(`Hello ${person}, today is ${date.toDateString()}!`);
+console.log(`Hello ${person}, today is ${date.toDateString()}!`);
 }
 ```
 
@@ -342,9 +342,9 @@ For example…
 
 ```ts
 function greet(person: string, date: Date) {
-  console.log(`Hello ${person}, today is ${date.toDateString()}!`);
+console.log(`Hello ${person}, today is ${date.toDateString()}!`);
 }
- 
+
 greet("Maddison", Date());
 ```
 
@@ -364,10 +364,10 @@ Anyway, we can quickly fix up the error:
 
 ```ts
 function greet(person: string, date: Date) {
-  console.log(`Hello ${person}, today is ${date.toDateString()}!`);
+console.log(`Hello ${person}, today is ${date.toDateString()}!`);
 }
- 
-greet("Maddison", new Date());
+
+greet("Maddison", newDate());
 ```
 
 Keep in mind, we don’t always have to write explicit type annotations.
@@ -377,7 +377,7 @@ In many cases, TypeScript can even just *infer* (or “figure out”) the types 
 
 ```ts
 let msg = "hello there!";
-    
+
 let msg: string
 ```
 
@@ -395,11 +395,10 @@ Let’s take a look at what happens when we compile the above function `greet` w
 
 ```ts
 "use strict";
-function greet(person, date) {
-    console.log("Hello ".concat(person, ", today is ").concat(date.toDateString(), "!"));
+functiongreet(person, date) {
+console.log("Hello ".concat(person, ", today is ").concat(date.toDateString(), "!"));
 }
-greet("Maddison", new Date());
- 
+greet("Maddison", newDate());
 ```
 
 Notice two things here:
@@ -442,9 +441,9 @@ So running `tsc --target es2015 hello.ts` gives us the following output:
 
 ```js
 function greet(person, date) {
-  console.log(`Hello ${person}, today is ${date.toDateString()}!`);
+console.log(`Hello ${person}, today is ${date.toDateString()}!`);
 }
-greet("Maddison", new Date());
+greet("Maddison", newDate());
 ```
 
 > While the default target is ES3, the great majority of current browsers support ES2015.
@@ -481,5 +480,5 @@ Turning on the [`noImplicitAny` ↗](https://www.typescriptlang.org/tsconfig.htm
 ## `strictNullChecks` {#strictnullchecks}
 
 By default, values like `null` and `undefined` are assignable to any other type.
-This can make writing some code easier, but forgetting to handle `null` and `undefined` is the cause of countless bugs in the world - some consider it a [billion dollar mistake](https://www.youtube.com/watch?v=ybrQvs4x0Ps)!
+This can make writing some code easier, but forgetting to handle `null` and `undefined` is the cause of countless bugs in the world - some consider it a [billion dollar mistake ↗](https://www.youtube.com/watch?v=ybrQvs4x0Ps)!
 The [`strictNullChecks` ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks) flag makes handling `null` and `undefined` more explicit, and *spares* us from worrying about whether we *forgot* to handle `null` and `undefined`.

@@ -14,12 +14,12 @@ In prior versions of TypeScript, unions of callable types could *only* be invoke
 
 ```ts
 type Fruit = "apple" | "orange";
-type Color = "red" | "orange";
+typeColor = "red" | "orange";
 
-type FruitEater = (fruit: Fruit) => number; // eats and ranks the fruit
-type ColorConsumer = (color: Color) => string; // consumes and describes the colors
+typeFruitEater = (fruit: Fruit) =>number; // eats and ranks the fruit
+typeColorConsumer = (color: Color) =>string; // consumes and describes the colors
 
-declare let f: FruitEater | ColorConsumer;
+declareletf: FruitEater | ColorConsumer;
 
 // Cannot invoke an expression whose type lacks a call signature.
 //   Type 'FruitEater | ColorConsumer' has no compatible call signatures.ts(2349)
@@ -32,12 +32,12 @@ In TypeScript 3.3, this is no longer an error.
 
 ```ts
 type Fruit = "apple" | "orange";
-type Color = "red" | "orange";
+typeColor = "red" | "orange";
 
-type FruitEater = (fruit: Fruit) => number; // eats and ranks the fruit
-type ColorConsumer = (color: Color) => string; // consumes and describes the colors
+typeFruitEater = (fruit: Fruit) =>number; // eats and ranks the fruit
+typeColorConsumer = (color: Color) =>string; // consumes and describes the colors
 
-declare let f: FruitEater | ColorConsumer;
+declareletf: FruitEater | ColorConsumer;
 
 f("orange"); // It works! Returns a 'number | string'.
 
@@ -61,19 +61,19 @@ On the other hand, methods like `forEach` will now be callable, but under [`noIm
 
 ```ts
 interface Dog {
-  kind: "dog";
-  dogProp: any;
+kind: "dog";
+dogProp: any;
 }
-interface Cat {
-  kind: "cat";
-  catProp: any;
+interfaceCat {
+kind: "cat";
+catProp: any;
 }
 
-const catOrDogArray: Dog[] | Cat[] = [];
+constcatOrDogArray: Dog[] | Cat[] = [];
 
-catOrDogArray.forEach(animal => {
-  //                ~~~~~~ error!
-  // Parameter 'animal' implicitly has an 'any' type.
+catOrDogArray.forEach(animal=> {
+//                ~~~~~~ error!
+// Parameter 'animal' implicitly has an 'any' type.
 });
 ```
 
@@ -81,22 +81,22 @@ This is still strictly more capable in TypeScript 3.3, and adding an explicit ty
 
 ```ts
 interface Dog {
-  kind: "dog";
-  dogProp: any;
+kind: "dog";
+dogProp: any;
 }
-interface Cat {
-  kind: "cat";
-  catProp: any;
+interfaceCat {
+kind: "cat";
+catProp: any;
 }
 
-const catOrDogArray: Dog[] | Cat[] = [];
+constcatOrDogArray: Dog[] | Cat[] = [];
 catOrDogArray.forEach((animal: Dog | Cat) => {
-  if (animal.kind === "dog") {
-    animal.dogProp;
-    // ...
-  } else if (animal.kind === "cat") {
-    animal.catProp;
-    // ...
+if (animal.kind === "dog") {
+animal.dogProp;
+// ...
+  } elseif (animal.kind === "cat") {
+animal.catProp;
+// ...
   }
 });
 ```
@@ -118,4 +118,4 @@ An update in one project under `--build --watch` mode would force a full build o
 In TypeScript 3.3, `--build` mode’s `--watch` flag *does* leverage incremental file watching as well.
 That can mean significantly faster builds under `--build --watch`.
 In our testing, this functionality has resulted in **a reduction of 50% to 75% in build times** of the original `--build --watch` times.
-[You can read more on the original pull request for the change](https://github.com/Microsoft/TypeScript/pull/29161) to see specific numbers, but we believe most composite project users will see significant wins here.
+[You can read more on the original pull request for the change ↗](https://github.com/Microsoft/TypeScript/pull/29161) to see specific numbers, but we believe most composite project users will see significant wins here.

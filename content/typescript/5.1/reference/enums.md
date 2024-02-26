@@ -23,10 +23,10 @@ An enum can be defined using the `enum` keyword.
 
 ```ts
 enum Direction {
-  Up = 1,
-  Down,
-  Left,
-  Right,
+Up = 1,
+Down,
+Left,
+Right,
 }
 ```
 
@@ -40,10 +40,10 @@ If we wanted, we could leave off the initializers entirely:
 
 ```ts
 enum Direction {
-  Up,
-  Down,
-  Left,
-  Right,
+Up,
+Down,
+Left,
+Right,
 }
 ```
 
@@ -56,18 +56,18 @@ Using an enum is simple: just access any member as a property off of the enum it
 
 ```ts
 enum UserResponse {
-  No = 0,
-  Yes = 1,
+No = 0,
+Yes = 1,
 }
- 
-function respond(recipient: string, message: UserResponse): void {
-  // ...
+
+functionrespond(recipient: string, message: UserResponse): void {
+// ...
 }
- 
+
 respond("Princess Caroline", UserResponse.Yes);
 ```
 
-Numeric enums can be mixed in [computed and constant members (see below) ↗](https://www.typescriptlang.org/docs/handbook/enums.html#computed-and-constant-members).
+Numeric enums can be mixed in [computed and constant members (see below)](/typescript/5.1/reference/enums#computed-and-constant-members).
 The short story is, enums without initializers either need to be first, or have to come after numeric enums initialized with numeric constants or other constant enum members.
 In other words, the following isn’t allowed:
 
@@ -75,8 +75,8 @@ In other words, the following isn’t allowed:
 
 ```ts
 enum E {
-  A = getSomeValue(),
-  B,
+A = getSomeValue(),
+B,
 }
 ```
 
@@ -86,22 +86,22 @@ Enum member must have initializer.
 
 ## String enums {#string-enums}
 
-String enums are a similar concept, but have some subtle [runtime differences ↗](https://www.typescriptlang.org/docs/handbook/enums.html#enums-at-runtime) as documented below.
+String enums are a similar concept, but have some subtle [runtime differences](/typescript/5.1/reference/enums#enums-at-runtime) as documented below.
 In a string enum, each member has to be constant-initialized with a string literal, or with another string enum member.
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/KYOwrgtgBAIglgJ2AYwC5wPYigbwFBRQCqADlALxQBERAClQDQGwYDu2lVMA8gOoByjZgBlgAM1QVqwgKIAxACpDCAJTgBzABaTOKgJIBxABJKmAXyA)
 
 ```ts
 enum Direction {
-  Up = "UP",
-  Down = "DOWN",
-  Left = "LEFT",
-  Right = "RIGHT",
+Up = "UP",
+Down = "DOWN",
+Left = "LEFT",
+Right = "RIGHT",
 }
 ```
 
 While string enums don’t have auto-incrementing behavior, string enums have the benefit that they “serialize” well.
-In other words, if you were debugging and had to read the runtime value of a numeric enum, the value is often opaque - it doesn’t convey any useful meaning on its own (though [reverse mapping ↗](https://www.typescriptlang.org/docs/handbook/enums.html#reverse-mappings) can often help). String enums allow you to give a meaningful and readable value when your code runs, independent of the name of the enum member itself.
+In other words, if you were debugging and had to read the runtime value of a numeric enum, the value is often opaque - it doesn’t convey any useful meaning on its own (though [reverse mapping](/typescript/5.1/reference/enums#reverse-mappings) can often help). String enums allow you to give a meaningful and readable value when your code runs, independent of the name of the enum member itself.
 
 ## Heterogeneous enums {#heterogeneous-enums}
 
@@ -111,8 +111,8 @@ Technically enums can be mixed with string and numeric members, but it’s not c
 
 ```ts
 enum BooleanLikeHeterogeneousEnum {
-  No = 0,
-  Yes = "YES",
+No = 0,
+Yes = "YES",
 }
 ```
 
@@ -129,8 +129,8 @@ An enum member is considered constant if:
 
   ```ts
   // E.X is constant:
-  enum E {
-    X,
+  enumE {
+  X,
   }
   ```
 
@@ -141,17 +141,17 @@ An enum member is considered constant if:
 
   ```ts
   // All enum members in 'E1' and 'E2' are constant.
- 
-  enum E1 {
-    X,
-    Y,
-    Z,
+
+  enumE1 {
+  X,
+  Y,
+  Z,
   }
- 
-  enum E2 {
-    A = 1,
-    B,
-    C,
+
+  enumE2 {
+  A = 1,
+  B,
+  C,
   }
   ```
 
@@ -171,13 +171,13 @@ In all other cases enum member is considered computed.
 
 ```ts
 enum FileAccess {
-  // constant members
-  None,
-  Read = 1 << 1,
-  Write = 1 << 2,
-  ReadWrite = Read | Write,
-  // computed member
-  G = "123".length,
+// constant members
+None,
+Read = 1 << 1,
+Write = 1 << 2,
+ReadWrite = Read | Write,
+// computed member
+G = "123".length,
 }
 ```
 
@@ -199,23 +199,23 @@ For example, we can say that certain members can *only* have the value of an enu
 
 ```ts
 enum ShapeKind {
-  Circle,
-  Square,
+Circle,
+Square,
 }
- 
-interface Circle {
-  kind: ShapeKind.Circle;
-  radius: number;
+
+interfaceCircle {
+kind: ShapeKind.Circle;
+radius: number;
 }
- 
-interface Square {
-  kind: ShapeKind.Square;
-  sideLength: number;
+
+interfaceSquare {
+kind: ShapeKind.Square;
+sideLength: number;
 }
- 
-let c: Circle = {
-  kind: ShapeKind.Square,
-  radius: 100,
+
+letc: Circle = {
+kind:ShapeKind.Square,
+radius:100,
 };
 ```
 
@@ -232,13 +232,13 @@ For example:
 
 ```ts
 enum E {
-  Foo,
-  Bar,
+Foo,
+Bar,
 }
- 
-function f(x: E) {
-  if (x !== E.Foo || x !== E.Bar) {
-    //
+
+functionf(x: E) {
+if (x !== E.Foo || x !== E.Bar) {
+//
   }
 }
 ```
@@ -260,9 +260,9 @@ For example, the following enum
 
 ```ts
 enum E {
-  X,
-  Y,
-  Z,
+X,
+Y,
+Z,
 }
 ```
 
@@ -272,15 +272,15 @@ can actually be passed around to functions
 
 ```ts
 enum E {
-  X,
-  Y,
-  Z,
+X,
+Y,
+Z,
 }
- 
-function f(obj: { X: number }) {
-  return obj.X;
+
+functionf(obj: { X: number }) {
+returnobj.X;
 }
- 
+
 // Works, since 'E' has a property named 'X' which is a number.
 f(E);
 ```
@@ -293,24 +293,24 @@ Even though Enums are real objects that exist at runtime, the `keyof` keyword wo
 
 ```ts
 enum LogLevel {
-  ERROR,
-  WARN,
-  INFO,
-  DEBUG,
+ERROR,
+WARN,
+INFO,
+DEBUG,
 }
- 
+
 /**
  * This is equivalent to:
  * type LogLevelStrings = 'ERROR' | 'WARN' | 'INFO' | 'DEBUG';
  */
-type LogLevelStrings = keyof typeof LogLevel;
- 
-function printImportant(key: LogLevelStrings, message: string) {
-  const num = LogLevel[key];
-  if (num <= LogLevel.WARN) {
-    console.log("Log level key is:", key);
-    console.log("Log level value is:", num);
-    console.log("Log level message is:", message);
+typeLogLevelStrings = keyoftypeofLogLevel;
+
+functionprintImportant(key: LogLevelStrings, message: string) {
+constnum = LogLevel[key];
+if (num <= LogLevel.WARN) {
+console.log("Log level key is:", key);
+console.log("Log level value is:", num);
+console.log("Log level message is:", message);
   }
 }
 printImportant("ERROR", "This is a message");
@@ -325,11 +325,11 @@ For example, in this example:
 
 ```ts
 enum Enum {
-  A,
+A,
 }
- 
-let a = Enum.A;
-let nameOfA = Enum[a]; // "A"
+
+leta = Enum.A;
+letnameOfA = Enum[a]; // "A"
 ```
 
 TypeScript compiles this down to the following JavaScript:
@@ -338,13 +338,12 @@ TypeScript compiles this down to the following JavaScript:
 
 ```ts
 "use strict";
-var Enum;
+varEnum;
 (function (Enum) {
-    Enum[Enum["A"] = 0] = "A";
+Enum[Enum["A"] = 0] = "A";
 })(Enum || (Enum = {}));
-let a = Enum.A;
-let nameOfA = Enum[a]; // "A"
- 
+leta = Enum.A;
+letnameOfA = Enum[a]; // "A"
 ```
 
 In this generated code, an enum is compiled into an object that stores both forward (`name` -> `value`) and reverse (`value` -> `name`) mappings.
@@ -363,8 +362,8 @@ Const enums are defined using the `const` modifier on our enums:
 
 ```ts
 const enum Enum {
-  A = 1,
-  B = A * 2,
+A = 1,
+B = A * 2,
 }
 ```
 
@@ -376,17 +375,17 @@ This is possible since const enums cannot have computed members.
 
 ```ts
 const enum Direction {
-  Up,
-  Down,
-  Left,
-  Right,
+Up,
+Down,
+Left,
+Right,
 }
- 
-let directions = [
-  Direction.Up,
-  Direction.Down,
-  Direction.Left,
-  Direction.Right,
+
+letdirections = [
+Direction.Up,
+Direction.Down,
+Direction.Left,
+Direction.Right,
 ];
 ```
 
@@ -396,13 +395,12 @@ in generated code will become
 
 ```ts
 "use strict";
-let directions = [
-    0 /* Direction.Up */,
-    1 /* Direction.Down */,
-    2 /* Direction.Left */,
-    3 /* Direction.Right */,
+letdirections = [
+0/* Direction.Up */,
+1/* Direction.Down */,
+2/* Direction.Left */,
+3/* Direction.Right */,
 ];
- 
 ```
 
 #### Const enum pitfalls {#const-enum-pitfalls}
@@ -413,22 +411,22 @@ These pitfalls pertain to *ambient* const enums only (basically const enums in `
 1. For the reasons laid out in the [`isolatedModules` documentation ↗](https://www.typescriptlang.org/tsconfig.html#references-to-const-enum-members), that mode is fundamentally incompatible with ambient const enums.
   This means if you publish ambient const enums, downstream consumers will not be able to use [`isolatedModules` ↗](https://www.typescriptlang.org/tsconfig.html#isolatedModules) and those enum values at the same time.
 2. You can easily inline values from version A of a dependency at compile time, and import version B at runtime.
-  Version A and B’s enums can have different values, if you are not very careful, resulting in [surprising bugs](https://github.com/microsoft/TypeScript/issues/5219#issue-110947903), like taking the wrong branches of `if` statements.
+  Version A and B’s enums can have different values, if you are not very careful, resulting in [surprising bugs ↗](https://github.com/microsoft/TypeScript/issues/5219#issue-110947903), like taking the wrong branches of `if` statements.
   These bugs are especially pernicious because it is common to run automated tests at roughly the same time as projects are built, with the same dependency versions, which misses these bugs completely.
 3. [`importsNotUsedAsValues: "preserve"` ↗](https://www.typescriptlang.org/tsconfig.html#importsNotUsedAsValues) will not elide imports for const enums used as values, but ambient const enums do not guarantee that runtime `.js` files exist.
   The unresolvable imports cause errors at runtime.
-  The usual way to unambiguously elide imports, [type-only imports ↗](https://www.typescriptlang.org/docs/handbook/modules.html#importing-types), [does not allow const enum values](https://github.com/microsoft/TypeScript/issues/40344), currently.
+  The usual way to unambiguously elide imports, [type-only imports](/typescript/5.1/reference/modules#importing-types), [does not allow const enum values ↗](https://github.com/microsoft/TypeScript/issues/40344), currently.
 
 Here are two approaches to avoiding these pitfalls:
 
 1. Do not use const enums at all.
-  You can easily [ban const enums](https://typescript-eslint.io/linting/troubleshooting#how-can-i-ban-specific-language-feature) with the help of a linter.
+  You can easily [ban const enums ↗](https://typescript-eslint.io/linting/troubleshooting#how-can-i-ban-specific-language-feature) with the help of a linter.
   Obviously this avoids any issues with const enums, but prevents your project from inlining its own enums.
   Unlike inlining enums from other projects, inlining a project’s own enums is not problematic and has performance implications.
 2. Do not publish ambient const enums, by deconstifying them with the help of [`preserveConstEnums` ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums).
-  This is the approach taken internally by the [TypeScript project itself](https://github.com/microsoft/TypeScript/pull/5422).
+  This is the approach taken internally by the [TypeScript project itself ↗](https://github.com/microsoft/TypeScript/pull/5422).
   [`preserveConstEnums` ↗](https://www.typescriptlang.org/tsconfig.html#preserveConstEnums) emits the same JavaScript for const enums as plain enums.
-  You can then safely strip the `const` modifier from `.d.ts` files [in a build step](https://github.com/microsoft/TypeScript/blob/1a981d1df1810c868a66b3828497f049a944951c/Gulpfile.js#L144).
+  You can then safely strip the `const` modifier from `.d.ts` files [in a build step ↗](https://github.com/microsoft/TypeScript/blob/1a981d1df1810c868a66b3828497f049a944951c/Gulpfile.js#L144).
   This way downstream consumers will not inline enums from your project, avoiding the pitfalls above, but a project can still inline its own enums, unlike banning const enums entirely.
 
 ## Ambient enums {#ambient-enums}
@@ -439,9 +437,9 @@ Ambient enums are used to describe the shape of already existing enum types.
 
 ```ts
 declare enum Enum {
-  A = 1,
-  B,
-  C = 2,
+A = 1,
+B,
+C = 2,
 }
 ```
 
@@ -456,36 +454,36 @@ In modern TypeScript, you may not need an enum when an object with `as const` co
 
 ```ts
 const enum EDirection {
-  Up,
-  Down,
-  Left,
-  Right,
+Up,
+Down,
+Left,
+Right,
 }
- 
-const ODirection = {
-  Up: 0,
-  Down: 1,
-  Left: 2,
-  Right: 3,
-} as const;
- 
+
+constODirection = {
+Up:0,
+Down:1,
+Left:2,
+Right:3,
+} asconst;
+
 EDirection.Up;
-           
+
 (enum member) EDirection.Up = 0
- 
+
 ODirection.Up;
-           
+
 (property) Up: 0
- 
+
 // Using the enum as a parameter
-function walk(dir: EDirection) {}
- 
+functionwalk(dir: EDirection) {}
+
 // It requires an extra line to pull out the values
-type Direction = typeof ODirection[keyof typeof ODirection];
-function run(dir: Direction) {}
- 
+typeDirection = typeofODirection[keyoftypeofODirection];
+functionrun(dir: Direction) {}
+
 walk(EDirection.Left);
 run(ODirection.Right);
 ```
 
-The biggest argument in favour of this format over TypeScript’s `enum` is that it keeps your codebase aligned with the state of JavaScript, and [when/if](https://github.com/rbuckton/proposal-enum) enums are added to JavaScript then you can move to the additional syntax.
+The biggest argument in favour of this format over TypeScript’s `enum` is that it keeps your codebase aligned with the state of JavaScript, and [when/if ↗](https://github.com/rbuckton/proposal-enum) enums are added to JavaScript then you can move to the additional syntax.

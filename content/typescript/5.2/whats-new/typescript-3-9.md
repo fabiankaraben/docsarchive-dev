@@ -15,34 +15,34 @@ Unfortunately, that introduced a few regressions, especially when mixing in valu
 
 ```ts
 interface Lion {
-  roar(): void;
+roar(): void;
 }
 
-interface Seal {
-  singKissFromARose(): void;
+interfaceSeal {
+singKissFromARose(): void;
 }
 
-async function visitZoo(
-  lionExhibit: Promise<Lion>,
-  sealExhibit: Promise<Seal | undefined>
+asyncfunctionvisitZoo(
+lionExhibit: Promise<Lion>,
+sealExhibit: Promise<Seal | undefined>
 ) {
-  let [lion, seal] = await Promise.all([lionExhibit, sealExhibit]);
-  lion.roar(); // uh oh
-  //  ~~~~
-  // Object is possibly 'undefined'.
+let [lion, seal] = awaitPromise.all([lionExhibit, sealExhibit]);
+lion.roar(); // uh oh
+//  ~~~~
+// Object is possibly 'undefined'.
 }
 ```
 
 This is strange behavior!
 The fact that `sealExhibit` contained an `undefined` somehow poisoned type of `lion` to include `undefined`.
 
-Thanks to [a pull request](https://github.com/microsoft/TypeScript/pull/34501) from [Jack Bates](https://github.com/jablko), this has been fixed with improvements in our inference process in TypeScript 3.9.
+Thanks to [a pull request ↗](https://github.com/microsoft/TypeScript/pull/34501) from [Jack Bates ↗](https://github.com/jablko), this has been fixed with improvements in our inference process in TypeScript 3.9.
 The above no longer errors.
 If you’ve been stuck on older versions of TypeScript due to issues around `Promise`s, we encourage you to give 3.9 a shot!
 
 ### What About the `awaited` Type? {#what-about-the-awaited-type}
 
-If you’ve been following our issue tracker and design meeting notes, you might be aware of some work around [a new type operator called `awaited`](https://github.com/microsoft/TypeScript/pull/35998).
+If you’ve been following our issue tracker and design meeting notes, you might be aware of some work around [a new type operator called `awaited` ↗](https://github.com/microsoft/TypeScript/pull/35998).
 This goal of this type operator is to accurately model the way that `Promise` unwrapping works in JavaScript.
 
 We initially anticipated shipping `awaited` in TypeScript 3.9, but as we’ve run early TypeScript builds with existing codebases, we’ve realized that the feature needs more design work before we can roll it out to everyone smoothly.
@@ -55,19 +55,19 @@ TypeScript 3.9 ships with many new speed improvements.
 Our team has been focusing on performance after observing extremely poor editing/compilation speed with packages like material-ui and styled-components.
 We’ve dived deep here, with a series of different pull requests that optimize certain pathological cases involving large unions, intersections, conditional types, and mapped types.
 
-- [https://github.com/microsoft/TypeScript/pull/36576](https://github.com/microsoft/TypeScript/pull/36576)
-- [https://github.com/microsoft/TypeScript/pull/36590](https://github.com/microsoft/TypeScript/pull/36590)
-- [https://github.com/microsoft/TypeScript/pull/36607](https://github.com/microsoft/TypeScript/pull/36607)
-- [https://github.com/microsoft/TypeScript/pull/36622](https://github.com/microsoft/TypeScript/pull/36622)
-- [https://github.com/microsoft/TypeScript/pull/36754](https://github.com/microsoft/TypeScript/pull/36754)
-- [https://github.com/microsoft/TypeScript/pull/36696](https://github.com/microsoft/TypeScript/pull/36696)
+- [https://github.com/microsoft/TypeScript/pull/36576 ↗](https://github.com/microsoft/TypeScript/pull/36576)
+- [https://github.com/microsoft/TypeScript/pull/36590 ↗](https://github.com/microsoft/TypeScript/pull/36590)
+- [https://github.com/microsoft/TypeScript/pull/36607 ↗](https://github.com/microsoft/TypeScript/pull/36607)
+- [https://github.com/microsoft/TypeScript/pull/36622 ↗](https://github.com/microsoft/TypeScript/pull/36622)
+- [https://github.com/microsoft/TypeScript/pull/36754 ↗](https://github.com/microsoft/TypeScript/pull/36754)
+- [https://github.com/microsoft/TypeScript/pull/36696 ↗](https://github.com/microsoft/TypeScript/pull/36696)
 
 Each of these pull requests gains about a 5-10% reduction in compile times on certain codebases.
 In total, we believe we’ve achieved around a 40% reduction in material-ui’s compile time!
 
 We also have some changes to file renaming functionality in editor scenarios.
 We heard from the Visual Studio Code team that when renaming a file, just figuring out which import statements needed to be updated could take between 5 to 10 seconds.
-TypeScript 3.9 addresses this issue by [changing the internals of how the compiler and language service caches file lookups](https://github.com/microsoft/TypeScript/pull/37055).
+TypeScript 3.9 addresses this issue by [changing the internals of how the compiler and language service caches file lookups ↗](https://github.com/microsoft/TypeScript/pull/37055).
 
 While there’s still room for improvement, we hope this work translates to a snappier experience for everyone!
 
@@ -78,10 +78,10 @@ The function’s types declare that it takes two `string`s so that other TypeScr
 
 ```ts
 function doStuff(abc: string, xyz: string) {
-  assert(typeof abc === "string");
-  assert(typeof xyz === "string");
+assert(typeofabc === "string");
+assert(typeofxyz === "string");
 
-  // do some stuff
+// do some stuff
 }
 ```
 
@@ -90,7 +90,7 @@ We’d like to test this behavior, so we’ll write a unit test.
 
 ```ts
 expect(() => {
-  doStuff(123, 456);
+doStuff(123, 456);
 }).toThrow();
 ```
 
@@ -126,8 +126,8 @@ results in the error
 Unused '@ts-expect-error' directive.
 ```
 
-We’d like to extend a big thanks to [Josh Goldberg](https://github.com/JoshuaKGoldberg), the contributor who implemented this feature.
-For more information, you can take a look at [the `ts-expect-error` pull request](https://github.com/microsoft/TypeScript/pull/36014).
+We’d like to extend a big thanks to [Josh Goldberg ↗](https://github.com/JoshuaKGoldberg), the contributor who implemented this feature.
+For more information, you can take a look at [the `ts-expect-error` pull request ↗](https://github.com/microsoft/TypeScript/pull/36014).
 
 ### `ts-ignore` or `ts-expect-error`? {#ts-ignore-or-ts-expect-error}
 
@@ -155,52 +155,52 @@ In TypeScript 3.7 we introduced *uncalled function checks* to report an error wh
 
 ```ts
 function hasImportantPermissions(): boolean {
-  // ...
+// ...
 }
 
 // Oops!
 if (hasImportantPermissions) {
-  //  ~~~~~~~~~~~~~~~~~~~~~~~
-  // This condition will always return true since the function is always defined.
-  // Did you mean to call it instead?
-  deleteAllTheImportantFiles();
+//  ~~~~~~~~~~~~~~~~~~~~~~~
+// This condition will always return true since the function is always defined.
+// Did you mean to call it instead?
+deleteAllTheImportantFiles();
 }
 ```
 
 However, this error only applied to conditions in `if` statements.
-Thanks to [a pull request](https://github.com/microsoft/TypeScript/pull/36402) from [Alexander Tarasyuk](https://github.com/a-tarasyuk), this feature is also now supported in ternary conditionals (i.e. the `cond ? trueExpr : falseExpr` syntax).
+Thanks to [a pull request ↗](https://github.com/microsoft/TypeScript/pull/36402) from [Alexander Tarasyuk ↗](https://github.com/a-tarasyuk), this feature is also now supported in ternary conditionals (i.e. the `cond ? trueExpr : falseExpr` syntax).
 
 ```ts
 declare function listFilesOfDirectory(dirPath: string): string[];
-declare function isDirectory(): boolean;
+declarefunctionisDirectory(): boolean;
 
-function getAllFiles(startFileName: string) {
-  const result: string[] = [];
-  traverse(startFileName);
-  return result;
+functiongetAllFiles(startFileName: string) {
+constresult: string[] = [];
+traverse(startFileName);
+returnresult;
 
-  function traverse(currentPath: string) {
-    return isDirectory
+functiontraverse(currentPath: string) {
+returnisDirectory
       ? //     ~~~~~~~~~~~
-        // This condition will always return true
-        // since the function is always defined.
-        // Did you mean to call it instead?
-        listFilesOfDirectory(currentPath).forEach(traverse)
+// This condition will always return true
+// since the function is always defined.
+// Did you mean to call it instead?
+listFilesOfDirectory(currentPath).forEach(traverse)
       : result.push(currentPath);
   }
 }
 ```
 
-[https://github.com/microsoft/TypeScript/issues/36048](https://github.com/microsoft/TypeScript/issues/36048)
+[https://github.com/microsoft/TypeScript/issues/36048 ↗](https://github.com/microsoft/TypeScript/issues/36048)
 
 ## Editor Improvements {#editor-improvements}
 
 The TypeScript compiler not only powers the TypeScript editing experience in most major editors, it also powers the JavaScript experience in the Visual Studio family of editors and more.
 Using new TypeScript/JavaScript functionality in your editor will differ depending on your editor, but
 
-- Visual Studio Code supports [selecting different versions of TypeScript](https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript). Alternatively, there’s the [JavaScript/TypeScript Nightly Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next) to stay on the bleeding edge (which is typically very stable).
-- Visual Studio 2017/2019 have [the SDK installers above] and [MSBuild installs](https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild).
-- Sublime Text 3 supports [selecting different versions of TypeScript](https://github.com/microsoft/TypeScript-Sublime-Plugin#note-using-different-versions-of-typescript)
+- Visual Studio Code supports [selecting different versions of TypeScript ↗](https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript). Alternatively, there’s the [JavaScript/TypeScript Nightly Extension ↗](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next) to stay on the bleeding edge (which is typically very stable).
+- Visual Studio 2017/2019 have [the SDK installers above] and [MSBuild installs ↗](https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild).
+- Sublime Text 3 supports [selecting different versions of TypeScript ↗](https://github.com/microsoft/TypeScript-Sublime-Plugin#note-using-different-versions-of-typescript)
 
 ### CommonJS Auto-Imports in JavaScript {#commonjs-auto-imports-in-javascript}
 
@@ -223,7 +223,7 @@ TypeScript now automatically detects the types of imports you’re using to keep
 
 
 
-For more details on the change, see [the corresponding pull request](https://github.com/microsoft/TypeScript/pull/37027).
+For more details on the change, see [the corresponding pull request ↗](https://github.com/microsoft/TypeScript/pull/37027).
 
 ### Code Actions Preserve Newlines {#code-actions-preserve-newlines}
 
@@ -234,12 +234,12 @@ As a really basic example, take the following code.
 const maxValue = 100;
 
 /*start*/
-for (let i = 0; i <= maxValue; i++) {
-  // First get the squared value.
-  let square = i ** 2;
+for (leti = 0; i <= maxValue; i++) {
+// First get the squared value.
+letsquare = i ** 2;
 
-  // Now print the squared value.
-  console.log(square);
+// Now print the squared value.
+console.log(square);
 }
 /*end*/
 ```
@@ -251,12 +251,12 @@ const maxValue = 100;
 
 printSquares();
 
-function printSquares() {
-  for (let i = 0; i <= maxValue; i++) {
-    // First get the squared value.
-    let square = i ** 2;
-    // Now print the squared value.
-    console.log(square);
+functionprintSquares() {
+for (leti = 0; i <= maxValue; i++) {
+// First get the squared value.
+letsquare = i ** 2;
+// Now print the squared value.
+console.log(square);
   }
 }
 ```
@@ -271,13 +271,13 @@ const maxValue = 100;
 
 printSquares();
 
-function printSquares() {
-  for (let i = 0; i <= maxValue; i++) {
-    // First get the squared value.
-    let square = i ** 2;
+functionprintSquares() {
+for (leti = 0; i <= maxValue; i++) {
+// First get the squared value.
+letsquare = i ** 2;
 
-    // Now print the squared value.
-    console.log(square);
+// Now print the squared value.
+console.log(square);
   }
 }
 ```
@@ -292,11 +292,11 @@ There are occasions where we might forget to return the value of the last statem
 
 ```ts
 // before
-let f1 = () => 42;
+letf1 = () =>42;
 
 // oops - not the same!
-let f2 = () => {
-  42;
+letf2 = () => {
+42;
 };
 ```
 
@@ -314,8 +314,8 @@ One case where this slightly fell over is when a `tsconfig.json` simply existed 
 ```
 // tsconfig.json
 {
-  "[files](/tsconfig.html#files)": [],
-  "[references](/tsconfig.html#references)": [
+"[files](/tsconfig.html#files)": [],
+"[references](/tsconfig.html#references)": [
     { "path": "./tsconfig.shared.json" },
     { "path": "./tsconfig.frontend.json" },
     { "path": "./tsconfig.backend.json" }
@@ -398,20 +398,20 @@ For example, take the following:
 
 ```ts
 interface A {
-  a: number; // notice this is 'number'
+a: number; // notice this is 'number'
 }
 
-interface B {
-  b: string;
+interfaceB {
+b: string;
 }
 
-interface C {
-  a?: boolean; // notice this is 'boolean'
-  b: string;
+interfaceC {
+a?: boolean; // notice this is 'boolean'
+b: string;
 }
 
-declare let x: A & B;
-declare let y: C;
+declareletx: A & B;
+declarelety: C;
 
 y = x;
 ```
@@ -437,20 +437,20 @@ For example
 ```ts
 declare function smushObjects<T, U>(x: T, y: U): T & U;
 
-interface Circle {
-  kind: "circle";
-  radius: number;
+interfaceCircle {
+kind: "circle";
+radius: number;
 }
 
-interface Square {
-  kind: "square";
-  sideLength: number;
+interfaceSquare {
+kind: "square";
+sideLength: number;
 }
 
-declare let x: Circle;
-declare let y: Square;
+declareletx: Circle;
+declarelety: Square;
 
-let z = smushObjects(x, y);
+letz = smushObjects(x, y);
 console.log(z.kind);
 ```
 
@@ -481,7 +481,7 @@ In previous versions of TypeScript, a type parameter constrained to `any` could 
 
 ```ts
 function foo<T extends any>(arg: T) {
-  arg.spfjgerijghoied; // no error!
+arg.spfjgerijghoied; // no error!
 }
 ```
 
@@ -489,9 +489,9 @@ This was an oversight, so TypeScript 3.9 takes a more conservative approach and 
 
 ```ts
 function foo<T extends any>(arg: T) {
-  arg.spfjgerijghoied;
-  //  ~~~~~~~~~~~~~~~
-  // Property 'spfjgerijghoied' does not exist on type 'T'.
+arg.spfjgerijghoied;
+//  ~~~~~~~~~~~~~~~
+// Property 'spfjgerijghoied' does not exist on type 'T'.
 }
 ```
 
@@ -514,32 +514,32 @@ interface AudioTrackList {
      [Symbol.iterator](): IterableIterator<AudioTrack>;
  }
 
-interface HTMLVideoElement {
-  readonly audioTracks: AudioTrackList
+interfaceHTMLVideoElement {
+readonlyaudioTracks: AudioTrackList
 
-  msFrameStep(forward: boolean): void;
-  msInsertVideoEffect(activatableClassId: string, effectRequired: boolean, config?: any): void;
-  msSetVideoRectangle(left: number, top: number, right: number, bottom: number): void;
-  webkitEnterFullScreen(): void;
-  webkitEnterFullscreen(): void;
-  webkitExitFullScreen(): void;
-  webkitExitFullscreen(): void;
+msFrameStep(forward: boolean): void;
+msInsertVideoEffect(activatableClassId: string, effectRequired: boolean, config?: any): void;
+msSetVideoRectangle(left: number, top: number, right: number, bottom: number): void;
+webkitEnterFullScreen(): void;
+webkitEnterFullscreen(): void;
+webkitExitFullScreen(): void;
+webkitExitFullscreen(): void;
 
-  msHorizontalMirror: boolean;
-  readonly msIsLayoutOptimalForPlayback: boolean;
-  readonly msIsStereo3D: boolean;
-  msStereo3DPackingMode: string;
-  msStereo3DRenderMode: string;
-  msZoom: boolean;
-  onMSVideoFormatChanged: ((this: HTMLVideoElement, ev: Event) => any) | null;
-  onMSVideoFrameStepCompleted: ((this: HTMLVideoElement, ev: Event) => any) | null;
-  onMSVideoOptimalLayoutChanged: ((this: HTMLVideoElement, ev: Event) => any) | null;
-  webkitDisplayingFullscreen: boolean;
-  webkitSupportsFullscreen: boolean;
+msHorizontalMirror: boolean;
+readonlymsIsLayoutOptimalForPlayback: boolean;
+readonlymsIsStereo3D: boolean;
+msStereo3DPackingMode: string;
+msStereo3DRenderMode: string;
+msZoom: boolean;
+onMSVideoFormatChanged: ((this: HTMLVideoElement, ev: Event) =>any) | null;
+onMSVideoFrameStepCompleted: ((this: HTMLVideoElement, ev: Event) =>any) | null;
+onMSVideoOptimalLayoutChanged: ((this: HTMLVideoElement, ev: Event) =>any) | null;
+webkitDisplayingFullscreen: boolean;
+webkitSupportsFullscreen: boolean;
 }
 
-interface MediaError {
-  readonly msExtendedCode: number;
-  readonly MS_MEDIA_ERR_ENCRYPTED: number;
+interfaceMediaError {
+readonlymsExtendedCode: number;
+readonlyMS_MEDIA_ERR_ENCRYPTED: number;
 }
 ```

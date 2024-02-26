@@ -28,7 +28,7 @@ These examples are ordered in approximately increasing order of complexity.
 let result = myLib.makeGreeting("hello, world");
 console.log("The computed greeting is:" + result);
 
-let count = myLib.numberOfGreetings;
+letcount = myLib.numberOfGreetings;
 ```
 
 *Declaration*
@@ -37,8 +37,8 @@ Use `declare namespace` to describe types or values accessed by dotted notation.
 
 ```ts
 declare namespace myLib {
-  function makeGreeting(s: string): string;
-  let numberOfGreetings: number;
+functionmakeGreeting(s: string): string;
+letnumberOfGreetings: number;
 }
 ```
 
@@ -53,14 +53,14 @@ The `getWidget` function accepts a number and returns a Widget, or accepts a str
 ```ts
 let x: Widget = getWidget(43);
 
-let arr: Widget[] = getWidget("all of them");
+letarr: Widget[] = getWidget("all of them");
 ```
 
 *Declaration*
 
 ```ts
 declare function getWidget(n: number): Widget;
-declare function getWidget(s: string): Widget[];
+declarefunctiongetWidget(s: string): Widget[];
 ```
 
 ## Reusable Types (Interfaces) {#reusable-types-interfaces}
@@ -78,8 +78,8 @@ declare function getWidget(s: string): Widget[];
 
 ```ts
 greet({
-  greeting: "hello world",
-  duration: 4000
+greeting:"hello world",
+duration:4000
 });
 ```
 
@@ -89,12 +89,12 @@ Use an `interface` to define a type with properties.
 
 ```ts
 interface GreetingSettings {
-  greeting: string;
-  duration?: number;
-  color?: string;
+greeting: string;
+duration?: number;
+color?: string;
 }
 
-declare function greet(setting: GreetingSettings): void;
+declarefunctiongreet(setting: GreetingSettings): void;
 ```
 
 ## Reusable Types (Type Aliases) {#reusable-types-type-aliases}
@@ -108,13 +108,13 @@ declare function greet(setting: GreetingSettings): void;
 
 ```ts
 function getGreeting() {
-  return "howdy";
+return"howdy";
 }
-class MyGreeter extends Greeter {}
+classMyGreeterextendsGreeter {}
 
 greet("hello");
 greet(getGreeting);
-greet(new MyGreeter());
+greet(newMyGreeter());
 ```
 
 *Declaration*
@@ -124,7 +124,7 @@ You can use a type alias to make a shorthand for a type:
 ```ts
 type GreetingLike = string | (() => string) | MyGreeter;
 
-declare function greet(g: GreetingLike): void;
+declarefunctiongreet(g: GreetingLike): void;
 ```
 
 ## Organizing Types {#organizing-types}
@@ -139,8 +139,8 @@ declare function greet(g: GreetingLike): void;
 
 ```ts
 const g = new Greeter("Hello");
-g.log({ verbose: true });
-g.alert({ modal: false, title: "Current Greeting" });
+g.log({ verbose:true });
+g.alert({ modal:false, title:"Current Greeting" });
 ```
 
 *Declaration*
@@ -149,13 +149,13 @@ Use namespaces to organize types.
 
 ```ts
 declare namespace GreetingLib {
-  interface LogOptions {
-    verbose?: boolean;
+interfaceLogOptions {
+verbose?: boolean;
   }
-  interface AlertOptions {
-    modal: boolean;
-    title?: string;
-    color?: string;
+interfaceAlertOptions {
+modal: boolean;
+title?: string;
+color?: string;
   }
 }
 ```
@@ -164,14 +164,14 @@ You can also create nested namespaces in one declaration:
 
 ```ts
 declare namespace GreetingLib.Options {
-  // Refer to via GreetingLib.Options.Log
-  interface Log {
-    verbose?: boolean;
+// Refer to via GreetingLib.Options.Log
+interfaceLog {
+verbose?: boolean;
   }
-  interface Alert {
-    modal: boolean;
-    title?: string;
-    color?: string;
+interfaceAlert {
+modal: boolean;
+title?: string;
+color?: string;
   }
 }
 ```
@@ -190,9 +190,9 @@ const myGreeter = new Greeter("hello, world");
 myGreeter.greeting = "howdy";
 myGreeter.showGreeting();
 
-class SpecialGreeter extends Greeter {
-  constructor() {
-    super("Very special greetings");
+classSpecialGreeterextendsGreeter {
+constructor() {
+super("Very special greetings");
   }
 }
 ```
@@ -204,10 +204,10 @@ Classes can have properties and methods as well as a constructor.
 
 ```ts
 declare class Greeter {
-  constructor(greeting: string);
+constructor(greeting: string);
 
-  greeting: string;
-  showGreeting(): void;
+greeting: string;
+showGreeting(): void;
 }
 ```
 
@@ -232,7 +232,7 @@ You can also use `declare let` if the variable is block-scoped.
 
 ```ts
 /** The number of widgets present */
-declare var foo: number;
+declarevarfoo: number;
 ```
 
 ## Global Functions {#global-functions}

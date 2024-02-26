@@ -45,7 +45,7 @@ which will change the file to be a module exporting nothing. This syntax works r
 
 ## Modules in TypeScript {#modules-in-typescript}
 
-> Additional Reading:[Impatient JS (Modules)](https://exploringjs.com/impatient-js/ch_modules.html#overview-syntax-of-ecmascript-modules)[MDN: JavaScript Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+> Additional Reading:[Impatient JS (Modules) ↗](https://exploringjs.com/impatient-js/ch_modules.html#overview-syntax-of-ecmascript-modules)[MDN: JavaScript Modules ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 > 
 
 There are three main things to consider when writing module-based code in TypeScript:
@@ -62,8 +62,8 @@ A file can declare a main export via `export default`:
 
 ```ts
 // @filename: hello.ts
-export default function helloWorld() {
-  console.log("Hello, world!");
+exportdefaultfunctionhelloWorld() {
+console.log("Hello, world!");
 }
 ```
 
@@ -82,15 +82,15 @@ In addition to the default export, you can have more than one export of variable
 
 ```ts
 // @filename: maths.ts
-export var pi = 3.14;
-export let squareTwo = 1.41;
-export const phi = 1.61;
- 
-export class RandomNumberGenerator {}
- 
-export function absolute(num: number) {
-  if (num < 0) return num * -1;
-  return num;
+exportvarpi = 3.14;
+exportletsquareTwo = 1.41;
+exportconstphi = 1.61;
+
+exportclassRandomNumberGenerator {}
+
+exportfunctionabsolute(num: number) {
+if (num < 0) returnnum * -1;
+returnnum;
 }
 ```
 
@@ -100,10 +100,10 @@ These can be used in another file via the `import` syntax:
 
 ```ts
 import { pi, phi, absolute } from "./maths.js";
- 
+
 console.log(pi);
-const absPhi = absolute(phi);
-        
+constabsPhi = absolute(phi);
+
 const absPhi: number
 ```
 
@@ -115,9 +115,9 @@ An import can be renamed using a format like `import {old as new}`:
 
 ```ts
 import { pi as π } from "./maths.js";
- 
+
 console.log(π);
-           
+
 (alias) var π: number
 import π
 ```
@@ -128,19 +128,19 @@ You can mix and match the above syntax into a single `import`:
 
 ```ts
 // @filename: maths.ts
-export const pi = 3.14;
-export default class RandomNumberGenerator {}
- 
+exportconstpi = 3.14;
+exportdefaultclassRandomNumberGenerator {}
+
 // @filename: app.ts
-import RandomNumberGenerator, { pi as π } from "./maths.js";
- 
+importRandomNumberGenerator, { piasπ } from"./maths.js";
+
 RandomNumberGenerator;
-         
+
 (alias) class RandomNumberGenerator
 import RandomNumberGenerator
- 
+
 console.log(π);
-           
+
 (alias) const π: 3.14
 import π
 ```
@@ -151,11 +151,11 @@ You can take all of the exported objects and put them into a single namespace us
 
 ```ts
 // @filename: app.ts
-import * as math from "./maths.js";
- 
+import*asmathfrom"./maths.js";
+
 console.log(math.pi);
-const positivePhi = math.absolute(math.phi);
-          
+constpositivePhi = math.absolute(math.phi);
+
 const positivePhi: number
 ```
 
@@ -165,8 +165,8 @@ You can import a file and *not* include any variables into your current module v
 
 ```ts
 // @filename: app.ts
-import "./maths.js";
- 
+import"./maths.js";
+
 console.log("3.14");
 ```
 
@@ -180,16 +180,16 @@ Types can be exported and imported using the same syntax as JavaScript values:
 
 ```ts
 // @filename: animal.ts
-export type Cat = { breed: string; yearOfBirth: number };
- 
-export interface Dog {
-  breeds: string[];
-  yearOfBirth: number;
+exporttypeCat = { breed: string; yearOfBirth: number };
+
+exportinterfaceDog {
+breeds: string[];
+yearOfBirth: number;
 }
- 
+
 // @filename: app.ts
-import { Cat, Dog } from "./animal.js";
-type Animals = Cat | Dog;
+import { Cat, Dog } from"./animal.js";
+typeAnimals = Cat | Dog;
 ```
 
 TypeScript has extended the `import` syntax with two concepts for declaring an import of a type:
@@ -202,17 +202,17 @@ Which is an import statement which can *only* import types:
 
 ```ts
 // @filename: animal.ts
-export type Cat = { breed: string; yearOfBirth: number };
-export type Dog = { breeds: string[]; yearOfBirth: number };
-export const createCatName = () => "fluffy";
- 
+exporttypeCat = { breed: string; yearOfBirth: number };
+exporttypeDog = { breeds: string[]; yearOfBirth: number };
+exportconstcreateCatName = () =>"fluffy";
+
 // @filename: valid.ts
-import type { Cat, Dog } from "./animal.js";
-export type Animals = Cat | Dog;
- 
+importtype { Cat, Dog } from"./animal.js";
+exporttypeAnimals = Cat | Dog;
+
 // @filename: app.ts
-import type { createCatName } from "./animal.js";
-const name = createCatName();
+importtype { createCatName } from"./animal.js";
+constname = createCatName();
 ```
 
 ```text {filename="Generated error"}
@@ -227,10 +227,10 @@ TypeScript 4.5 also allows for individual imports to be prefixed with `type` to 
 
 ```ts
 // @filename: app.ts
-import { createCatName, type Cat, type Dog } from "./animal.js";
- 
-export type Animals = Cat | Dog;
-const name = createCatName();
+import { createCatName, typeCat, typeDog } from"./animal.js";
+
+exporttypeAnimals = Cat | Dog;
+constname = createCatName();
 ```
 
 Together these allow a non-TypeScript transpiler like Babel, swc or esbuild to know what imports can be safely removed.
@@ -243,10 +243,10 @@ TypeScript has ES Module syntax which *directly* correlates to a CommonJS and AM
 
 ```ts
 import fs = require("fs");
-const code = fs.readFileSync("hello.ts", "utf8");
+constcode = fs.readFileSync("hello.ts", "utf8");
 ```
 
-You can learn more about this syntax in the [modules reference page ↗](https://www.typescriptlang.org/docs/handbook/modules.html#export--and-import--require).
+You can learn more about this syntax in the [modules reference page](/typescript/5.1/reference/modules#export--and-import--require).
 
 ## CommonJS Syntax {#commonjs-syntax}
 
@@ -260,15 +260,15 @@ Identifiers are exported via setting the `exports` property on a global called `
 
 ```ts
 function absolute(num: number) {
-  if (num < 0) return num * -1;
-  return num;
+if (num < 0) returnnum * -1;
+returnnum;
 }
- 
+
 module.exports = {
-  pi: 3.14,
-  squareTwo: 1.41,
-  phi: 1.61,
-  absolute,
+pi:3.14,
+squareTwo:1.41,
+phi:1.61,
+absolute,
 };
 ```
 
@@ -279,7 +279,7 @@ Then these files can be imported via a `require` statement:
 ```ts
 const maths = require("./maths");
 maths.pi;
-      
+
 any
 ```
 
@@ -290,7 +290,7 @@ Or you can simplify a bit using the destructuring feature in JavaScript:
 ```ts
 const { squareTwo } = require("./maths");
 squareTwo;
-   
+
 const squareTwo: any
 ```
 
@@ -327,8 +327,8 @@ For example, here is a TypeScript file using ES Modules syntax, showcasing a few
 
 ```ts
 import { valueOfPi } from "./constants.js";
- 
-export const twoPi = valueOfPi * 2;
+
+exportconsttwoPi = valueOfPi * 2;
 ```
 
 #### `ES2020` {#es2020}
@@ -337,8 +337,7 @@ export const twoPi = valueOfPi * 2;
 
 ```ts
 import { valueOfPi } from "./constants.js";
-export const twoPi = valueOfPi * 2;
- 
+exportconsttwoPi = valueOfPi * 2;
 ```
 
 #### `CommonJS` {#commonjs}
@@ -347,11 +346,10 @@ export const twoPi = valueOfPi * 2;
 
 ```ts
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.twoPi = void 0;
-const constants_js_1 = require("./constants.js");
+Object.defineProperty(exports, "__esModule", { value:true });
+exports.twoPi = void0;
+constconstants_js_1 = require("./constants.js");
 exports.twoPi = constants_js_1.valueOfPi * 2;
- 
 ```
 
 #### `UMD` {#umd}
@@ -360,21 +358,20 @@ exports.twoPi = constants_js_1.valueOfPi * 2;
 
 ```ts
 (function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+if (typeofmodule === "object" && typeofmodule.exports === "object") {
+varv = factory(require, exports);
+if (v !== undefined) module.exports = v;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./constants.js"], factory);
+elseif (typeofdefine === "function" && define.amd) {
+define(["require", "exports", "./constants.js"], factory);
     }
 })(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.twoPi = void 0;
-    const constants_js_1 = require("./constants.js");
-    exports.twoPi = constants_js_1.valueOfPi * 2;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value:true });
+exports.twoPi = void0;
+constconstants_js_1 = require("./constants.js");
+exports.twoPi = constants_js_1.valueOfPi * 2;
 });
- 
 ```
 
 > Note that ES2020 is effectively the same as the original `index.ts`.
@@ -384,4 +381,4 @@ You can see all of the available options and what their emitted JavaScript code 
 
 ## TypeScript namespaces {#typescript-namespaces}
 
-TypeScript has its own module format called `namespaces` which pre-dates the ES Modules standard. This syntax has a lot of useful features for creating complex definition files, and still sees active use [in DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped). While not deprecated, the majority of the features in namespaces exist in ES Modules and we recommend you use that to align with JavaScript’s direction. You can learn more about namespaces in [the namespaces reference page](/typescript/5.1/reference/namespaces).
+TypeScript has its own module format called `namespaces` which pre-dates the ES Modules standard. This syntax has a lot of useful features for creating complex definition files, and still sees active use [in DefinitelyTyped ↗](https://github.com/DefinitelyTyped/DefinitelyTyped). While not deprecated, the majority of the features in namespaces exist in ES Modules and we recommend you use that to align with JavaScript’s direction. You can learn more about namespaces in [the namespaces reference page](/typescript/5.1/reference/namespaces).

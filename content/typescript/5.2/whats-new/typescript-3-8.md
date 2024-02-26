@@ -17,7 +17,7 @@ TypeScript 3.8 adds a new syntax for type-only imports and exports.
 ```ts
 import type { SomeThing } from "./some-module.js";
 
-export type { SomeThing };
+exporttype { SomeThing };
 ```
 
 `import type` only imports declarations to be used for type annotations and declarations.
@@ -30,14 +30,14 @@ When using `import type` to import a class, you can’t do things like extend fr
 ```ts
 import type { Component } from "react";
 
-interface ButtonProps {
-  // ...
+interfaceButtonProps {
+// ...
 }
 
-class Button extends Component<ButtonProps> {
-  //               ~~~~~~~~~
-  // error! 'Component' only refers to a type, but is being used as a value here.
-  // ...
+classButtonextendsComponent<ButtonProps> {
+//               ~~~~~~~~~
+// error! 'Component' only refers to a type, but is being used as a value here.
+// ...
 }
 ```
 
@@ -48,7 +48,7 @@ One difference is that we’ve added a few restrictions to avoid code that might
 // Is only 'Foo' a type? Or every declaration in the import?
 // We just give an error because it's not clear.
 
-import type Foo, { Bar, Baz } from "some-module";
+importtypeFoo, { Bar, Baz } from"some-module";
 //     ~~~~~~~~~~~~~~~~~~~~~~
 // error! A type-only import can specify a default import or named bindings, but not both.
 ```
@@ -60,26 +60,26 @@ This flag takes 3 different values:
 - `preserve`: this *preserves* all imports whose values are never used. This can cause imports/side-effects to be preserved.
 - `error`: this preserves all imports (the same as the `preserve` option), but will error when a value import is only used as a type. This might be useful if you want to ensure no values are being accidentally imported, but still make side-effect imports explicit.
 
-For more information about the feature, you can [take a look at the pull request](https://github.com/microsoft/TypeScript/pull/35200), and [relevant changes](https://github.com/microsoft/TypeScript/pull/36092/) around broadening where imports from an `import type` declaration can be used.
+For more information about the feature, you can [take a look at the pull request ↗](https://github.com/microsoft/TypeScript/pull/35200), and [relevant changes ↗](https://github.com/microsoft/TypeScript/pull/36092/) around broadening where imports from an `import type` declaration can be used.
 
 ## ECMAScript Private Fields {#ecmascript-private-fields}
 
-TypeScript 3.8 brings support for ECMAScript’s private fields, part of the [stage-3 class fields proposal](https://github.com/tc39/proposal-class-fields/).
+TypeScript 3.8 brings support for ECMAScript’s private fields, part of the [stage-3 class fields proposal ↗](https://github.com/tc39/proposal-class-fields/).
 
 ```ts
 class Person {
-  #name: string;
+#name: string;
 
-  constructor(name: string) {
-    this.#name = name;
+constructor(name: string) {
+this.#name = name;
   }
 
-  greet() {
-    console.log(`Hello, my name is ${this.#name}!`);
+greet() {
+console.log(`Hello, my name is ${this.#name}!`);
   }
 }
 
-let jeremy = new Person("Jeremy Bearimy");
+letjeremy = newPerson("Jeremy Bearimy");
 
 jeremy.#name;
 //     ~~~~~
@@ -100,22 +100,22 @@ For example, regular property declarations are prone to being overwritten in sub
 
 ```ts
 class C {
-  foo = 10;
+foo = 10;
 
-  cHelper() {
-    return this.foo;
+cHelper() {
+returnthis.foo;
   }
 }
 
-class D extends C {
-  foo = 20;
+classDextendsC {
+foo = 20;
 
-  dHelper() {
-    return this.foo;
+dHelper() {
+returnthis.foo;
   }
 }
 
-let instance = new D();
+letinstance = newD();
 // 'this.foo' refers to the same property on each instance.
 console.log(instance.cHelper()); // prints '20'
 console.log(instance.dHelper()); // prints '20'
@@ -125,22 +125,22 @@ With private fields, you’ll never have to worry about this, since each field n
 
 ```ts
 class C {
-  #foo = 10;
+#foo = 10;
 
-  cHelper() {
-    return this.#foo;
+cHelper() {
+returnthis.#foo;
   }
 }
 
-class D extends C {
-  #foo = 20;
+classDextendsC {
+#foo = 20;
 
-  dHelper() {
-    return this.#foo;
+dHelper() {
+returnthis.#foo;
   }
 }
 
-let instance = new D();
+letinstance = newD();
 // 'this.#foo' refers to a different field within each class.
 console.log(instance.cHelper()); // prints '10'
 console.log(instance.dHelper()); // prints '20'
@@ -150,19 +150,19 @@ Another thing worth noting is that accessing a private field on any other type w
 
 ```ts
 class Square {
-  #sideLength: number;
+#sideLength: number;
 
-  constructor(sideLength: number) {
-    this.#sideLength = sideLength;
+constructor(sideLength: number) {
+this.#sideLength = sideLength;
   }
 
-  equals(other: any) {
-    return this.#sideLength === other.#sideLength;
+equals(other: any) {
+returnthis.#sideLength === other.#sideLength;
   }
 }
 
-const a = new Square(100);
-const b = { sideLength: 100 };
+consta = newSquare(100);
+constb = { sideLength:100 };
 
 // Boom!
 // TypeError: attempted to get private field on non-instance
@@ -174,13 +174,13 @@ Finally, for any plain `.js` file users, private fields *always* have to be decl
 
 ```js
 class C {
-  // No declaration for '#foo'
-  // :(
+// No declaration for '#foo'
+// :(
 
-  constructor(foo: number) {
-    // SyntaxError!
-    // '#foo' needs to be declared before writing to it.
-    this.#foo = foo;
+constructor(foo: number) {
+// SyntaxError!
+// '#foo' needs to be declared before writing to it.
+this.#foo = foo;
   }
 }
 ```
@@ -190,17 +190,17 @@ With private fields, declarations are always needed regardless of whether we’r
 
 ```js
 class C {
-  /** @type {number} */
-  #foo;
+/** @type{number} */
+#foo;
 
-  constructor(foo: number) {
-    // This works.
-    this.#foo = foo;
+constructor(foo: number) {
+// This works.
+this.#foo = foo;
   }
 }
 ```
 
-For more information about the implementation, you can [check out the original pull request](https://github.com/Microsoft/TypeScript/pull/30829)
+For more information about the implementation, you can [check out the original pull request ↗](https://github.com/Microsoft/TypeScript/pull/30829)
 
 ### Which should I use? {#which-should-i-use}
 
@@ -211,19 +211,19 @@ When it comes to properties, TypeScript’s `private` modifiers are fully erased
 
 ```ts
 class C {
-  private foo = 10;
+privatefoo = 10;
 }
 
 // This is an error at compile time,
 // but when TypeScript outputs .js files,
 // it'll run fine and print '10'.
-console.log(new C().foo); // prints '10'
+console.log(newC().foo); // prints '10'
 //                  ~~~
 // error! Property 'foo' is private and only accessible within class 'C'.
 
 // TypeScript allows this at compile-time
 // as a "work-around" to avoid the error.
-console.log(new C()["foo"]); // prints '10'
+console.log(newC()["foo"]); // prints '10'
 ```
 
 The upside is that this sort of “soft privacy” can help your consumers temporarily work around not having access to some API, and also works in any runtime.
@@ -232,15 +232,15 @@ On the other hand, ECMAScript’s `#` privates are completely inaccessible outsi
 
 ```ts
 class C {
-  #foo = 10;
+#foo = 10;
 }
 
-console.log(new C().#foo); // SyntaxError
+console.log(newC().#foo); // SyntaxError
 //                  ~~~~
 // TypeScript reports an error *and*
 // this won't work at runtime!
 
-console.log(new C()["#foo"]); // prints undefined
+console.log(newC()["#foo"]); // prints undefined
 //          ~~~~~~~~~~~~~~~
 // TypeScript reports an error under 'noImplicitAny',
 // and this prints 'undefined'.
@@ -288,12 +288,12 @@ JavaScript users often introduce an `async` function in order to use `await`, an
 
 ```js
 async function main() {
-  const response = await fetch("...");
-  const greeting = await response.text();
-  console.log(greeting);
+constresponse = awaitfetch("...");
+constgreeting = awaitresponse.text();
+console.log(greeting);
 }
 
-main().catch((e) => console.error(e));
+main().catch((e) =>console.error(e));
 ```
 
 This is because previously in JavaScript (along with most other languages with a similar feature), `await` was only allowed within the body of an `async` function.
@@ -301,7 +301,7 @@ However, with top-level `await`, we can use `await` at the top level of a module
 
 ```ts
 const response = await fetch("...");
-const greeting = await response.text();
+constgreeting = awaitresponse.text();
 console.log(greeting);
 
 // Make sure we're a module
@@ -315,7 +315,7 @@ Top level `await` may not work in all environments where you might expect at thi
 Currently, you can only use top level `await` when the [`target` ↗](https://www.typescriptlang.org/tsconfig.html#target) compiler option is `es2017` or above, and `module` is `esnext` or `system`.
 Support within several environments and bundlers may be limited or may require enabling experimental support.
 
-For more information on our implementation, you can [check out the original pull request](https://github.com/microsoft/TypeScript/pull/35813).
+For more information on our implementation, you can [check out the original pull request ↗](https://github.com/microsoft/TypeScript/pull/35813).
 
 ## `es2020` for `target` and `module` {#es2020-for-target-and-module}
 
@@ -336,18 +336,18 @@ These tags work exactly like `public`, `private`, and `protected` respectively w
 ```js
 // @ts-check
 
-class Foo {
-  constructor() {
-    /** @private */
-    this.stuff = 100;
+classFoo {
+constructor() {
+/** @private */
+this.stuff = 100;
   }
 
-  printStuff() {
-    console.log(this.stuff);
+printStuff() {
+console.log(this.stuff);
   }
 }
 
-new Foo().stuff;
+newFoo().stuff;
 //        ~~~~~
 // error! Property 'stuff' is private and only accessible within class 'Foo'.
 ```
@@ -361,20 +361,20 @@ Next, we’ve also added the `@readonly` modifier to ensure that a property is o
 ```js
 // @ts-check
 
-class Foo {
-  constructor() {
-    /** @readonly */
-    this.stuff = 100;
+classFoo {
+constructor() {
+/** @readonly */
+this.stuff = 100;
   }
 
-  writeToStuff() {
-    this.stuff = 200;
-    //   ~~~~~
-    // Cannot assign to 'stuff' because it is a read-only property.
+writeToStuff() {
+this.stuff = 200;
+//   ~~~~~
+// Cannot assign to 'stuff' because it is a read-only property.
   }
 }
 
-new Foo().stuff++;
+newFoo().stuff++;
 //        ~~~~~
 // Cannot assign to 'stuff' because it is a read-only property.
 ```
@@ -393,22 +393,22 @@ Because every project might work better under different strategies, and this new
 
 ```
 {
-  // Some typical compiler options
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[target ↗](https://www.typescriptlang.org/tsconfig.html#target)": "es2020",
-    "[moduleResolution ↗](https://www.typescriptlang.org/tsconfig.html#moduleResolution)": "node"
-    // ...
+// Some typical compiler options
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[target ↗](https://www.typescriptlang.org/tsconfig.html#target)": "es2020",
+"[moduleResolution ↗](https://www.typescriptlang.org/tsconfig.html#moduleResolution)": "node"
+// ...
   },
 
-  // NEW: Options for file/directory watching
-  "watchOptions": {
-    // Use native file system events for files and directories
-    "[watchFile ↗](https://www.typescriptlang.org/tsconfig.html#watchFile)": "useFsEvents",
-    "[watchDirectory ↗](https://www.typescriptlang.org/tsconfig.html#watchDirectory)": "useFsEvents",
+// NEW: Options for file/directory watching
+"watchOptions": {
+// Use native file system events for files and directories
+"[watchFile ↗](https://www.typescriptlang.org/tsconfig.html#watchFile)": "useFsEvents",
+"[watchDirectory ↗](https://www.typescriptlang.org/tsconfig.html#watchDirectory)": "useFsEvents",
 
-    // Poll files for updates more frequently
-    // when they're updated a lot.
-    "[fallbackPolling ↗](https://www.typescriptlang.org/tsconfig.html#fallbackPolling)": "dynamicPriority"
+// Poll files for updates more frequently
+// when they're updated a lot.
+"[fallbackPolling ↗](https://www.typescriptlang.org/tsconfig.html#fallbackPolling)": "dynamicPriority"
   }
 }
 ```
@@ -431,7 +431,7 @@ Because every project might work better under different strategies, and this new
   - `dynamicPriorityPolling`: *(See above.)*
   - `synchronousWatchDirectory`: Disable deferred watching on directories. Deferred watching is useful when lots of file changes might occur at once (e.g. a change in `node_modules` from running `npm install`), but you might want to disable it with this flag for some less-common setups.
 
-For more information on these changes, [head over to GitHub to see the pull request](https://github.com/microsoft/TypeScript/pull/35615) to read more.
+For more information on these changes, [head over to GitHub to see the pull request ↗](https://github.com/microsoft/TypeScript/pull/35615) to read more.
 
 ## “Fast and Loose” Incremental Checking {#fast-and-loose-incremental-checking}
 
@@ -450,4 +450,4 @@ Under [`assumeChangesOnlyAffectDirectDependencies` ↗](https://www.typescriptla
 In a codebase like Visual Studio Code, this reduced rebuild times for changes in certain files from about 14 seconds to about 1 second.
 While we don’t necessarily recommend this option for all codebases, you might be interested if you have an extremely large codebase and are willing to defer full project errors until later (e.g. a dedicated build via a `tsconfig.fullbuild.json` or in CI).
 
-For more details, you can [see the original pull request](https://github.com/microsoft/TypeScript/pull/35711).
+For more details, you can [see the original pull request ↗](https://github.com/microsoft/TypeScript/pull/35711).

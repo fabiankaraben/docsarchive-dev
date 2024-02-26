@@ -14,7 +14,7 @@ In TypeScript, there are several places where type inference is used to provide 
 
 ```ts
 let x = 3;
-   
+
 let x: number
 ```
 
@@ -32,7 +32,7 @@ When a type inference is made from several expressions, the types of those expre
 
 ```ts
 let x = [0, 1, null];
-   
+
 let x: (number | null)[]
 ```
 
@@ -46,7 +46,7 @@ Because the best common type has to be chosen from the provided candidate types,
 
 ```ts
 let zoo = [new Rhino(), new Elephant(), new Snake()];
-    
+
 let zoo: (Rhino | Elephant | Snake)[]
 ```
 
@@ -57,7 +57,7 @@ To correct this, explicitly provide the type when no one type is a super type of
 
 ```ts
 let zoo: Animal[] = [new Rhino(), new Elephant(), new Snake()];
-    
+
 let zoo: Animal[]
 ```
 
@@ -72,8 +72,8 @@ This is known as “contextual typing”. Contextual typing occurs when the type
 
 ```ts
 window.onmousedown = function (mouseEvent) {
-  console.log(mouseEvent.button);
-  console.log(mouseEvent.kangaroo);
+console.log(mouseEvent.button);
+console.log(mouseEvent.kangaroo);
 };
 ```
 
@@ -82,23 +82,23 @@ Property 'kangaroo' does not exist on type 'MouseEvent'.
 ```
 
 Here, the TypeScript type checker used the type of the `Window.onmousedown` function to infer the type of the function expression on the right hand side of the assignment.
-When it did so, it was able to infer the [type](https://developer.mozilla.org/docs/Web/API/MouseEvent) of the `mouseEvent` parameter, which does contain a `button` property, but not a `kangaroo` property.
+When it did so, it was able to infer the [type ↗](https://developer.mozilla.org/docs/Web/API/MouseEvent) of the `mouseEvent` parameter, which does contain a `button` property, but not a `kangaroo` property.
 
 This works because window already has `onmousedown` declared in its type:
 
 ```ts
 // Declares there is a global variable called 'window'
-declare var window: Window & typeof globalThis;
+declarevarwindow: Window & typeofglobalThis;
 
 // Which is declared as (simplified):
-interface Window extends GlobalEventHandlers {
-  // ...
+interfaceWindowextendsGlobalEventHandlers {
+// ...
 }
 
 // Which defines a lot of known handler events
-interface GlobalEventHandlers {
-  onmousedown: ((this: GlobalEventHandlers, ev: MouseEvent) => any) | null;
-  // ...
+interfaceGlobalEventHandlers {
+onmousedown: ((this: GlobalEventHandlers, ev: MouseEvent) =>any) | null;
+// ...
 }
 ```
 
@@ -108,7 +108,7 @@ TypeScript is smart enough to infer types in other contexts as well:
 
 ```ts
 window.onscroll = function (uiEvent) {
-  console.log(uiEvent.button);
+console.log(uiEvent.button);
 };
 ```
 
@@ -116,7 +116,7 @@ window.onscroll = function (uiEvent) {
 Property 'button' does not exist on type 'Event'.
 ```
 
-Based on the fact that the above function is being assigned to `Window.onscroll`, TypeScript knows that `uiEvent` is a [UIEvent](https://developer.mozilla.org/docs/Web/API/UIEvent), and not a [MouseEvent](https://developer.mozilla.org/docs/Web/API/MouseEvent) like the previous example. `UIEvent` objects contain no `button` property, and so TypeScript will throw an error.
+Based on the fact that the above function is being assigned to `Window.onscroll`, TypeScript knows that `uiEvent` is a [UIEvent ↗](https://developer.mozilla.org/docs/Web/API/UIEvent), and not a [MouseEvent ↗](https://developer.mozilla.org/docs/Web/API/MouseEvent) like the previous example. `UIEvent` objects contain no `button` property, and so TypeScript will throw an error.
 
 If this function were not in a contextually typed position, the function’s argument would implicitly have type `any`, and no error would be issued (unless you are using the [`noImplicitAny` ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny) option):
 
@@ -124,7 +124,7 @@ If this function were not in a contextually typed position, the function’s arg
 
 ```ts
 const handler = function (uiEvent) {
-  console.log(uiEvent.button); // <- OK
+console.log(uiEvent.button); // <- OK
 };
 ```
 
@@ -134,7 +134,7 @@ We can also explicitly give type information to the function’s argument to ove
 
 ```ts
 window.onscroll = function (uiEvent: any) {
-  console.log(uiEvent.button); // <- Now, no error is given
+console.log(uiEvent.button); // <- Now, no error is given
 };
 ```
 
@@ -148,7 +148,7 @@ The contextual type also acts as a candidate type in best common type. For examp
 
 ```ts
 function createZoo(): Animal[] {
-  return [new Rhino(), new Elephant(), new Snake()];
+return [newRhino(), newElephant(), newSnake()];
 }
 ```
 

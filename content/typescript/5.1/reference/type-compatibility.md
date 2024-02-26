@@ -15,16 +15,16 @@ Consider the following code:
 
 ```ts
 interface Pet {
-  name: string;
+name: string;
 }
 
-class Dog {
-  name: string;
+classDog {
+name: string;
 }
 
-let pet: Pet;
+letpet: Pet;
 // OK, because of structural typing
-pet = new Dog();
+pet = newDog();
 ```
 
 In nominally-typed languages like C# or Java, the equivalent code would be an error because the `Dog` class does not explicitly describe itself as being an implementer of the `Pet` interface.
@@ -42,12 +42,12 @@ The basic rule for TypeScript’s structural type system is that `x` is compatib
 
 ```ts
 interface Pet {
-  name: string;
+name: string;
 }
 
-let pet: Pet;
+letpet: Pet;
 // dog's inferred type is { name: string; owner: string; }
-let dog = { name: "Lassie", owner: "Rudd Weatherwax" };
+letdog = { name:"Lassie", owner:"Rudd Weatherwax" };
 pet = dog;
 ```
 
@@ -58,13 +58,13 @@ The same rule for assignment is used when checking function call arguments:
 
 ```ts
 interface Pet {
-  name: string;
+name: string;
 }
 
-let dog = { name: "Lassie", owner: "Rudd Weatherwax" };
+letdog = { name:"Lassie", owner:"Rudd Weatherwax" };
 
-function greet(pet: Pet) {
-  console.log("Hello, " + pet.name);
+functiongreet(pet: Pet) {
+console.log("Hello, " + pet.name);
 }
 greet(dog); // OK
 ```
@@ -74,7 +74,7 @@ Only members of the target type (`Pet` in this case) are considered when
 checking for compatibility. This comparison process proceeds recursively,
 exploring the type of each member and sub-member.
 
-Be aware, however, that object literals [may only specify known properties ↗](https://www.typescriptlang.org/docs/handbook/2/objects.html#excess-property-checks).
+Be aware, however, that object literals [may only specify known properties](/typescript/5.1/handbook/objects#excess-property-checks).
 For example, because we have explicitly specified that `dog` is
 of type `Pet`, the following code is invalid:
 
@@ -89,7 +89,7 @@ Let’s start with a basic example of two functions that differ only in their pa
 
 ```ts
 let x = (a: number) => 0;
-let y = (b: number, s: string) => 0;
+lety = (b: number, s: string) =>0;
 
 y = x; // OK
 x = y; // Error
@@ -111,17 +111,17 @@ Nevertheless, it’s very useful to provide a callback that only uses the first 
 let items = [1, 2, 3];
 
 // Don't force these extra parameters
-items.forEach((item, index, array) => console.log(item));
+items.forEach((item, index, array) =>console.log(item));
 
 // Should be OK!
-items.forEach((item) => console.log(item));
+items.forEach((item) =>console.log(item));
 ```
 
 Now let’s look at how return types are treated, using two functions that differ only by their return type:
 
 ```ts
 let x = () => ({ name: "Alice" });
-let y = () => ({ name: "Alice", location: "Seattle" });
+lety = () => ({ name:"Alice", location:"Seattle" });
 
 x = y; // OK
 y = x; // Error, because x() lacks a location property
@@ -137,37 +137,37 @@ In practice, this sort of error is rare, and allowing this enables many common J
 
 ```ts
 enum EventType {
-  Mouse,
-  Keyboard,
+Mouse,
+Keyboard,
 }
 
-interface Event {
-  timestamp: number;
+interfaceEvent {
+timestamp: number;
 }
-interface MyMouseEvent extends Event {
-  x: number;
-  y: number;
+interfaceMyMouseEventextendsEvent {
+x: number;
+y: number;
 }
-interface MyKeyEvent extends Event {
-  keyCode: number;
+interfaceMyKeyEventextendsEvent {
+keyCode: number;
 }
 
-function listenEvent(eventType: EventType, handler: (n: Event) => void) {
-  /* ... */
+functionlistenEvent(eventType: EventType, handler: (n: Event) =>void) {
+/* ... */
 }
 
 // Unsound, but useful and common
-listenEvent(EventType.Mouse, (e: MyMouseEvent) => console.log(e.x + "," + e.y));
+listenEvent(EventType.Mouse, (e: MyMouseEvent) =>console.log(e.x + "," + e.y));
 
 // Undesirable alternatives in presence of soundness
 listenEvent(EventType.Mouse, (e: Event) =>
-  console.log((e as MyMouseEvent).x + "," + (e as MyMouseEvent).y)
+console.log((easMyMouseEvent).x + "," + (easMyMouseEvent).y)
 );
 listenEvent(EventType.Mouse, ((e: MyMouseEvent) =>
-  console.log(e.x + "," + e.y)) as (e: Event) => void);
+console.log(e.x + "," + e.y)) as (e: Event) =>void);
 
 // Still disallowed (clear error). Type safety enforced for wholly incompatible types
-listenEvent(EventType.Mouse, (e: number) => console.log(e));
+listenEvent(EventType.Mouse, (e: number) =>console.log(e));
 ```
 
 You can have TypeScript raise errors when this happens via the compiler flag [`strictFunctionTypes` ↗](https://www.typescriptlang.org/tsconfig.html#strictFunctionTypes).
@@ -185,14 +185,14 @@ The motivating example is the common pattern of a function that takes a callback
 
 ```ts
 function invokeLater(args: any[], callback: (...args: any[]) => void) {
-  /* ... Invoke callback with 'args' ... */
+/* ... Invoke callback with 'args' ... */
 }
 
 // Unsound - invokeLater "might" provide any number of arguments
-invokeLater([1, 2], (x, y) => console.log(x + ", " + y));
+invokeLater([1, 2], (x, y) =>console.log(x + ", " + y));
 
 // Confusing (x and y are actually required) and undiscoverable
-invokeLater([1, 2], (x?, y?) => console.log(x + ", " + y));
+invokeLater([1, 2], (x?, y?) =>console.log(x + ", " + y));
 ```
 
 ### Functions with overloads {#functions-with-overloads}
@@ -206,16 +206,16 @@ Enums are compatible with numbers, and numbers are compatible with enums. Enum v
 
 ```ts
 enum Status {
-  Ready,
-  Waiting,
+Ready,
+Waiting,
 }
-enum Color {
-  Red,
-  Blue,
-  Green,
+enumColor {
+Red,
+Blue,
+Green,
 }
 
-let status = Status.Ready;
+letstatus = Status.Ready;
 status = Color.Green; // Error
 ```
 
@@ -227,17 +227,17 @@ Static members and constructors do not affect compatibility.
 
 ```ts
 class Animal {
-  feet: number;
-  constructor(name: string, numFeet: number) {}
+feet: number;
+constructor(name: string, numFeet: number) {}
 }
 
-class Size {
-  feet: number;
-  constructor(numFeet: number) {}
+classSize {
+feet: number;
+constructor(numFeet: number) {}
 }
 
-let a: Animal;
-let s: Size;
+leta: Animal;
+lets: Size;
 
 a = s; // OK
 s = a; // OK
@@ -256,8 +256,8 @@ Because TypeScript is a structural type system, type parameters only affect the 
 
 ```ts
 interface Empty<T> {}
-let x: Empty<number>;
-let y: Empty<string>;
+letx: Empty<number>;
+lety: Empty<string>;
 
 x = y; // OK, because y matches structure of x
 ```
@@ -267,10 +267,10 @@ Changing this example by adding a member to `Empty<T>` shows how this works:
 
 ```ts
 interface NotEmpty<T> {
-  data: T;
+data: T;
 }
-let x: NotEmpty<number>;
-let y: NotEmpty<string>;
+letx: NotEmpty<number>;
+lety: NotEmpty<string>;
 
 x = y; // Error, because x and y are not compatible
 ```
@@ -284,11 +284,11 @@ For example,
 
 ```ts
 let identity = function <T>(x: T): T {
-  // ...
+// ...
 };
 
-let reverse = function <U>(y: U): U {
-  // ...
+letreverse = function <U>(y: U): U {
+// ...
 };
 
 identity = reverse; // OK, because (x: any) => any matches (y: any) => any

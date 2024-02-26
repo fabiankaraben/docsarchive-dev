@@ -23,17 +23,17 @@ Properties defined in the constructor are always assumed to exist, whereas ones 
 
 ```js
 class C {
-  constructor() {
-    this.constructorOnly = 0;
-    this.constructorUnknown = undefined;
+constructor() {
+this.constructorOnly = 0;
+this.constructorUnknown = undefined;
   }
-  method() {
-    this.constructorOnly = false;
-    this.constructorUnknown = "plunkbat"; // ok, constructorUnknown is string | undefined
-    this.methodOnly = "ok"; // ok, but methodOnly could also be undefined
+method() {
+this.constructorOnly = false;
+this.constructorUnknown = "plunkbat"; // ok, constructorUnknown is string | undefined
+this.methodOnly = "ok"; // ok, but methodOnly could also be undefined
   }
-  method2() {
-    this.methodOnly = true; // also, ok, methodOnly's type is string | boolean | undefined
+method2() {
+this.methodOnly = true; // also, ok, methodOnly's type is string | boolean | undefined
   }
 }
 ```
@@ -50,15 +50,15 @@ You don’t even have to give a value if it will be initialized later:
 
 ```js
 class C {
-  constructor() {
-    /** @type {number | undefined} */
-    this.prop = undefined;
-    /** @type {number | undefined} */
-    this.count;
+constructor() {
+/** @type{number | undefined} */
+this.prop = undefined;
+/** @type{number | undefined} */
+this.count;
   }
 }
- 
-let c = new C();
+
+letc = newC();
 c.prop = 0; // OK
 c.count = "string";
 ```
@@ -77,12 +77,12 @@ The property inference rules described above work exactly the same way.
 
 ```js
 function C() {
-  this.constructorOnly = 0;
-  this.constructorUnknown = undefined;
+this.constructorOnly = 0;
+this.constructorUnknown = undefined;
 }
 C.prototype.method = function () {
-  this.constructorOnly = false;
-  this.constructorUnknown = "plunkbat"; // OK, the type is string | undefined
+this.constructorOnly = false;
+this.constructorUnknown = "plunkbat"; // OK, the type is string | undefined
 };
 ```
 
@@ -98,11 +98,11 @@ Similarly, `require` function calls are recognized as module imports. For exampl
 
 ```js
 // same as `import module "fs"`
-const fs = require("fs");
+constfs = require("fs");
 
 // same as `export function readFile`
 module.exports.readFile = function (f) {
-  return fs.readFileSync(f);
+returnfs.readFileSync(f);
 };
 ```
 
@@ -127,13 +127,13 @@ And, for pre-ES2015 code, it can be used to simulate static methods:
 
 ```js
 function Outer() {
-  this.y = 2;
+this.y = 2;
 }
- 
+
 Outer.Inner = function () {
-  this.yy = 2;
+this.yy = 2;
 };
- 
+
 Outer.Inner();
 ```
 
@@ -145,7 +145,7 @@ It can also be used to create simple namespaces:
 var ns = {};
 ns.C = class {};
 ns.func = function () {};
- 
+
 ns;
 ```
 
@@ -155,16 +155,16 @@ Other variants are allowed as well:
 
 ```js
 // IIFE
-var ns = (function (n) {
-  return n || {};
+varns = (function (n) {
+returnn || {};
 })();
 ns.CONST = 1;
- 
+
 // defaulting to global
-var assign =
-  assign ||
-  function () {
-    // code goes here
+varassign =
+assign ||
+function () {
+// code goes here
   };
 assign.extra = 1;
 ```
@@ -191,7 +191,7 @@ Like other special JS checking behaviors, this behavior can be changed by specif
 
 ```js
 /** @type {{a: number}} */
-var obj = { a: 1 };
+varobj = { a:1 };
 obj.b = 2;
 ```
 
@@ -209,13 +209,13 @@ The only exception is for properties that have multiple initializers as describe
 
 ```js
 function Foo(i = null) {
-  if (!i) i = 1;
-  var j = undefined;
-  j = 2;
-  this.l = [];
+if (!i) i = 1;
+varj = undefined;
+j = 2;
+this.l = [];
 }
- 
-var foo = new Foo();
+
+varfoo = newFoo();
 foo.l.push(foo.i);
 foo.l.push("end");
 ```
@@ -233,9 +233,9 @@ For instance:
 
 ```js
 function bar(a, b) {
-  console.log(a + " " + b);
+console.log(a + " " + b);
 }
- 
+
 bar(1); // OK, second argument considered optional
 bar(1, 2);
 bar(1, 2, 3); // Error, too many arguments
@@ -252,15 +252,15 @@ Use JSDoc optional parameter syntax (`[``]`) to express optionality. e.g.:
 
 ```js
 /**
- * @param {string} [somebody] - Somebody's name.
+ * @param{string}[somebody] - Somebody's name.
  */
-function sayHello(somebody) {
-  if (!somebody) {
-    somebody = "John Doe";
+functionsayHello(somebody) {
+if (!somebody) {
+somebody = "John Doe";
   }
-  console.log("Hello " + somebody);
+console.log("Hello " + somebody);
 }
- 
+
 sayHello();
 ```
 
@@ -272,12 +272,12 @@ A function whose body has a reference to the `arguments` reference is implicitly
 
 ```js
 /** @param {...number} args */
-function sum(/* numbers */) {
-  var total = 0;
-  for (var i = 0; i < arguments.length; i++) {
-    total += arguments[i];
+functionsum(/* numbers */) {
+vartotal = 0;
+for (vari = 0; i < arguments.length; i++) {
+total += arguments[i];
   }
-  return total;
+returntotal;
 }
 ```
 
@@ -293,9 +293,9 @@ In a `.js` file, there is no legal way to specify these in the extends clause. B
 ```js
 import { Component } from "react";
 
-class MyComponent extends Component {
-  render() {
-    this.props.b; // Allowed, since this.props is of type any
+classMyComponentextendsComponent {
+render() {
+this.props.b; // Allowed, since this.props is of type any
   }
 }
 ```
@@ -308,9 +308,9 @@ import { Component } from "react";
 /**
  * @augments {Component<{a: number}, State>}
  */
-class MyComponent extends Component {
-  render() {
-    this.props.b; // Error: b does not exist on {a:number}
+classMyComponentextendsComponent {
+render() {
+this.props.b; // Error: b does not exist on {a:number}
   }
 }
 ```
@@ -323,14 +323,14 @@ An unspecified type argument in JSDoc defaults to any:
 
 ```js
 /** @type{Array} */
-var x = [];
- 
+varx = [];
+
 x.push(1); // OK
 x.push("string"); // OK, x is of type Array<any>
- 
+
 /** @type{Array.<number>} */
-var y = [];
- 
+vary = [];
+
 y.push(1); // OK
 y.push("string"); // Error, string is not assignable to number
 ```
@@ -341,7 +341,7 @@ A call to a generic function uses the arguments to infer the type parameters. So
 
 ```js
 var p = new Promise((resolve, reject) => {
-  reject();
+reject();
 });
 
 p; // Promise<any>;

@@ -16,7 +16,7 @@ JavaScript already has a `typeof` operator you can use in an *expression* contex
 
 ```ts
 // Prints "string"
-console.log(typeof "Hello world");
+console.log(typeof"Hello world");
 ```
 
 TypeScript adds a `typeof` operator you can use in a *type* context to refer to the *type* of a variable or property:
@@ -25,8 +25,8 @@ TypeScript adds a `typeof` operator you can use in a *type* context to refer to 
 
 ```ts
 let s = "hello";
-let n: typeof s;
-   
+letn: typeofs;
+
 let n: string
 ```
 
@@ -38,8 +38,8 @@ It takes a *function type* and produces its return type:
 
 ```ts
 type Predicate = (x: unknown) => boolean;
-type K = ReturnType<Predicate>;
-    
+typeK = ReturnType<Predicate>;
+
 type K = boolean
 ```
 
@@ -49,9 +49,9 @@ If we try to use `ReturnType` on a function name, we see an instructive error:
 
 ```ts
 function f() {
-  return { x: 10, y: 3 };
+return { x:10, y:3 };
 }
-type P = ReturnType<f>;
+typeP = ReturnType<f>;
 ```
 
 ```text {filename="Generated error"}
@@ -65,10 +65,10 @@ To refer to the *type* that the *value `f`* has, we use `typeof`:
 
 ```ts
 function f() {
-  return { x: 10, y: 3 };
+return { x:10, y:3 };
 }
-type P = ReturnType<typeof f>;
-    
+typeP = ReturnType<typeoff>;
+
 type P = {
     x: number;
     y: number;
@@ -86,7 +86,7 @@ This helps avoid the confusing trap of writing code you think is executing, but 
 
 ```ts
 // Meant to use = ReturnType<typeof msgbox>
-let shouldContinue: typeof msgbox("Are you sure you want to continue?");
+letshouldContinue: typeofmsgbox("Are you sure you want to continue?");
 ```
 
 ```text {filename="Generated error"}

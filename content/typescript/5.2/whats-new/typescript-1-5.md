@@ -22,15 +22,15 @@ In addition to the existing TypeScript support for decorating declarations with 
 
 ```ts
 interface Stream { ... }
-function writeToStream(stream: Stream, data: string) { ... }
-export { Stream, writeToStream as write };  // writeToStream exported as write
+functionwriteToStream(stream: Stream, data: string) { ... }
+export { Stream, writeToStreamaswrite };  // writeToStream exported as write
 ```
 
 Import declarations, as well, can optionally use `as` clauses to specify different local names for the imports. For example:
 
 ```ts
 import { read, write, standardOutput as stdout } from "./inout";
-var s = read(stdout);
+vars = read(stdout);
 write(stdout, s);
 ```
 
@@ -38,7 +38,7 @@ As an alternative to individual imports, a namespace import can be used to impor
 
 ```ts
 import * as io from "./inout";
-var s = io.read(io.standardOutput);
+vars = io.read(io.standardOutput);
 io.write(io.standardOutput, s);
 ```
 
@@ -54,8 +54,8 @@ export { read, write, standardOutput as stdout } from "./inout";
 
 ```ts
 export function transform(s: string): string { ... }
-export * from "./mod1";
-export * from "./mod2";
+export*from"./mod1";
+export*from"./mod2";
 ```
 
 #### Default Export {#default-export}
@@ -64,8 +64,8 @@ An export default declaration specifies an expression that becomes the default e
 
 ```ts
 export default class Greeter {
-  sayHello() {
-    console.log("Greetings!");
+sayHello() {
+console.log("Greetings!");
   }
 }
 ```
@@ -74,7 +74,7 @@ Which in turn can be imported using default imports:
 
 ```ts
 import Greeter from "./greeter";
-var g = new Greeter();
+varg = newGreeter();
 g.sayHello();
 ```
 
@@ -86,7 +86,7 @@ A “bare import” can be used to import a module only for its side-effects.
 import "./polyfills";
 ```
 
-For more information about module, please see the [ES6 module support spec](https://github.com/Microsoft/TypeScript/issues/2242).
+For more information about module, please see the [ES6 module support spec ↗](https://github.com/Microsoft/TypeScript/issues/2242).
 
 ## Destructuring in declarations and assignments {#destructuring-in-declarations-and-assignments}
 
@@ -112,11 +112,11 @@ Similarly, destructuring can be used in function parameter declarations:
 
 ```ts
 function drawText({ text = "", location: [x, y] = [0, 0], bold = false }) {
-  // Draw text
+// Draw text
 }
 
 // Call drawText with an object literal
-var item = { text: "someText", location: [1, 2, 3], style: "italics" };
+varitem = { text:"someText", location: [1, 2, 3], style:"italics" };
 drawText(item);
 ```
 
@@ -127,7 +127,7 @@ For instance, swapping two variables can be written as a single destructuring as
 
 ```ts
 var x = 1;
-var y = 2;
+vary = 2;
 [x, y] = [y, x];
 ```
 
@@ -144,7 +144,7 @@ this has been a bit of confusion for developers new to TypeScript.
 
 ```ts
 module Math {
-    export function add(x, y) { ... }
+exportfunctionadd(x, y) { ... }
 }
 ```
 
@@ -152,7 +152,7 @@ module Math {
 
 ```ts
 namespace Math {
-    export function add(x, y) { ... }
+exportfunctionadd(x, y) { ... }
 }
 ```
 
@@ -173,11 +173,11 @@ const MAX = 100;
 
 ```ts
 if (true) {
-  let a = 4;
-  // use a
+leta = 4;
+// use a
 } else {
-  let a = "string";
-  // use a
+leta = "string";
+// use a
 }
 
 alert(a); // Error: a is not defined in this scope.
@@ -200,13 +200,13 @@ will be emitted as:
 
 ```js
 for (var _i = 0, _a = expr; _i < _a.length; _i++) {
-  var v = _a[_i];
+varv = _a[_i];
 }
 ```
 
 ## Decorators {#decorators}
 
-> TypeScript decorators are based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators).
+> TypeScript decorators are based on the [ES7 decorator proposal ↗](https://github.com/wycats/javascript-decorators).
 > 
 
 A decorator is:
@@ -216,7 +216,7 @@ A decorator is:
 - that takes the target, name, and property descriptor as arguments
 - and optionally returns a property descriptor to install on the target object
 
-> For more information, please see the [Decorators](https://github.com/Microsoft/TypeScript/issues/2249) proposal.
+> For more information, please see the [Decorators ↗](https://github.com/Microsoft/TypeScript/issues/2249) proposal.
 > 
 
 ##### Example {#example-1}
@@ -228,16 +228,16 @@ This allows the decorator to change the implementation, and in this case, augmen
 class C {
   @readonly
   @enumerable(false)
-  method() { ... }
+method() { ... }
 }
 
-function readonly(target, key, descriptor) {
-    descriptor.writable = false;
+functionreadonly(target, key, descriptor) {
+descriptor.writable = false;
 }
 
-function enumerable(value) {
-    return function (target, key, descriptor) {
-        descriptor.enumerable = value;
+functionenumerable(value) {
+returnfunction (target, key, descriptor) {
+descriptor.enumerable = value;
     };
 }
 ```
@@ -248,12 +248,12 @@ Initializing an object with dynamic properties can be a bit of a burden. Take th
 
 ```ts
 type NeighborMap = { [name: string]: Node };
-type Node = { name: string; neighbors: NeighborMap };
+typeNode = { name: string; neighbors: NeighborMap };
 
-function makeNode(name: string, initialNeighbor: Node): Node {
-  var neighbors: NeighborMap = {};
-  neighbors[initialNeighbor.name] = initialNeighbor;
-  return { name: name, neighbors: neighbors };
+functionmakeNode(name: string, initialNeighbor: Node): Node {
+varneighbors: NeighborMap = {};
+neighbors[initialNeighbor.name] = initialNeighbor;
+return { name:name, neighbors:neighbors };
 }
 ```
 
@@ -262,10 +262,10 @@ With TypeScript 1.5, we can let the compiler do the heavy lifting:
 
 ```ts
 function makeNode(name: string, initialNeighbor: Node): Node {
-  return {
-    name: name,
-    neighbors: {
-      [initialNeighbor.name]: initialNeighbor,
+return {
+name:name,
+neighbors: {
+[initialNeighbor.name]:initialNeighbor,
     },
   };
 }
@@ -273,7 +273,7 @@ function makeNode(name: string, initialNeighbor: Node): Node {
 
 ## Support for `UMD` and `System` module output {#support-for-umd-and-system-module-output}
 
-In addition to `AMD` and `CommonJS` module loaders, TypeScript now supports emitting modules `UMD` ([Universal Module Definition](https://github.com/umdjs/umd)) and [`System`](https://github.com/systemjs/systemjs) module formats.
+In addition to `AMD` and `CommonJS` module loaders, TypeScript now supports emitting modules `UMD` ([Universal Module Definition ↗](https://github.com/umdjs/umd)) and [`System` ↗](https://github.com/systemjs/systemjs) module formats.
 
 **Usage**:
 
@@ -300,30 +300,30 @@ TypeScript will emit the string in ES3/ES5 as `"\uD842\uDFB7"`.
 ## Tagged template strings in ES3/ES5 {#tagged-template-strings-in-es3es5}
 
 In TypeScript 1.4, we added support for template strings for all targets, and tagged templates for just ES6.
-Thanks to some considerable work done by [@ivogabe](https://github.com/ivogabe), we bridged the gap for for tagged templates in ES3 and ES5.
+Thanks to some considerable work done by [@ivogabe ↗](https://github.com/ivogabe), we bridged the gap for for tagged templates in ES3 and ES5.
 
 When targeting ES3/ES5, the following code
 
 ```ts
 function oddRawStrings(strs: TemplateStringsArray, n1, n2) {
-  return strs.raw.filter((raw, index) => index % 2 === 1);
+returnstrs.raw.filter((raw, index) =>index % 2 === 1);
 }
 
-oddRawStrings`Hello \n${123} \t ${456}\n world`;
+oddRawStrings`Hello \n${123}\t${456}\n world`;
 ```
 
 will be emitted as
 
 ```js
 function oddRawStrings(strs, n1, n2) {
-  return strs.raw.filter(function (raw, index) {
-    return index % 2 === 1;
+returnstrs.raw.filter(function (raw, index) {
+returnindex % 2 === 1;
   });
 }
 (_a = ["Hello \n", " \t ", "\n world"]),
   (_a.raw = ["Hello \\n", " \\t ", "\\n world"]),
-  oddRawStrings(_a, 123, 456);
-var _a;
+oddRawStrings(_a, 123, 456);
+var_a;
 ```
 
 ## AMD-dependency optional names {#amd-dependency-optional-names}
@@ -335,7 +335,7 @@ The new `amd-dependency name` property allows passing an optional name for an am
 
 ```ts
 /// <amd-dependency path="legacy/moduleA" name="moduleA"/>
-declare var moduleA: MyType;
+declarevarmoduleA: MyType;
 moduleA.callStuff();
 ```
 
@@ -343,11 +343,11 @@ Generated JS code:
 
 ```js
 define(["require", "exports", "legacy/moduleA"], function (
-  require,
-  exports,
-  moduleA
+require,
+exports,
+moduleA
 ) {
-  moduleA.callStuff();
+moduleA.callStuff();
 });
 ```
 
@@ -363,15 +363,15 @@ The tsconfig.json file specifies the root files and the compiler options require
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "commonjs",
-    "[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
-    "[sourceMap ↗](https://www.typescriptlang.org/tsconfig.html#sourceMap)": true
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "commonjs",
+"[noImplicitAny ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitAny)": true,
+"[sourceMap ↗](https://www.typescriptlang.org/tsconfig.html#sourceMap)": true
   }
 }
 ```
 
-See the [tsconfig.json wiki page](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) for more details.
+See the [tsconfig.json wiki page ↗](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) for more details.
 
 ## `--rootDir` command line option {#--rootdir-command-line-option}
 

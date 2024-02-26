@@ -69,7 +69,7 @@ define(..., ['someLib'], function(someLib) {
 });
 ```
 
-As with global modules, you might see these examples in the documentation of [a UMD ↗](https://www.typescriptlang.org/docs/handbook/declaration-files/library-structures.html#umd) module, so be sure to check the code or documentation.
+As with global modules, you might see these examples in the documentation of [a UMD](/typescript/5.2/declaration-files/library-structures#umd) module, so be sure to check the code or documentation.
 
 #### Identifying a Module Library from Code {#identifying-a-module-library-from-code}
 
@@ -95,7 +95,7 @@ Then use the template [`module-function.d.ts`](/typescript/5.2/declaration-files
 ```js
 const x = require("foo");
 // Note: calling 'x' as a function
-const y = x(42);
+consty = x(42);
 ```
 
 Use the template [`module-class.d.ts`](/typescript/5.2/declaration-files/d-ts-templates/module-class-d-ts) if your module can be *constructed* using `new`:
@@ -103,7 +103,7 @@ Use the template [`module-class.d.ts`](/typescript/5.2/declaration-files/d-ts-te
 ```js
 const x = require("bar");
 // Note: using 'new' operator on the imported variable
-const y = new x("hello");
+consty = newx("hello");
 ```
 
 If you have a module which when imported, makes changes to other modules use template [`module-plugin.d.ts`](/typescript/5.2/declaration-files/d-ts-templates/module-plugin-d-ts):
@@ -117,11 +117,11 @@ require("jest-matchers-files");
 
 A *global* library is one that can be accessed from the global scope (i.e. without using any form of `import`).
 Many libraries simply expose one or more global variables for use.
-For example, if you were using [jQuery](https://jquery.com/), the `$` variable can be used by simply referring to it:
+For example, if you were using [jQuery ↗](https://jquery.com/), the `$` variable can be used by simply referring to it:
 
 ```ts
 $(() => {
-  console.log("hello!");
+console.log("hello!");
 });
 ```
 
@@ -142,7 +142,7 @@ A global “Hello, world” library might look like this:
 
 ```js
 function createGreeting(s) {
-  return "Hello, " + s;
+return"Hello, " + s;
 }
 ```
 
@@ -151,17 +151,17 @@ or like this:
 ```js
 // Web
 window.createGreeting = function (s) {
-  return "Hello, " + s;
+return"Hello, " + s;
 };
 
 // Node
 global.createGreeting = function (s) {
-  return "Hello, " + s;
+return"Hello, " + s;
 };
 
 // Potentially any runtime
 globalThis.createGreeting = function (s) {
-  return "Hello, " + s;
+return"Hello, " + s;
 };
 ```
 
@@ -186,12 +186,12 @@ However, libraries that are small and require the DOM (or have *no* dependencies
 #### Global Library Template {#global-library-template}
 
 The template file [`global.d.ts`](/typescript/5.2/declaration-files/d-ts-templates/global-d-ts) defines an example library `myLib`.
-Be sure to read the [“Preventing Name Conflicts” footnote ↗](https://www.typescriptlang.org/docs/handbook/declaration-files/library-structures.html#preventing-name-conflicts).
+Be sure to read the [“Preventing Name Conflicts” footnote](/typescript/5.2/declaration-files/library-structures#preventing-name-conflicts).
 
 ### *UMD* {#umd}
 
 A *UMD* module is one that can *either* be used as module (through an import), or as a global (when run in an environment without a module loader).
-Many popular libraries, such as [Moment.js](https://momentjs.com/), are written this way.
+Many popular libraries, such as [Moment.js ↗](https://momentjs.com/), are written this way.
 For example, in Node.js or using RequireJS, you would write:
 
 ```ts
@@ -207,17 +207,17 @@ console.log(moment.format());
 
 #### Identifying a UMD library {#identifying-a-umd-library}
 
-[UMD modules](https://github.com/umdjs/umd) check for the existence of a module loader environment.
+[UMD modules ↗](https://github.com/umdjs/umd) check for the existence of a module loader environment.
 This is an easy-to-spot pattern that looks something like this:
 
 ```js
 (function (root, factory) {
-    if (typeof define === "function" && define.amd) {
-        define(["libName"], factory);
-    } else if (typeof module === "object" && module.exports) {
-        module.exports = factory(require("libName"));
+if (typeofdefine === "function" && define.amd) {
+define(["libName"], factory);
+    } elseif (typeofmodule === "object" && module.exports) {
+module.exports = factory(require("libName"));
     } else {
-        root.returnExports = factory(root.libName);
+root.returnExports = factory(root.libName);
     }
 }(this, function (b) {
 ```
@@ -230,7 +230,7 @@ and a “Using in the browser” example showing using a `<script>` tag to load 
 #### Examples of UMD libraries {#examples-of-umd-libraries}
 
 Most popular libraries are now available as UMD packages.
-Examples include [jQuery](https://jquery.com/), [Moment.js](https://momentjs.com/), [lodash](https://lodash.com/), and many more.
+Examples include [jQuery ↗](https://jquery.com/), [Moment.js ↗](https://momentjs.com/), [lodash ↗](https://lodash.com/), and many more.
 
 #### Template {#template}
 
@@ -248,7 +248,7 @@ If your library depends on a global library, use a `/// <reference types="..." /
 ```ts
 /// <reference types="someLib" />
 
-function getThing(): someLib.thing;
+functiongetThing(): someLib.thing;
 ```
 
 ### Dependencies on Modules {#dependencies-on-modules}
@@ -258,7 +258,7 @@ If your library depends on a module, use an `import` statement:
 ```ts
 import * as moment from "moment";
 
-function getThing(): moment;
+functiongetThing(): moment;
 ```
 
 ### Dependencies on UMD libraries {#dependencies-on-umd-libraries}
@@ -270,7 +270,7 @@ If your global library depends on a UMD module, use a `/// <reference types` dir
 ```ts
 /// <reference types="moment" />
 
-function getThing(): moment;
+functiongetThing(): moment;
 ```
 
 #### From a Module or UMD Library {#from-a-module-or-umd-library}
@@ -295,7 +295,7 @@ For example, if the library defines the global value ‘cats’, you should writ
 
 ```ts
 declare namespace cats {
-  interface KittySettings {}
+interfaceKittySettings {}
 }
 ```
 
@@ -303,7 +303,7 @@ But *not*
 
 ```ts
 // at top-level
-interface CatsKittySettings {}
+interfaceCatsKittySettings {}
 ```
 
 This guidance also ensures that the library can be transitioned to UMD without breaking declaration file users.
@@ -315,7 +315,7 @@ For example, the typical Express usage looks like this:
 
 ```ts
 import exp = require("express");
-var app = exp();
+varapp = exp();
 ```
 
 In ES6-compliant module loaders, the top-level object (here imported as `exp`) can only have properties;

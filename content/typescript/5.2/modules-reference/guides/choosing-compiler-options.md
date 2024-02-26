@@ -12,33 +12,33 @@ next: /typescript/5.2/modules-reference/reference
 
 ## I’m writing an app {#im-writing-an-app}
 
-A single tsconfig.json can only represent a single environment, both in terms of what globals are available and in terms of how modules behave. If your app contains server code, DOM code, web worker code, test code, and code to be shared by all of those, each of those should have its own tsconfig.json, connected with [project references ↗](https://www.typescriptlang.org/docs/handbook/project-references.html#handbook-content). Then, use this guide once for each tsconfig.json. For library-like projects within an app, especially ones that need to run in multiple runtime environments, use the “[I’m writing a library ↗](https://www.typescriptlang.org/docs/handbook/modules/guides/choosing-compiler-options.html#im-writing-a-library)” section.
+A single tsconfig.json can only represent a single environment, both in terms of what globals are available and in terms of how modules behave. If your app contains server code, DOM code, web worker code, test code, and code to be shared by all of those, each of those should have its own tsconfig.json, connected with [project references](/typescript/5.2/project-configuration/project-references#handbook-content). Then, use this guide once for each tsconfig.json. For library-like projects within an app, especially ones that need to run in multiple runtime environments, use the “[I’m writing a library](/typescript/5.2/modules-reference/guides/choosing-compiler-options#im-writing-a-library)” section.
 
 ### I’m using a bundler {#im-using-a-bundler}
 
-In addition to adopting the following settings, it’s also recommended *not* to set `{ "type": "module" }` or use `.mts` files in bundler projects for now. [Some bundlers](https://andrewbranch.github.io/interop-test/#synthesizing-default-exports-for-cjs-modules) adopt different ESM/CJS interop behavior under these circumstances, which TypeScript cannot currently analyze with `"moduleResolution": "bundler"`. See [issue #54102](https://github.com/microsoft/TypeScript/issues/54102) for more information.
+In addition to adopting the following settings, it’s also recommended *not* to set `{ "type": "module" }` or use `.mts` files in bundler projects for now. [Some bundlers ↗](https://andrewbranch.github.io/interop-test/#synthesizing-default-exports-for-cjs-modules) adopt different ESM/CJS interop behavior under these circumstances, which TypeScript cannot currently analyze with `"moduleResolution": "bundler"`. See [issue #54102 ↗](https://github.com/microsoft/TypeScript/issues/54102) for more information.
 
 ```json
 {
-  "compilerOptions": {
-    // This is not a complete template; it only
-    // shows relevant module-related settings.
-    // Be sure to set other important options
-    // like `target`, `lib`, and `strict`.
+"compilerOptions": {
+// This is not a complete template; it only
+// shows relevant module-related settings.
+// Be sure to set other important options
+// like `target`, `lib`, and `strict`.
 
-    // Required
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "esModuleInterop": true,
+// Required
+"module": "esnext",
+"moduleResolution": "bundler",
+"esModuleInterop": true,
 
-    // Consult your bundler’s documentation
-    "customConditions": ["module"],
+// Consult your bundler’s documentation
+"customConditions": ["module"],
 
-    // Recommended
-    "noEmit": true, // or `emitDeclarationOnly`
-    "allowImportingTsExtensions": true,
-    "allowArbitraryExtensions": true,
-    "verbatimModuleSyntax": true, // or `isolatedModules`
+// Recommended
+"noEmit": true, // or `emitDeclarationOnly`
+"allowImportingTsExtensions": true,
+"allowArbitraryExtensions": true,
+"verbatimModuleSyntax": true, // or `isolatedModules`
   }
 }
 ```
@@ -49,33 +49,33 @@ Remember to set `"type": "module"` or use `.mts` files if you intend to emit ES 
 
 ```json
 {
-  "compilerOptions": {
-    // This is not a complete template; it only
-    // shows relevant module-related settings.
-    // Be sure to set other important options
-    // like `target`, `lib`, and `strict`.
+"compilerOptions": {
+// This is not a complete template; it only
+// shows relevant module-related settings.
+// Be sure to set other important options
+// like `target`, `lib`, and `strict`.
 
-    // Required
-    "module": "nodenext",
+// Required
+"module": "nodenext",
 
-    // Implied by `"module": "nodenext"`:
-    // "moduleResolution": "nodenext",
-    // "esModuleInterop": true,
-    // "target": "esnext",
+// Implied by `"module": "nodenext"`:
+// "moduleResolution": "nodenext",
+// "esModuleInterop": true,
+// "target": "esnext",
 
-    // Recommended
-    "verbatimModuleSyntax": true,
+// Recommended
+"verbatimModuleSyntax": true,
   }
 }
 ```
 
 ### I’m using ts-node {#im-using-ts-node}
 
-ts-node attempts to be compatible with the same code and the same tsconfig.json settings that can be used to [compile and run the JS outputs in Node.js ↗](https://www.typescriptlang.org/docs/handbook/modules/guides/choosing-compiler-options.html#im-compiling-and-running-the-outputs-in-node). Refer to [ts-node documentation](https://typestrong.org/ts-node/) for more details.
+ts-node attempts to be compatible with the same code and the same tsconfig.json settings that can be used to [compile and run the JS outputs in Node.js](/typescript/5.2/modules-reference/guides/choosing-compiler-options#im-compiling-and-running-the-outputs-in-node). Refer to [ts-node documentation ↗](https://typestrong.org/ts-node/) for more details.
 
 ### I’m using tsx {#im-using-tsx}
 
-Whereas ts-node makes minimal modifications to Node.js’s module system by default, [tsx](https://github.com/esbuild-kit/tsx) behaves more like a bundler, allowing extensionless/index module specifiers and arbitrary mixing of ESM and CJS. Use the same settings for tsx as you [would for a bundler ↗](https://www.typescriptlang.org/docs/handbook/modules/guides/choosing-compiler-options.html#im-using-a-bundler).
+Whereas ts-node makes minimal modifications to Node.js’s module system by default, [tsx ↗](https://github.com/esbuild-kit/tsx) behaves more like a bundler, allowing extensionless/index module specifiers and arbitrary mixing of ESM and CJS. Use the same settings for tsx as you [would for a bundler](/typescript/5.2/modules-reference/guides/choosing-compiler-options#im-using-a-bundler).
 
 ### I’m writing ES modules for the browser, with no bundler or module compiler {#im-writing-es-modules-for-the-browser-with-no-bundler-or-module-compiler}
 
@@ -84,21 +84,21 @@ TypeScript does not currently have options dedicated to this scenario, but you c
 ```json
 // tsconfig.json
 {
-  "compilerOptions": {
-    // This is not a complete template; it only
-    // shows relevant module-related settings.
-    // Be sure to set other important options
-    // like `target`, `lib`, and `strict`.
+"compilerOptions": {
+// This is not a complete template; it only
+// shows relevant module-related settings.
+// Be sure to set other important options
+// like `target`, `lib`, and `strict`.
 
-    // Combined with `"type": "module"` in a local package.json,
-    // this enforces including file extensions on relative path imports.
-    "module": "nodenext",
-    "paths": {
-      // Point TS to local types for remote URLs:
-      "https://esm.sh/lodash@4.17.21": ["./node_modules/@types/lodash/index.d.ts"],
-      // Optional: point bare specifier imports to an empty file
-      // to prohibit importing from node_modules specifiers not listed here:
-      "*": ["./empty-file.ts"]
+// Combined with `"type": "module"` in a local package.json,
+// this enforces including file extensions on relative path imports.
+"module": "nodenext",
+"paths": {
+// Point TS to local types for remote URLs:
+"https://esm.sh/lodash@4.17.21": ["./node_modules/@types/lodash/index.d.ts"],
+// Optional: point bare specifier imports to an empty file
+// to prohibit importing from node_modules specifiers not listed here:
+"*": ["./empty-file.ts"]
     }
   }
 }
@@ -112,7 +112,7 @@ import {} from "lodash";
 // File '/project/empty-file.ts' is not a module. ts(2306)
 ```
 
-Alternatively, you can use [import maps](https://github.com/WICG/import-maps) to explicitly map a list of bare specifiers to URLs in the browser, while relying on `nodenext`’s default node_modules lookups, or on `paths`, to direct TypeScript to type declaration files for those bare specifier imports:
+Alternatively, you can use [import maps ↗](https://github.com/WICG/import-maps) to explicitly map a list of bare specifiers to URLs in the browser, while relying on `nodenext`’s default node_modules lookups, or on `paths`, to direct TypeScript to type declaration files for those bare specifier imports:
 
 ```html
 <script type="importmap">
@@ -136,14 +136,14 @@ Choosing compilation settings as a library author is a fundamentally different p
 
 ```json
 {
-  "compilerOptions": {
-    "module": "node16",
-    "target": "es2020", // set to the *lowest* target you support
-    "strict": true,
-    "verbatimModuleSyntax": true,
-    "declaration": true,
-    "sourceMap": true,
-    "declarationMap": true
+"compilerOptions": {
+"module": "node16",
+"target": "es2020", // set to the *lowest* target you support
+"strict": true,
+"verbatimModuleSyntax": true,
+"declaration": true,
+"sourceMap": true,
+"declarationMap": true
   }
 }
 ```
@@ -174,15 +174,15 @@ Let’s examine why we picked each of these settings:
 
   ```ts
   export interface Super {
-    foo: string;
+  foo: string;
   }
-  export interface Sub extends Super {
-    foo: string | undefined;
+  exportinterfaceSubextendsSuper {
+  foo: string | undefined;
   }
   ```
   is only an error under `strictNullChecks`. On the other hand, it’s very difficult to write code that errors only when `strict` is *disabled*, so it’s highly recommended for libraries to compile with `strict`.
 
-- **`verbatimModuleSyntax: true`**. This setting protects against a few module-related pitfalls that can cause problems for library consumers. First, it prevents writing any import statements that could be interpreted ambiguously based on the user’s value of `esModuleInterop` or `allowSyntheticDefaultImports`. Previously, it was often suggested that libraries compile without `esModuleInterop`, since its use in libraries could force users to adopt it too. However, it’s also possible to write imports that only work *without*`esModuleInterop`, so neither value for the setting guarantees portability for libraries. `verbatimModuleSyntax` does provide such a guarantee. Second, it prevents the use of `export default` in modules that will be emitted as CommonJS, which can require bundler users and Node.js ESM users to consume the module differently. See the appendix on [ESM/CJS Interop ↗](https://www.typescriptlang.org/docs/handbook/modules/appendices/esm-cjs-interop.html#library-code-needs-special-considerations) for more details.
+- **`verbatimModuleSyntax: true`**. This setting protects against a few module-related pitfalls that can cause problems for library consumers. First, it prevents writing any import statements that could be interpreted ambiguously based on the user’s value of `esModuleInterop` or `allowSyntheticDefaultImports`. Previously, it was often suggested that libraries compile without `esModuleInterop`, since its use in libraries could force users to adopt it too. However, it’s also possible to write imports that only work *without*`esModuleInterop`, so neither value for the setting guarantees portability for libraries. `verbatimModuleSyntax` does provide such a guarantee. Second, it prevents the use of `export default` in modules that will be emitted as CommonJS, which can require bundler users and Node.js ESM users to consume the module differently. See the appendix on [ESM/CJS Interop](/typescript/5.2/modules-reference/appendices/esm-cjs-interop#library-code-needs-special-considerations) for more details.
 - **`declaration: true`** emits type declaration files alongside the output JavaScript. This is needed for consumers of the library to have any type information.
 - **`sourceMap: true`** and **`declarationMap: true`** emit source maps for the output JavaScript and type declaration files, respectively. These are only useful if the library also ships its source (`.ts`) files. By shipping source maps and source files, consumers of the library will be able to debug the library code somewhat more easily. By shipping declaration maps and source files, consumers will be able to see the original TypeScript sources when they run Go To Definition on imports from the libraries. Both of these represent a tradeoff between developer experience and library size, so it’s up to you whether to include them.
 
@@ -191,7 +191,7 @@ Let’s examine why we picked each of these settings:
 If you’re using a bundler to emit your library, then all your (non-externalized) imports will be processed by the bundler with known behavior, not by your users’ unknowable environments. In this case, you can use `"module": "esnext"` and `"moduleResolution": "bundler"`, but only with two caveats:
 
 1. TypeScript cannot model module resolution when some files are bundled and some are externalized. When bundling libraries with dependencies, it’s common to bundle the first-party library source code into a single file, but leave imports of external dependencies as real imports in the bundled output. This essentially means module resolution is split between the bundler and the end user’s environment. To model this in TypeScript, you would want to process bundled imports with `"moduleResolution": "bundler"` and externalized imports with `"moduleResolution": "nodenext"` (or with multiple options to check that everything will work in a range of end-user environments). But TypeScript cannot be configured to use two different module resolution settings in the same compilation. As a consequence, using `"moduleResolution": "bundler"` may allow imports of externalized dependencies that would work in a bundler but are unsafe in Node.js. On the other hand, using `"moduleResolution": "nodenext"` may impose overly strict requirements on bundled imports.
-2. You must ensure that your declaration files get bundled as well. Recall the [first rule of declaration files ↗](https://www.typescriptlang.org/docs/handbook/modules/theory.html#the-role-of-declaration-files): every declaration file represents exactly one JavaScript file. If you use `"moduleResolution": "bundler"` and use a bundler to emit an ESM bundle while using `tsc` to emit many individual declaration files, your declaration files may cause errors when consumed under `"module": "nodenext"`. For example, an input file like:
+2. You must ensure that your declaration files get bundled as well. Recall the [first rule of declaration files](/typescript/5.2/modules-reference/theory#the-role-of-declaration-files): every declaration file represents exactly one JavaScript file. If you use `"moduleResolution": "bundler"` and use a bundler to emit an ESM bundle while using `tsc` to emit many individual declaration files, your declaration files may cause errors when consumed under `"module": "nodenext"`. For example, an input file like:
 
   ```ts
   import { Component } from "./extensionless-relative-import";
@@ -201,8 +201,8 @@ If you’re using a bundler to emit your library, then all your (non-externalize
 
 ### Notes on dual-emit solutions {#notes-on-dual-emit-solutions}
 
-A single TypeScript compilation (whether emitting or just type checking) assumes that each input file will only produce one output file. Even if `tsc` isn’t emitting anything, the type checking it performs on imported names rely on knowledge about how the output file will behave at runtime, based on the module- and emit-related options set in the tsconfig.json. While third-party emitters are generally safe to use in combination with `tsc` type checking as long as `tsc` can be configured to understand what the other emitter will emit, any solution that emits two different sets of outputs with different module formats while only type checking once leaves (at least) one of the outputs unchecked. Because external dependencies may expose different APIs to CommonJS and ESM consumers, there’s no configuration you can use to guarantee in a single compilation that both outputs will be type-safe. In practice, most dependencies follow best practices and dual-emit outputs work. Running tests and [static analysis](https://npmjs.com/package/@arethetypeswrong/cli) against all output bundles before publishing significantly reduces the chance of a serious problem going unnoticed.
+A single TypeScript compilation (whether emitting or just type checking) assumes that each input file will only produce one output file. Even if `tsc` isn’t emitting anything, the type checking it performs on imported names rely on knowledge about how the output file will behave at runtime, based on the module- and emit-related options set in the tsconfig.json. While third-party emitters are generally safe to use in combination with `tsc` type checking as long as `tsc` can be configured to understand what the other emitter will emit, any solution that emits two different sets of outputs with different module formats while only type checking once leaves (at least) one of the outputs unchecked. Because external dependencies may expose different APIs to CommonJS and ESM consumers, there’s no configuration you can use to guarantee in a single compilation that both outputs will be type-safe. In practice, most dependencies follow best practices and dual-emit outputs work. Running tests and [static analysis ↗](https://npmjs.com/package/@arethetypeswrong/cli) against all output bundles before publishing significantly reduces the chance of a serious problem going unnoticed.
 
 ---
 
-1. `verbatimModuleSyntax` can only work when the JS emitter emits the same module kind as `tsc` would given the tsconfig.json, source file extension, and package.json `"type"`. The option works by enforcing that the `import`/`require` written is identical to the `import`/`require` emitted. Any configuration that produces both an ESM and a CJS output from the same source file is fundamentally incompatible with `verbatimModuleSyntax`, since its whole purpose is to prevent you from writing `import` anywhere that a `require` would be emitted. `verbatimModuleSyntax` can also be defeated by configuring a third-party emitter to emit a different module kind than `tsc` would—for example, by setting `"module": "esnext"` in tsconfig.json while configuring Babel to emit CommonJS.[↩ ↗](https://www.typescriptlang.org/docs/handbook/modules/guides/choosing-compiler-options.html#fnref-1)
+1. `verbatimModuleSyntax` can only work when the JS emitter emits the same module kind as `tsc` would given the tsconfig.json, source file extension, and package.json `"type"`. The option works by enforcing that the `import`/`require` written is identical to the `import`/`require` emitted. Any configuration that produces both an ESM and a CJS output from the same source file is fundamentally incompatible with `verbatimModuleSyntax`, since its whole purpose is to prevent you from writing `import` anywhere that a `require` would be emitted. `verbatimModuleSyntax` can also be defeated by configuring a third-party emitter to emit a different module kind than `tsc` would—for example, by setting `"module": "esnext"` in tsconfig.json while configuring Babel to emit CommonJS.[↩](/typescript/5.2/modules-reference/guides/choosing-compiler-options#fnref-1)

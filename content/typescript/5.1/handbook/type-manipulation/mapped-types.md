@@ -18,10 +18,10 @@ Mapped types build on the syntax for index signatures, which are used to declare
 type OnlyBoolsAndHorses = {
   [key: string]: boolean | Horse;
 };
- 
-const conforms: OnlyBoolsAndHorses = {
-  del: true,
-  rodney: false,
+
+constconforms: OnlyBoolsAndHorses = {
+del:true,
+rodney:false,
 };
 ```
 
@@ -31,7 +31,7 @@ A mapped type is a generic type which uses a union of `PropertyKey`s (frequently
 
 ```ts
 type OptionsFlags<Type> = {
-  [Property in keyof Type]: boolean;
+  [PropertyinkeyofType]: boolean;
 };
 ```
 
@@ -41,12 +41,12 @@ In this example, `OptionsFlags` will take all the properties from the type `Type
 
 ```ts
 type Features = {
-  darkMode: () => void;
-  newUserProfile: () => void;
+darkMode: () =>void;
+newUserProfile: () =>void;
 };
- 
-type FeatureOptions = OptionsFlags<Features>;
-           
+
+typeFeatureOptions = OptionsFlags<Features>;
+
 type FeatureOptions = {
     darkMode: boolean;
     newUserProfile: boolean;
@@ -63,17 +63,17 @@ You can remove or add these modifiers by prefixing with `-` or `+`. If you don�
 
 ```ts
 // Removes 'readonly' attributes from a type's properties
-type CreateMutable<Type> = {
-  -readonly [Property in keyof Type]: Type[Property];
+typeCreateMutable<Type> = {
+  -readonly [PropertyinkeyofType]: Type[Property];
 };
- 
-type LockedAccount = {
-  readonly id: string;
-  readonly name: string;
+
+typeLockedAccount = {
+readonlyid: string;
+readonlyname: string;
 };
- 
-type UnlockedAccount = CreateMutable<LockedAccount>;
-           
+
+typeUnlockedAccount = CreateMutable<LockedAccount>;
+
 type UnlockedAccount = {
     id: string;
     name: string;
@@ -84,18 +84,18 @@ type UnlockedAccount = {
 
 ```ts
 // Removes 'optional' attributes from a type's properties
-type Concrete<Type> = {
-  [Property in keyof Type]-?: Type[Property];
+typeConcrete<Type> = {
+  [PropertyinkeyofType]-?: Type[Property];
 };
- 
-type MaybeUser = {
-  id: string;
-  name?: string;
-  age?: number;
+
+typeMaybeUser = {
+id: string;
+name?: string;
+age?: number;
 };
- 
-type User = Concrete<MaybeUser>;
-      
+
+typeUser = Concrete<MaybeUser>;
+
 type User = {
     id: string;
     name: string;
@@ -109,7 +109,7 @@ In TypeScript 4.1 and onwards, you can re-map keys in mapped types with an `as` 
 
 ```ts
 type MappedTypeWithNewProperties<Type> = {
-    [Properties in keyof Type as NewKeyType]: Type[Properties]
+    [PropertiesinkeyofTypeasNewKeyType]: Type[Properties]
 }
 ```
 
@@ -119,17 +119,17 @@ You can leverage features like [template literal types](/typescript/5.1/handbook
 
 ```ts
 type Getters<Type> = {
-    [Property in keyof Type as `get${Capitalize<string & Property>}`]: () => Type[Property]
+    [PropertyinkeyofTypeas`get${Capitalize<string&Property>}`]: () =>Type[Property]
 };
- 
-interface Person {
-    name: string;
-    age: number;
-    location: string;
+
+interfacePerson {
+name: string;
+age: number;
+location: string;
 }
- 
-type LazyPerson = Getters<Person>;
-         
+
+typeLazyPerson = Getters<Person>;
+
 type LazyPerson = {
     getName: () => string;
     getAge: () => number;
@@ -143,17 +143,17 @@ You can filter out keys by producing `never` via a conditional type:
 
 ```ts
 // Remove the 'kind' property
-type RemoveKindField<Type> = {
-    [Property in keyof Type as Exclude<Property, "kind">]: Type[Property]
+typeRemoveKindField<Type> = {
+    [PropertyinkeyofTypeasExclude<Property, "kind">]: Type[Property]
 };
- 
-interface Circle {
-    kind: "circle";
-    radius: number;
+
+interfaceCircle {
+kind: "circle";
+radius: number;
 }
- 
-type KindlessCircle = RemoveKindField<Circle>;
-           
+
+typeKindlessCircle = RemoveKindField<Circle>;
+
 type KindlessCircle = {
     radius: number;
 }
@@ -165,14 +165,14 @@ You can map over arbitrary unions, not just unions of `string | number | symbol`
 
 ```ts
 type EventConfig<Events extends { kind: string }> = {
-    [E in Events as E["kind"]]: (event: E) => void;
+    [EinEventsasE["kind"]]: (event: E) =>void;
 }
- 
-type SquareEvent = { kind: "square", x: number, y: number };
-type CircleEvent = { kind: "circle", radius: number };
- 
-type Config = EventConfig<SquareEvent | CircleEvent>
-       
+
+typeSquareEvent = { kind: "square", x: number, y: number };
+typeCircleEvent = { kind: "circle", radius: number };
+
+typeConfig = EventConfig<SquareEvent | CircleEvent>
+
 type Config = {
     square: (event: SquareEvent) => void;
     circle: (event: CircleEvent) => void;
@@ -187,16 +187,16 @@ Mapped types work well with other features in this type manipulation section, fo
 
 ```ts
 type ExtractPII<Type> = {
-  [Property in keyof Type]: Type[Property] extends { pii: true } ? true : false;
+  [PropertyinkeyofType]: Type[Property] extends { pii: true } ? true : false;
 };
- 
-type DBFields = {
-  id: { format: "incrementing" };
-  name: { type: string; pii: true };
+
+typeDBFields = {
+id: { format: "incrementing" };
+name: { type: string; pii: true };
 };
- 
-type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
-                 
+
+typeObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
+
 type ObjectsNeedingGDPRDeletion = {
     id: false;
     name: true;

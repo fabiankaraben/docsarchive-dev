@@ -16,17 +16,17 @@ In TypeScript, it was previously an error to contain *any* code at the beginning
 
 ```ts
 class Base {
-  // ...
+// ...
 }
 
-class Derived extends Base {
-  someProperty = true;
+classDerivedextendsBase {
+someProperty = true;
 
-  constructor() {
-    // error!
-    // have to call 'super()' first because it needs to initialize 'someProperty'.
-    doSomeStuff();
-    super();
+constructor() {
+// error!
+// have to call 'super()' first because it needs to initialize 'someProperty'.
+doSomeStuff();
+super();
   }
 }
 ```
@@ -34,7 +34,7 @@ class Derived extends Base {
 This made it cheap to check that `super()` gets called before `this` is referenced, but it ended up rejecting a lot of valid code.
 TypeScript 4.6 is now much more lenient in that check and permits other code to run before `super()`., all while still ensuring that `super()` occurs at the top-level before any references to `this`.
 
-We’d like to extend our thanks to [Joshua Goldberg](https://github.com/JoshuaKGoldberg) for [patiently working with us to land this change](https://github.com/microsoft/TypeScript/pull/29374)!
+We’d like to extend our thanks to [Joshua Goldberg ↗](https://github.com/JoshuaKGoldberg) for [patiently working with us to land this change ↗](https://github.com/microsoft/TypeScript/pull/29374)!
 
 ## Control Flow Analysis for Destructured Discriminated Unions {#control-flow-analysis-for-destructured-discriminated-unions}
 
@@ -46,15 +46,15 @@ type Action =
   | { kind: "NumberContents"; payload: number }
   | { kind: "StringContents"; payload: string };
 
-function processAction(action: Action) {
-  if (action.kind === "NumberContents") {
-    // `action.payload` is a number here.
-    let num = action.payload * 2;
-    // ...
-  } else if (action.kind === "StringContents") {
-    // `action.payload` is a string here.
-    const str = action.payload.trim();
-    // ...
+functionprocessAction(action: Action) {
+if (action.kind === "NumberContents") {
+// `action.payload` is a number here.
+letnum = action.payload * 2;
+// ...
+  } elseif (action.kind === "StringContents") {
+// `action.payload` is a string here.
+conststr = action.payload.trim();
+// ...
   }
 }
 ```
@@ -69,14 +69,14 @@ type Action =
   | { kind: "NumberContents"; payload: number }
   | { kind: "StringContents"; payload: string };
 
-function processAction(action: Action) {
-  const { kind, payload } = action;
-  if (kind === "NumberContents") {
-    let num = payload * 2;
-    // ...
-  } else if (kind === "StringContents") {
-    const str = payload.trim();
-    // ...
+functionprocessAction(action: Action) {
+const { kind, payload } = action;
+if (kind === "NumberContents") {
+letnum = payload * 2;
+// ...
+  } elseif (kind === "StringContents") {
+conststr = payload.trim();
+// ...
   }
 }
 ```
@@ -89,7 +89,7 @@ When destructuring individual properties into a `const` declaration, or when des
 If it is, TypeScript can now narrow the types of variables depending on checks of other variables
 So in our example, a check on `kind` narrows the type of `payload`.
 
-For more information, [see the pull request that implemented this analysis](https://github.com/microsoft/TypeScript/pull/46266).
+For more information, [see the pull request that implemented this analysis ↗](https://github.com/microsoft/TypeScript/pull/46266).
 
 ## Improved Recursion Depth Checks {#improved-recursion-depth-checks}
 
@@ -99,19 +99,19 @@ In a structural type system, object types are compatible based on the members th
 
 ```ts
 interface Source {
-  prop: string;
+prop: string;
 }
 
-interface Target {
-  prop: number;
+interfaceTarget {
+prop: number;
 }
 
-function check(source: Source, target: Target) {
-  target = source;
-  // error!
-  // Type 'Source' is not assignable to type 'Target'.
-  //   Types of property 'prop' are incompatible.
-  //     Type 'string' is not assignable to type 'number'.
+functioncheck(source: Source, target: Target) {
+target = source;
+// error!
+// Type 'Source' is not assignable to type 'Target'.
+//   Types of property 'prop' are incompatible.
+//     Type 'string' is not assignable to type 'number'.
 }
 ```
 
@@ -123,15 +123,15 @@ For instance, is a `Source<string>` assignable to a `Target<number>` in the foll
 
 ```ts
 interface Source<T> {
-  prop: Source<Source<T>>;
+prop: Source<Source<T>>;
 }
 
-interface Target<T> {
-  prop: Target<Target<T>>;
+interfaceTarget<T> {
+prop: Target<Target<T>>;
 }
 
-function check(source: Source<string>, target: Target<number>) {
-  target = source;
+functioncheck(source: Source<string>, target: Target<number>) {
+target = source;
 }
 ```
 
@@ -145,11 +145,11 @@ This is usually enough, but embarrassingly there were some false-negatives that 
 
 ```ts
 interface Foo<T> {
-  prop: T;
+prop: T;
 }
 
-declare let x: Foo<Foo<Foo<Foo<Foo<Foo<string>>>>>>;
-declare let y: Foo<Foo<Foo<Foo<Foo<string>>>>>;
+declareletx: Foo<Foo<Foo<Foo<Foo<Foo<string>>>>>>;
+declarelety: Foo<Foo<Foo<Foo<Foo<string>>>>>;
 
 x = y;
 ```
@@ -162,7 +162,7 @@ TypeScript 4.6 is now able to distinguish these cases, and correctly errors on t
 Additionally, because the language is no longer concerned with false-positives from explicitly-written types, TypeScript can conclude that a type is infinitely expanding much earlier, and save a bunch of work in checking for type compatibility.
 As a result, libraries on DefinitelyTyped like `redux-immutable`, `react-lazylog`, and `yup` saw a 50% reduction in check-time.
 
-You may already have this change because it was cherry-picked into TypeScript 4.5.3, but it is a notable feature of TypeScript 4.6 which you can read up more about [here](https://github.com/microsoft/TypeScript/pull/46599).
+You may already have this change because it was cherry-picked into TypeScript 4.5.3, but it is a notable feature of TypeScript 4.6 which you can read up more about [here ↗](https://github.com/microsoft/TypeScript/pull/46599).
 
 ## Indexed Access Inference Improvements {#indexed-access-inference-improvements}
 
@@ -170,32 +170,32 @@ TypeScript now can correctly infer to indexed access types which immediately ind
 
 ```ts
 interface TypeMap {
-  number: number;
-  string: string;
-  boolean: boolean;
+number: number;
+string: string;
+boolean: boolean;
 }
 
-type UnionRecord<P extends keyof TypeMap> = {
-  [K in P]: {
-    kind: K;
-    v: TypeMap[K];
-    f: (p: TypeMap[K]) => void;
+typeUnionRecord<PextendskeyofTypeMap> = {
+  [KinP]: {
+kind: K;
+v: TypeMap[K];
+f: (p: TypeMap[K]) =>void;
   };
 }[P];
 
-function processRecord<K extends keyof TypeMap>(record: UnionRecord<K>) {
-  record.f(record.v);
+functionprocessRecord<KextendskeyofTypeMap>(record: UnionRecord<K>) {
+record.f(record.v);
 }
 
 // This call used to have issues - now works!
 processRecord({
-  kind: "string",
-  v: "hello!",
+kind:"string",
+v:"hello!",
 
-  // 'val' used to implicitly have the type 'string | number | boolean',
-  // but now is correctly inferred to just 'string'.
-  f: (val) => {
-    console.log(val.toUpperCase());
+// 'val' used to implicitly have the type 'string | number | boolean',
+// but now is correctly inferred to just 'string'.
+f: (val) => {
+console.log(val.toUpperCase());
   },
 });
 ```
@@ -204,7 +204,7 @@ This pattern was already supported and allowed TypeScript to understand that the
 
 TypeScript 4.6 improves this so that no type assertions are necessary within the call to `processRecord`.
 
-For more information, you can [read up on the pull request](https://github.com/microsoft/TypeScript/pull/47109).
+For more information, you can [read up on the pull request ↗](https://github.com/microsoft/TypeScript/pull/47109).
 
 ## Control Flow Analysis for Dependent Parameters {#control-flow-analysis-for-dependent-parameters}
 
@@ -212,7 +212,7 @@ A signature can be declared with a rest parameter whose type is a discriminated 
 
 ```ts
 function func(...args: ["str", string] | ["num", number]) {
-  // ...
+// ...
 }
 ```
 
@@ -225,12 +225,12 @@ In cases where TypeScript infers the type of a function from a signature like th
 ```ts
 type Func = (...args: ["a", number] | ["b", string]) => void;
 
-const f1: Func = (kind, payload) => {
-  if (kind === "a") {
-    payload.toFixed(); // 'payload' narrowed to 'number'
+constf1: Func = (kind, payload) => {
+if (kind === "a") {
+payload.toFixed(); // 'payload' narrowed to 'number'
   }
-  if (kind === "b") {
-    payload.toUpperCase(); // 'payload' narrowed to 'string'
+if (kind === "b") {
+payload.toUpperCase(); // 'payload' narrowed to 'string'
   }
 };
 
@@ -238,15 +238,15 @@ f1("a", 42);
 f1("b", "hello");
 ```
 
-For more information, [see the change on GitHub](https://github.com/microsoft/TypeScript/pull/47190).
+For more information, [see the change on GitHub ↗](https://github.com/microsoft/TypeScript/pull/47190).
 
 ## `--target es2022` {#--target-es2022}
 
 TypeScript’s `--target` option now supports `es2022`.
 This means features like class fields now have a stable output target where they can be preserved.
-It also means that new built-in functionality like the [`at()` method on `Array`s](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at), [`Object.hasOwn`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwn), or [the `cause` option on `new Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Error#rethrowing_an_error_with_a_cause) can be used either with this new `--target` setting, or with `--lib es2022`.
+It also means that new built-in functionality like the [`at()` method on `Array`s ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at), [`Object.hasOwn` ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwn), or [the `cause` option on `new Error` ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Error#rethrowing_an_error_with_a_cause) can be used either with this new `--target` setting, or with `--lib es2022`.
 
-This functionality was [implemented](https://github.com/microsoft/TypeScript/pull/46291) by [Kagami Sascha Rosylight (saschanaz)](https://github.com/saschanaz) over several PRs, and we’re grateful for that contribution!
+This functionality was [implemented ↗](https://github.com/microsoft/TypeScript/pull/46291) by [Kagami Sascha Rosylight (saschanaz) ↗](https://github.com/saschanaz) over several PRs, and we’re grateful for that contribution!
 
 ## Removed Unnecessary Arguments in `react-jsx` {#removed-unnecessary-arguments-in-react-jsx}
 
@@ -260,7 +260,7 @@ TypeScript would produce the following JavaScript code:
 
 ```jsx
 import { jsx as _jsx } from "react/jsx-runtime";
-export const el = _jsx("div", { children: "foo" }, void 0);
+exportconstel = _jsx("div", { children:"foo" }, void0);
 ```
 
 That last `void 0` argument is unnecessary in this emit mode, and removing it can improve bundle sizes.
@@ -270,7 +270,7 @@ That last `void 0` argument is unnecessary in this emit mode, and removing it ca
 + export const el = _jsx("div", { children: "foo" });
 ```
 
-Thanks to [a pull request](https://github.com/microsoft/TypeScript/pull/47467) from [Alexander Tarasyuk](https://github.com/a-tarasyuk), TypeScript 4.6 now drops the `void 0` argument.
+Thanks to [a pull request ↗](https://github.com/microsoft/TypeScript/pull/47467) from [Alexander Tarasyuk ↗](https://github.com/a-tarasyuk), TypeScript 4.6 now drops the `void 0` argument.
 
 ## JSDoc Name Suggestions {#jsdoc-name-suggestions}
 
@@ -278,11 +278,11 @@ In JSDoc, you can document parameters using an `@param` tag.
 
 ```js
 /**
- * @param x The first operand
- * @param y The second operand
+ * @paramx The first operand
+ * @paramy The second operand
  */
-function add(x, y) {
-  return x + y;
+functionadd(x, y) {
+returnx + y;
 }
 ```
 
@@ -291,11 +291,11 @@ What if we rename `x` and `y` to `a` and `b`?
 
 ```js
 /**
- * @param x {number} The first operand
- * @param y {number} The second operand
+ * @paramx {number} The first operand
+ * @paramy {number} The second operand
  */
-function add(a, b) {
-  return a + b;
+functionadd(a, b) {
+returna + b;
 }
 ```
 
@@ -322,7 +322,7 @@ const foo = 1234;
 
 // ...
 
-const foo = 5678;
+constfoo = 5678;
 //    ~~~
 // error: Cannot redeclare block-scoped variable 'foo'.
 ```
@@ -331,7 +331,7 @@ As another example, TypeScript will let you know if a modifier is being incorrec
 
 ```ts
 function container() {
-    export function foo() {
+exportfunctionfoo() {
 //  ~~~~~~
 // error: Modifiers cannot appear here.
     }
@@ -361,19 +361,19 @@ In the following example…
 
 ```ts
 class Thing {
-  someProperty = 42;
+someProperty = 42;
 
-  someMethod() {
-    // ...
+someMethod() {
+// ...
   }
 }
 
-function foo<T extends Thing>(x: T) {
-  let { someProperty, ...rest } = x;
+functionfoo<TextendsThing>(x: T) {
+let { someProperty, ...rest } = x;
 
-  // Used to work, is now an error!
-  // Property 'someMethod' does not exist on type 'Omit<T, "someProperty" | "someMethod">'.
-  rest.someMethod();
+// Used to work, is now an error!
+// Property 'someMethod' does not exist on type 'Omit<T, "someProperty" | "someMethod">'.
+rest.someMethod();
 }
 ```
 
@@ -386,18 +386,18 @@ When destructuring `this` using a `...rest` element, unspreadable and non-public
 
 ```ts
 class Thing {
-  someProperty = 42;
+someProperty = 42;
 
-  someMethod() {
-    // ...
+someMethod() {
+// ...
   }
 
-  someOtherMethod() {
-    let { someProperty, ...rest } = this;
+someOtherMethod() {
+let { someProperty, ...rest } = this;
 
-    // Used to work, is now an error!
-    // Property 'someMethod' does not exist on type 'Omit<T, "someProperty" | "someMethod">'.
-    rest.someMethod();
+// Used to work, is now an error!
+// Property 'someMethod' does not exist on type 'Omit<T, "someProperty" | "someMethod">'.
+rest.someMethod();
   }
 }
 ```

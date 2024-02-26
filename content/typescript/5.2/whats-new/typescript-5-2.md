@@ -11,7 +11,7 @@ prev: /typescript/5.2/tutorials/babel-with-typescript
 
 ## `using` Declarations and Explicit Resource Management {#using-declarations-and-explicit-resource-management}
 
-TypeScript 5.2 adds support for the upcoming [Explicit Resource Management](https://github.com/tc39/proposal-explicit-resource-management) feature in ECMAScript.
+TypeScript 5.2 adds support for the upcoming [Explicit Resource Management ↗](https://github.com/tc39/proposal-explicit-resource-management) feature in ECMAScript.
 Let’s explore some of the motivations and understand what the feature brings us.
 
 It’s common to need to do some sort of “clean-up” after creating an object.
@@ -22,15 +22,15 @@ Let’s imagine a function that creates a temporary file, reads and writes to it
 ```ts
 import * as fs from "fs";
 
-export function doSomeWork() {
-    const path = ".some_temp_file";
-    const file = fs.openSync(path, "w+");
+exportfunctiondoSomeWork() {
+constpath = ".some_temp_file";
+constfile = fs.openSync(path, "w+");
 
-    // use file...
+// use file...
 
-    // Close the file and delete it.
-    fs.closeSync(file);
-    fs.unlinkSync(path);
+// Close the file and delete it.
+fs.closeSync(file);
+fs.unlinkSync(path);
 }
 ```
 
@@ -38,22 +38,22 @@ This is fine, but what happens if we need to perform an early exit?
 
 ```ts
 export function doSomeWork() {
-    const path = ".some_temp_file";
-    const file = fs.openSync(path, "w+");
+constpath = ".some_temp_file";
+constfile = fs.openSync(path, "w+");
 
-    // use file...
-    if (someCondition()) {
-        // do some more work...
+// use file...
+if (someCondition()) {
+// do some more work...
 
-        // Close the file and delete it.
-        fs.closeSync(file);
-        fs.unlinkSync(path);
-        return;
+// Close the file and delete it.
+fs.closeSync(file);
+fs.unlinkSync(path);
+return;
     }
 
-    // Close the file and delete it.
-    fs.closeSync(file);
-    fs.unlinkSync(path);
+// Close the file and delete it.
+fs.closeSync(file);
+fs.unlinkSync(path);
 }
 ```
 
@@ -63,28 +63,28 @@ This could be solved by wrapping this all in a `try`/`finally` block.
 
 ```ts
 export function doSomeWork() {
-    const path = ".some_temp_file";
-    const file = fs.openSync(path, "w+");
+constpath = ".some_temp_file";
+constfile = fs.openSync(path, "w+");
 
-    try {
-        // use file...
+try {
+// use file...
 
-        if (someCondition()) {
-            // do some more work...
-            return;
+if (someCondition()) {
+// do some more work...
+return;
         }
     }
-    finally {
-        // Close the file and delete it.
-        fs.closeSync(file);
-        fs.unlinkSync(path);
+finally {
+// Close the file and delete it.
+fs.closeSync(file);
+fs.unlinkSync(path);
     }
 }
 ```
 
 While this is more robust, it’s added quite a bit of “noise” to our code.
 There are also other foot-guns we can run into if we start adding more clean-up logic to our `finally` block — for example, exceptions preventing other resources from being disposed.
-This is what the [explicit resource management](https://github.com/tc39/proposal-explicit-resource-management) proposal aims to solve.
+This is what the [explicit resource management ↗](https://github.com/tc39/proposal-explicit-resource-management) proposal aims to solve.
 The key idea of the proposal is to support resource disposal — this clean-up work we’re trying to deal with — as a first class idea in JavaScript.
 
 This starts by adding a new built-in `symbol` called `Symbol.dispose`, and we can create objects with methods named by `Symbol.dispose`.
@@ -92,20 +92,20 @@ For convenience, TypeScript defines a new global type called `Disposable` which 
 
 ```ts
 class TempFile implements Disposable {
-    #path: string;
-    #handle: number;
+#path: string;
+#handle: number;
 
-    constructor(path: string) {
-        this.#path = path;
-        this.#handle = fs.openSync(path, "w+");
+constructor(path: string) {
+this.#path = path;
+this.#handle = fs.openSync(path, "w+");
     }
 
-    // other methods
+// other methods
 
     [Symbol.dispose ↗](https://www.typescriptlang.org) {
-        // Close the file and delete it.
-        fs.closeSync(this.#handle);
-        fs.unlinkSync(this.#path);
+// Close the file and delete it.
+fs.closeSync(this.#handle);
+fs.unlinkSync(this.#path);
     }
 }
 ```
@@ -114,13 +114,13 @@ Later on we can call those methods.
 
 ```ts
 export function doSomeWork() {
-    const file = new TempFile(".some_temp_file");
+constfile = newTempFile(".some_temp_file");
 
-    try {
-        // ...
+try {
+// ...
     }
-    finally {
-        file[Symbol.dispose ↗](https://www.typescriptlang.org);
+finally {
+file[Symbol.dispose ↗](https://www.typescriptlang.org);
     }
 }
 ```
@@ -137,13 +137,13 @@ So we could simply have written our code like this:
 
 ```ts
 export function doSomeWork() {
-    using file = new TempFile(".some_temp_file");
+usingfile = newTempFile(".some_temp_file");
 
-    // use file...
+// use file...
 
-    if (someCondition()) {
-        // do some more work...
-        return;
+if (someCondition()) {
+// do some more work...
+return;
     }
 }
 ```
@@ -152,7 +152,7 @@ Check it out — no `try`/`finally` blocks!
 At least, none that we see.
 Functionally, that’s exactly what `using` declarations will do for us, but we don’t have to deal with that.
 
-You might be familiar with [`using` declarations in C#](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/using), [`with` statements in Python](https://docs.python.org/3/reference/compound_stmts.html#the-with-statement), or [`try`-with-resource declarations in Java](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html).
+You might be familiar with [`using` declarations in C# ↗](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/using), [`with` statements in Python ↗](https://docs.python.org/3/reference/compound_stmts.html#the-with-statement), or [`try`-with-resource declarations in Java ↗](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html).
 These are all similar to JavaScript’s new `using` keyword, and provide a similar explicit way to perform a “tear-down” of an object at the end of a scope.
 
 `using` declarations do this clean-up at the very end of their containing scope or right before an “early return” like a `return` or a `throw`n error.
@@ -160,28 +160,28 @@ They also dispose in a first-in-last-out order like a stack.
 
 ```ts
 function loggy(id: string): Disposable {
-    console.log(`Creating ${id}`);
+console.log(`Creating ${id}`);
 
-    return {
+return {
         [Symbol.dispose ↗](https://www.typescriptlang.org) {
-            console.log(`Disposing ${id}`);
+console.log(`Disposing ${id}`);
         }
     }
 }
 
-function func() {
-    using a = loggy("a");
-    using b = loggy("b");
+functionfunc() {
+usinga = loggy("a");
+usingb = loggy("b");
     {
-        using c = loggy("c");
-        using d = loggy("d");
+usingc = loggy("c");
+usingd = loggy("d");
     }
-    using e = loggy("e");
-    return;
+usinge = loggy("e");
+return;
 
-    // Unreachable.
-    // Never created, never disposed.
-    using f = loggy("f");
+// Unreachable.
+// Never created, never disposed.
+usingf = loggy("f");
 }
 
 func();
@@ -208,37 +208,37 @@ It features a `suppressed` property that holds the last-thrown error, and an `er
 
 ```ts
 class ErrorA extends Error {
-    name = "ErrorA";
+name = "ErrorA";
 }
-class ErrorB extends Error {
-    name = "ErrorB";
+classErrorBextendsError {
+name = "ErrorB";
 }
 
-function throwy(id: string) {
-    return {
+functionthrowy(id: string) {
+return {
         [Symbol.dispose ↗](https://www.typescriptlang.org) {
-            throw new ErrorA(`Error from ${id}`);
+thrownewErrorA(`Error from ${id}`);
         }
     };
 }
 
-function func() {
-    using a = throwy("a");
-    throw new ErrorB("oops!")
+functionfunc() {
+usinga = throwy("a");
+thrownewErrorB("oops!")
 }
 
 try {
-    func();
+func();
 }
 catch (e: any) {
-    console.log(e.name); // SuppressedError
-    console.log(e.message); // An error was suppressed during disposal.
+console.log(e.name); // SuppressedError
+console.log(e.message); // An error was suppressed during disposal.
 
-    console.log(e.error.name); // ErrorA
-    console.log(e.error.message); // Error from a
+console.log(e.error.name); // ErrorA
+console.log(e.error.message); // Error from a
 
-    console.log(e.suppressed.name); // ErrorB
-    console.log(e.suppressed.message); // oops!
+console.log(e.suppressed.name); // ErrorB
+console.log(e.suppressed.message); // oops!
 }
 ```
 
@@ -252,33 +252,33 @@ For convenience, TypeScript also introduces a global type called `AsyncDisposabl
 
 ```ts
 async function doWork() {
-    // Do fake work for half a second.
-    await new Promise(resolve => setTimeout(resolve, 500));
+// Do fake work for half a second.
+awaitnewPromise(resolve=>setTimeout(resolve, 500));
 }
 
-function loggy(id: string): AsyncDisposable {
-    console.log(`Constructing ${id}`);
-    return {
-        async [Symbol.asyncDispose ↗](https://www.typescriptlang.org) {
-            console.log(`Disposing (async) ${id}`);
-            await doWork();
+functionloggy(id: string): AsyncDisposable {
+console.log(`Constructing ${id}`);
+return {
+async [Symbol.asyncDispose ↗](https://www.typescriptlang.org) {
+console.log(`Disposing (async) ${id}`);
+awaitdoWork();
         },
     }
 }
 
-async function func() {
-    await using a = loggy("a");
-    await using b = loggy("b");
+asyncfunctionfunc() {
+awaitusinga = loggy("a");
+awaitusingb = loggy("b");
     {
-        await using c = loggy("c");
-        await using d = loggy("d");
+awaitusingc = loggy("c");
+awaitusingd = loggy("d");
     }
-    await using e = loggy("e");
-    return;
+awaitusinge = loggy("e");
+return;
 
-    // Unreachable.
-    // Never created, never disposed.
-    await using f = loggy("f");
+// Unreachable.
+// Never created, never disposed.
+awaitusingf = loggy("f");
 }
 
 func();
@@ -296,7 +296,7 @@ func();
 
 Defining types in terms of `Disposable` and `AsyncDisposable` can make your code much easier to work with if you expect others to do tear-down logic consistently.
 In fact, lots of existing types exist in the wild which have a `dispose()` or `close()` method.
-For example, the Visual Studio Code APIs even define [their own `Disposable` interface](https://code.visualstudio.com/api/references/vscode-api#Disposable).
+For example, the Visual Studio Code APIs even define [their own `Disposable` interface ↗](https://code.visualstudio.com/api/references/vscode-api#Disposable).
 APIs in the browser and in runtimes like Node.js, Deno, and Bun might also choose to use `Symbol.dispose` and `Symbol.asyncDispose` for objects which already have clean-up methods, like file handles, connections, and more.
 
 Now maybe this all sounds great for libraries, but a little bit heavy-weight for your scenarios.
@@ -305,31 +305,31 @@ For example, take our `TempFile` example again.
 
 ```ts
 class TempFile implements Disposable {
-    #path: string;
-    #handle: number;
+#path: string;
+#handle: number;
 
-    constructor(path: string) {
-        this.#path = path;
-        this.#handle = fs.openSync(path, "w+");
+constructor(path: string) {
+this.#path = path;
+this.#handle = fs.openSync(path, "w+");
     }
 
-    // other methods
+// other methods
 
     [Symbol.dispose ↗](https://www.typescriptlang.org) {
-        // Close the file and delete it.
-        fs.closeSync(this.#handle);
-        fs.unlinkSync(this.#path);
+// Close the file and delete it.
+fs.closeSync(this.#handle);
+fs.unlinkSync(this.#path);
     }
 }
 
-export function doSomeWork() {
-    using file = new TempFile(".some_temp_file");
+exportfunctiondoSomeWork() {
+usingfile = newTempFile(".some_temp_file");
 
-    // use file...
+// use file...
 
-    if (someCondition()) {
-        // do some more work...
-        return;
+if (someCondition()) {
+// do some more work...
+return;
     }
 }
 ```
@@ -346,23 +346,23 @@ So here’s how we could’ve written the original example.
 
 ```ts
 function doSomeWork() {
-    const path = ".some_temp_file";
-    const file = fs.openSync(path, "w+");
+constpath = ".some_temp_file";
+constfile = fs.openSync(path, "w+");
 
-    using cleanup = new DisposableStack();
-    cleanup.defer(() => {
-        fs.closeSync(file);
-        fs.unlinkSync(path);
+usingcleanup = newDisposableStack();
+cleanup.defer(() => {
+fs.closeSync(file);
+fs.unlinkSync(path);
     });
 
-    // use file...
+// use file...
 
-    if (someCondition()) {
-        // do some more work...
-        return;
+if (someCondition()) {
+// do some more work...
+return;
     }
 
-    // ...
+// ...
 }
 ```
 
@@ -372,7 +372,7 @@ should be called immediately after creating a resource.
 As the name suggests, `DisposableStack` disposes of everything it keeps track of like a stack, in a first-in-last-out order, so `defer`ing immediately after creating a value helps avoid odd dependency issues.
 `AsyncDisposableStack` works similarly, but can keep track of `async` functions and `AsyncDisposable`s, and is itself an `AsyncDisposable.`
 
-The `defer` method is similar in many ways to the `defer` keyword in [Go](https://go.dev/tour/flowcontrol/12), [Swift](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/statements/#Defer-Statement), [Zig](https://ziglang.org/documentation/master/#defer), [Odin](https://odin-lang.org/docs/overview/#defer-statement), and others, where the conventions should be similar.
+The `defer` method is similar in many ways to the `defer` keyword in [Go ↗](https://go.dev/tour/flowcontrol/12), [Swift ↗](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/statements/#Defer-Statement), [Zig ↗](https://ziglang.org/documentation/master/#defer), [Odin ↗](https://odin-lang.org/docs/overview/#defer-statement), and others, where the conventions should be similar.
 
 Because this feature is so recent, most runtimes will not support it natively.
 To use it, you will need runtime polyfills for the following:
@@ -395,18 +395,18 @@ You will also need to set your compilation `target` to `es2022` or below, and co
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es2022",
-        "lib": ["es2022", "esnext.disposable", "dom"]
+"compilerOptions": {
+"target": "es2022",
+"lib": ["es2022", "esnext.disposable", "dom"]
     }
 }
 ```
 
-For more information on this feature, [take a look at the work on GitHub](https://github.com/microsoft/TypeScript/pull/54505)!
+For more information on this feature, [take a look at the work on GitHub ↗](https://github.com/microsoft/TypeScript/pull/54505)!
 
 ## Decorator Metadata {#decorator-metadata}
 
-TypeScript 5.2 implements [an upcoming ECMAScript feature called decorator metadata](https://github.com/tc39/proposal-decorator-metadata).
+TypeScript 5.2 implements [an upcoming ECMAScript feature called decorator metadata ↗](https://github.com/tc39/proposal-decorator-metadata).
 
 The key idea of this feature is to make it easy for decorators to create and consume metadata on any class they’re used on or within.
 
@@ -418,26 +418,26 @@ After all decorators on or in a class get run, that object can be accessed on th
 
 ```ts
 interface Context {
-    name: string;
-    metadata: Record<PropertyKey, unknown>;
+name: string;
+metadata: Record<PropertyKey, unknown>;
 }
 
-function setMetadata(_target: any, context: Context) {
-    context.metadata[context.name] = true;
+functionsetMetadata(_target: any, context: Context) {
+context.metadata[context.name] = true;
 }
 
-class SomeClass {
+classSomeClass {
     @setMetadata
-    foo = 123;
+foo = 123;
 
     @setMetadata
-    accessor bar = "hello!";
+accessorbar = "hello!";
 
     @setMetadata
-    baz() { }
+baz() { }
 }
 
-const ourMetadata = SomeClass[Symbol.metadata];
+constourMetadata = SomeClass[Symbol.metadata];
 
 console.log(JSON.stringify(ourMetadata));
 // { "bar": true, "baz": true, "foo": true }
@@ -452,24 +452,24 @@ For example, let’s say we wanted to use decorators to keep track of which prop
 ```ts
 import { serialize, jsonify } from "./serializer";
 
-class Person {
-    firstName: string;
-    lastName: string;
+classPerson {
+firstName: string;
+lastName: string;
 
     @serialize
-    age: number
+age: number
 
     @serialize
-    get fullName() {
-        return `${this.firstName} ${this.lastName}`;
+getfullName() {
+return`${this.firstName}${this.lastName}`;
     }
 
-    toJSON() {
-        return jsonify(this)
+toJSON() {
+returnjsonify(this)
     }
 
-    constructor(firstName: string, lastName: string, age: number) {
-        // ...
+constructor(firstName: string, lastName: string, age: number) {
+// ...
     }
 }
 ```
@@ -482,39 +482,39 @@ Here’s an example of how the module `./serialize.ts` might be defined:
 ```ts
 const serializables = Symbol();
 
-type Context =
+typeContext =
     | ClassAccessorDecoratorContext
     | ClassGetterDecoratorContext
     | ClassFieldDecoratorContext
     ;
 
-export function serialize(_target: any, context: Context): void {
-    if (context.static || context.private) {
-        throw new Error("Can only serialize public instance members.")
+exportfunctionserialize(_target: any, context: Context): void {
+if (context.static || context.private) {
+thrownewError("Can only serialize public instance members.")
     }
-    if (typeof context.name === "symbol") {
-        throw new Error("Cannot serialize symbol-named properties.");
+if (typeofcontext.name === "symbol") {
+thrownewError("Cannot serialize symbol-named properties.");
     }
 
-    const propNames =
-        (context.metadata[serializables] as string[] | undefined) ??= [];
-    propNames.push(context.name);
+constpropNames =
+        (context.metadata[serializables] asstring[] | undefined) ??= [];
+propNames.push(context.name);
 }
 
-export function jsonify(instance: object): string {
-    const metadata = instance.constructor[Symbol.metadata];
-    const propNames = metadata?.[serializables] as string[] | undefined;
-    if (!propNames) {
-        throw new Error("No members marked with @serialize.");
+exportfunctionjsonify(instance: object): string {
+constmetadata = instance.constructor[Symbol.metadata];
+constpropNames = metadata?.[serializables] asstring[] | undefined;
+if (!propNames) {
+thrownewError("No members marked with @serialize.");
     }
 
-    const pairStrings = propNames.map(key => {
-        const strKey = JSON.stringify(key);
-        const strValue = JSON.stringify((instance as any)[key]);
-        return `${strKey}: ${strValue}`;
+constpairStrings = propNames.map(key=> {
+conststrKey = JSON.stringify(key);
+conststrValue = JSON.stringify((instanceasany)[key]);
+return`${strKey}: ${strValue}`;
     });
 
-    return `{ ${pairStrings.join(", ")} }`;
+return`{ ${pairStrings.join(", ")} }`;
 }
 ```
 
@@ -529,40 +529,40 @@ This keeps data private and happens to use fewer type assertions in this case, b
 ```ts
 const serializables = new WeakMap<object, string[]>();
 
-type Context =
+typeContext =
     | ClassAccessorDecoratorContext
     | ClassGetterDecoratorContext
     | ClassFieldDecoratorContext
     ;
 
-export function serialize(_target: any, context: Context): void {
-    if (context.static || context.private) {
-        throw new Error("Can only serialize public instance members.")
+exportfunctionserialize(_target: any, context: Context): void {
+if (context.static || context.private) {
+thrownewError("Can only serialize public instance members.")
     }
-    if (typeof context.name !== "string") {
-        throw new Error("Can only serialize string properties.");
+if (typeofcontext.name !== "string") {
+thrownewError("Can only serialize string properties.");
     }
 
-    let propNames = serializables.get(context.metadata);
-    if (propNames === undefined) {
-        serializables.set(context.metadata, propNames = []);
+letpropNames = serializables.get(context.metadata);
+if (propNames === undefined) {
+serializables.set(context.metadata, propNames = []);
     }
-    propNames.push(context.name);
+propNames.push(context.name);
 }
 
-export function jsonify(instance: object): string {
-    const metadata = instance.constructor[Symbol.metadata];
-    const propNames = metadata && serializables.get(metadata);
-    if (!propNames) {
-        throw new Error("No members marked with @serialize.");
+exportfunctionjsonify(instance: object): string {
+constmetadata = instance.constructor[Symbol.metadata];
+constpropNames = metadata && serializables.get(metadata);
+if (!propNames) {
+thrownewError("No members marked with @serialize.");
     }
-    const pairStrings = propNames.map(key => {
-        const strKey = JSON.stringify(key);
-        const strValue = JSON.stringify((instance as any)[key]);
-        return `${strKey}: ${strValue}`;
+constpairStrings = propNames.map(key=> {
+conststrKey = JSON.stringify(key);
+conststrValue = JSON.stringify((instanceasany)[key]);
+return`${strKey}: ${strValue}`;
     });
 
-    return `{ ${pairStrings.join(", ")} }`;
+return`{ ${pairStrings.join(", ")} }`;
 }
 ```
 
@@ -581,14 +581,14 @@ You will also need to set your compilation `target` to `es2022` or below, and co
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es2022",
-        "lib": ["es2022", "esnext.decorators", "dom"]
+"compilerOptions": {
+"target": "es2022",
+"lib": ["es2022", "esnext.decorators", "dom"]
     }
 }
 ```
 
-We’d like to thank [Oleksandr Tarasiuk](https://github.com/a-tarasyuk) for contributing [the implementation of decorator metadata](https://github.com/microsoft/TypeScript/pull/54657) for TypeScript 5.2!
+We’d like to thank [Oleksandr Tarasiuk ↗](https://github.com/a-tarasyuk) for contributing [the implementation of decorator metadata ↗](https://github.com/microsoft/TypeScript/pull/54657) for TypeScript 5.2!
 
 ## Named and Anonymous Tuple Elements {#named-and-anonymous-tuple-elements}
 
@@ -605,13 +605,13 @@ In other words, either no element could have a label in a tuple, or all elements
 
 ```ts
 // ✅ fine - no labels
-type Pair1<T> = [T, T];
+typePair1<T> = [T, T];
 
 // ✅ fine - all fully labeled
-type Pair2<T> = [first: T, second: T];
+typePair2<T> = [first: T, second: T];
 
 // ❌ previously an error
-type Pair3<T> = [first: T, T];
+typePair3<T> = [first: T, T];
 //                         ~
 // Tuple members must all have names
 // or all not have names.
@@ -621,21 +621,21 @@ This could be annoying for rest elements where we’d be forced to just add a la
 
 ```ts
 // ❌ previously an error
-type TwoOrMore_A<T> = [first: T, second: T, ...T[]];
+typeTwoOrMore_A<T> = [first: T, second: T, ...T[]];
 //                                          ~~~~~~
 // Tuple members must all have names
 // or all not have names.
 
 // ✅
-type TwoOrMore_B<T> = [first: T, second: T, rest: ...T[]];
+typeTwoOrMore_B<T> = [first: T, second: T, rest: ...T[]];
 ```
 
 It also meant that this restriction had to be enforced internally in the type system, meaning TypeScript would lose labels.
 
 ```ts
 type HasLabels = [a: string, b: string];
-type HasNoLabels = [number, number];
-type Merged = [...HasNoLabels, ...HasLabels];
+typeHasNoLabels = [number, number];
+typeMerged = [...HasNoLabels, ...HasLabels];
 //   ^ [number, number, string, string]
 //
 //     'a' and 'b' were lost in 'Merged'
@@ -644,7 +644,7 @@ type Merged = [...HasNoLabels, ...HasLabels];
 In TypeScript 5.2, the all-or-nothing restriction on tuple labels has been lifted.
 The language can now also preserve labels when spreading into an unlabeled tuple.
 
-We’d like to extend our thanks to [Josh Goldberg](https://github.com/JoshuaKGoldberg) and [Mateusz Burzyński](https://github.com/Andarist) who [collaborated to lift this restriction](https://github.com/microsoft/TypeScript/pull/53356).
+We’d like to extend our thanks to [Josh Goldberg ↗](https://github.com/JoshuaKGoldberg) and [Mateusz Burzyński ↗](https://github.com/Andarist) who [collaborated to lift this restriction ↗](https://github.com/microsoft/TypeScript/pull/53356).
 
 ## Easier Method Usage for Unions of Arrays {#easier-method-usage-for-unions-of-arrays}
 
@@ -653,7 +653,7 @@ In previous versions on TypeScript, calling a method on a union of arrays could 
 ```ts
 declare let array: string[] | number[];
 
-array.filter(x => !!x);
+array.filter(x=> !!x);
 //    ~~~~~~ error!
 // This expression is not callable.
 //   Each member of the union type '...' has signatures,
@@ -673,7 +673,7 @@ but for a freshly produced value there is less risk of something “going wrong�
 
 This means lots of methods like `filter`, `find`, `some`, `every`, and `reduce` should all be invokable on unions of arrays in cases where they were not previously.
 
-You can [read up more details on the implementing pull request](https://github.com/microsoft/TypeScript/pull/53489).
+You can [read up more details on the implementing pull request ↗](https://github.com/microsoft/TypeScript/pull/53489).
 
 ## Type-Only Import Paths with TypeScript Implementation File Extensions {#type-only-import-paths-with-typescript-implementation-file-extensions}
 
@@ -684,8 +684,8 @@ This means that you can now write `import type` statements that use `.ts`, `.mts
 ```ts
 import type { JustAType } from "./justTypes.ts";
 
-export function f(param: JustAType) {
-    // ...
+exportfunctionf(param: JustAType) {
+// ...
 }
 ```
 
@@ -693,14 +693,14 @@ It also means that `import()` types, which can be used in both TypeScript and Ja
 
 ```js
 /**
- * @param {import("./justTypes.ts").JustAType} param
+ * @param{import("./justTypes.ts").JustAType}param
  */
-export function f(param) {
-    // ...
+exportfunctionf(param) {
+// ...
 }
 ```
 
-For more information, [see the change here](https://github.com/microsoft/TypeScript/pull/54746).
+For more information, [see the change here ↗](https://github.com/microsoft/TypeScript/pull/54746).
 
 ## Comma Completions for Object Members {#comma-completions-for-object-members}
 
@@ -733,13 +733,13 @@ For example:
 
 ```ts
 interface A {
-    value: A;
-    other: string;
+value: A;
+other: string;
 }
 
-interface B {
-    value: B;
-    other: number;
+interfaceB {
+value: B;
+other: number;
 }
 ```
 
@@ -822,11 +822,11 @@ For example, it would not issue an error on a case like the following, where `re
 
 ```ts
 declare module 'replace-in-file' {
-    export function replaceInFile(config: unknown): Promise<unknown[]>;
-    export {};
+exportfunctionreplaceInFile(config: unknown): Promise<unknown[]>;
+export {};
 
-    namespace replaceInFile {
-        export function sync(config: unknown): unknown[];
+namespacereplaceInFile {
+exportfunctionsync(config: unknown): unknown[];
   }
 }
 ```

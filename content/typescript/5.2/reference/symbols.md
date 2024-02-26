@@ -15,14 +15,14 @@ Starting with ECMAScript 2015, `symbol` is a primitive data type, just like `num
 ```ts
 let sym1 = Symbol();
 
-let sym2 = Symbol("key"); // optional string key
+letsym2 = Symbol("key"); // optional string key
 ```
 
 Symbols are immutable, and unique.
 
 ```ts
 let sym2 = Symbol("key");
-let sym3 = Symbol("key");
+letsym3 = Symbol("key");
 
 sym2 === sym3; // false, symbols are unique
 ```
@@ -32,8 +32,8 @@ Just like strings, symbols can be used as keys for object properties.
 ```ts
 const sym = Symbol();
 
-let obj = {
-  [sym]: "value",
+letobj = {
+[sym]:"value",
 };
 
 console.log(obj[sym]); // "value"
@@ -44,14 +44,14 @@ Symbols can also be combined with computed property declarations to declare obje
 ```ts
 const getClassNameSymbol = Symbol();
 
-class C {
+classC {
   [getClassNameSymbol ↗](https://www.typescriptlang.org) {
-    return "C";
+return"C";
   }
 }
 
-let c = new C();
-let className = c[getClassNameSymbol ↗](https://www.typescriptlang.org); // "C"
+letc = newC();
+letclassName = c[getClassNameSymbol ↗](https://www.typescriptlang.org); // "C"
 ```
 
 ## `unique symbol` {#unique-symbol}
@@ -62,16 +62,16 @@ To enable treating symbols as unique literals a special type `unique symbol` is 
 
 ```ts
 declare const sym1: unique symbol;
- 
+
 // sym2 can only be a constant reference.
-let sym2: unique symbol = Symbol();
- 
+letsym2: uniquesymbol = Symbol();
+
 // Works - refers to a unique symbol, but its identity is tied to 'sym1'.
-let sym3: typeof sym1 = sym1;
- 
+letsym3: typeofsym1 = sym1;
+
 // Also works.
-class C {
-  static readonly StaticSymbol: unique symbol = Symbol();
+classC {
+staticreadonlyStaticSymbol: uniquesymbol = Symbol();
 }
 ```
 
@@ -85,10 +85,10 @@ Because each `unique symbol` has a completely separate identity, no two `unique 
 
 ```ts
 const sym2 = Symbol();
-const sym3 = Symbol();
- 
+constsym3 = Symbol();
+
 if (sym2 === sym3) {
-  // ...
+// ...
 }
 ```
 

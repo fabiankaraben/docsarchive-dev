@@ -14,7 +14,7 @@ As of TypeScript 3.8 and onward, the Typescript compiler exposes configuration w
 
 The `--watch` implementation of the compiler relies on Node’s `fs.watch` and `fs.watchFile`. Each of these methods has pros and cons.
 
-`fs.watch` relies on file system events to broadcast changes in the watched files and directories. The implementation of this command is OS dependent and unreliable - on many operating systems, it does not work as expected. Additionally, some operating systems limit the number of watches which can exist simultaneously (e.g. some flavors of [Linux](https://man7.org/linux/man-pages/man7/inotify.7.html)). Heavy use of `fs.watch` in large codebases has the potential to exceed these limits and result in undesirable behavior. However, because this implementation relies on an events-based model, CPU use is comparatively light. The compiler typically uses `fs.watch` to watch directories (e.g. source directories included by compiler configuration files and directories in which module resolution failed, among others). TypeScript uses these to augment potential failures in individual file watchers. However, there is a key limitation of this strategy: recursive watching of directories is supported on Windows and macOS, but not on Linux. This suggested a need for additional strategies for file and directory watching.
+`fs.watch` relies on file system events to broadcast changes in the watched files and directories. The implementation of this command is OS dependent and unreliable - on many operating systems, it does not work as expected. Additionally, some operating systems limit the number of watches which can exist simultaneously (e.g. some flavors of [Linux ↗](https://man7.org/linux/man-pages/man7/inotify.7.html)). Heavy use of `fs.watch` in large codebases has the potential to exceed these limits and result in undesirable behavior. However, because this implementation relies on an events-based model, CPU use is comparatively light. The compiler typically uses `fs.watch` to watch directories (e.g. source directories included by compiler configuration files and directories in which module resolution failed, among others). TypeScript uses these to augment potential failures in individual file watchers. However, there is a key limitation of this strategy: recursive watching of directories is supported on Windows and macOS, but not on Linux. This suggested a need for additional strategies for file and directory watching.
 
 `fs.watchFile` uses polling and thus costs CPU cycles. However, `fs.watchFile` is by far the most reliable mechanism available to subscribe to the events from files and directories of interest. Under this strategy, the TypeScript compiler typically uses `fs.watchFile` to watch source files, config files, and files which appear missing based on reference statements. This means that the degree to which CPU usage will be higher when using `fs.watchFile` depends directly on number of files watched in the codebase.
 
@@ -24,35 +24,35 @@ The suggested method of configuring watch behavior is through the new `watchOpti
 
 ```
 {
-  // Some typical compiler options
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[target ↗](https://www.typescriptlang.org/tsconfig.html#target)": "es2020",
-    "[moduleResolution ↗](https://www.typescriptlang.org/tsconfig.html#moduleResolution)": "node"
-    // ...
+// Some typical compiler options
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[target ↗](https://www.typescriptlang.org/tsconfig.html#target)": "es2020",
+"[moduleResolution ↗](https://www.typescriptlang.org/tsconfig.html#moduleResolution)": "node"
+// ...
   },
 
-  // NEW: Options for file/directory watching
-  "watchOptions": {
-    // Use native file system events for files and directories
-    "[watchFile ↗](https://www.typescriptlang.org/tsconfig.html#watchFile)": "useFsEvents",
-    "[watchDirectory ↗](https://www.typescriptlang.org/tsconfig.html#watchDirectory)": "useFsEvents",
+// NEW: Options for file/directory watching
+"watchOptions": {
+// Use native file system events for files and directories
+"[watchFile ↗](https://www.typescriptlang.org/tsconfig.html#watchFile)": "useFsEvents",
+"[watchDirectory ↗](https://www.typescriptlang.org/tsconfig.html#watchDirectory)": "useFsEvents",
 
-    // Poll files for updates more frequently
-    // when they're updated a lot.
-    "[fallbackPolling ↗](https://www.typescriptlang.org/tsconfig.html#fallbackPolling)": "dynamicPriority",
+// Poll files for updates more frequently
+// when they're updated a lot.
+"[fallbackPolling ↗](https://www.typescriptlang.org/tsconfig.html#fallbackPolling)": "dynamicPriority",
 
-    // Don't coalesce watch notification
-    "[synchronousWatchDirectory ↗](https://www.typescriptlang.org/tsconfig.html#synchronousWatchDirectory)": true,
+// Don't coalesce watch notification
+"[synchronousWatchDirectory ↗](https://www.typescriptlang.org/tsconfig.html#synchronousWatchDirectory)": true,
 
-    // Finally, two additional settings for reducing the amount of possible
-    // files to track  work from these directories
-    "[excludeDirectories ↗](https://www.typescriptlang.org/tsconfig.html#excludeDirectories)": ["**/node_modules", "_build"],
-    "[excludeFiles ↗](https://www.typescriptlang.org/tsconfig.html#excludeFiles)": ["build/fileWhichChangesOften.ts"]
+// Finally, two additional settings for reducing the amount of possible
+// files to track  work from these directories
+"[excludeDirectories ↗](https://www.typescriptlang.org/tsconfig.html#excludeDirectories)": ["**/node_modules", "_build"],
+"[excludeFiles ↗](https://www.typescriptlang.org/tsconfig.html#excludeFiles)": ["build/fileWhichChangesOften.ts"]
   }
 }
 ```
 
-For further details, see [the release notes for Typescript 3.8 ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#better-directory-watching-on-linux-and-watchoptions).
+For further details, see [the release notes for Typescript 3.8](/typescript/5.1/whats-new/typescript-3-8#better-directory-watching-on-linux-and-watchoptions).
 
 ## Configuring file watching using environment variable `TSC_WATCHFILE` {#configuring-file-watching-using-environment-variable-tsc_watchfile}
 

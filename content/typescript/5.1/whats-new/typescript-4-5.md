@@ -29,8 +29,8 @@ If you wanted to lock your project to a specific version of the DOM APIs, you co
 
 ```json
 {
-  "dependencies": {
-    "@typescript/lib-dom": "npm:@types/web"
+"dependencies": {
+"@typescript/lib-dom": "npm:@types/web"
   }
 }
 ```
@@ -38,9 +38,9 @@ If you wanted to lock your project to a specific version of the DOM APIs, you co
 Then from 4.5 onwards, you can update TypeScript and your dependency manager’s lockfile will ensure that it uses the exact same version of the DOM types.
 That means you get to update your types on your own terms.
 
-We’d like to give a shout-out to [saschanaz](https://github.com/saschanaz) who has been extremely helpful and patient as we’ve been building out and experimenting with this feature.
+We’d like to give a shout-out to [saschanaz ↗](https://github.com/saschanaz) who has been extremely helpful and patient as we’ve been building out and experimenting with this feature.
 
-For more information, you can [see the implementation of this change](https://github.com/microsoft/TypeScript/pull/45771).
+For more information, you can [see the implementation of this change ↗](https://github.com/microsoft/TypeScript/pull/45771).
 
 ## The `Awaited` Type and `Promise` Improvements {#the-awaited-type-and-promise-improvements}
 
@@ -49,13 +49,13 @@ This type is meant to model operations like `await` in `async` functions, or the
 
 ```ts
 // A = string
-type A = Awaited<Promise<string>>;
+typeA = Awaited<Promise<string>>;
 
 // B = number
-type B = Awaited<Promise<Promise<number>>>;
+typeB = Awaited<Promise<Promise<number>>>;
 
 // C = boolean | number
-type C = Awaited<boolean | Promise<number>>;
+typeC = Awaited<boolean | Promise<number>>;
 ```
 
 The `Awaited` type can be helpful for modeling existing APIs, including JavaScript built-ins like `Promise.all`, `Promise.race`, etc.
@@ -65,23 +65,23 @@ Here’s an example that fails in TypeScript 4.4 and earlier.
 ```ts
 declare function MaybePromise<T>(value: T): T | Promise<T> | PromiseLike<T>;
 
-async function doSomething(): Promise<[number, number]> {
-  const result = await Promise.all([MaybePromise(100), MaybePromise(200)]);
+asyncfunctiondoSomething(): Promise<[number, number]> {
+constresult = awaitPromise.all([MaybePromise(100), MaybePromise(200)]);
 
-  // Error!
-  //
-  //    [number | Promise<100>, number | Promise<200>]
-  //
-  // is not assignable to type
-  //
-  //    [number, number]
-  return result;
+// Error!
+//
+//    [number | Promise<100>, number | Promise<200>]
+//
+// is not assignable to type
+//
+//    [number, number]
+returnresult;
 }
 ```
 
 Now `Promise.all` leverages the combination of certain features with `Awaited` to give much better inference results, and the above example works.
 
-For more information, you [can read about this change on GitHub](https://github.com/microsoft/TypeScript/pull/45350).
+For more information, you [can read about this change on GitHub ↗](https://github.com/microsoft/TypeScript/pull/45350).
 
 ### Template String Types as Discriminants {#template-string-types-as-discriminants}
 
@@ -93,33 +93,33 @@ As an example, the following used to fail, but now successfully type-checks in T
 
 ```ts
 export interface Success {
-    type: `${string}Success`;
-    body: string;
+type: `${string}Success`;
+body: string;
 }
- 
-export interface Error {
-    type: `${string}Error`;
-    message: string
+
+exportinterfaceError {
+type: `${string}Error`;
+message: string
 }
- 
-export function handler(r: Success | Error) {
-    if (r.type === "HttpSuccess") {
-        const token = r.body;
-                     
+
+exportfunctionhandler(r: Success | Error) {
+if (r.type === "HttpSuccess") {
+consttoken = r.body;
+
 (parameter) r: Success
     }
 }
 ```
 
-For more information, [see the change that enables this feature](https://github.com/microsoft/TypeScript/pull/46137).
+For more information, [see the change that enables this feature ↗](https://github.com/microsoft/TypeScript/pull/46137).
 
 ### `module es2022` {#module-es2022}
 
-Thanks to [Kagami S. Rosylight](https://github.com/saschanaz), TypeScript now supports a new `module` setting: `es2022`.
+Thanks to [Kagami S. Rosylight ↗](https://github.com/saschanaz), TypeScript now supports a new `module` setting: `es2022`.
 The main feature in [`module es2022` ↗](https://www.typescriptlang.org/tsconfig.html#module) is top-level `await`, meaning you can use `await` outside of `async` functions.
 This was already supported in `--module esnext` (and now [`--module nodenext` ↗](https://www.typescriptlang.org/tsconfig.html#target)), but `es2022` is the first stable target for this feature.
 
-You can [read up more on this change here](https://github.com/microsoft/TypeScript/pull/44656).
+You can [read up more on this change here ↗](https://github.com/microsoft/TypeScript/pull/44656).
 
 ### Tail-Recursion Elimination on Conditional Types {#tail-recursion-elimination-on-conditional-types}
 
@@ -129,10 +129,10 @@ As a result, TypeScript has heuristics to make sure it doesn’t go off the rail
 ```ts
 type InfiniteBox<T> = { item: InfiniteBox<T> };
 
-type Unpack<T> = T extends { item: infer U } ? Unpack<U> : T;
+typeUnpack<T> = Textends { item: inferU } ? Unpack<U> : T;
 
 // error: Type instantiation is excessively deep and possibly infinite.
-type Test = Unpack<InfiniteBox<number>>;
+typeTest = Unpack<InfiniteBox<number>>;
 ```
 
 The above example is intentionally simple and useless, but there are plenty of types that are actually useful, and unfortunately trigger our heuristics.
@@ -141,20 +141,20 @@ If given a string type that has a space at the beginning, it immediately feeds t
 
 ```ts
 type TrimLeft<T extends string> =
-    T extends ` ${infer Rest}` ? TrimLeft<Rest> : T;
+Textends` ${inferRest}` ? TrimLeft<Rest> : T;
 
 // Test = "hello" | "world"
-type Test = TrimLeft<"   hello" | " world">;
+typeTest = TrimLeft<"   hello" | " world">;
 ```
 
 This type can be useful, but if a string has 50 leading spaces, you’ll get an error.
 
 ```ts
 type TrimLeft<T extends string> =
-    T extends ` ${infer Rest}` ? TrimLeft<Rest> : T;
+Textends` ${inferRest}` ? TrimLeft<Rest> : T;
 
 // error: Type instantiation is excessively deep and possibly infinite.
-type Test = TrimLeft<"                                                oops">;
+typeTest = TrimLeft<"                                                oops">;
 ```
 
 That’s unfortunate, because these kinds of types tend to be extremely useful in modeling operations on strings - for example, parsers for URL routers.
@@ -172,18 +172,18 @@ Keep in mind, the following type *won’t* be optimized, since it uses the resul
 
 ```ts
 type GetChars<S> =
-    S extends `${infer Char}${infer Rest}` ? Char | GetChars<Rest> : never;
+Sextends`${inferChar}${inferRest}` ? Char | GetChars<Rest> : never;
 ```
 
 If you would like to make it tail-recursive, you can introduce a helper that takes an “accumulator” type parameter, just like with tail-recursive functions.
 
 ```ts
 type GetChars<S> = GetCharsHelper<S, never>;
-type GetCharsHelper<S, Acc> =
-    S extends `${infer Char}${infer Rest}` ? GetCharsHelper<Rest, Char | Acc> : Acc;
+typeGetCharsHelper<S, Acc> =
+Sextends`${inferChar}${inferRest}` ? GetCharsHelper<Rest, Char | Acc> : Acc;
 ```
 
-You can read up more on the implementation [here](https://github.com/microsoft/TypeScript/pull/45711).
+You can read up more on the implementation [here ↗](https://github.com/microsoft/TypeScript/pull/45711).
 
 ### Disabling Import Elision {#disabling-import-elision}
 
@@ -203,21 +203,21 @@ Good reasons to use `eval` are few and far between, but something very similar t
 ```html
 <!-- A .svelte File -->
 <script>
-  import { someFunc } from "./some-module.js";
+import { someFunc } from"./some-module.js";
 </script>
 
-<button on:click="{someFunc}">Click me!</button>
+<buttonon:click="{someFunc}">Click me!</button>
 ```
 
 along with in Vue.js, using its `<script setup>` feature:
 
 ```html
 <!-- A .vue File -->
-<script setup>
-  import { someFunc } from "./some-module.js";
+<scriptsetup>
+import { someFunc } from"./some-module.js";
 </script>
 
-<button @click="someFunc">Click me!</button>
+<button@click="someFunc">Click me!</button>
 ```
 
 These frameworks generate some code based on markup outside of their `<script>` tags, but TypeScript *only* sees code within the `<script>` tags.
@@ -230,15 +230,15 @@ types *must* be marked as type-only because compilers that process single files 
 ```ts
 // Which of these is a value that should be preserved? tsc knows, but `ts.transpileModule`,
 // ts-loader, esbuild, etc. don't, so `isolatedModules` gives an error.
-import { someFunc, BaseType } from "./some-module.js";
+import { someFunc, BaseType } from"./some-module.js";
 //                 ^^^^^^^^
 // Error: 'BaseType' is a type and must be imported using a type-only import
 // when 'preserveValueImports' and 'isolatedModules' are both enabled.
 ```
 
-That makes another TypeScript 4.5 feature, [`type` modifiers on import names ↗](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-5.html#type-on-import-names), especially important.
+That makes another TypeScript 4.5 feature, [`type` modifiers on import names](/typescript/5.1/whats-new/typescript-4-5#type-on-import-names), especially important.
 
-For more information, [see the pull request here](https://github.com/microsoft/TypeScript/pull/44619).
+For more information, [see the pull request here ↗](https://github.com/microsoft/TypeScript/pull/44619).
 
 ### `type` Modifiers on Import Names {#type-modifiers-on-import-names}
 
@@ -247,7 +247,7 @@ As mentioned above, [`preserveValueImports` ↗](https://www.typescriptlang.org/
 ```ts
 // Which of these is a value that should be preserved? tsc knows, but `ts.transpileModule`,
 // ts-loader, esbuild, etc. don't, so `isolatedModules` issues an error.
-import { someFunc, BaseType } from "./some-module.js";
+import { someFunc, BaseType } from"./some-module.js";
 //                 ^^^^^^^^
 // Error: 'BaseType' is a type and must be imported using a type-only import
 // when 'preserveValueImports' and 'isolatedModules' are both enabled.
@@ -258,10 +258,10 @@ TypeScript already has something for this with `import type`:
 
 ```ts
 import type { BaseType } from "./some-module.js";
-import { someFunc } from "./some-module.js";
+import { someFunc } from"./some-module.js";
 
-export class Thing implements BaseType {
-  // ...
+exportclassThingimplementsBaseType {
+// ...
 }
 ```
 
@@ -271,9 +271,9 @@ That’s part of why TypeScript 4.5 allows a `type` modifier on individual named
 ```ts
 import { someFunc, type BaseType } from "./some-module.js";
 
-export class Thing implements BaseType {
-    someMethod() {
-        someFunc();
+exportclassThingimplementsBaseType {
+someMethod() {
+someFunc();
     }
 }
 ```
@@ -283,14 +283,14 @@ In the above example, `BaseType` is always guaranteed to be erased and `someFunc
 ```js
 import { someFunc } from "./some-module.js";
 
-export class Thing {
-  someMethod() {
-    someFunc();
+exportclassThing {
+someMethod() {
+someFunc();
   }
 }
 ```
 
-For more information, see [the changes on GitHub](https://github.com/microsoft/TypeScript/pull/45998).
+For more information, see [the changes on GitHub ↗](https://github.com/microsoft/TypeScript/pull/45998).
 
 ### Private Field Presence Checks {#private-field-presence-checks}
 
@@ -299,16 +299,16 @@ You can now write a class with a `#private` field member and see whether another
 
 ```ts
 class Person {
-    #name: string;
-    constructor(name: string) {
-        this.#name = name;
+#name: string;
+constructor(name: string) {
+this.#name = name;
     }
 
-    equals(other: unknown) {
-        return other &&
-            typeof other === "object" &&
-            #name in other && // <- this is new!
-            this.#name === other.#name;
+equals(other: unknown) {
+returnother &&
+typeofother === "object" &&
+            #nameinother && // <- this is new!
+this.#name === other.#name;
     }
 }
 ```
@@ -317,7 +317,7 @@ One interesting aspect of this feature is that the check `#name in other` implie
 This is actually one of the key features of the proposal, and it’s why the proposal is named “ergonomic brand checks” - because private fields often act as a “brand” to guard against objects that aren’t instances of their class.
 As such, TypeScript is able to appropriately narrow the type of `other` on each check, until it ends up with the type `Person`.
 
-We’d like to extend a big thanks to our friends at Bloomberg [who contributed this pull request](https://github.com/microsoft/TypeScript/pull/44648): [Ashley Claymore](https://github.com/acutmore), [Titian Cernicova-Dragomir](https://github.com/dragomirtitian), [Kubilay Kahveci](https://github.com/mkubilayk), and [Rob Palmer](https://github.com/robpalme)!
+We’d like to extend a big thanks to our friends at Bloomberg [who contributed this pull request ↗](https://github.com/microsoft/TypeScript/pull/44648): [Ashley Claymore ↗](https://github.com/acutmore), [Titian Cernicova-Dragomir ↗](https://github.com/dragomirtitian), [Kubilay Kahveci ↗](https://github.com/mkubilayk), and [Rob Palmer ↗](https://github.com/robpalme)!
 
 ### Import Assertions {#import-assertions}
 
@@ -333,8 +333,8 @@ The contents of these assertions are not checked by TypeScript since they’re h
 ```ts
 // TypeScript is fine with this.
 // But your browser? Probably not.
-import obj from "./something.json" assert {
-    type: "fluffy bunny"
+importobjfrom"./something.json"assert {
+type: "fluffybunny"
 };
 ```
 
@@ -342,13 +342,13 @@ Dynamic `import()` calls can also use import assertions through a second argumen
 
 ```ts
 const obj = await import("./something.json", {
-  assert: { type: "json" },
+assert: { type:"json" },
 });
 ```
 
 The expected type of that second argument is defined by a new type called `ImportCallOptions`, and currently only accepts an `assert` property.
 
-We’d like to thank [Wenlu Wang](https://github.com/Kingwl/) for [implementing this feature](https://github.com/microsoft/TypeScript/pull/40698)!
+We’d like to thank [Wenlu Wang ↗](https://github.com/Kingwl/) for [implementing this feature ↗](https://github.com/microsoft/TypeScript/pull/40698)!
 
 ### Const Assertions and Default Type Arguments in JSDoc {#const-assertions-and-default-type-arguments-in-jsdoc}
 
@@ -358,20 +358,20 @@ One example of this is with `const` assertions. In TypeScript, you can get a mor
 
 ```ts
 // type is { prop: string }
-let a = { prop: "hello" };
+leta = { prop:"hello" };
 
 // type is { readonly prop: "hello" }
-let b = { prop: "hello" } as const;
+letb = { prop:"hello" } asconst;
 ```
 
 In JavaScript files, you can now use JSDoc type assertions to achieve the same thing.
 
 ```ts
 // type is { prop: string }
-let a = { prop: "hello" };
+leta = { prop:"hello" };
 
 // type is { readonly prop: "hello" }
-let b = /** @type {const} */ ({ prop: "hello" });
+letb = /** @type{const} */ ({ prop:"hello" });
 ```
 
 As a reminder, JSDoc type assertions comments start with `/** @type {TheTypeWeWant} */` and are followed by a parenthesized expression:
@@ -391,7 +391,7 @@ can be rewritten as the following `@typedef` declaration in JavaScript:
 ```js
 /**
  * @template {string | number} [T=number]
- * @typedef Foo
+ * @typedefFoo
  * @property prop {T}
  */
 
@@ -399,11 +399,11 @@ can be rewritten as the following `@typedef` declaration in JavaScript:
 
 /**
  * @template {string | number} [T=number]
- * @typedef {{ prop: T }} Foo
+ * @typedef{{ prop: T }}Foo
  */
 ```
 
-For more information, see [the pull request for const assertions](https://github.com/microsoft/TypeScript/pull/45464) along with [the changes for type argument defaults](https://github.com/microsoft/TypeScript/pull/45483).
+For more information, see [the pull request for const assertions ↗](https://github.com/microsoft/TypeScript/pull/45464) along with [the changes for type argument defaults ↗](https://github.com/microsoft/TypeScript/pull/45483).
 
 ### Faster Load Time with `realPathSync.native` {#faster-load-time-with-realpathsyncnative}
 
@@ -412,7 +412,7 @@ TypeScript now leverages a system-native implementation of the Node.js `realPath
 Previously this function was only used on Linux, but in TypeScript 4.5 it has been adopted to operating systems that are typically case-insensitive, like Windows and MacOS.
 On certain codebases, this change sped up project loading by 5-13% (depending on the host operating system).
 
-For more information, see [the original change here](https://github.com/microsoft/TypeScript/pull/44966), along with [the 4.5-specific changes here](https://github.com/microsoft/TypeScript/pull/44966).
+For more information, see [the original change here ↗](https://github.com/microsoft/TypeScript/pull/44966), along with [the 4.5-specific changes here ↗](https://github.com/microsoft/TypeScript/pull/44966).
 
 ### Snippet Completions for JSX Attributes {#snippet-completions-for-jsx-attributes}
 

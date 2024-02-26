@@ -15,7 +15,7 @@ The [`strictFunctionTypes` ↗](https://www.typescriptlang.org/tsconfig.html#str
 You can opt-out by setting `--strictFunctionTypes false` on your command line or in your tsconfig.json.
 
 Under [`strictFunctionTypes` ↗](https://www.typescriptlang.org/tsconfig.html#strictFunctionTypes) function type parameter positions are checked *contravariantly* instead of *bivariantly*.
-For some background on what variance means for function types check out [What are covariance and contravariance?](https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance).
+For some background on what variance means for function types check out [What are covariance and contravariance? ↗](https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance).
 
 The stricter checking applies to all function types, *except* those originating in method or constructor declarations.
 Methods are excluded specifically to ensure generic classes and interfaces (such as `Array<T>`) continue to mostly relate covariantly.
@@ -24,8 +24,8 @@ Consider the following example in which `Animal` is the supertype of `Dog` and `
 
 ```ts
 declare let f1: (x: Animal) => void;
-declare let f2: (x: Dog) => void;
-declare let f3: (x: Cat) => void;
+declareletf2: (x: Dog) =>void;
+declareletf3: (x: Cat) =>void;
 f1 = f2; // Error with --strictFunctionTypes
 f2 = f1; // Ok
 f2 = f3; // Error
@@ -41,11 +41,11 @@ Another way to describe the example is that the type `(x: T) => void` is *bivari
 
 ```ts
 interface Comparer<T> {
-  compare: (a: T, b: T) => number;
+compare: (a: T, b: T) =>number;
 }
 
-declare let animalComparer: Comparer<Animal>;
-declare let dogComparer: Comparer<Dog>;
+declareletanimalComparer: Comparer<Animal>;
+declareletdogComparer: Comparer<Dog>;
 
 animalComparer = dogComparer; // Error
 dogComparer = animalComparer; // Ok
@@ -62,11 +62,11 @@ Effectively, `T` is bivariant in `Comparer<T>` because it is used only in method
 
 ```ts
 interface Comparer<T> {
-  compare(a: T, b: T): number;
+compare(a: T, b: T): number;
 }
 
-declare let animalComparer: Comparer<Animal>;
-declare let dogComparer: Comparer<Dog>;
+declareletanimalComparer: Comparer<Animal>;
+declareletdogComparer: Comparer<Dog>;
 
 animalComparer = dogComparer; // Ok because of bivariance
 dogComparer = animalComparer; // Ok
@@ -76,15 +76,15 @@ TypeScript 2.6 also improves type inference involving contravariant positions:
 
 ```ts
 function combine<T>(...funcs: ((x: T) => void)[]): (x: T) => void {
-  return x => {
-    for (const f of funcs) f(x);
+returnx=> {
+for (constfoffuncs) f(x);
   };
 }
 
-function animalFunc(x: Animal) {}
-function dogFunc(x: Dog) {}
+functionanimalFunc(x: Animal) {}
+functiondogFunc(x: Dog) {}
 
-let combined = combine(animalFunc, dogFunc); // (x: Dog) => void
+letcombined = combine(animalFunc, dogFunc); // (x: Dog) => void
 ```
 
 Above, all inferences for `T` originate in contravariant positions, and we therefore infer the *best common subtype* for `T`.
@@ -93,55 +93,55 @@ This contrasts with inferences from covariant positions, where we infer the *bes
 ## Cache tagged template objects in modules {#cache-tagged-template-objects-in-modules}
 
 TypeScript 2.6 fixes the tagged string template emit to align better with the ECMAScript spec.
-As per the [ECMAScript spec](https://tc39.github.io/ecma262/#sec-gettemplateobject), every time a template tag is evaluated, the *same* template strings object (the same `TemplateStringsArray`) should be passed as the first argument.
+As per the [ECMAScript spec ↗](https://tc39.github.io/ecma262/#sec-gettemplateobject), every time a template tag is evaluated, the *same* template strings object (the same `TemplateStringsArray`) should be passed as the first argument.
 Before TypeScript 2.6, the generated output was a completely new template object each time.
-Though the string contents are the same, this emit affects libraries that use the identity of the string for cache invalidation purposes, e.g. [lit-html](https://github.com/PolymerLabs/lit-html/issues/58).
+Though the string contents are the same, this emit affects libraries that use the identity of the string for cache invalidation purposes, e.g. [lit-html ↗](https://github.com/PolymerLabs/lit-html/issues/58).
 
 ##### Example {#example-1}
 
 ```ts
 export function id(x: TemplateStringsArray) {
-  return x;
+returnx;
 }
 
-export function templateObjectFactory() {
-  return id`hello world`;
+exportfunctiontemplateObjectFactory() {
+returnid`hello world`;
 }
 
-let result = templateObjectFactory() === templateObjectFactory(); // true in TS 2.6
+letresult = templateObjectFactory() === templateObjectFactory(); // true in TS 2.6
 ```
 
 Results in the following generated code:
 
 ```js
 "use strict";
-var __makeTemplateObject =
+var__makeTemplateObject =
   (this && this.__makeTemplateObject) ||
-  function(cooked, raw) {
-    if (Object.defineProperty) {
-      Object.defineProperty(cooked, "raw", { value: raw });
+function(cooked, raw) {
+if (Object.defineProperty) {
+Object.defineProperty(cooked, "raw", { value:raw });
     } else {
-      cooked.raw = raw;
+cooked.raw = raw;
     }
-    return cooked;
+returncooked;
   };
 
-function id(x) {
-  return x;
+functionid(x) {
+returnx;
 }
 
-var _a;
-function templateObjectFactory() {
-  return id(
-    _a || (_a = __makeTemplateObject(["hello world"], ["hello world"]))
+var_a;
+functiontemplateObjectFactory() {
+returnid(
+_a || (_a = __makeTemplateObject(["hello world"], ["hello world"]))
   );
 }
 
-var result = templateObjectFactory() === templateObjectFactory();
+varresult = templateObjectFactory() === templateObjectFactory();
 ```
 
 > Note: This change brings a new emit helper, `__makeTemplateObject`;
-> if you are using [`importHelpers` ↗](https://www.typescriptlang.org/tsconfig.html#importHelpers) with [`tslib`](https://github.com/Microsoft/tslib), an updated to version 1.8 or later.
+> if you are using [`importHelpers` ↗](https://www.typescriptlang.org/tsconfig.html#importHelpers) with [`tslib` ↗](https://github.com/Microsoft/tslib), an updated to version 1.8 or later.
 > 
 
 ## Localized diagnostics on the command line {#localized-diagnostics-on-the-command-line}
@@ -192,9 +192,9 @@ PS C:\ts> tsc --locale ja-jp
 NEXT'。
  -m 種類, --module 種類                         モジュール コード生成を指定します: 'none'、'commonjs'、'amd'、'system'、'umd'、'es2015'、'ESNext'。
  --lib                                      コンパイルに含めるライブラリ ファイルを指定します:
-                                              'es5' 'es6' 'es2015' 'es7' 'es2016' 'es2017' 'esnext' 'dom' 'dom.iterable' 'webworker' 'scripthost' 'es201
-5.core' 'es2015.collection' 'es2015.generator' 'es2015.iterable' 'es2015.promise' 'es2015.proxy' 'es2015.reflect' 'es2015.symbol' 'es2015.symbol.wellkno
-wn' 'es2016.array.include' 'es2017.object' 'es2017.sharedmemory' 'es2017.string' 'es2017.intl' 'esnext.asynciterable'
+'es5''es6''es2015''es7''es2016''es2017''esnext''dom''dom.iterable''webworker''scripthost''es201
+5.core''es2015.collection''es2015.generator''es2015.iterable''es2015.promise''es2015.proxy''es2015.reflect''es2015.symbol''es2015.symbol.wellkno
+wn''es2016.array.include''es2017.object''es2017.sharedmemory''es2017.string''es2017.intl''esnext.asynciterable'
  --allowJs                                  javascript ファイルのコンパイルを許可します。
  --jsx 種類                                   JSX コード生成を指定します: 'preserve'、'react-native'、'react'。
  -d, --declaration                          対応する '.d.ts' ファイルを生成します。
@@ -224,8 +224,8 @@ TypeScript 2.6 support suppressing errors in .ts files using `// @ts-ignore` com
 
 ```ts
 if (false) {
-  // @ts-ignore: Unreachable code error
-  console.log("hello");
+// @ts-ignore: Unreachable code error
+console.log("hello");
 }
 ```
 
@@ -255,13 +255,13 @@ Bellow both `n` and `m` will be marked as unused, because their values are never
 
 ```ts
 function f(n: number) {
-  n = 0;
+n = 0;
 }
 
-class C {
-  private m: number;
-  constructor() {
-    this.m = 0;
+classC {
+privatem: number;
+constructor() {
+this.m = 0;
   }
 }
 ```
@@ -272,6 +272,6 @@ Also functions that are only called within their own bodies are considered unuse
 
 ```ts
 function f() {
-  f(); // Error: 'f' is declared but its value is never read
+f(); // Error: 'f' is declared but its value is never read
 }
 ```

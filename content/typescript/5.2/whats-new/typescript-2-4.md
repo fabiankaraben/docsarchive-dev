@@ -17,9 +17,9 @@ For example, here’s an `async` function that only imports a utility library wh
 
 ```ts
 async function getZipFile(name: string, files: File[]): Promise<File> {
-  const zipUtil = await import("./utils/create-zip-file");
-  const zipContents = await zipUtil.getContentAsBlob(files);
-  return new File(zipContents, name);
+constzipUtil = awaitimport("./utils/create-zip-file");
+constzipContents = awaitzipUtil.getContentAsBlob(files);
+returnnewFile(zipContents, name);
 }
 ```
 
@@ -31,9 +31,9 @@ TypeScript 2.4 now allows enum members to contain string initializers.
 
 ```ts
 enum Colors {
-  Red = "RED",
-  Green = "GREEN",
-  Blue = "BLUE"
+Red = "RED",
+Green = "GREEN",
+Blue = "BLUE"
 }
 ```
 
@@ -52,18 +52,18 @@ Something that now works:
 
 ```ts
 function arrayMap<T, U>(f: (x: T) => U): (a: T[]) => U[] {
-  return a => a.map(f);
+returna=>a.map(f);
 }
 
-const lengths: (a: string[]) => number[] = arrayMap(s => s.length);
+constlengths: (a: string[]) =>number[] = arrayMap(s=>s.length);
 ```
 
 As an example of new errors you might spot as a result:
 
 ```ts
 let x: Promise<string> = new Promise(resolve => {
-  resolve(10);
-  //      ~~ Error!
+resolve(10);
+//      ~~ Error!
 });
 ```
 
@@ -96,11 +96,11 @@ As a result, you’ll get stricter checks when relating two generic signatures, 
 
 ```ts
 type A = <T, U>(x: T, y: U) => [T, U];
-type B = <S>(x: S, y: S) => [S, S];
+typeB = <S>(x: S, y: S) => [S, S];
 
-function f(a: A, b: B) {
-  a = b; // Error
-  b = a; // Ok
+functionf(a: A, b: B) {
+a = b; // Error
+b = a; // Ok
 }
 ```
 
@@ -113,11 +113,11 @@ TypeScript 2.4 introduces tightens this up when relating two callback types. For
 
 ```ts
 interface Mappable<T> {
-  map<U>(f: (x: T) => U): Mappable<U>;
+map<U>(f: (x: T) =>U): Mappable<U>;
 }
 
-declare let a: Mappable<number>;
-declare let b: Mappable<string | number>;
+declareleta: Mappable<number>;
+declareletb: Mappable<string | number>;
 
 a = b;
 b = a;
@@ -139,9 +139,9 @@ For example, this `Options` type is a weak type:
 
 ```ts
 interface Options {
-  data?: string;
-  timeout?: number;
-  maxRetries?: number;
+data?: string;
+timeout?: number;
+maxRetries?: number;
 }
 ```
 
@@ -150,12 +150,12 @@ For example:
 
 ```ts
 function sendMessage(options: Options) {
-  // ...
+// ...
 }
 
-const opts = {
-  payload: "hello world!",
-  retryOnFail: true
+constopts = {
+payload:"hello world!",
+retryOnFail:true
 };
 
 // Error!

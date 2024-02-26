@@ -20,10 +20,10 @@ At this point, the compiler will ask “what’s the shape of `moduleA`?”
 While this sounds straightforward, `moduleA` could be defined in one of your own `.ts`/`.tsx` files, or in a `.d.ts` that your code depends on.
 
 First, the compiler will try to locate a file that represents the imported module.
-To do so the compiler follows one of two different strategies: [Classic ↗](https://www.typescriptlang.org/docs/handbook/module-resolution.html#classic) or [Node ↗](https://www.typescriptlang.org/docs/handbook/module-resolution.html#node).
+To do so the compiler follows one of two different strategies: [Classic](/typescript/5.1/reference/module-resolution#classic) or [Node](/typescript/5.1/reference/module-resolution#node).
 These strategies tell the compiler *where* to look for `moduleA`.
 
-If that didn’t work and if the module name is non-relative (and in the case of `"moduleA"`, it is), then the compiler will attempt to locate an [ambient module declaration ↗](https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules).
+If that didn’t work and if the module name is non-relative (and in the case of `"moduleA"`, it is), then the compiler will attempt to locate an [ambient module declaration](/typescript/5.1/reference/modules#ambient-modules).
 We’ll cover non-relative imports next.
 
 Finally, if the compiler could not resolve the module, it will log an error.
@@ -50,14 +50,14 @@ A relative import is resolved relative to the importing file and *cannot* resolv
 You should use relative imports for your own modules that are guaranteed to maintain their relative location at runtime.
 
 A non-relative import can be resolved relative to [`baseUrl` ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl), or through path mapping, which we’ll cover below.
-They can also resolve to [ambient module declarations ↗](https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules).
+They can also resolve to [ambient module declarations](/typescript/5.1/reference/modules#ambient-modules).
 Use non-relative paths when importing any of your external dependencies.
 
 ## Module Resolution Strategies {#module-resolution-strategies}
 
-There are two possible module resolution strategies: [Node ↗](https://www.typescriptlang.org/docs/handbook/module-resolution.html#node) and [Classic ↗](https://www.typescriptlang.org/docs/handbook/module-resolution.html#classic).
+There are two possible module resolution strategies: [Node](/typescript/5.1/reference/module-resolution#node) and [Classic](/typescript/5.1/reference/module-resolution#classic).
 You can use the [`moduleResolution` ↗](https://www.typescriptlang.org/tsconfig.html#moduleResolution) option to specify the module resolution strategy.
-If not specified, the default is [Node ↗](https://www.typescriptlang.org/docs/handbook/module-resolution.html#node) for `--module commonjs`, and [Classic ↗](https://www.typescriptlang.org/docs/handbook/module-resolution.html#classic) otherwise (including when [`module` ↗](https://www.typescriptlang.org/tsconfig.html#module) is set to `amd`, `system`, `umd`, `es2015`, `esnext`, etc.).
+If not specified, the default is [Node](/typescript/5.1/reference/module-resolution#node) for `--module commonjs`, and [Classic](/typescript/5.1/reference/module-resolution#classic) otherwise (including when [`module` ↗](https://www.typescriptlang.org/tsconfig.html#module) is set to `amd`, `system`, `umd`, `es2015`, `esnext`, etc.).
 
 > Note: `node` module resolution is the most-commonly used in the TypeScript community and is recommended for most projects.
 > If you are having resolution problems with `import`s and `export`s in TypeScript, try setting `moduleResolution: "node"` to see if it fixes the issue.
@@ -91,8 +91,8 @@ A non-relative import to `moduleB` such as `import { b } from "moduleB"`, in a s
 
 ### Node {#node}
 
-This resolution strategy attempts to mimic the [Node.js](https://nodejs.org/) module resolution mechanism at runtime.
-The full Node.js resolution algorithm is outlined in [Node.js module documentation](https://nodejs.org/api/modules.html#modules_all_together).
+This resolution strategy attempts to mimic the [Node.js ↗](https://nodejs.org/) module resolution mechanism at runtime.
+The full Node.js resolution algorithm is outlined in [Node.js module documentation ↗](https://nodejs.org/api/modules.html#modules_all_together).
 
 #### How Node.js resolves modules {#how-nodejs-resolves-modules}
 
@@ -110,9 +110,9 @@ Node.js resolves that import in the following order:
 3. Ask the folder `/root/src/moduleB` if it contains a file named `index.js`.
   That file is implicitly considered that folder’s “main” module.
 
-You can read more about this in Node.js documentation on [file modules](https://nodejs.org/api/modules.html#modules_file_modules) and [folder modules](https://nodejs.org/api/modules.html#modules_folders_as_modules).
+You can read more about this in Node.js documentation on [file modules ↗](https://nodejs.org/api/modules.html#modules_file_modules) and [folder modules ↗](https://nodejs.org/api/modules.html#modules_folders_as_modules).
 
-However, resolution for a [non-relative module name ↗](https://www.typescriptlang.org/docs/handbook/module-resolution.html#relative-vs-non-relative-module-imports) is performed differently.
+However, resolution for a [non-relative module name](/typescript/5.1/reference/module-resolution#relative-vs-non-relative-module-imports) is performed differently.
 Node will look for your modules in special folders named `node_modules`.
 A `node_modules` folder can be on the same level as the current file, or higher up in the directory chain.
 Node will walk up the directory chain, looking through each `node_modules` until it finds the module you tried to load.
@@ -132,7 +132,7 @@ Node would then try to resolve `moduleB` to each of the locations until one work
 
 Notice that Node.js jumped up a directory in steps (4) and (7).
 
-You can read more about the process in Node.js documentation on [loading modules from `node_modules`](https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders).
+You can read more about the process in Node.js documentation on [loading modules from `node_modules` ↗](https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders).
 
 #### How TypeScript resolves modules {#how-typescript-resolves-modules}
 
@@ -211,23 +211,23 @@ Value of *baseUrl* is determined as either:
 
 Note that relative module imports are not impacted by setting the baseUrl, as they are always resolved relative to their importing files.
 
-You can find more documentation on baseUrl in [RequireJS](http://requirejs.org/docs/api.html#config-baseUrl) and [SystemJS](https://github.com/systemjs/systemjs/blob/main/docs/api.md) documentation.
+You can find more documentation on baseUrl in [RequireJS ↗](http://requirejs.org/docs/api.html#config-baseUrl) and [SystemJS ↗](https://github.com/systemjs/systemjs/blob/main/docs/api.md) documentation.
 
 ### Path mapping {#path-mapping}
 
 Sometimes modules are not directly located under *baseUrl*.
 For instance, an import to a module `"jquery"` would be translated at runtime to `"node_modules/jquery/dist/jquery.slim.min.js"`.
-Loaders use a mapping configuration to map module names to files at run-time, see [RequireJs documentation](http://requirejs.org/docs/api.html#config-paths) and [SystemJS documentation](https://github.com/systemjs/systemjs/blob/main/docs/import-maps.md).
+Loaders use a mapping configuration to map module names to files at run-time, see [RequireJs documentation ↗](http://requirejs.org/docs/api.html#config-paths) and [SystemJS documentation ↗](https://github.com/systemjs/systemjs/blob/main/docs/import-maps.md).
 
 The TypeScript compiler supports the declaration of such mappings using [`paths` ↗](https://www.typescriptlang.org/tsconfig.html#paths) property in `tsconfig.json` files.
 Here is an example for how to specify the [`paths` ↗](https://www.typescriptlang.org/tsconfig.html#paths) property for `jquery`.
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)": ".", // This must be specified if "paths" is.
-    "[paths ↗](https://www.typescriptlang.org/tsconfig.html#paths)": {
-      "jquery": ["node_modules/jquery/dist/jquery"] // This mapping is relative to "baseUrl"
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)": ".", // This must be specified if "paths" is.
+"[paths ↗](https://www.typescriptlang.org/tsconfig.html#paths)": {
+"jquery": ["node_modules/jquery/dist/jquery"] // This mapping is relative to "baseUrl"
     }
   }
 }
@@ -258,10 +258,10 @@ The corresponding `tsconfig.json` would look like:
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)": ".",
-    "[paths ↗](https://www.typescriptlang.org/tsconfig.html#paths)": {
-      "*": ["*", "generated/*"]
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[baseUrl ↗](https://www.typescriptlang.org/tsconfig.html#baseUrl)": ".",
+"[paths ↗](https://www.typescriptlang.org/tsconfig.html#paths)": {
+"*": ["*", "generated/*"]
     }
   }
 }
@@ -324,8 +324,8 @@ So following our example, the `tsconfig.json` file should look like:
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[rootDirs ↗](https://www.typescriptlang.org/tsconfig.html#rootDirs)": ["src/views", "generated/templates/views"]
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[rootDirs ↗](https://www.typescriptlang.org/tsconfig.html#rootDirs)": ["src/views", "generated/templates/views"]
   }
 }
 ```
@@ -346,8 +346,8 @@ By leveraging [`rootDirs` ↗](https://www.typescriptlang.org/tsconfig.html#root
 
 ```
 {
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    "[rootDirs ↗](https://www.typescriptlang.org/tsconfig.html#rootDirs)": ["src/zh", "src/de", "src/#{locale}"]
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+"[rootDirs ↗](https://www.typescriptlang.org/tsconfig.html#rootDirs)": ["src/zh", "src/de", "src/#{locale}"]
   }
 }
 ```
@@ -434,7 +434,7 @@ For instance:
 
 ```ts
 import * as A from "moduleA"; // OK, 'moduleA' passed on the command-line
-import * as B from "moduleB"; // Error TS2307: Cannot find module 'moduleB'.
+import*asBfrom"moduleB"; // Error TS2307: Cannot find module 'moduleB'.
 ```
 
 ```shell

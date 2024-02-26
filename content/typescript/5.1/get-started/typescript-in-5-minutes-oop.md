@@ -88,27 +88,27 @@ For example, if we construct an object that satisfies an interface, we can use t
 
 ```ts
 interface Pointlike {
-  x: number;
-  y: number;
+x: number;
+y: number;
 }
-interface Named {
-  name: string;
+interfaceNamed {
+name: string;
 }
- 
-function logPoint(point: Pointlike) {
-  console.log("x = " + point.x + ", y = " + point.y);
+
+functionlogPoint(point: Pointlike) {
+console.log("x = " + point.x + ", y = " + point.y);
 }
- 
-function logName(x: Named) {
-  console.log("Hello, " + x.name);
+
+functionlogName(x: Named) {
+console.log("Hello, " + x.name);
 }
- 
-const obj = {
-  x: 0,
-  y: 0,
-  name: "Origin",
+
+constobj = {
+x:0,
+y:0,
+name:"Origin",
 };
- 
+
 logPoint(obj);
 logName(obj);
 ```
@@ -133,13 +133,13 @@ The first is that the *empty type* seems to defy expectation:
 
 ```ts
 class Empty {}
- 
-function fn(arg: Empty) {
-  // do something?
+
+functionfn(arg: Empty) {
+// do something?
 }
- 
+
 // No error, but this isn't an 'Empty' ?
-fn({ k: 10 });
+fn({ k:10 });
 ```
 
 TypeScript determines if the call to `fn` here is valid by seeing if the provided argument is a valid `Empty`.
@@ -157,18 +157,18 @@ Another frequent source of surprise comes with identical types:
 
 ```ts
 class Car {
-  drive() {
-    // hit the gas
+drive() {
+// hit the gas
   }
 }
-class Golfer {
-  drive() {
-    // hit the ball far
+classGolfer {
+drive() {
+// hit the ball far
   }
 }
 
 // No error?
-let w: Car = new Golfer();
+letw: Car = newGolfer();
 ```
 
 Again, this isn’t an error because the *structures* of these classes are the same.
@@ -182,8 +182,8 @@ OOP programmers are accustomed to being able to query the type of any value, eve
 
 ```csharp
 // C#
-static void LogType<T>() {
-    Console.WriteLine(typeof(T).Name);
+staticvoidLogType<T>() {
+Console.WriteLine(typeof(T).Name);
 }
 ```
 

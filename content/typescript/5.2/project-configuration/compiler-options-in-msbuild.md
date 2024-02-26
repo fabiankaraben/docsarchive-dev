@@ -16,7 +16,7 @@ When you have an MSBuild based project which utilizes TypeScript such as an ASP.
 
 We recommend using a `tsconfig.json` for your project when possible. To add one to an existing project, add a new item to your project which is called a “TypeScript JSON Configuration File” in modern versions of Visual Studio.
 
-The new `tsconfig.json` will then be used as the source of truth for TypeScript-specific build information like files and configuration. You can learn [about how TSConfigs works here](/typescript/5.2/project-configuration/tsconfig-json) and there is a [comprehensive reference here](/typescript/5.2/project-configuration/tsconfig).
+The new `tsconfig.json` will then be used as the source of truth for TypeScript-specific build information like files and configuration. You can learn [about how TSConfigs works here](/typescript/5.2/project-configuration/tsconfig-json) and there is a [comprehensive reference here ↗](https://www.typescriptlang.org/tsconfig.html).
 
 ## Using Project Settings {#using-project-settings}
 
@@ -24,12 +24,12 @@ You can also define the configuration for TypeScript inside you project’s sett
 
 ```xml
 <PropertyGroup>
-  <TypeScriptNoEmitOnError>true</TypeScriptNoEmitOnError>
-  <TypeScriptNoImplicitReturns>true</TypeScriptNoImplicitReturns>
+<TypeScriptNoEmitOnError>true</TypeScriptNoEmitOnError>
+<TypeScriptNoImplicitReturns>true</TypeScriptNoImplicitReturns>
 </PropertyGroup>
 ```
 
-There is a series of mappings for common TypeScript settings, these are settings which map directly to [TypeScript cli options](/typescript/5.2/project-configuration/compiler-options) and are used to help you write a more understandable project file. You can use the [TSConfig reference](/typescript/5.2/project-configuration/tsconfig) to get more information on what values and defaults are for each mapping.
+There is a series of mappings for common TypeScript settings, these are settings which map directly to [TypeScript cli options](/typescript/5.2/project-configuration/compiler-options) and are used to help you write a more understandable project file. You can use the [TSConfig reference ↗](https://www.typescriptlang.org/tsconfig.html) to get more information on what values and defaults are for each mapping.
 
 ### CLI Mappings
 
@@ -179,18 +179,18 @@ You can use PropertyGroup conditions to define different sets of configurations.
 
 ```xml
 <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-  <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
-  <TypeScriptSourceMap>true</TypeScriptSourceMap>
+<TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+<TypeScriptSourceMap>true</TypeScriptSourceMap>
 </PropertyGroup>
 
-<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-  <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
-  <TypeScriptSourceMap>false</TypeScriptSourceMap>
+<PropertyGroupCondition="'$(Configuration)' == 'Release'">
+<TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+<TypeScriptSourceMap>false</TypeScriptSourceMap>
 </PropertyGroup>
 
 <Import
-    Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets"
-    Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets"
+Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')"/>
 ```
 
 ### ToolsVersion {#toolsversion}

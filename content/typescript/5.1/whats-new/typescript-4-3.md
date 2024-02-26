@@ -18,21 +18,21 @@ For example, let’s imagine we’ve got a class with a setter that always conve
 
 ```js
 class Thing {
-  #size = 0;
- 
-  get size() {
-    return this.#size;
+#size = 0;
+
+getsize() {
+returnthis.#size;
   }
-  set size(value) {
-    let num = Number(value);
- 
-    // Don't allow NaN and stuff.
-    if (!Number.isFinite(num)) {
-      this.#size = 0;
-      return;
+setsize(value) {
+letnum = Number(value);
+
+// Don't allow NaN and stuff.
+if (!Number.isFinite(num)) {
+this.#size = 0;
+return;
     }
- 
-    this.#size = num;
+
+this.#size = num;
   }
 }
 ```
@@ -45,9 +45,9 @@ We could get around this by saying that `size` has the type `unknown` or `any` l
 
 ```ts
 class Thing {
-  // ...
-  get size(): unknown {
-    return this.#size;
+// ...
+getsize(): unknown {
+returnthis.#size;
   }
 }
 ```
@@ -61,22 +61,22 @@ That’s why TypeScript 4.3 allows you to specify types for reading and writing 
 
 ```ts
 class Thing {
-  #size = 0;
- 
-  get size(): number {
-    return this.#size;
+#size = 0;
+
+getsize(): number {
+returnthis.#size;
   }
- 
-  set size(value: string | number | boolean) {
-    let num = Number(value);
- 
-    // Don't allow NaN and stuff.
-    if (!Number.isFinite(num)) {
-      this.#size = 0;
-      return;
+
+setsize(value: string | number | boolean) {
+letnum = Number(value);
+
+// Don't allow NaN and stuff.
+if (!Number.isFinite(num)) {
+this.#size = 0;
+return;
     }
- 
-    this.#size = num;
+
+this.#size = num;
   }
 }
 ```
@@ -88,14 +88,14 @@ Now we can finally assign other types to these properties with no errors!
 
 ```ts
 let thing = new Thing();
- 
+
 // Assigning other types to `thing.size` works!
 thing.size = "hello";
 thing.size = true;
 thing.size = 42;
- 
+
 // Reading `thing.size` always produces a number!
-let mySize: number = thing.size;
+letmySize: number = thing.size;
 ```
 
 When considering how two properties with the same name relate to each other, TypeScript will only use the “reading” type (e.g. the type on the `get` accessor above).
@@ -106,21 +106,21 @@ You can write getters and setters with different types in object literals.
 
 ```ts
 function makeThing(): Thing {
-  let size = 0;
-  return {
-    get size(): number {
-      return size;
+letsize = 0;
+return {
+getsize(): number {
+returnsize;
     },
-    set size(value: string | number | boolean) {
-      let num = Number(value);
+setsize(value: string | number | boolean) {
+letnum = Number(value);
 
-      // Don't allow NaN and stuff.
-      if (!Number.isFinite(num)) {
-        size = 0;
-        return;
+// Don't allow NaN and stuff.
+if (!Number.isFinite(num)) {
+size = 0;
+return;
       }
 
-      size = num;
+size = num;
     },
   };
 }
@@ -130,9 +130,9 @@ In fact, we’ve added syntax to interfaces/object types to support different re
 
 ```ts
 // Now valid!
-interface Thing {
-    get size(): number
-    set size(value: number | string | boolean);
+interfaceThing {
+getsize(): number
+setsize(value: number | string | boolean);
 }
 ```
 
@@ -140,7 +140,7 @@ One limitation of using different types for reading and writing properties is th
 In other words, the getter type has to be assignable to the setter.
 This ensures some level of consistency, so that a property is always assignable to itself.
 
-For more information on this feature, take a look at [the implementing pull request](https://github.com/microsoft/TypeScript/pull/42425).
+For more information on this feature, take a look at [the implementing pull request ↗](https://github.com/microsoft/TypeScript/pull/42425).
 
 ## `override` and the `--noImplicitOverride` Flag {#override-and-the---noimplicitoverride-flag}
 
@@ -151,20 +151,20 @@ For example, take the following classes:
 
 ```ts
 class SomeComponent {
-  show() {
-    // ...
+show() {
+// ...
   }
-  hide() {
-    // ...
+hide() {
+// ...
   }
 }
 
-class SpecializedComponent extends SomeComponent {
-  show() {
-    // ...
+classSpecializedComponentextendsSomeComponent {
+show() {
+// ...
   }
-  hide() {
-    // ...
+hide() {
+// ...
   }
 }
 ```
@@ -203,11 +203,11 @@ That’s why TypeScript 4.3 adds the `override` keyword.
 
 ```ts
 class SpecializedComponent extends SomeComponent {
-    override show() {
-        // ...
+overrideshow() {
+// ...
     }
-    override hide() {
-        // ...
+overridehide() {
+// ...
     }
 }
 ```
@@ -218,13 +218,13 @@ When a method is marked with `override`, TypeScript will always make sure that a
 
 ```ts
 class SomeComponent {
-    setVisible(value: boolean) {
-        // ...
+setVisible(value: boolean) {
+// ...
     }
 }
-class SpecializedComponent extends SomeComponent {
-    override show() {
- 
+classSpecializedComponentextendsSomeComponent {
+overrideshow() {
+
     }
 }
 ```
@@ -239,16 +239,16 @@ For example, you might accidentally “trample over” a method that exists in a
 
 ```ts
 class Base {
-  someHelperMethod() {
-    // ...
+someHelperMethod() {
+// ...
   }
 }
 
-class Derived extends Base {
-  // Oops! We weren't trying to override here,
-  // we just needed to write a local helper method.
-  someHelperMethod() {
-    // ...
+classDerivedextendsBase {
+// Oops! We weren't trying to override here,
+// we just needed to write a local helper method.
+someHelperMethod() {
+// ...
   }
 }
 ```
@@ -258,7 +258,7 @@ When this option is turned on, it becomes an error to override any method from a
 In that last example, TypeScript would error under [`noImplicitOverride` ↗](https://www.typescriptlang.org/tsconfig.html#noImplicitOverride), and give us a clue that we probably need to rename our method inside of `Derived`.
 
 We’d like to extend our thanks to our community for the implementation here.
-The work for these items was implemented in [a pull request](https://github.com/microsoft/TypeScript/pull/39669) by [Wenlu Wang](https://github.com/Kingwl), though an earlier pull request implementing only the `override` keyword by [Paul Cody Johnston](https://github.com/pcj) served as a basis for direction and discussion.
+The work for these items was implemented in [a pull request ↗](https://github.com/microsoft/TypeScript/pull/39669) by [Wenlu Wang ↗](https://github.com/Kingwl), though an earlier pull request implementing only the `override` keyword by [Paul Cody Johnston ↗](https://github.com/pcj) served as a basis for direction and discussion.
 We extend our gratitude for putting in the time for these features.
 
 ## Template String Type Improvements {#template-string-type-improvements}
@@ -268,9 +268,9 @@ These are types that either construct new string-like types by concatenating…
 
 ```ts
 type Color = "red" | "blue";
-type Quantity = "one" | "two";
+typeQuantity = "one" | "two";
 
-type SeussFish = `${Quantity | Color} fish`;
+typeSeussFish = `${Quantity|Color} fish`;
 // same as
 //   type SeussFish = "one fish" | "two fish"
 //                  | "red fish" | "blue fish";
@@ -280,7 +280,7 @@ type SeussFish = `${Quantity | Color} fish`;
 
 ```ts
 declare let s1: `${number}-${number}-${number}`;
-declare let s2: `1-2-3`;
+declarelets2: `1-2-3`;
 
 // Works!
 s1 = s2;
@@ -291,8 +291,8 @@ When a template string is *contextually typed* by a string-literal-like type (i.
 
 ```ts
 function bar(s: string): `hello ${string}` {
-    // Previously an error, now works!
-    return `hello ${s}`;
+// Previously an error, now works!
+return`hello ${s}`;
 }
 ```
 
@@ -300,11 +300,11 @@ This also kicks in when inferring types, and the type parameter `extends string`
 
 ```ts
 declare let s: string;
-declare function f<T extends string>(x: T): T;
+declarefunctionf<Textendsstring>(x: T): T;
 
 // Previously: string
 // Now       : `hello ${string}`
-let x2 = f(`hello ${s}`);
+letx2 = f(`hello ${s}`);
 ```
 
 The second major change here is that TypeScript can now better-relate, and *infer between*, different template string types.
@@ -313,8 +313,8 @@ To see this, take the following example code:
 
 ```ts
 declare let s1: `${number}-${number}-${number}`;
-declare let s2: `1-2-3`;
-declare let s3: `${number}-2-3`;
+declarelets2: `1-2-3`;
+declarelets3: `${number}-2-3`;
 
 s1 = s2;
 s1 = s3;
@@ -329,11 +329,11 @@ You can now mix and match template strings with different substitutions and Type
 
 ```ts
 declare let s1: `${number}-${number}-${number}`;
-declare let s2: `1-2-3`;
-declare let s3: `${number}-2-3`;
-declare let s4: `1-${number}-3`;
-declare let s5: `1-2-${number}`;
-declare let s6: `${number}-2-${number}`;
+declarelets2: `1-2-3`;
+declarelets3: `${number}-2-3`;
+declarelets4: `1-${number}-3`;
+declarelets5: `1-2-${number}`;
+declarelets6: `${number}-2-${number}`;
 
 // Now *all of these* work!
 s1 = s2;
@@ -349,18 +349,18 @@ You can see an example of these in action:
 ```ts
 declare function foo<V extends string>(arg: `*${V}*`): V;
 
-function test<T extends string>(s: string, n: number, b: boolean, t: T) {
-    let x1 = foo("*hello*");            // "hello"
-    let x2 = foo("**hello**");          // "*hello*"
-    let x3 = foo(`*${s}*` as const);    // string
-    let x4 = foo(`*${n}*` as const);    // `${number}`
-    let x5 = foo(`*${b}*` as const);    // "true" | "false"
-    let x6 = foo(`*${t}*` as const);    // `${T}`
-    let x7 = foo(`**${s}**` as const);  // `*${string}*`
+functiontest<Textendsstring>(s: string, n: number, b: boolean, t: T) {
+letx1 = foo("*hello*");            // "hello"
+letx2 = foo("**hello**");          // "*hello*"
+letx3 = foo(`*${s}*`asconst);    // string
+letx4 = foo(`*${n}*`asconst);    // `${number}`
+letx5 = foo(`*${b}*`asconst);    // "true" | "false"
+letx6 = foo(`*${t}*`asconst);    // `${T}`
+letx7 = foo(`**${s}**`asconst);  // `*${string}*`
 }
 ```
 
-For more information, see [the original pull request on leveraging contextual types](https://github.com/microsoft/TypeScript/pull/43376), along with [the pull request that improved inference and checking between template types](https://github.com/microsoft/TypeScript/pull/43361).
+For more information, see [the original pull request on leveraging contextual types ↗](https://github.com/microsoft/TypeScript/pull/43376), along with [the pull request that improved inference and checking between template types ↗](https://github.com/microsoft/TypeScript/pull/43361).
 
 ## ECMAScript `#private` Class Elements {#ecmascript-private-class-elements}
 
@@ -370,28 +370,28 @@ In addition to properties, methods and accessors can also be given private names
 ```ts
 class Foo {
   #someMethod() {
-    //...
+//...
   }
 
-  get #someValue() {
-    return 100;
+get #someValue() {
+return100;
   }
 
-  publicMethod() {
-    // These work.
-    // We can access private-named members inside this class.
-    this.#someMethod();
-    return this.#someValue;
+publicMethod() {
+// These work.
+// We can access private-named members inside this class.
+this.#someMethod();
+returnthis.#someValue;
   }
 }
 
-new Foo().#someMethod();
+newFoo().#someMethod();
 //        ~~~~~~~~~~~
 // error!
 // Property '#someMethod' is not accessible
 // outside class 'Foo' because it has a private identifier.
 
-new Foo().#someValue;
+newFoo().#someValue;
 //        ~~~~~~~~~~
 // error!
 // Property '#someValue' is not accessible
@@ -402,8 +402,8 @@ Even more broadly, static members can now also have private names.
 
 ```ts
 class Foo {
-  static #someMethod() {
-    // ...
+static #someMethod() {
+// ...
   }
 }
 
@@ -414,7 +414,7 @@ Foo.#someMethod();
 // outside class 'Foo' because it has a private identifier.
 ```
 
-This feature was authored [in a pull request](https://github.com/microsoft/TypeScript/pull/42458) from our friends at Bloomberg - written by [Titian Cernicova-Dragomir](https://github.com/dragomirtitian)and [Kubilay Kahveci](https://github.com/mkubilayk), with support and expertise from [Joey Watts](https://github.com/joeywatts), [Rob Palmer](https://github.com/robpalme), and [Tim McClure](https://github.com/tim-mc).
+This feature was authored [in a pull request ↗](https://github.com/microsoft/TypeScript/pull/42458) from our friends at Bloomberg - written by [Titian Cernicova-Dragomir ↗](https://github.com/dragomirtitian)and [Kubilay Kahveci ↗](https://github.com/mkubilayk), with support and expertise from [Joey Watts ↗](https://github.com/joeywatts), [Rob Palmer ↗](https://github.com/robpalme), and [Tim McClure ↗](https://github.com/tim-mc).
 We’d like to extend our thanks to all of them!
 
 ## `ConstructorParameters` Works on Abstract Classes {#constructorparameters-works-on-abstract-classes}
@@ -423,28 +423,28 @@ In TypeScript 4.3, the `ConstructorParameters` type helper now works on `abstrac
 
 ```ts
 abstract class C {
-  constructor(a: string, b: number) {
-    // ...
+constructor(a: string, b: number) {
+// ...
   }
 }
 
 // Has the type '[a: string, b: number]'.
-type CParams = ConstructorParameters<typeof C>;
+typeCParams = ConstructorParameters<typeofC>;
 ```
 
 This is thanks to work done in TypeScript 4.2, where construct signatures can be marked as abstract:
 
 ```ts
 type MyConstructorOf<T> = {
-    abstract new(...args: any[]): T;
+abstractnew(...args: any[]): T;
 }
 
 // or using the shorthand syntax:
 
-type MyConstructorOf<T> = abstract new (...args: any[]) => T;
+typeMyConstructorOf<T> = abstractnew (...args: any[]) =>T;
 ```
 
-You can [see the change in more detail on GitHub](https://github.com/microsoft/TypeScript/pull/43380).
+You can [see the change in more detail on GitHub ↗](https://github.com/microsoft/TypeScript/pull/43380).
 
 ## Contextual Narrowing for Generics {#contextual-narrowing-for-generics}
 
@@ -457,28 +457,28 @@ After all that, it will return the original collection.
 
 ```ts
 function makeUnique<T>(
-  collection: Set<T> | T[],
-  comparer: (x: T, y: T) => number
+collection: Set<T> | T[],
+comparer: (x: T, y: T) =>number
 ): Set<T> | T[] {
-  // Early bail-out if we have a Set.
-  // We assume the elements are already unique.
-  if (collection instanceof Set) {
-    return collection;
+// Early bail-out if we have a Set.
+// We assume the elements are already unique.
+if (collectioninstanceofSet) {
+returncollection;
   }
 
-  // Sort the array, then remove consecutive duplicates.
-  collection.sort(comparer);
-  for (let i = 0; i < collection.length; i++) {
-    let j = i;
-    while (
-      j < collection.length &&
-      comparer(collection[i], collection[j + 1]) === 0
+// Sort the array, then remove consecutive duplicates.
+collection.sort(comparer);
+for (leti = 0; i < collection.length; i++) {
+letj = i;
+while (
+j < collection.length &&
+comparer(collection[i], collection[j + 1]) === 0
     ) {
-      j++;
+j++;
     }
-    collection.splice(i + 1, j - i);
+collection.splice(i + 1, j - i);
   }
-  return collection;
+returncollection;
 }
 ```
 
@@ -495,39 +495,39 @@ In TypeScript 4.2 and earlier, you’d end up with a bunch of errors as soon as 
 
 ```ts
 function makeUnique<T, C extends Set<T> | T[]>(
-  collection: C,
-  comparer: (x: T, y: T) => number
+collection: C,
+comparer: (x: T, y: T) =>number
 ): C {
-  // Early bail-out if we have a Set.
-  // We assume the elements are already unique.
-  if (collection instanceof Set) {
-    return collection;
+// Early bail-out if we have a Set.
+// We assume the elements are already unique.
+if (collectioninstanceofSet) {
+returncollection;
   }
 
-  // Sort the array, then remove consecutive duplicates.
-  collection.sort(comparer);
-  //         ~~~~
-  // error: Property 'sort' does not exist on type 'C'.
-  for (let i = 0; i < collection.length; i++) {
-    //                             ~~~~~~
-    // error: Property 'length' does not exist on type 'C'.
-    let j = i;
-    while (
-      j < collection.length &&
-      comparer(collection[i], collection[j + 1]) === 0
+// Sort the array, then remove consecutive duplicates.
+collection.sort(comparer);
+//         ~~~~
+// error: Property 'sort' does not exist on type 'C'.
+for (leti = 0; i < collection.length; i++) {
+//                             ~~~~~~
+// error: Property 'length' does not exist on type 'C'.
+letj = i;
+while (
+j < collection.length &&
+comparer(collection[i], collection[j + 1]) === 0
     ) {
-      //                    ~~~~~~
-      // error: Property 'length' does not exist on type 'C'.
-      //                                       ~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~
-      // error: Element implicitly has an 'any' type because expression of type 'number'
-      //        can't be used to index type 'Set<T> | T[]'.
-      j++;
+//                    ~~~~~~
+// error: Property 'length' does not exist on type 'C'.
+//                                       ~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~
+// error: Element implicitly has an 'any' type because expression of type 'number'
+//        can't be used to index type 'Set<T> | T[]'.
+j++;
     }
-    collection.splice(i + 1, j - i);
-    //         ~~~~~~
-    // error: Property 'splice' does not exist on type 'C'.
+collection.splice(i + 1, j - i);
+//         ~~~~~~
+// error: Property 'splice' does not exist on type 'C'.
   }
-  return collection;
+returncollection;
 }
 ```
 
@@ -545,26 +545,26 @@ At the return positions, where the function expects values with the type `C`, we
 
 ```ts
 function makeUnique<T>(
-  collection: Set<T> | T[],
-  comparer: (x: T, y: T) => number
+collection: Set<T> | T[],
+comparer: (x: T, y: T) =>number
 ): Set<T> | T[] {
-  // Early bail-out if we have a Set.
-  // We assume the elements are already unique.
-  if (collection instanceof Set) {
-    return collection;
-    //     ~~~~~~~~~~
-    // error: Type 'Set<T>' is not assignable to type 'C'.
-    //          'Set<T>' is assignable to the constraint of type 'C', but
-    //          'C' could be instantiated with a different subtype of constraint 'Set<T> | T[]'.
+// Early bail-out if we have a Set.
+// We assume the elements are already unique.
+if (collectioninstanceofSet) {
+returncollection;
+//     ~~~~~~~~~~
+// error: Type 'Set<T>' is not assignable to type 'C'.
+//          'Set<T>' is assignable to the constraint of type 'C', but
+//          'C' could be instantiated with a different subtype of constraint 'Set<T> | T[]'.
   }
 
-  // ...
+// ...
 
-  return collection;
-  //     ~~~~~~~~~~
-  // error: Type 'T[]' is not assignable to type 'C'.
-  //          'T[]' is assignable to the constraint of type 'C', but
-  //          'C' could be instantiated with a different subtype of constraint 'Set<T> | T[]'.
+returncollection;
+//     ~~~~~~~~~~
+// error: Type 'T[]' is not assignable to type 'C'.
+//          'T[]' is assignable to the constraint of type 'C', but
+//          'C' could be instantiated with a different subtype of constraint 'Set<T> | T[]'.
 }
 ```
 
@@ -578,7 +578,7 @@ however, in any other case, we’ll just try to narrow the original generic type
 In other words, based on how you use a generic value, TypeScript will narrow it a little differently.
 The end result is that the entire above example compiles with no type-checking errors.
 
-For more details, you can [look at the original pull request on GitHub](https://github.com/microsoft/TypeScript/pull/43183).
+For more details, you can [look at the original pull request on GitHub ↗](https://github.com/microsoft/TypeScript/pull/43183).
 
 ## Always-Truthy Promise Checks {#always-truthy-promise-checks}
 
@@ -586,23 +586,23 @@ Under [`strictNullChecks` ↗](https://www.typescriptlang.org/tsconfig.html#stri
 
 ```ts
 async function foo(): Promise<boolean> {
-  return false;
+returnfalse;
 }
 
-async function bar(): Promise<string> {
-  if (foo()) {
-    //  ~~~~~
-    // Error!
-    // This condition will always return true since
-    // this 'Promise<boolean>' appears to always be defined.
-    // Did you forget to use 'await'?
-    return "true";
+asyncfunctionbar(): Promise<string> {
+if (foo()) {
+//  ~~~~~
+// Error!
+// This condition will always return true since
+// this 'Promise<boolean>' appears to always be defined.
+// Did you forget to use 'await'?
+return"true";
   }
-  return "false";
+return"false";
 }
 ```
 
-[This change](https://github.com/microsoft/TypeScript/pull/39175) was contributed by [Jack Works](https://github.com/Jack-Works), and we extend our thanks to them!
+[This change ↗](https://github.com/microsoft/TypeScript/pull/39175) was contributed by [Jack Works ↗](https://github.com/Jack-Works), and we extend our thanks to them!
 
 ## `static` Index Signatures {#static-index-signatures}
 
@@ -610,51 +610,51 @@ Index signatures allow us to set more properties on a value than a type explicit
 
 ```ts
 class Foo {
-  hello = "hello";
-  world = 1234;
+hello = "hello";
+world = 1234;
 
-  // This is an index signature:
+// This is an index signature:
   [propName: string]: string | number | undefined;
 }
 
-let instance = new Foo();
+letinstance = newFoo();
 
 // Valid assignment
 instance["whatever"] = 42;
 
 // Has type 'string | number | undefined'.
-let x = instance["something"];
+letx = instance["something"];
 ```
 
 Up until now, an index signature could only be declared on the instance side of a class.
-Thanks to [a pull request](https://github.com/microsoft/TypeScript/pull/37797) from [Wenlu Wang](https://github.com/microsoft/TypeScript/pull/37797), index signatures can now be declared as `static`.
+Thanks to [a pull request ↗](https://github.com/microsoft/TypeScript/pull/37797) from [Wenlu Wang ↗](https://github.com/microsoft/TypeScript/pull/37797), index signatures can now be declared as `static`.
 
 ```ts
 class Foo {
-  static hello = "hello";
-  static world = 1234;
+statichello = "hello";
+staticworld = 1234;
 
-  static [propName: string]: string | number | undefined;
+static [propName: string]: string | number | undefined;
 }
 
 // Valid.
 Foo["whatever"] = 42;
 
 // Has type 'string | number | undefined'
-let x = Foo["something"];
+letx = Foo["something"];
 ```
 
 The same sorts of rules apply for index signatures on the static side of a class as they do for the instance side - namely, that every other static property has to be compatible with the index signature.
 
 ```ts
 class Foo {
-  static prop = true;
-  //     ~~~~
-  // Error! Property 'prop' of type 'boolean'
-  // is not assignable to string index type
-  // 'string | number | undefined'.
+staticprop = true;
+//     ~~~~
+// Error! Property 'prop' of type 'boolean'
+// is not assignable to string index type
+// 'string | number | undefined'.
 
-  static [propName: string]: string | number | undefined;
+static [propName: string]: string | number | undefined;
 }
 ```
 
@@ -662,7 +662,7 @@ class Foo {
 
 In TypeScript 4.3, `.tsbuildinfo` files that are generated as part of [`incremental` ↗](https://www.typescriptlang.org/tsconfig.html#incremental) builds should be significantly smaller.
 This is thanks to several optimizations in the internal format, creating tables with numeric identifiers to be used throughout the file instead of repeating full paths and similar information.
-This work was spear-headed by [Tobias Koppers](https://github.com/sokra) in [their pull request](https://github.com/microsoft/TypeScript/pull/43079), serving as inspiration for [the ensuing pull request](https://github.com/microsoft/TypeScript/pull/43155) and [further optimizations](https://github.com/microsoft/TypeScript/pull/43695).
+This work was spear-headed by [Tobias Koppers ↗](https://github.com/sokra) in [their pull request ↗](https://github.com/microsoft/TypeScript/pull/43079), serving as inspiration for [the ensuing pull request ↗](https://github.com/microsoft/TypeScript/pull/43155) and [further optimizations ↗](https://github.com/microsoft/TypeScript/pull/43695).
 
 We have seen significant reductions of `.tsbuildinfo` file sizes including
 
@@ -684,7 +684,7 @@ In a sense, [`incremental` ↗](https://www.typescriptlang.org/tsconfig.html#inc
 
 In a repository with 3000 files, **this reduced initial build times to almost a third**!
 
-[This work was started](https://github.com/microsoft/TypeScript/pull/42960) by [Tobias Koppers](https://github.com/sokra), whose work ensued in [the resulting final change](https://github.com/microsoft/TypeScript/pull/43314) for this functionality.
+[This work was started ↗](https://github.com/microsoft/TypeScript/pull/42960) by [Tobias Koppers ↗](https://github.com/sokra), whose work ensued in [the resulting final change ↗](https://github.com/microsoft/TypeScript/pull/43314) for this functionality.
 We’d like to extend a great thanks to Tobias for helping us find these opportunities for improvements!
 
 ## Import Statement Completions {#import-statement-completions}
@@ -726,16 +726,16 @@ For example, you’ll be able to go-to-definition on `plantCarrot` in `@link pla
 
 ```ts
 /**
- * To be called 70 to 80 days after {@link plantCarrot}.
+ * To be called 70 to 80 days after {@linkplantCarrot}.
  */
-function harvestCarrot(carrot: Carrot) {}
+functionharvestCarrot(carrot: Carrot) {}
 
 /**
  * Call early in spring for best results. Added in v2.1.0.
- * @param seed Make sure it's a carrot seed!
+ * @paramseed Make sure it's a carrot seed!
  */
-function plantCarrot(seed: Seed) {
-  // TODO: some gardening
+functionplantCarrot(seed: Seed) {
+// TODO: some gardening
 }
 ```
 
@@ -781,12 +781,12 @@ Under [`strictNullChecks`](/tsconfig.html#strictNullChecks), using a `Promise` t
 declare var p: Promise<number>;
 
 if (p) {
-  //  ~
-  // Error!
-  // This condition will always return true since
-  // this 'Promise<number>' appears to always be defined.
-  //
-  // Did you forget to use 'await'?
+//  ~
+// Error!
+// This condition will always return true since
+// this 'Promise<number>' appears to always be defined.
+//
+// Did you forget to use 'await'?
 }
 ```
 
@@ -801,14 +801,14 @@ In TypeScript 4.3, if a value with a union `enum` type is compared with a numeri
 
 ```ts
 enum E {
-  A = 0,
-  B = 1,
+A = 0,
+B = 1,
 }
 
-function doSomething(x: E) {
-  // Error! This condition will always return 'false' since the types 'E' and '-1' have no overlap.
-  if (x === -1) {
-    // ...
+functiondoSomething(x: E) {
+// Error! This condition will always return 'false' since the types 'E' and '-1' have no overlap.
+if (x === -1) {
+// ...
   }
 }
 ```
@@ -817,14 +817,14 @@ As a workaround, you can re-write an annotation to include the appropriate liter
 
 ```ts
 enum E {
-  A = 0,
-  B = 1,
+A = 0,
+B = 1,
 }
 
 // Include -1 in the type, if we're really certain that -1 can come through.
-function doSomething(x: E | -1) {
-  if (x === -1) {
-    // ...
+functiondoSomething(x: E | -1) {
+if (x === -1) {
+// ...
   }
 }
 ```
@@ -833,14 +833,14 @@ You can also use a type-assertion on the value.
 
 ```ts
 enum E {
-  A = 0,
-  B = 1,
+A = 0,
+B = 1,
 }
 
-function doSomething(x: E) {
-  // Use a type assertion on 'x' because we know we're not actually just dealing with values from 'E'.
-  if ((x as number) === -1) {
-    // ...
+functiondoSomething(x: E) {
+// Use a type assertion on 'x' because we know we're not actually just dealing with values from 'E'.
+if ((xasnumber) === -1) {
+// ...
   }
 }
 ```
@@ -849,9 +849,9 @@ Alternatively, you can re-declare your enum to have a non-trivial initializer so
 
 ```ts
 enum E {
-  // the leading + on 0 opts TypeScript out of inferring a union enum.
-  A = +0,
-  B = 1,
+// the leading + on 0 opts TypeScript out of inferring a union enum.
+A = +0,
+B = 1,
 }
 ```
 

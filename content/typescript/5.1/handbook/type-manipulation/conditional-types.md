@@ -16,18 +16,18 @@ JavaScript programs are no different, but given the fact that values can be easi
 
 ```ts
 interface Animal {
-  live(): void;
+live(): void;
 }
-interface Dog extends Animal {
-  woof(): void;
+interfaceDogextendsAnimal {
+woof(): void;
 }
- 
-type Example1 = Dog extends Animal ? number : string;
-        
+
+typeExample1 = DogextendsAnimal ? number : string;
+
 type Example1 = number
- 
-type Example2 = RegExp extends Animal ? number : string;
-        
+
+typeExample2 = RegExpextendsAnimal ? number : string;
+
 type Example2 = string
 ```
 
@@ -50,17 +50,17 @@ For example, let’s take the following `createLabel` function:
 
 ```ts
 interface IdLabel {
-  id: number /* some fields */;
+id: number/* some fields */;
 }
-interface NameLabel {
-  name: string /* other fields */;
+interfaceNameLabel {
+name: string/* other fields */;
 }
- 
-function createLabel(id: number): IdLabel;
-function createLabel(name: string): NameLabel;
-function createLabel(nameOrId: string | number): IdLabel | NameLabel;
-function createLabel(nameOrId: string | number): IdLabel | NameLabel {
-  throw "unimplemented";
+
+functioncreateLabel(id: number): IdLabel;
+functioncreateLabel(name: string): NameLabel;
+functioncreateLabel(nameOrId: string | number): IdLabel | NameLabel;
+functioncreateLabel(nameOrId: string | number): IdLabel | NameLabel {
+throw"unimplemented";
 }
 ```
 
@@ -85,18 +85,18 @@ We can then use that conditional type to simplify our overloads down to a single
 
 ```ts
 function createLabel<T extends number | string>(idOrName: T): NameOrId<T> {
-  throw "unimplemented";
+throw"unimplemented";
 }
- 
-let a = createLabel("typescript");
-   
+
+leta = createLabel("typescript");
+
 let a: NameLabel
- 
-let b = createLabel(2.8);
-   
+
+letb = createLabel(2.8);
+
 let b: IdLabel
- 
-let c = createLabel(Math.random() ? "hello" : 42);
+
+letc = createLabel(Math.random() ? "hello" : 42);
 
 let c: NameLabel | IdLabel
 ```
@@ -125,13 +125,13 @@ We could constrain `T`, and TypeScript would no longer complain:
 
 ```ts
 type MessageOf<T extends { message: unknown }> = T["message"];
- 
-interface Email {
-  message: string;
+
+interfaceEmail {
+message: string;
 }
- 
-type EmailMessageContents = MessageOf<Email>;
-              
+
+typeEmailMessageContents = MessageOf<Email>;
+
 type EmailMessageContents = string
 ```
 
@@ -142,21 +142,21 @@ We can do this by moving the constraint out and introducing a conditional type:
 
 ```ts
 type MessageOf<T> = T extends { message: unknown } ? T["message"] : never;
- 
-interface Email {
-  message: string;
+
+interfaceEmail {
+message: string;
 }
- 
-interface Dog {
-  bark(): void;
+
+interfaceDog {
+bark(): void;
 }
- 
-type EmailMessageContents = MessageOf<Email>;
-              
+
+typeEmailMessageContents = MessageOf<Email>;
+
 type EmailMessageContents = string
- 
-type DogMessageContents = MessageOf<Dog>;
-             
+
+typeDogMessageContents = MessageOf<Dog>;
+
 type DogMessageContents = never
 ```
 
@@ -168,15 +168,15 @@ As another example, we could also write a type called `Flatten` that flattens ar
 
 ```ts
 type Flatten<T> = T extends any[] ? T[number] : T;
- 
+
 // Extracts out the element type.
-type Str = Flatten<string[]>;
-     
+typeStr = Flatten<string[]>;
+
 type Str = string
- 
+
 // Leaves the type alone.
-type Num = Flatten<number>;
-     
+typeNum = Flatten<number>;
+
 type Num = number
 ```
 
@@ -209,17 +209,17 @@ For example, for simple cases, we can extract the return type out from function 
 type GetReturnType<Type> = Type extends (...args: never[]) => infer Return
   ? Return
   : never;
- 
-type Num = GetReturnType<() => number>;
-     
+
+typeNum = GetReturnType<() =>number>;
+
 type Num = number
- 
-type Str = GetReturnType<(x: string) => string>;
-     
+
+typeStr = GetReturnType<(x: string) =>string>;
+
 type Str = string
- 
-type Bools = GetReturnType<(a: boolean, b: boolean) => boolean[]>;
-      
+
+typeBools = GetReturnType<(a: boolean, b: boolean) =>boolean[]>;
+
 type Bools = boolean[]
 ```
 
@@ -229,11 +229,11 @@ When inferring from a type with multiple call signatures (such as the type of an
 
 ```ts
 declare function stringOrNum(x: string): number;
-declare function stringOrNum(x: number): string;
-declare function stringOrNum(x: string | number): string | number;
- 
-type T1 = ReturnType<typeof stringOrNum>;
-     
+declarefunctionstringOrNum(x: number): string;
+declarefunctionstringOrNum(x: string | number): string | number;
+
+typeT1 = ReturnType<typeofstringOrNum>;
+
 type T1 = string | number
 ```
 
@@ -254,9 +254,9 @@ If we plug a union type into `ToArray`, then the conditional type will be applie
 
 ```ts
 type ToArray<Type> = Type extends any ? Type[] : never;
- 
-type StrArrOrNumArr = ToArray<string | number>;
-           
+
+typeStrArrOrNumArr = ToArray<string | number>;
+
 type StrArrOrNumArr = string[] | number[]
 ```
 
@@ -291,9 +291,9 @@ To avoid that behavior, you can surround each side of the `extends` keyword with
 
 ```ts
 type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never;
- 
+
 // 'StrArrOrNumArr' is no longer a union.
-type StrArrOrNumArr = ToArrayNonDist<string | number>;
-           
+typeStrArrOrNumArr = ToArrayNonDist<string | number>;
+
 type StrArrOrNumArr = (string | number)[]
 ```

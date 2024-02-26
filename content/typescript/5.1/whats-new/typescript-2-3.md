@@ -14,13 +14,13 @@ type: docs
 
 ##### Iterators {#iterators}
 
-[ES2015 introduced `Iterator`](http://www.ecma-international.org/ecma-262/6.0/#sec-iteration), which is an object that exposes three methods, `next`, `return`, and `throw`, as per the following interface:
+[ES2015 introduced `Iterator` ↗](http://www.ecma-international.org/ecma-262/6.0/#sec-iteration), which is an object that exposes three methods, `next`, `return`, and `throw`, as per the following interface:
 
 ```ts
 interface Iterator<T> {
-  next(value?: any): IteratorResult<T>;
-  return?(value?: any): IteratorResult<T>;
-  throw?(e?: any): IteratorResult<T>;
+next(value?: any): IteratorResult<T>;
+return?(value?: any): IteratorResult<T>;
+throw?(e?: any): IteratorResult<T>;
 }
 ```
 
@@ -31,13 +31,13 @@ The Iterator protocol also defines the target of some of the ES2015 features lik
 
 ##### Generators {#generators}
 
-[ES2015 also introduced “Generators”](http://www.ecma-international.org/ecma-262/6.0/#sec-generatorfunction-objects), which are functions that can be used to yield partial computation results via the `Iterator` interface and the `yield` keyword.
+[ES2015 also introduced “Generators” ↗](http://www.ecma-international.org/ecma-262/6.0/#sec-generatorfunction-objects), which are functions that can be used to yield partial computation results via the `Iterator` interface and the `yield` keyword.
 Generators can also internally delegate calls to another iterable through `yield *`. For example:
 
 ```ts
 function* f() {
-  yield 1;
-  yield* [2, 3];
+yield1;
+yield* [2, 3];
 }
 ```
 
@@ -57,7 +57,7 @@ With [`downlevelIteration` ↗](https://www.typescriptlang.org/tsconfig.html#dow
 
 ## Async Iteration {#async-iteration}
 
-TypeScript 2.3 adds support for the async iterators and generators as described by the current [TC39 proposal](https://github.com/tc39/proposal-async-iteration).
+TypeScript 2.3 adds support for the async iterators and generators as described by the current [TC39 proposal ↗](https://github.com/tc39/proposal-async-iteration).
 
 ##### Async iterators {#async-iterators}
 
@@ -68,9 +68,9 @@ An `AsyncIterator` has the following shape:
 
 ```ts
 interface AsyncIterator<T> {
-  next(value?: any): Promise<IteratorResult<T>>;
-  return?(value?: any): Promise<IteratorResult<T>>;
-  throw?(e?: any): Promise<IteratorResult<T>>;
+next(value?: any): Promise<IteratorResult<T>>;
+return?(value?: any): Promise<IteratorResult<T>>;
+throw?(e?: any): Promise<IteratorResult<T>>;
 }
 ```
 
@@ -78,17 +78,17 @@ An object that supports async iteration is said to be “iterable” if it has a
 
 ##### Async Generators {#async-generators}
 
-The [Async Iteration proposal](https://github.com/tc39/proposal-async-iteration) introduces “Async Generators”, which are async functions that also can be used to yield partial computation results.
+The [Async Iteration proposal ↗](https://github.com/tc39/proposal-async-iteration) introduces “Async Generators”, which are async functions that also can be used to yield partial computation results.
 Async Generators can also delegate calls via `yield*` to either an iterable or async iterable:
 
 ```ts
 async function* g() {
-  yield 1;
-  await sleep(100);
-  yield* [2, 3];
-  yield* (async function*() {
-    await sleep(100);
-    yield 4;
+yield1;
+awaitsleep(100);
+yield* [2, 3];
+yield* (asyncfunction*() {
+awaitsleep(100);
+yield4;
   })();
 }
 ```
@@ -103,8 +103,8 @@ Similarly, the Async Iteration proposal introduces the `for..await..of` statemen
 
 ```ts
 async function f() {
-  for await (const x of g()) {
-    console.log(x);
+forawait (constxofg()) {
+console.log(x);
   }
 }
 ```
@@ -127,10 +127,10 @@ Consider a function that creates a new `HTMLElement`, calling it with no argumen
 
 ```ts
 declare function create(): Container<HTMLDivElement, HTMLDivElement[]>;
-declare function create<T extends HTMLElement>(element: T): Container<T, T[]>;
-declare function create<T extends HTMLElement, U extends HTMLElement>(
-  element: T,
-  children: U[]
+declarefunctioncreate<TextendsHTMLElement>(element: T): Container<T, T[]>;
+declarefunctioncreate<TextendsHTMLElement, UextendsHTMLElement>(
+element: T,
+children: U[]
 ): Container<T, U[]>;
 ```
 
@@ -138,8 +138,8 @@ With generic parameter defaults we can reduce it to:
 
 ```ts
 declare function create<T extends HTMLElement = HTMLDivElement, U = T[]>(
-  element?: T,
-  children?: U
+element?: T,
+children?: U
 ): Container<T, U>;
 ```
 
@@ -194,6 +194,6 @@ You can skip checking some files by adding `// @ts-nocheck` comment to them; con
 You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
 
 `.js` files are still checked to ensure that they only include standard ECMAScript features; type annotations are only allowed in `.ts` files and are flagged as errors in `.js` files.
-JSDoc comments can be used to add some type information to your JavaScript code, see [JSDoc Support documentation](https://github.com/Microsoft/TypeScript/wiki/JSDoc-support-in-JavaScript) for more details about the supported JSDoc constructs.
+JSDoc comments can be used to add some type information to your JavaScript code, see [JSDoc Support documentation ↗](https://github.com/Microsoft/TypeScript/wiki/JSDoc-support-in-JavaScript) for more details about the supported JSDoc constructs.
 
-See [Type checking JavaScript Files documentation](https://github.com/Microsoft/TypeScript/wiki/Type-Checking-JavaScript-Files) for more details.
+See [Type checking JavaScript Files documentation ↗](https://github.com/Microsoft/TypeScript/wiki/Type-Checking-JavaScript-Files) for more details.

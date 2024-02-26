@@ -11,7 +11,7 @@ next: /typescript/5.1/declaration-files/introduction
 
 ## Performance Improvements {#performance-improvements}
 
-The 1.1 compiler is typically around 4x faster than any previous release. See [this blog post for some impressive charts.](http://blogs.msdn.com/b/typescript/archive/2014/10/06/announcing-typescript-1-1-ctp.aspx)
+The 1.1 compiler is typically around 4x faster than any previous release. See [this blog post for some impressive charts. ↗](http://blogs.msdn.com/b/typescript/archive/2014/10/06/announcing-typescript-1-1-ctp.aspx)
 
 ## Better Module Visibility Rules {#better-module-visibility-rules}
 
@@ -19,14 +19,14 @@ TypeScript now only strictly enforces the visibility of types in modules if the 
 
 ```ts
 module MyControllers {
-  interface ZooScope extends ng.IScope {
-    animals: Animal[];
+interfaceZooScopeextendsng.IScope {
+animals: Animal[];
   }
-  export class ZooController {
-    // Used to be an error (cannot expose ZooScope), but now is only
-    // an error when trying to generate .d.ts files
-    constructor(public $scope: ZooScope) {}
-    /* more code */
+exportclassZooController {
+// Used to be an error (cannot expose ZooScope), but now is only
+// an error when trying to generate .d.ts files
+constructor(public$scope: ZooScope) {}
+/* more code */
   }
 }
 ```

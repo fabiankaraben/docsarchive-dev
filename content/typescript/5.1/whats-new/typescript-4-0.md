@@ -14,7 +14,7 @@ Consider a function in JavaScript called `concat` that takes two array or tuple 
 
 ```js
 function concat(arr1, arr2) {
-  return [...arr1, ...arr2];
+return [...arr1, ...arr2];
 }
 ```
 
@@ -22,8 +22,8 @@ Also consider `tail`, that takes an array or tuple, and returns all elements but
 
 ```js
 function tail(arg) {
-  const [_, ...result] = arg;
-  return result;
+const [_, ...result] = arg;
+returnresult;
 }
 ```
 
@@ -33,12 +33,12 @@ For `concat`, the only valid thing we could do in older versions of the language
 
 ```ts
 function concat(arr1: [], arr2: []): [];
-function concat<A>(arr1: [A], arr2: []): [A];
-function concat<A, B>(arr1: [A, B], arr2: []): [A, B];
-function concat<A, B, C>(arr1: [A, B, C], arr2: []): [A, B, C];
-function concat<A, B, C, D>(arr1: [A, B, C, D], arr2: []): [A, B, C, D];
-function concat<A, B, C, D, E>(arr1: [A, B, C, D, E], arr2: []): [A, B, C, D, E];
-function concat<A, B, C, D, E, F>(arr1: [A, B, C, D, E, F], arr2: []): [A, B, C, D, E, F];
+functionconcat<A>(arr1: [A], arr2: []): [A];
+functionconcat<A, B>(arr1: [A, B], arr2: []): [A, B];
+functionconcat<A, B, C>(arr1: [A, B, C], arr2: []): [A, B, C];
+functionconcat<A, B, C, D>(arr1: [A, B, C, D], arr2: []): [A, B, C, D];
+functionconcat<A, B, C, D, E>(arr1: [A, B, C, D, E], arr2: []): [A, B, C, D, E];
+functionconcat<A, B, C, D, E, F>(arr1: [A, B, C, D, E, F], arr2: []): [A, B, C, D, E, F];
 ```
 
 Uh…okay, that’s…seven overloads for when the second array is always empty.
@@ -46,12 +46,12 @@ Let’s add some for when `arr2` has one argument.
 
 ```ts
 function concat<A2>(arr1: [], arr2: [A2]): [A2];
-function concat<A1, A2>(arr1: [A1], arr2: [A2]): [A1, A2];
-function concat<A1, B1, A2>(arr1: [A1, B1], arr2: [A2]): [A1, B1, A2];
-function concat<A1, B1, C1, A2>(arr1: [A1, B1, C1], arr2: [A2]): [A1, B1, C1, A2];
-function concat<A1, B1, C1, D1, A2>(arr1: [A1, B1, C1, D1], arr2: [A2]): [A1, B1, C1, D1, A2];
-function concat<A1, B1, C1, D1, E1, A2>(arr1: [A1, B1, C1, D1, E1], arr2: [A2]): [A1, B1, C1, D1, E1, A2];
-function concat<A1, B1, C1, D1, E1, F1, A2>(arr1: [A1, B1, C1, D1, E1, F1], arr2: [A2]): [A1, B1, C1, D1, E1, F1, A2];
+functionconcat<A1, A2>(arr1: [A1], arr2: [A2]): [A1, A2];
+functionconcat<A1, B1, A2>(arr1: [A1, B1], arr2: [A2]): [A1, B1, A2];
+functionconcat<A1, B1, C1, A2>(arr1: [A1, B1, C1], arr2: [A2]): [A1, B1, C1, A2];
+functionconcat<A1, B1, C1, D1, A2>(arr1: [A1, B1, C1, D1], arr2: [A2]): [A1, B1, C1, D1, A2];
+functionconcat<A1, B1, C1, D1, E1, A2>(arr1: [A1, B1, C1, D1, E1], arr2: [A2]): [A1, B1, C1, D1, E1, A2];
+functionconcat<A1, B1, C1, D1, E1, F1, A2>(arr1: [A1, B1, C1, D1, E1, F1], arr2: [A2]): [A1, B1, C1, D1, E1, F1, A2];
 ```
 
 We hope it’s clear that this is getting unreasonable.
@@ -79,19 +79,19 @@ For example, that means we can type function like `tail`, without our “death b
 
 ```ts
 function tail<T extends any[]>(arr: readonly [any, ...T]) {
-  const [_ignored, ...rest] = arr;
-  return rest;
+const [_ignored, ...rest] = arr;
+returnrest;
 }
- 
-const myTuple = [1, 2, 3, 4] as const;
-const myArray = ["hello", "world"];
- 
-const r1 = tail(myTuple);
-      
+
+constmyTuple = [1, 2, 3, 4] asconst;
+constmyArray = ["hello", "world"];
+
+constr1 = tail(myTuple);
+
 const r1: [2, 3, 4]
- 
-const r2 = tail([...myTuple, ...myArray] as const);
-      
+
+constr2 = tail([...myTuple, ...myArray] asconst);
+
 const r2: [2, 3, 4, ...string[]]
 ```
 
@@ -99,9 +99,9 @@ The second change is that rest elements can occur anywhere in a tuple - not just
 
 ```ts
 type Strings = [string, string];
-type Numbers = [number, number];
+typeNumbers = [number, number];
 
-type StrStrNumNumBool = [...Strings, ...Numbers, boolean];
+typeStrStrNumNumBool = [...Strings, ...Numbers, boolean];
 ```
 
 Previously, TypeScript would issue an error like the following:
@@ -116,9 +116,9 @@ Note that in cases when we spread in a type without a known length, the resultin
 
 ```ts
 type Strings = [string, string];
-type Numbers = number[];
+typeNumbers = number[];
 
-type Unbounded = [...Strings, ...Numbers, boolean];
+typeUnbounded = [...Strings, ...Numbers, boolean];
 ```
 
 By combining both of these behaviors together, we can write a single well-typed signature for `concat`:
@@ -127,22 +127,22 @@ By combining both of these behaviors together, we can write a single well-typed 
 
 ```ts
 type Arr = readonly any[];
- 
-function concat<T extends Arr, U extends Arr>(arr1: T, arr2: U): [...T, ...U] {
-  return [...arr1, ...arr2];
+
+functionconcat<TextendsArr, UextendsArr>(arr1: T, arr2: U): [...T, ...U] {
+return [...arr1, ...arr2];
 }
 ```
 
 While that one signature is still a bit lengthy, it’s just one signature that doesn’t have to be repeated, and it gives predictable behavior on all arrays and tuples.
 
 This functionality on its own is great, but it shines in more sophisticated scenarios too.
-For example, consider a function to [partially apply arguments](https://en.wikipedia.org/wiki/Partial_application) called `partialCall`.
+For example, consider a function to [partially apply arguments ↗](https://en.wikipedia.org/wiki/Partial_application) called `partialCall`.
 `partialCall` takes a function - let’s call it `f` - along with the initial few arguments that `f` expects.
 It then returns a new function that takes any other arguments that `f` still needs, and calls `f` when it receives them.
 
 ```js
 function partialCall(f, ...headArgs) {
-  return (...tailArgs) => f(...headArgs, ...tailArgs);
+return (...tailArgs) =>f(...headArgs, ...tailArgs);
 }
 ```
 
@@ -152,12 +152,12 @@ TypeScript 4.0 improves the inference process for rest parameters and rest tuple
 
 ```ts
 type Arr = readonly unknown[];
- 
-function partialCall<T extends Arr, U extends Arr, R>(
-  f: (...args: [...T, ...U]) => R,
+
+functionpartialCall<TextendsArr, UextendsArr, R>(
+f: (...args: [...T, ...U]) =>R,
   ...headArgs: T
 ) {
-  return (...tailArgs: U) => f(...headArgs, ...tailArgs);
+return (...tailArgs: U) =>f(...headArgs, ...tailArgs);
 }
 ```
 
@@ -167,23 +167,23 @@ In this case, `partialCall` understands which parameters it can and can’t init
 
 ```ts
 const foo = (x: string, y: number, z: boolean) => {};
- 
-const f1 = partialCall(foo, 100);
- 
-const f2 = partialCall(foo, "hello", 100, true, "oops");
-Expected 4 arguments, but got 5.2554Expected 4 arguments, but got 5. 
+
+constf1 = partialCall(foo, 100);
+
+constf2 = partialCall(foo, "hello", 100, true, "oops");
+Expected 4 arguments, but got 5.2554Expected 4 arguments, but got 5.
 // This works!
-const f3 = partialCall(foo, "hello");
-      
+constf3 = partialCall(foo, "hello");
+
 const f3: (y: number, z: boolean) => void
- 
+
 // What can we do with f3 now?
- 
+
 // Works!
 f3(123, true);
- 
+
 f3();
-Expected 2 arguments, but got 0.2554Expected 2 arguments, but got 0. 
+Expected 2 arguments, but got 0.2554Expected 2 arguments, but got 0.
 f3(123, "hello");
 Argument of type 'string' is not assignable to parameter of type 'boolean'.2345Argument of type 'string' is not assignable to parameter of type 'boolean'.
 ```
@@ -194,7 +194,7 @@ Argument of type 'number' is not assignable to parameter of type 'string'.
 
 Variadic tuple types enable a lot of new exciting patterns, especially around function composition.
 We expect we may be able to leverage it to do a better job type-checking JavaScript’s built-in `bind` method.
-A handful of other inference improvements and patterns also went into this, and if you’re interested in learning more, you can take a look at [the pull request](https://github.com/microsoft/TypeScript/pull/39094) for variadic tuples.
+A handful of other inference improvements and patterns also went into this, and if you’re interested in learning more, you can take a look at [the pull request ↗](https://github.com/microsoft/TypeScript/pull/39094) for variadic tuples.
 
 ## Labeled Tuple Elements {#labeled-tuple-elements}
 
@@ -205,7 +205,7 @@ For example, the following function that uses a tuple type as a rest parameter�
 
 ```ts
 function foo(...args: [string, number]): void {
-  // ...
+// ...
 }
 ```
 
@@ -213,7 +213,7 @@ function foo(...args: [string, number]): void {
 
 ```ts
 function foo(arg0: string, arg1: number): void {
-  // ...
+// ...
 }
 ```
 
@@ -223,7 +223,7 @@ function foo(arg0: string, arg1: number): void {
 
 ```ts
 foo("hello", 42);
- 
+
 foo("hello", 42, true);
 foo("hello");
 Expected 2 arguments, but got 1.2554Expected 2 arguments, but got 1.
@@ -269,15 +269,15 @@ They’re purely there for documentation and tooling.
 
 ```ts
 function foo(x: [first: string, second: number]) {
-    // ...
- 
-    // note: we didn't need to name these 'first' and 'second'
-    const [a, b] = x;
-    a
-   
+// ...
+
+// note: we didn't need to name these 'first' and 'second'
+const [a, b] = x;
+a
+
 const a: string
-    b
-   
+b
+
 const b: number
 }
 ```
@@ -297,16 +297,16 @@ TypeScript 4.0 can now use control flow analysis to determine the types of prope
 
 ```ts
 class Square {
-  // Previously both of these were any
-  area;
-   
+// Previously both of these were any
+area;
+
 (property) Square.area: number
-  sideLength;
-      
+sideLength;
+
 (property) Square.sideLength: number
-  constructor(sideLength: number) {
-    this.sideLength = sideLength;
-    this.area = sideLength ** 2;
+constructor(sideLength: number) {
+this.sideLength = sideLength;
+this.area = sideLength ** 2;
   }
 }
 ```
@@ -317,18 +317,18 @@ In cases where not all paths of a constructor assign to an instance member, the 
 
 ```ts
 class Square {
-  sideLength;
-      
+sideLength;
+
 (property) Square.sideLength: number | undefined
- 
-  constructor(sideLength: number) {
-    if (Math.random()) {
-      this.sideLength = sideLength;
+
+constructor(sideLength: number) {
+if (Math.random()) {
+this.sideLength = sideLength;
     }
   }
- 
-  get area() {
-    return this.sideLength ** 2;
+
+getarea() {
+returnthis.sideLength ** 2;
   }
 }
 ```
@@ -343,21 +343,21 @@ In cases where you know better (e.g. you have an `initialize` method of some sor
 
 ```ts
 class Square {
-  // definite assignment assertion
-  //        v
-  sideLength!: number;
-  // type annotation
- 
-  constructor(sideLength: number) {
-    this.initialize(sideLength);
+// definite assignment assertion
+//        v
+sideLength!: number;
+// type annotation
+
+constructor(sideLength: number) {
+this.initialize(sideLength);
   }
- 
-  initialize(sideLength: number) {
-    this.sideLength = sideLength;
+
+initialize(sideLength: number) {
+this.sideLength = sideLength;
   }
- 
-  get area() {
-    return this.sideLength ** 2;
+
+getarea() {
+returnthis.sideLength ** 2;
   }
 }
 ```
@@ -414,7 +414,7 @@ Or a similar `if` block like
 ```ts
 // could be 'a ||= b'
 if (!a) {
-  a = b;
+a = b;
 }
 ```
 
@@ -441,7 +441,7 @@ obj.prop ||= foo();
 obj.prop || (obj.prop = foo());
 
 if (!obj.prop) {
-    obj.prop = foo();
+obj.prop = foo();
 }
 ```
 
@@ -451,25 +451,25 @@ if (!obj.prop) {
 
 ```ts
 const obj = {
-    get prop() {
-        console.log("getter has run");
- 
-        // Replace me!
-        return Math.random() < 0.5;
+getprop() {
+console.log("getter has run");
+
+// Replace me!
+returnMath.random() < 0.5;
     },
-    set prop(_val: boolean) {
-        console.log("setter has run");
+setprop(_val: boolean) {
+console.log("setter has run");
     }
 };
- 
-function foo() {
-    console.log("right side evaluated");
-    return true;
+
+functionfoo() {
+console.log("right side evaluated");
+returntrue;
 }
- 
+
 console.log("This one always runs the setter");
 obj.prop = obj.prop || foo();
- 
+
 console.log("This one *sometimes* runs the setter");
 obj.prop ||= foo();
 ```
@@ -488,13 +488,13 @@ This meant that TypeScript allowed you to do anything you wanted with them.
 
 ```ts
 try {
-  // Do some work
+// Do some work
 } catch (x) {
-  // x has type 'any' - have fun!
-  console.log(x.message);
-  console.log(x.toUpperCase());
-  x++;
-  x.yadda.yadda.yadda();
+// x has type 'any' - have fun!
+console.log(x.message);
+console.log(x.toUpperCase());
+x++;
+x.yadda.yadda.yadda();
 }
 ```
 
@@ -508,14 +508,14 @@ That’s why TypeScript 4.0 now lets you specify the type of `catch` clause vari
 
 ```ts
 try {
-  // ...
+// ...
 } catch (e: unknown) {
-  // Can't access values on unknowns
-  console.log(e.toUpperCase());
- 
-  if (typeof e === "string") {
-    // We've narrowed 'e' down to the type 'string'.
-    console.log(e.toUpperCase());
+// Can't access values on unknowns
+console.log(e.toUpperCase());
+
+if (typeofe === "string") {
+// We've narrowed 'e' down to the type 'string'.
+console.log(e.toUpperCase());
   }
 }
 ```
@@ -541,12 +541,12 @@ As an example, the following `tsconfig.json` file tells TypeScript to transform 
 
 ```
 {
-  "[compilerOptions](/tsconfig.html#compilerOptions)": {
-    "[target](/tsconfig.html#target)": "esnext",
-    "[module](/tsconfig.html#module)": "commonjs",
-    "[jsx](/tsconfig.html#jsx)": "react",
-    "[jsxFactory](/tsconfig.html#jsxFactory)": "h",
-    "[jsxFragmentFactory](/tsconfig.html#jsxFragmentFactory)": "Fragment"
+"[compilerOptions](/tsconfig.html#compilerOptions)": {
+"[target](/tsconfig.html#target)": "esnext",
+"[module](/tsconfig.html#module)": "commonjs",
+"[jsx](/tsconfig.html#jsx)": "react",
+"[jsxFactory](/tsconfig.html#jsxFactory)": "h",
+"[jsxFragmentFactory](/tsconfig.html#jsxFragmentFactory)": "Fragment"
   }
 }
 ```
@@ -559,16 +559,16 @@ For example, the following…
 ```tsx
 // Note: these pragma comments need to be written
 // with a JSDoc-style multiline syntax to take effect.
- 
+
 /** @jsx h */
 /** @jsxFrag Fragment */
- 
-import { h, Fragment } from "preact";
- 
-export const Header = (
-  <>
-    <h1>Welcome</h1>
-  </>
+
+import { h, Fragment } from"preact";
+
+exportconstHeader = (
+<>
+<h1>Welcome</h1>
+</>
 );
 ```
 
@@ -578,9 +578,8 @@ export const Header = (
 
 ```tsx
 import React from 'react';
-export const Header = (React.createElement(React.Fragment, null,
-    React.createElement("h1", null, "Welcome")));
- 
+exportconstHeader = (React.createElement(React.Fragment, null,
+React.createElement("h1", null, "Welcome")));
 ```
 
 We’d like to extend a big thanks to community member [Noj Vek](https://github.com/nojvek) for sending this pull request and patiently working with our team on it.
@@ -709,16 +708,16 @@ Previously, it was only an error for properties to override accessors, or access
 
 ```ts
 class Base {
-  get foo() {
-    return 100;
+getfoo() {
+return100;
   }
-  set foo(value) {
-    // ...
+setfoo(value) {
+// ...
   }
 }
- 
-class Derived extends Base {
-  foo = 10;
+
+classDerivedextendsBase {
+foo = 10;
 }
 ```
 
@@ -730,12 +729,12 @@ class Derived extends Base {
 
 ```ts
 class Base {
-  prop = 10;
+prop = 10;
 }
- 
-class Derived extends Base {
-  get prop() {
-    return 100;
+
+classDerivedextendsBase {
+getprop() {
+return100;
   }
 }
 ```
@@ -755,11 +754,11 @@ Otherwise, use of the `delete` operator is an error.
 
 ```ts
 interface Thing {
-  prop: string;
+prop: string;
 }
- 
-function f(x: Thing) {
-  delete x.prop;
+
+functionf(x: Thing) {
+deletex.prop;
 }
 ```
 

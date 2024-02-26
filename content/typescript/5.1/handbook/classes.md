@@ -8,7 +8,7 @@ type: docs
 
 # Classes
 
-> Background Reading:[Classes (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+> Background Reading:[Classes (MDN) ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 > 
 
 TypeScript offers full support for the `class` keyword introduced in ES2015.
@@ -35,11 +35,11 @@ A field declaration creates a public writeable property on a class:
 
 ```ts
 class Point {
-  x: number;
-  y: number;
+x: number;
+y: number;
 }
- 
-const pt = new Point();
+
+constpt = newPoint();
 pt.x = 0;
 pt.y = 0;
 ```
@@ -52,11 +52,11 @@ Fields can also have *initializers*; these will run automatically when the class
 
 ```ts
 class Point {
-  x = 0;
-  y = 0;
+x = 0;
+y = 0;
 }
- 
-const pt = new Point();
+
+constpt = newPoint();
 // Prints 0, 0
 console.log(`${pt.x}, ${pt.y}`);
 ```
@@ -82,7 +82,7 @@ The [`strictPropertyInitialization` ↗](https://www.typescriptlang.org/tsconfig
 
 ```ts
 class BadGreeter {
-  name: string;
+name: string;
 }
 ```
 
@@ -94,10 +94,10 @@ Property 'name' has no initializer and is not definitely assigned in the constru
 
 ```ts
 class GoodGreeter {
-  name: string;
- 
-  constructor() {
-    this.name = "hello";
+name: string;
+
+constructor() {
+this.name = "hello";
   }
 }
 ```
@@ -111,8 +111,8 @@ If you intend to definitely initialize a field through means other than the cons
 
 ```ts
 class OKGreeter {
-  // Not initialized, but no error
-  name!: string;
+// Not initialized, but no error
+name!: string;
 }
 ```
 
@@ -125,19 +125,19 @@ This prevents assignments to the field outside of the constructor.
 
 ```ts
 class Greeter {
-  readonly name: string = "world";
- 
-  constructor(otherName?: string) {
-    if (otherName !== undefined) {
-      this.name = otherName;
+readonlyname: string = "world";
+
+constructor(otherName?: string) {
+if (otherName !== undefined) {
+this.name = otherName;
     }
   }
- 
-  err() {
-    this.name = "not ok";
+
+err() {
+this.name = "not ok";
   }
 }
-const g = new Greeter();
+constg = newGreeter();
 g.name = "also not ok";
 Cannot assign to 'name' because it is a read-only property.2540Cannot assign to 'name' because it is a read-only property.
 ```
@@ -148,7 +148,7 @@ Cannot assign to 'name' because it is a read-only property.
 
 ### Constructors {#constructors}
 
-> Background Reading:[Constructor (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)
+> Background Reading:[Constructor (MDN) ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)
 > 
 
 Class constructors are very similar to functions.
@@ -158,13 +158,13 @@ You can add parameters with type annotations, default values, and overloads:
 
 ```ts
 class Point {
-  x: number;
-  y: number;
- 
-  // Normal signature with defaults
-  constructor(x = 0, y = 0) {
-    this.x = x;
-    this.y = y;
+x: number;
+y: number;
+
+// Normal signature with defaults
+constructor(x = 0, y = 0) {
+this.x = x;
+this.y = y;
   }
 }
 ```
@@ -173,11 +173,11 @@ class Point {
 
 ```ts
 class Point {
-  // Overloads
-  constructor(x: number, y: string);
-  constructor(s: string);
-  constructor(xs: any, y?: any) {
-    // TBD
+// Overloads
+constructor(x: number, y: string);
+constructor(s: string);
+constructor(xs: any, y?: any) {
+// TBD
   }
 }
 ```
@@ -195,14 +195,14 @@ Just as in JavaScript, if you have a base class, you’ll need to call `super();
 
 ```ts
 class Base {
-  k = 4;
+k = 4;
 }
- 
-class Derived extends Base {
-  constructor() {
-    // Prints a wrong value in ES5; throws exception in ES6
-    console.log(this.k);
-    super();
+
+classDerivedextendsBase {
+constructor() {
+// Prints a wrong value in ES5; throws exception in ES6
+console.log(this.k);
+super();
   }
 }
 ```
@@ -215,7 +215,7 @@ Forgetting to call `super` is an easy mistake to make in JavaScript, but TypeScr
 
 ### Methods {#methods}
 
-> Background Reading:[Method definitions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)
+> Background Reading:[Method definitions ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)
 > 
 
 A function property on a class is called a *method*.
@@ -225,12 +225,12 @@ Methods can use all the same type annotations as functions and constructors:
 
 ```ts
 class Point {
-  x = 10;
-  y = 10;
- 
-  scale(n: number): void {
-    this.x *= n;
-    this.y *= n;
+x = 10;
+y = 10;
+
+scale(n: number): void {
+this.x *= n;
+this.y *= n;
   }
 }
 ```
@@ -244,13 +244,13 @@ An unqualified name in a method body will always refer to something in the enclo
 
 ```ts
 let x: number = 0;
- 
-class C {
-  x: string = "hello";
- 
-  m() {
-    // This is trying to modify 'x' from line 1, not the class property
-    x = "world";
+
+classC {
+x: string = "hello";
+
+m() {
+// This is trying to modify 'x' from line 1, not the class property
+x = "world";
   }
 }
 ```
@@ -267,12 +267,12 @@ Classes can also have *accessors*:
 
 ```ts
 class C {
-  _length = 0;
-  get length() {
-    return this._length;
+_length = 0;
+getlength() {
+returnthis._length;
   }
-  set length(value) {
-    this._length = value;
+setlength(value) {
+this._length = value;
   }
 }
 ```
@@ -285,47 +285,47 @@ TypeScript has some special inference rules for accessors:
 
 - If `get` exists but no `set`, the property is automatically `readonly`
 - If the type of the setter parameter is not specified, it is inferred from the return type of the getter
-- Getters and setters must have the same [Member Visibility ↗](https://www.typescriptlang.org/docs/handbook/2/classes.html#member-visibility)
+- Getters and setters must have the same [Member Visibility](/typescript/5.1/handbook/classes#member-visibility)
 
-Since [TypeScript 4.3](https://devblogs.microsoft.com/typescript/announcing-typescript-4-3/), it is possible to have accessors with different types for getting and setting.
+Since [TypeScript 4.3 ↗](https://devblogs.microsoft.com/typescript/announcing-typescript-4-3/), it is possible to have accessors with different types for getting and setting.
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAEAqAWBLAdgc2gbwLAChrQH0JEAvAU2gF5oAGAbl131TIBdpjyAKASgC5oyAK4BbAEZkATpib5oktkMnJorJBAB0RUmQZ5oAX0b6IbDjq4A3MCCFkBEVpJToAPoNETp7sQHtfIGRgyDwy+viB7MIiVNAAcp5SVjZ2PHqy+AD0mdAAIr7IAOTsNiC+AO7xYHEANNAAksgAZiiIrACedWzAxnLQiE3QXACECeJSGogQAGKtrGRc0Tyh2OFyalNanBTU9BlyCqxKyHp9Rjj7G5ra5LHRp4a4BkA)
 
 ```ts
 class Thing {
-  _size = 0;
- 
-  get size(): number {
-    return this._size;
+_size = 0;
+
+getsize(): number {
+returnthis._size;
   }
- 
-  set size(value: string | number | boolean) {
-    let num = Number(value);
- 
-    // Don't allow NaN, Infinity, etc
- 
-    if (!Number.isFinite(num)) {
-      this._size = 0;
-      return;
+
+setsize(value: string | number | boolean) {
+letnum = Number(value);
+
+// Don't allow NaN, Infinity, etc
+
+if (!Number.isFinite(num)) {
+this._size = 0;
+return;
     }
- 
-    this._size = num;
+
+this._size = num;
   }
 }
 ```
 
 ### Index Signatures {#index-signatures}
 
-Classes can declare index signatures; these work the same as [Index Signatures for other object types ↗](https://www.typescriptlang.org/docs/handbook/2/objects.html#index-signatures):
+Classes can declare index signatures; these work the same as [Index Signatures for other object types](/typescript/5.1/handbook/objects#index-signatures):
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAECyCeBhcVoG8CwAoa0DaEAXNBAC4BOAlgHYDmAusQEYD2LIApmNdAD7QAKAURIUatAJTQAvAD5ordl2oSA3Nmy5gACw7AA1sOJkqdKZhy5o5DqQCu5HqW2UIBetEgK2nbussAvtgBQA)
 
 ```ts
 class MyClass {
-  [s: string]: boolean | ((s: string) => boolean);
- 
-  check(s: string) {
-    return this[s] as boolean;
+  [s: string]: boolean | ((s: string) =>boolean);
+
+check(s: string) {
+returnthis[s] asboolean;
   }
 }
 ```
@@ -346,18 +346,18 @@ An error will be issued if a class fails to correctly implement it:
 
 ```ts
 interface Pingable {
-  ping(): void;
+ping(): void;
 }
- 
-class Sonar implements Pingable {
-  ping() {
-    console.log("ping!");
+
+classSonarimplementsPingable {
+ping() {
+console.log("ping!");
   }
 }
- 
-class Ball implements Pingable {
-  pong() {
-    console.log("pong!");
+
+classBallimplementsPingable {
+pong() {
+console.log("pong!");
   }
 }
 ```
@@ -379,14 +379,14 @@ A common source of error is to assume that an `implements` clause will change th
 
 ```ts
 interface Checkable {
-  check(name: string): boolean;
+check(name: string): boolean;
 }
- 
-class NameChecker implements Checkable {
-  check(s) {
-    // Notice no error here
-    return s.toLowerCase() === "ok";
-                 
+
+classNameCheckerimplementsCheckable {
+check(s) {
+// Notice no error here
+returns.toLowerCase() === "ok";
+
 any
   }
 }
@@ -405,13 +405,13 @@ Similarly, implementing an interface with an optional property doesn’t create 
 
 ```ts
 interface A {
-  x: number;
-  y?: number;
+x: number;
+y?: number;
 }
-class C implements A {
-  x = 0;
+classCimplementsA {
+x = 0;
 }
-const c = new C();
+constc = newC();
 c.y = 10;
 ```
 
@@ -421,7 +421,7 @@ Property 'y' does not exist on type 'C'.
 
 ### `extends` Clauses {#extends-clauses}
 
-> Background Reading:[extends keyword (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
+> Background Reading:[extends keyword (MDN) ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
 > 
 
 Classes may `extend` from a base class.
@@ -431,20 +431,20 @@ A derived class has all the properties and methods of its base class, and can al
 
 ```ts
 class Animal {
-  move() {
-    console.log("Moving along!");
+move() {
+console.log("Moving along!");
   }
 }
- 
-class Dog extends Animal {
-  woof(times: number) {
-    for (let i = 0; i < times; i++) {
-      console.log("woof!");
+
+classDogextendsAnimal {
+woof(times: number) {
+for (leti = 0; i < times; i++) {
+console.log("woof!");
     }
   }
 }
- 
-const d = new Dog();
+
+constd = newDog();
 // Base class method
 d.move();
 // Derived class method
@@ -453,7 +453,7 @@ d.woof(3);
 
 #### Overriding Methods {#overriding-methods}
 
-> Background Reading:[super keyword (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
+> Background Reading:[super keyword (MDN) ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
 > 
 
 A derived class can also override a base class field or property.
@@ -468,22 +468,22 @@ For example, here’s a legal way to override a method:
 
 ```ts
 class Base {
-  greet() {
-    console.log("Hello, world!");
+greet() {
+console.log("Hello, world!");
   }
 }
- 
-class Derived extends Base {
-  greet(name?: string) {
-    if (name === undefined) {
-      super.greet();
+
+classDerivedextendsBase {
+greet(name?: string) {
+if (name === undefined) {
+super.greet();
     } else {
-      console.log(`Hello, ${name.toUpperCase()}`);
+console.log(`Hello, ${name.toUpperCase()}`);
     }
   }
 }
- 
-const d = new Derived();
+
+constd = newDerived();
 d.greet();
 d.greet("reader");
 ```
@@ -495,7 +495,7 @@ Remember that it’s very common (and always legal!) to refer to a derived class
 
 ```ts
 // Alias the derived instance through a base class reference
-const b: Base = d;
+constb: Base = d;
 // No problem
 b.greet();
 ```
@@ -506,15 +506,15 @@ What if `Derived` didn’t follow `Base`’s contract?
 
 ```ts
 class Base {
-  greet() {
-    console.log("Hello, world!");
+greet() {
+console.log("Hello, world!");
   }
 }
- 
-class Derived extends Base {
-  // Make this parameter required
-  greet(name: string) {
-    console.log(`Hello, ${name.toUpperCase()}`);
+
+classDerivedextendsBase {
+// Make this parameter required
+greet(name: string) {
+console.log(`Hello, ${name.toUpperCase()}`);
   }
 }
 ```
@@ -542,26 +542,26 @@ When `target >= ES2022` or [`useDefineForClassFields` ↗](https://www.typescrip
 
 ```ts
 interface Animal {
-  dateOfBirth: any;
+dateOfBirth: any;
 }
- 
-interface Dog extends Animal {
-  breed: any;
+
+interfaceDogextendsAnimal {
+breed: any;
 }
- 
-class AnimalHouse {
-  resident: Animal;
-  constructor(animal: Animal) {
-    this.resident = animal;
+
+classAnimalHouse {
+resident: Animal;
+constructor(animal: Animal) {
+this.resident = animal;
   }
 }
- 
-class DogHouse extends AnimalHouse {
-  // Does not emit JavaScript code,
-  // only ensures the types are correct
-  declare resident: Dog;
-  constructor(dog: Dog) {
-    super(dog);
+
+classDogHouseextendsAnimalHouse {
+// Does not emit JavaScript code,
+// only ensures the types are correct
+declareresident: Dog;
+constructor(dog: Dog) {
+super(dog);
   }
 }
 ```
@@ -575,18 +575,18 @@ Let’s consider this code:
 
 ```ts
 class Base {
-  name = "base";
-  constructor() {
-    console.log("My name is " + this.name);
+name = "base";
+constructor() {
+console.log("My name is " + this.name);
   }
 }
- 
-class Derived extends Base {
-  name = "derived";
+
+classDerivedextendsBase {
+name = "derived";
 }
- 
+
 // Prints "base", not "derived"
-const d = new Derived();
+constd = newDerived();
 ```
 
 What happened here?
@@ -619,11 +619,11 @@ For a subclass like the following:
 
 ```ts
 class MsgError extends Error {
-  constructor(m: string) {
-    super(m);
+constructor(m: string) {
+super(m);
   }
-  sayHello() {
-    return "hello " + this.message;
+sayHello() {
+return"hello " + this.message;
   }
 }
 ```
@@ -639,23 +639,23 @@ As a recommendation, you can manually adjust the prototype immediately after any
 
 ```ts
 class MsgError extends Error {
-  constructor(m: string) {
-    super(m);
- 
-    // Set the prototype explicitly.
-    Object.setPrototypeOf(this, MsgError.prototype);
+constructor(m: string) {
+super(m);
+
+// Set the prototype explicitly.
+Object.setPrototypeOf(this, MsgError.prototype);
   }
- 
-  sayHello() {
-    return "hello " + this.message;
+
+sayHello() {
+return"hello " + this.message;
   }
 }
 ```
 
 However, any subclass of `MsgError` will have to manually set the prototype as well.
-For runtimes that don’t support [`Object.setPrototypeOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf), you may instead be able to use [`__proto__`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto).
+For runtimes that don’t support [`Object.setPrototypeOf` ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf), you may instead be able to use [`__proto__` ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto).
 
-Unfortunately, [these workarounds will not work on Internet Explorer 10 and prior](https://msdn.microsoft.com/en-us/library/s4esdbwz(v=vs.94).aspx).
+Unfortunately, [these workarounds will not work on Internet Explorer 10 and prior ↗](https://msdn.microsoft.com/en-us/library/s4esdbwz(v=vs.94).aspx).
 One can manually copy methods from the prototype onto the instance itself (i.e. `MsgError.prototype` onto `this`), but the prototype chain itself cannot be fixed.
 
 ## Member Visibility {#member-visibility}
@@ -671,11 +671,11 @@ A `public` member can be accessed anywhere:
 
 ```ts
 class Greeter {
-  public greet() {
-    console.log("hi!");
+publicgreet() {
+console.log("hi!");
   }
 }
-const g = new Greeter();
+constg = newGreeter();
 g.greet();
 ```
 
@@ -689,21 +689,21 @@ Because `public` is already the default visibility modifier, you don’t ever *n
 
 ```ts
 class Greeter {
-  public greet() {
-    console.log("Hello, " + this.getName());
+publicgreet() {
+console.log("Hello, " + this.getName());
   }
-  protected getName() {
-    return "hi";
-  }
-}
- 
-class SpecialGreeter extends Greeter {
-  public howdy() {
-    // OK to access protected member here
-    console.log("Howdy, " + this.getName());
+protectedgetName() {
+return"hi";
   }
 }
-const g = new SpecialGreeter();
+
+classSpecialGreeterextendsGreeter {
+publichowdy() {
+// OK to access protected member here
+console.log("Howdy, " + this.getName());
+  }
+}
+constg = newSpecialGreeter();
 g.greet(); // OK
 g.getName();
 ```
@@ -721,13 +721,13 @@ This includes making `protected` members `public`:
 
 ```ts
 class Base {
-  protected m = 10;
+protectedm = 10;
 }
-class Derived extends Base {
-  // No modifier, so default is 'public'
-  m = 15;
+classDerivedextendsBase {
+// No modifier, so default is 'public'
+m = 15;
 }
-const d = new Derived();
+constd = newDerived();
 console.log(d.m); // OK
 ```
 
@@ -742,17 +742,17 @@ Different OOP languages disagree about whether it’s legal to access a `protect
 
 ```ts
 class Base {
-  protected x: number = 1;
+protectedx: number = 1;
 }
-class Derived1 extends Base {
-  protected x: number = 5;
+classDerived1extendsBase {
+protectedx: number = 5;
 }
-class Derived2 extends Base {
-  f1(other: Derived2) {
-    other.x = 10;
+classDerived2extendsBase {
+f1(other: Derived2) {
+other.x = 10;
   }
-  f2(other: Base) {
-    other.x = 10;
+f2(other: Base) {
+other.x = 10;
   }
 }
 ```
@@ -767,7 +767,7 @@ On the other hand, C# and C++ chose that this code should be illegal.
 TypeScript sides with C# and C++ here, because accessing `x` in `Derived2` should only be legal from `Derived2`’s subclasses, and `Derived1` isn’t one of them.
 Moreover, if accessing `x` through a `Derived1` reference is illegal (which it certainly should be!), then accessing it through a base class reference should never improve the situation.
 
-See also [Why Can’t I Access A Protected Member From A Derived Class?](https://blogs.msdn.microsoft.com/ericlippert/2005/11/09/why-cant-i-access-a-protected-member-from-a-derived-class/) which explains more of C#‘s reasoning.
+See also [Why Can’t I Access A Protected Member From A Derived Class? ↗](https://blogs.msdn.microsoft.com/ericlippert/2005/11/09/why-cant-i-access-a-protected-member-from-a-derived-class/) which explains more of C#‘s reasoning.
 
 ### `private` {#private}
 
@@ -777,9 +777,9 @@ See also [Why Can’t I Access A Protected Member From A Derived Class?](https:/
 
 ```ts
 class Base {
-  private x = 0;
+privatex = 0;
 }
-const b = new Base();
+constb = newBase();
 // Can't access from outside the class
 console.log(b.x);
 ```
@@ -792,9 +792,9 @@ Property 'x' is private and only accessible within class 'Base'.
 
 ```ts
 class Derived extends Base {
-  showX() {
-    // Can't access in subclasses
-    console.log(this.x);
+showX() {
+// Can't access in subclasses
+console.log(this.x);
   }
 }
 ```
@@ -809,10 +809,10 @@ Because `private` members aren’t visible to derived classes, a derived class c
 
 ```ts
 class Base {
-  private x = 0;
+privatex = 0;
 }
-class Derived extends Base {
-  x = 1;
+classDerivedextendsBase {
+x = 1;
 }
 ```
 
@@ -832,11 +832,11 @@ TypeScript does allow cross-instance `private` access:
 
 ```ts
 class A {
-  private x = 10;
- 
-  public sameAs(other: A) {
-    // No error
-    return other.x === this.x;
+privatex = 10;
+
+publicsameAs(other: A) {
+// No error
+returnother.x === this.x;
   }
 }
 ```
@@ -851,13 +851,13 @@ This means that JavaScript runtime constructs like `in` or simple property looku
 
 ```ts
 class MySafe {
-  private secretKey = 12345;
+privatesecretKey = 12345;
 }
 ```
 
 ```js
 // In a JavaScript file...
-const s = new MySafe();
+consts = newMySafe();
 // Will print 12345
 console.log(s.secretKey);
 ```
@@ -868,14 +868,14 @@ console.log(s.secretKey);
 
 ```ts
 class MySafe {
-  private secretKey = 12345;
+privatesecretKey = 12345;
 }
- 
-const s = new MySafe();
- 
+
+consts = newMySafe();
+
 // Not allowed during type checking
 console.log(s.secretKey);
- 
+
 // OK
 console.log(s["secretKey"]);
 ```
@@ -884,16 +884,16 @@ console.log(s["secretKey"]);
 Property 'secretKey' is private and only accessible within class 'MySafe'.
 ```
 
-Unlike TypeScripts’s `private`, JavaScript’s [private fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) (`#`) remain private after compilation and do not provide the previously mentioned escape hatches like bracket notation access, making them *hard private*.
+Unlike TypeScripts’s `private`, JavaScript’s [private fields ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) (`#`) remain private after compilation and do not provide the previously mentioned escape hatches like bracket notation access, making them *hard private*.
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAEAiD2BzaBvAsAKGtAxAIzACcBrAQQFt4BXAOwBdoBeaABgG5NsAHAU0Ing0wIAJZ0Ank2gAiABZguXcdI4ZO0YIIh1CVYHXiEAFAEpUAX0zmgA)
 
 ```ts
 class Dog {
-  #barkAmount = 0;
-  personality = "happy";
- 
-  constructor() {}
+#barkAmount = 0;
+personality = "happy";
+
+constructor() {}
 }
 ```
 
@@ -901,12 +901,11 @@ class Dog {
 
 ```ts
 "use strict";
-class Dog {
-    #barkAmount = 0;
-    personality = "happy";
-    constructor() { }
+classDog {
+#barkAmount = 0;
+personality = "happy";
+constructor() { }
 }
- 
 ```
 
 When compiling to ES2021 or less, TypeScript will use WeakMaps in place of `#`.
@@ -915,22 +914,21 @@ When compiling to ES2021 or less, TypeScript will use WeakMaps in place of `#`.
 
 ```ts
 "use strict";
-var _Dog_barkAmount;
-class Dog {
-    constructor() {
-        _Dog_barkAmount.set(this, 0);
-        this.personality = "happy";
+var_Dog_barkAmount;
+classDog {
+constructor() {
+_Dog_barkAmount.set(this, 0);
+this.personality = "happy";
     }
 }
-_Dog_barkAmount = new WeakMap();
- 
+_Dog_barkAmount = newWeakMap();
 ```
 
 If you need to protect values in your class from malicious actors, you should use mechanisms that offer hard runtime privacy, such as closures, WeakMaps, or private fields. Note that these added privacy checks during runtime could affect performance.
 
 ## Static Members {#static-members}
 
-> Background Reading:[Static Members (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
+> Background Reading:[Static Members (MDN) ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)
 > 
 
 Classes may have `static` members.
@@ -941,9 +939,9 @@ They can be accessed through the class constructor object itself:
 
 ```ts
 class MyClass {
-  static x = 0;
-  static printX() {
-    console.log(MyClass.x);
+staticx = 0;
+staticprintX() {
+console.log(MyClass.x);
   }
 }
 console.log(MyClass.x);
@@ -956,7 +954,7 @@ Static members can also use the same `public`, `protected`, and `private` visibi
 
 ```ts
 class MyClass {
-  private static x = 0;
+privatestaticx = 0;
 }
 console.log(MyClass.x);
 ```
@@ -971,12 +969,12 @@ Static members are also inherited:
 
 ```ts
 class Base {
-  static getGreeting() {
-    return "Hello world";
+staticgetGreeting() {
+return"Hello world";
   }
 }
-class Derived extends Base {
-  myGreeting = Derived.getGreeting();
+classDerivedextendsBase {
+myGreeting = Derived.getGreeting();
 }
 ```
 
@@ -990,7 +988,7 @@ Function properties like `name`, `length`, and `call` aren’t valid to define a
 
 ```ts
 class S {
-  static name = "S!";
+staticname = "S!";
 }
 ```
 
@@ -1011,16 +1009,16 @@ For example, we don’t need a “static class” syntax in TypeScript because a
 
 ```ts
 // Unnecessary "static" class
-class MyStaticClass {
-  static doSomething() {}
+classMyStaticClass {
+staticdoSomething() {}
 }
- 
+
 // Preferred (alternative 1)
-function doSomething() {}
- 
+functiondoSomething() {}
+
 // Preferred (alternative 2)
-const MyHelperObject = {
-  dosomething() {},
+constMyHelperObject = {
+dosomething() {},
 };
 ```
 
@@ -1032,18 +1030,18 @@ Static blocks allow you to write a sequence of statements with their own scope t
 
 ```ts
 class Foo {
-    static #count = 0;
- 
-    get count() {
-        return Foo.#count;
+static#count = 0;
+
+getcount() {
+returnFoo.#count;
     }
- 
-    static {
-        try {
-            const lastInstances = loadLastInstances();
-            Foo.#count += lastInstances.length;
+
+static {
+try {
+constlastInstances = loadLastInstances();
+Foo.#count += lastInstances.length;
         }
-        catch {}
+catch {}
     }
 }
 ```
@@ -1057,14 +1055,14 @@ When a generic class is instantiated with `new`, its type parameters are inferre
 
 ```ts
 class Box<Type> {
-  contents: Type;
-  constructor(value: Type) {
-    this.contents = value;
+contents: Type;
+constructor(value: Type) {
+this.contents = value;
   }
 }
- 
-const b = new Box("hello!");
-     
+
+constb = newBox("hello!");
+
 const b: Box<string>
 ```
 
@@ -1078,7 +1076,7 @@ This code isn’t legal, and it may not be obvious why:
 
 ```ts
 class Box<Type> {
-  static defaultValue: Type;
+staticdefaultValue: Type;
 }
 ```
 
@@ -1093,7 +1091,7 @@ The `static` members of a generic class can never refer to the class’s type pa
 
 ## `this` at Runtime in Classes {#this-at-runtime-in-classes}
 
-> Background Reading:[this keyword (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+> Background Reading:[this keyword (MDN) ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
 > 
 
 It’s important to remember that TypeScript doesn’t change the runtime behavior of JavaScript, and that JavaScript is somewhat famous for having some peculiar runtime behaviors.
@@ -1104,17 +1102,17 @@ JavaScript’s handling of `this` is indeed unusual:
 
 ```ts
 class MyClass {
-  name = "MyClass";
-  getName() {
-    return this.name;
+name = "MyClass";
+getName() {
+returnthis.name;
   }
 }
-const c = new MyClass();
-const obj = {
-  name: "obj",
-  getName: c.getName,
+constc = newMyClass();
+constobj = {
+name:"obj",
+getName:c.getName,
 };
- 
+
 // Prints "obj", not "MyClass"
 console.log(obj.getName());
 ```
@@ -1127,7 +1125,7 @@ TypeScript provides some ways to mitigate or prevent this kind of error.
 
 ### Arrow Functions {#arrow-functions}
 
-> Background Reading:[Arrow functions (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+> Background Reading:[Arrow functions (MDN) ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 > 
 
 If you have a function that will often be called in a way that loses its `this` context, it can make sense to use an arrow function property instead of a method definition:
@@ -1136,13 +1134,13 @@ If you have a function that will often be called in a way that loses its `this` 
 
 ```ts
 class MyClass {
-  name = "MyClass";
-  getName = () => {
-    return this.name;
+name = "MyClass";
+getName = () => {
+returnthis.name;
   };
 }
-const c = new MyClass();
-const g = c.getName;
+constc = newMyClass();
+constg = c.getName;
 // Prints "MyClass" instead of crashing
 console.log(g());
 ```
@@ -1162,15 +1160,15 @@ These parameters are erased during compilation:
 
 ```ts
 // TypeScript input with 'this' parameter
-function fn(this: SomeType, x: number) {
-  /* ... */
+functionfn(this: SomeType, x: number) {
+/* ... */
 }
 ```
 
 ```js
 // JavaScript output
-function fn(x) {
-  /* ... */
+functionfn(x) {
+/* ... */
 }
 ```
 
@@ -1181,17 +1179,17 @@ Instead of using an arrow function, we can add a `this` parameter to method defi
 
 ```ts
 class MyClass {
-  name = "MyClass";
-  getName(this: MyClass) {
-    return this.name;
+name = "MyClass";
+getName(this: MyClass) {
+returnthis.name;
   }
 }
-const c = new MyClass();
+constc = newMyClass();
 // OK
 c.getName();
- 
+
 // Error, would crash
-const g = c.getName;
+constg = c.getName;
 console.log(g());
 ```
 
@@ -1214,12 +1212,12 @@ Let’s see how this is useful:
 
 ```ts
 class Box {
-  contents: string = "";
-  set(value: string) {
-  
+contents: string = "";
+set(value: string) {
+
 (method) Box.set(value: string): this
-    this.contents = value;
-    return this;
+this.contents = value;
+returnthis;
   }
 }
 ```
@@ -1231,14 +1229,14 @@ Now let’s make a subclass of `Box`:
 
 ```ts
 class ClearableBox extends Box {
-  clear() {
-    this.contents = "";
+clear() {
+this.contents = "";
   }
 }
- 
-const a = new ClearableBox();
-const b = a.set("hello");
-     
+
+consta = newClearableBox();
+constb = a.set("hello");
+
 const b: ClearableBox
 ```
 
@@ -1248,9 +1246,9 @@ You can also use `this` in a parameter type annotation:
 
 ```ts
 class Box {
-  content: string = "";
-  sameAs(other: this) {
-    return other.content === this.content;
+content: string = "";
+sameAs(other: this) {
+returnother.content === this.content;
   }
 }
 ```
@@ -1261,18 +1259,18 @@ This is different from writing `other: Box` — if you have a derived class, its
 
 ```ts
 class Box {
-  content: string = "";
-  sameAs(other: this) {
-    return other.content === this.content;
+content: string = "";
+sameAs(other: this) {
+returnother.content === this.content;
   }
 }
- 
-class DerivedBox extends Box {
-  otherContent: string = "?";
+
+classDerivedBoxextendsBox {
+otherContent: string = "?";
 }
- 
-const base = new Box();
-const derived = new DerivedBox();
+
+constbase = newBox();
+constderived = newDerivedBox();
 derived.sameAs(base);
 ```
 
@@ -1290,45 +1288,45 @@ When mixed with a type narrowing (e.g. `if` statements) the type of the target o
 
 ```ts
 class FileSystemObject {
-  isFile(): this is FileRep {
-    return this instanceof FileRep;
+isFile(): thisisFileRep {
+returnthisinstanceofFileRep;
   }
-  isDirectory(): this is Directory {
-    return this instanceof Directory;
+isDirectory(): thisisDirectory {
+returnthisinstanceofDirectory;
   }
-  isNetworked(): this is Networked & this {
-    return this.networked;
+isNetworked(): thisisNetworked & this {
+returnthis.networked;
   }
-  constructor(public path: string, private networked: boolean) {}
+constructor(publicpath: string, privatenetworked: boolean) {}
 }
- 
-class FileRep extends FileSystemObject {
-  constructor(path: string, public content: string) {
-    super(path, false);
+
+classFileRepextendsFileSystemObject {
+constructor(path: string, publiccontent: string) {
+super(path, false);
   }
 }
- 
-class Directory extends FileSystemObject {
-  children: FileSystemObject[];
+
+classDirectoryextendsFileSystemObject {
+children: FileSystemObject[];
 }
- 
-interface Networked {
-  host: string;
+
+interfaceNetworked {
+host: string;
 }
- 
-const fso: FileSystemObject = new FileRep("foo/bar.txt", "foo");
- 
+
+constfso: FileSystemObject = newFileRep("foo/bar.txt", "foo");
+
 if (fso.isFile()) {
-  fso.content;
-  
+fso.content;
+
 const fso: FileRep
-} else if (fso.isDirectory()) {
-  fso.children;
-  
+} elseif (fso.isDirectory()) {
+fso.children;
+
 const fso: Directory
-} else if (fso.isNetworked()) {
-  fso.host;
-  
+} elseif (fso.isNetworked()) {
+fso.host;
+
 const fso: Networked & FileSystemObject
 }
 ```
@@ -1339,23 +1337,23 @@ A common use-case for a this-based type guard is to allow for lazy validation of
 
 ```ts
 class Box<T> {
-  value?: T;
- 
-  hasValue(): this is { value: T } {
-    return this.value !== undefined;
+value?: T;
+
+hasValue(): thisis { value: T } {
+returnthis.value !== undefined;
   }
 }
- 
-const box = new Box();
+
+constbox = newBox();
 box.value = "Gameboy";
- 
+
 box.value;
-     
+
 (property) Box<unknown>.value?: unknown
- 
+
 if (box.hasValue()) {
-  box.value;
-       
+box.value;
+
 (property) value: unknown
 }
 ```
@@ -1370,17 +1368,17 @@ The resulting field gets those modifier(s):
 
 ```ts
 class Params {
-  constructor(
-    public readonly x: number,
-    protected y: number,
-    private z: number
+constructor(
+publicreadonlyx: number,
+protectedy: number,
+privatez: number
   ) {
-    // No body necessary
+// No body necessary
   }
 }
-const a = new Params(1, 2, 3);
+consta = newParams(1, 2, 3);
 console.log(a.x);
-             
+
 (property) Params.x: number
 console.log(a.z);
 ```
@@ -1391,7 +1389,7 @@ Property 'z' is private and only accessible within class 'Params'.
 
 ## Class Expressions {#class-expressions}
 
-> Background Reading:[Class expressions (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)
+> Background Reading:[Class expressions (MDN) ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)
 > 
 
 Class expressions are very similar to class declarations.
@@ -1401,41 +1399,41 @@ The only real difference is that class expressions don’t need a name, though w
 
 ```ts
 const someClass = class<Type> {
-  content: Type;
-  constructor(value: Type) {
-    this.content = value;
+content: Type;
+constructor(value: Type) {
+this.content = value;
   }
 };
- 
-const m = new someClass("Hello, world");
-     
+
+constm = newsomeClass("Hello, world");
+
 const m: someClass<string>
 ```
 
 ## Constructor Signatures {#constructor-signatures}
 
-JavaScript classes are instantiated with the `new` operator. Given the type of a class itself, the [InstanceType ↗](https://www.typescriptlang.org/docs/handbook/utility-types.html#instancetypetype) utility type models this operation.
+JavaScript classes are instantiated with the `new` operator. Given the type of a class itself, the [InstanceType](/typescript/5.1/reference/utility-types#instancetypetype) utility type models this operation.
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/MYGwhgzhAEAKD2BLAdgF2gbwLAChrWACcBTMVYgEwEFUAuaZAVwFsAjYwgbl3wA96mbDtzzQAngJbtCPAvGQRUhRsFTxCACn4MpHADTjJQwgEpMs-KgAWiCADoipctXQBeaABEyxO8ngB3DRMLaGtbO15od14RfEsbezEo8VjoAF9cDJxUMQAHYjgkNABJBVQwZGAC91LFCqqAFTziAB4c-PgAM0KUVAA+XFxOxkrURHloZngAN2IAJUQAcytUDVyiuh6SsvriM2xRdd6I6ABqdwBWESzcYHlFaCO0ZORify3VgGYDABYTESmswWy1WT1Q-1wYIinGgAHpYVE+tAABxAA)
 
 ```ts
 class Point {
-  createdAt: number;
-  x: number;
-  y: number
-  constructor(x: number, y: number) {
-    this.createdAt = Date.now()
-    this.x = x;
-    this.y = y;
+createdAt: number;
+x: number;
+y: number
+constructor(x: number, y: number) {
+this.createdAt = Date.now()
+this.x = x;
+this.y = y;
   }
 }
-type PointInstance = InstanceType<typeof Point>
- 
-function moveRight(point: PointInstance) {
-  point.x += 5;
+typePointInstance = InstanceType<typeofPoint>
+
+functionmoveRight(point: PointInstance) {
+point.x += 5;
 }
- 
-const point = new Point(3, 4);
+
+constpoint = newPoint(3, 4);
 moveRight(point);
 point.x; // => 8
 ```
@@ -1456,14 +1454,14 @@ Let’s look at an example:
 
 ```ts
 abstract class Base {
-  abstract getName(): string;
- 
-  printName() {
-    console.log("Hello, " + this.getName());
+abstractgetName(): string;
+
+printName() {
+console.log("Hello, " + this.getName());
   }
 }
- 
-const b = new Base();
+
+constb = newBase();
 ```
 
 ```text {filename="Generated error"}
@@ -1477,12 +1475,12 @@ Instead, we need to make a derived class and implement the abstract members:
 
 ```ts
 class Derived extends Base {
-  getName() {
-    return "world";
+getName() {
+return"world";
   }
 }
- 
-const d = new Derived();
+
+constd = newDerived();
 d.printName();
 ```
 
@@ -1492,7 +1490,7 @@ Notice that if we forget to implement the base class’s abstract members, we’
 
 ```ts
 class Derived extends Base {
-  // forgot to do anything
+// forgot to do anything
 }
 ```
 
@@ -1510,8 +1508,8 @@ For example, you might want to write this code:
 
 ```ts
 function greet(ctor: typeof Base) {
-  const instance = new ctor();
-  instance.printName();
+constinstance = newctor();
+instance.printName();
 }
 ```
 
@@ -1535,8 +1533,8 @@ Instead, you want to write a function that accepts something with a construct si
 
 ```ts
 function greet(ctor: new () => Base) {
-  const instance = new ctor();
-  instance.printName();
+constinstance = newctor();
+instance.printName();
 }
 greet(Derived);
 greet(Base);
@@ -1559,17 +1557,17 @@ For example, these two classes can be used in place of each other because they�
 
 ```ts
 class Point1 {
-  x = 0;
-  y = 0;
+x = 0;
+y = 0;
 }
- 
-class Point2 {
-  x = 0;
-  y = 0;
+
+classPoint2 {
+x = 0;
+y = 0;
 }
- 
+
 // OK
-const p: Point1 = new Point2();
+constp: Point1 = newPoint2();
 ```
 
 Similarly, subtype relationships between classes exist even if there’s no explicit inheritance:
@@ -1578,18 +1576,18 @@ Similarly, subtype relationships between classes exist even if there’s no expl
 
 ```ts
 class Person {
-  name: string;
-  age: number;
+name: string;
+age: number;
 }
- 
-class Employee {
-  name: string;
-  age: number;
-  salary: number;
+
+classEmployee {
+name: string;
+age: number;
+salary: number;
 }
- 
+
 // OK
-const p: Person = new Employee();
+constp: Person = newEmployee();
 ```
 
 This sounds straightforward, but there are a few cases that seem stranger than others.
@@ -1602,11 +1600,11 @@ So if you write an empty class (don’t!), anything can be used in place of it:
 
 ```ts
 class Empty {}
- 
-function fn(x: Empty) {
-  // can't do anything with 'x', so I won't
+
+functionfn(x: Empty) {
+// can't do anything with 'x', so I won't
 }
- 
+
 // All OK!
 fn(window);
 fn({});

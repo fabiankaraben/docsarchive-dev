@@ -21,13 +21,13 @@ These types are syntactically similar to arrow functions:
 
 ```ts
 function greeter(fn: (a: string) => void) {
-  fn("Hello, World");
+fn("Hello, World");
 }
- 
-function printToConsole(s: string) {
-  console.log(s);
+
+functionprintToConsole(s: string) {
+console.log(s);
 }
- 
+
 greeter(printToConsole);
 ```
 
@@ -43,8 +43,8 @@ Of course, we can use a type alias to name a function type:
 
 ```ts
 type GreetFunction = (a: string) => void;
-function greeter(fn: GreetFunction) {
-  // ...
+functiongreeter(fn: GreetFunction) {
+// ...
 }
 ```
 
@@ -58,18 +58,18 @@ If we want to describe something callable with properties, we can write a *call 
 
 ```ts
 type DescribableFunction = {
-  description: string;
+description: string;
   (someArg: number): boolean;
 };
-function doSomething(fn: DescribableFunction) {
-  console.log(fn.description + " returned " + fn(6));
+functiondoSomething(fn: DescribableFunction) {
+console.log(fn.description + " returned " + fn(6));
 }
- 
-function myFunc(someArg: number) {
-  return someArg > 3;
+
+functionmyFunc(someArg: number) {
+returnsomeArg > 3;
 }
 myFunc.description = "default description";
- 
+
 doSomething(myFunc);
 ```
 
@@ -85,10 +85,10 @@ You can write a *construct signature* by adding the `new` keyword in front of a 
 
 ```ts
 type SomeConstructor = {
-  new (s: string): SomeObject;
+new (s: string): SomeObject;
 };
-function fn(ctor: SomeConstructor) {
-  return new ctor("hello");
+functionfn(ctor: SomeConstructor) {
+returnnewctor("hello");
 }
 ```
 
@@ -99,7 +99,7 @@ You can combine call and construct signatures in the same type arbitrarily:
 
 ```ts
 interface CallOrConstruct {
-  new (s: string): Date;
+new (s: string): Date;
   (n?: number): string;
 }
 ```
@@ -113,7 +113,7 @@ Let’s consider for a moment a function that returns the first element of an ar
 
 ```ts
 function firstElement(arr: any[]) {
-  return arr[0];
+returnarr[0];
 }
 ```
 
@@ -127,7 +127,7 @@ We do this by declaring a *type parameter* in the function signature:
 
 ```ts
 function firstElement<Type>(arr: Type[]): Type | undefined {
-  return arr[0];
+returnarr[0];
 }
 ```
 
@@ -138,11 +138,11 @@ Now when we call it, a more specific type comes out:
 
 ```ts
 // s is of type 'string'
-const s = firstElement(["a", "b", "c"]);
+consts = firstElement(["a", "b", "c"]);
 // n is of type 'number'
-const n = firstElement([1, 2, 3]);
+constn = firstElement([1, 2, 3]);
 // u is of type undefined
-const u = firstElement([]);
+constu = firstElement([]);
 ```
 
 ### Inference {#inference}
@@ -157,12 +157,12 @@ For example, a standalone version of `map` would look like this:
 
 ```ts
 function map<Input, Output>(arr: Input[], func: (arg: Input) => Output): Output[] {
-  return arr.map(func);
+returnarr.map(func);
 }
- 
+
 // Parameter 'n' is of type 'string'
 // 'parsed' is of type 'number[]'
-const parsed = map(["1", "2", "3"], (n) => parseInt(n));
+constparsed = map(["1", "2", "3"], (n) =>parseInt(n));
 ```
 
 Note that in this example, TypeScript could infer both the type of the `Input` type parameter (from the given `string` array), as well as the `Output` type parameter based on the return value of the function expression (`number`).
@@ -181,19 +181,19 @@ We *constrain* the type parameter to that type by writing an `extends` clause:
 
 ```ts
 function longest<Type extends { length: number }>(a: Type, b: Type) {
-  if (a.length >= b.length) {
-    return a;
+if (a.length >= b.length) {
+returna;
   } else {
-    return b;
+returnb;
   }
 }
- 
+
 // longerArray is of type 'number[]'
-const longerArray = longest([1, 2], [1, 2, 3]);
+constlongerArray = longest([1, 2], [1, 2, 3]);
 // longerString is of type 'alice' | 'bob'
-const longerString = longest("alice", "bob");
+constlongerString = longest("alice", "bob");
 // Error! Numbers don't have a 'length' property
-const notOK = longest(10, 100);
+constnotOK = longest(10, 100);
 ```
 
 ```text {filename="Generated error"}
@@ -220,13 +220,13 @@ Here’s a common error when working with generic constraints:
 
 ```ts
 function minimumLength<Type extends { length: number }>(
-  obj: Type,
-  minimum: number
+obj: Type,
+minimum: number
 ): Type {
-  if (obj.length >= minimum) {
-    return obj;
+if (obj.length >= minimum) {
+returnobj;
   } else {
-    return { length: minimum };
+return { length:minimum };
   }
 }
 ```
@@ -244,7 +244,7 @@ If this code were legal, you could write code that definitely wouldn’t work:
 
 ```ts
 // 'arr' gets value { length: 6 }
-const arr = minimumLength([1, 2, 3], 6);
+constarr = minimumLength([1, 2, 3], 6);
 // and crashes here because arrays have
 // a 'slice' method, but not the returned object!
 console.log(arr.slice(0));
@@ -259,7 +259,7 @@ For example, let’s say you wrote a function to combine two arrays:
 
 ```ts
 function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
-  return arr1.concat(arr2);
+returnarr1.concat(arr2);
 }
 ```
 
@@ -296,17 +296,17 @@ Here are two ways of writing a function that appear similar:
 
 ```ts
 function firstElement1<Type>(arr: Type[]) {
-  return arr[0];
+returnarr[0];
 }
- 
-function firstElement2<Type extends any[]>(arr: Type) {
-  return arr[0];
+
+functionfirstElement2<Typeextendsany[]>(arr: Type) {
+returnarr[0];
 }
- 
+
 // a: number (good)
-const a = firstElement1([1, 2, 3]);
+consta = firstElement1([1, 2, 3]);
 // b: any (bad)
-const b = firstElement2([1, 2, 3]);
+constb = firstElement2([1, 2, 3]);
 ```
 
 These might seem identical at first glance, but `firstElement1` is a much better way to write this function.
@@ -323,14 +323,14 @@ Here’s another pair of similar functions:
 
 ```ts
 function filter1<Type>(arr: Type[], func: (arg: Type) => boolean): Type[] {
-  return arr.filter(func);
+returnarr.filter(func);
 }
- 
-function filter2<Type, Func extends (arg: Type) => boolean>(
-  arr: Type[],
-  func: Func
+
+functionfilter2<Type, Funcextends (arg: Type) =>boolean>(
+arr: Type[],
+func: Func
 ): Type[] {
-  return arr.filter(func);
+returnarr.filter(func);
 }
 ```
 
@@ -349,9 +349,9 @@ Sometimes we forget that a function might not need to be generic:
 
 ```ts
 function greet<Str extends string>(s: Str) {
-  console.log("Hello, " + s);
+console.log("Hello, " + s);
 }
- 
+
 greet("world");
 ```
 
@@ -361,7 +361,7 @@ We could just as easily have written a simpler version:
 
 ```ts
 function greet(s: string) {
-  console.log("Hello, " + s);
+console.log("Hello, " + s);
 }
 ```
 
@@ -381,8 +381,8 @@ For example, the `toFixed` method of `number` takes an optional digit count:
 
 ```ts
 function f(n: number) {
-  console.log(n.toFixed()); // 0 arguments
-  console.log(n.toFixed(3)); // 1 argument
+console.log(n.toFixed()); // 0 arguments
+console.log(n.toFixed(3)); // 1 argument
 }
 ```
 
@@ -392,7 +392,7 @@ We can model this in TypeScript by marking the parameter as *optional* with `?`:
 
 ```ts
 function f(x?: number) {
-  // ...
+// ...
 }
 f(); // OK
 f(10); // OK
@@ -406,7 +406,7 @@ You can also provide a parameter *default*:
 
 ```ts
 function f(x = 10) {
-  // ...
+// ...
 }
 ```
 
@@ -432,8 +432,8 @@ Once you’ve learned about optional parameters and function type expressions, i
 
 ```ts
 function myForEach(arr: any[], callback: (arg: any, index?: number) => void) {
-  for (let i = 0; i < arr.length; i++) {
-    callback(arr[i], i);
+for (leti = 0; i < arr.length; i++) {
+callback(arr[i], i);
   }
 }
 ```
@@ -444,7 +444,7 @@ What people usually intend when writing `index?` as an optional parameter is tha
 
 ```ts
 myForEach([1, 2, 3], (a) => console.log(a));
-myForEach([1, 2, 3], (a, i) => console.log(a, i));
+myForEach([1, 2, 3], (a, i) =>console.log(a, i));
 ```
 
 What this *actually* means is that *`callback` might get invoked with one argument*.
@@ -454,9 +454,9 @@ In other words, the function definition says that the implementation might look 
 
 ```ts
 function myForEach(arr: any[], callback: (arg: any, index?: number) => void) {
-  for (let i = 0; i < arr.length; i++) {
-    // I don't feel like providing the index today
-    callback(arr[i]);
+for (leti = 0; i < arr.length; i++) {
+// I don't feel like providing the index today
+callback(arr[i]);
   }
 }
 ```
@@ -467,7 +467,7 @@ In turn, TypeScript will enforce this meaning and issue errors that aren’t rea
 
 ```ts
 myForEach([1, 2, 3], (a, i) => {
-  console.log(i.toFixed());
+console.log(i.toFixed());
 });
 ```
 
@@ -494,17 +494,17 @@ To do this, write some number of function signatures (usually two or more), foll
 
 ```ts
 function makeDate(timestamp: number): Date;
-function makeDate(m: number, d: number, y: number): Date;
-function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
-  if (d !== undefined && y !== undefined) {
-    return new Date(y, mOrTimestamp, d);
+functionmakeDate(m: number, d: number, y: number): Date;
+functionmakeDate(mOrTimestamp: number, d?: number, y?: number): Date {
+if (d !== undefined && y !== undefined) {
+returnnewDate(y, mOrTimestamp, d);
   } else {
-    return new Date(mOrTimestamp);
+returnnewDate(mOrTimestamp);
   }
 }
-const d1 = makeDate(12345678);
-const d2 = makeDate(5, 5, 5);
-const d3 = makeDate(1, 3);
+constd1 = makeDate(12345678);
+constd2 = makeDate(5, 5, 5);
+constd3 = makeDate(1, 3);
 ```
 
 ```text {filename="Generated error"}
@@ -527,8 +527,8 @@ Often people will write code like this and not understand why there is an error:
 
 ```ts
 function fn(x: string): void;
-function fn() {
-  // ...
+functionfn() {
+// ...
 }
 // Expected to be able to call with zero arguments
 fn();
@@ -552,8 +552,8 @@ For example, these functions have errors because the implementation signature do
 ```ts
 function fn(x: boolean): void;
 // Argument type isn't right
-function fn(x: string): void;
-function fn(x: boolean) {}
+functionfn(x: string): void;
+functionfn(x: boolean) {}
 ```
 
 ```text {filename="Generated error"}
@@ -565,9 +565,9 @@ This overload signature is not compatible with its implementation signature.
 ```ts
 function fn(x: string): string;
 // Return type isn't right
-function fn(x: number): boolean;
-function fn(x: string | number) {
-  return "oops";
+functionfn(x: number): boolean;
+functionfn(x: string | number) {
+return"oops";
 }
 ```
 
@@ -586,9 +586,9 @@ Let’s consider a function that returns the length of a string or an array:
 
 ```ts
 function len(s: string): number;
-function len(arr: any[]): number;
-function len(x: any) {
-  return x.length;
+functionlen(arr: any[]): number;
+functionlen(x: any) {
+returnx.length;
 }
 ```
 
@@ -619,7 +619,7 @@ Because both overloads have the same argument count and same return type, we can
 
 ```ts
 function len(x: any[] | string) {
-  return x.length;
+returnx.length;
 }
 ```
 
@@ -637,11 +637,11 @@ TypeScript will infer what the `this` should be in a function via code flow anal
 
 ```ts
 const user = {
-  id: 123,
- 
-  admin: false,
-  becomeAdmin: function () {
-    this.admin = true;
+id:123,
+
+admin:false,
+becomeAdmin:function () {
+this.admin = true;
   },
 };
 ```
@@ -652,12 +652,12 @@ TypeScript understands that the function `user.becomeAdmin` has a corresponding 
 
 ```ts
 interface DB {
-  filterUsers(filter: (this: User) => boolean): User[];
+filterUsers(filter: (this: User) =>boolean): User[];
 }
- 
-const db = getDB();
-const admins = db.filterUsers(function (this: User) {
-  return this.admin;
+
+constdb = getDB();
+constadmins = db.filterUsers(function (this: User) {
+returnthis.admin;
 });
 ```
 
@@ -667,11 +667,11 @@ This pattern is common with callback-style APIs, where another object typically 
 
 ```ts
 interface DB {
-  filterUsers(filter: (this: User) => boolean): User[];
+filterUsers(filter: (this: User) =>boolean): User[];
 }
- 
-const db = getDB();
-const admins = db.filterUsers(() => this.admin);
+
+constdb = getDB();
+constadmins = db.filterUsers(() =>this.admin);
 ```
 
 ```text {filename="Generated error"}
@@ -692,8 +692,8 @@ It’s the inferred type any time a function doesn’t have any `return` stateme
 
 ```ts
 // The inferred return type is void
-function noop() {
-  return;
+functionnoop() {
+return;
 }
 ```
 
@@ -725,10 +725,10 @@ This is similar to the `any` type, but is safer because it’s not legal to do a
 
 ```ts
 function f1(a: any) {
-  a.b(); // OK
+a.b(); // OK
 }
-function f2(a: unknown) {
-  a.b();
+functionf2(a: unknown) {
+a.b();
 }
 ```
 
@@ -744,11 +744,11 @@ Conversely, you can describe a function that returns a value of unknown type:
 
 ```ts
 function safeParse(s: string): unknown {
-  return JSON.parse(s);
+returnJSON.parse(s);
 }
- 
+
 // Need to be careful with 'obj'!
-const obj = safeParse(someRandomString);
+constobj = safeParse(someRandomString);
 ```
 
 ### `never` {#never}
@@ -759,7 +759,7 @@ Some functions *never* return a value:
 
 ```ts
 function fail(msg: string): never {
-  throw new Error(msg);
+thrownewError(msg);
 }
 ```
 
@@ -772,12 +772,12 @@ In a return type, this means that the function throws an exception or terminates
 
 ```ts
 function fn(x: string | number) {
-  if (typeof x === "string") {
-    // do something
-  } else if (typeof x === "number") {
-    // do something else
+if (typeofx === "string") {
+// do something
+  } elseif (typeofx === "number") {
+// do something else
   } else {
-    x; // has type 'never'!
+x; // has type 'never'!
   }
 }
 ```
@@ -791,7 +791,7 @@ It also has the special property that values of type `Function` can always be ca
 
 ```ts
 function doSomething(f: Function) {
-  return f(1, 2, 3);
+returnf(1, 2, 3);
 }
 ```
 
@@ -801,7 +801,7 @@ If you need to accept an arbitrary function but don’t intend to call it, the t
 
 ## Rest Parameters and Arguments {#rest-parameters-and-arguments}
 
-> Background Reading:[Rest Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)[Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+> Background Reading:[Rest Parameters ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)[Spread Syntax ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 > 
 
 ### Rest Parameters {#rest-parameters}
@@ -814,10 +814,10 @@ A rest parameter appears after all other parameters, and uses the `...` syntax:
 
 ```ts
 function multiply(n: number, ...m: number[]) {
-  return m.map((x) => n * x);
+returnm.map((x) =>n * x);
 }
 // 'a' gets value [10, 20, 30, 40]
-const a = multiply(10, 1, 2, 3, 4);
+consta = multiply(10, 1, 2, 3, 4);
 ```
 
 In TypeScript, the type annotation on these parameters is implicitly `any[]` instead of `any`, and any type annotation given must be of the form `Array<T>` or `T[]`, or a tuple type (which we’ll learn about later).
@@ -831,7 +831,7 @@ For example, the `push` method of arrays takes any number of arguments:
 
 ```ts
 const arr1 = [1, 2, 3];
-const arr2 = [4, 5, 6];
+constarr2 = [4, 5, 6];
 arr1.push(...arr2);
 ```
 
@@ -843,8 +843,8 @@ This can lead to some surprising behavior:
 ```ts
 // Inferred type is number[] -- "an array with zero or more numbers",
 // not specifically two numbers
-const args = [8, 5];
-const angle = Math.atan2(...args);
+constargs = [8, 5];
+constangle = Math.atan2(...args);
 ```
 
 ```text {filename="Generated error"}
@@ -857,16 +857,16 @@ The best fix for this situation depends a bit on your code, but in general a `co
 
 ```ts
 // Inferred as 2-length tuple
-const args = [8, 5] as const;
+constargs = [8, 5] asconst;
 // OK
-const angle = Math.atan2(...args);
+constangle = Math.atan2(...args);
 ```
 
 Using rest arguments may require turning on [`downlevelIteration` ↗](https://www.typescriptlang.org/tsconfig.html#downlevelIteration) when targeting older runtimes.
 
 ## Parameter Destructuring {#parameter-destructuring}
 
-> Background Reading:[Destructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+> Background Reading:[Destructuring Assignment ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 > 
 
 You can use parameter destructuring to conveniently unpack objects provided as an argument into one or more local variables in the function body.
@@ -874,9 +874,9 @@ In JavaScript, it looks like this:
 
 ```js
 function sum({ a, b, c }) {
-  console.log(a + b + c);
+console.log(a + b + c);
 }
-sum({ a: 10, b: 3, c: 9 });
+sum({ a:10, b:3, c:9 });
 ```
 
 The type annotation for the object goes after the destructuring syntax:
@@ -885,7 +885,7 @@ The type annotation for the object goes after the destructuring syntax:
 
 ```ts
 function sum({ a, b, c }: { a: number; b: number; c: number }) {
-  console.log(a + b + c);
+console.log(a + b + c);
 }
 ```
 
@@ -895,9 +895,9 @@ This can look a bit verbose, but you can use a named type here as well:
 
 ```ts
 // Same as prior example
-type ABC = { a: number; b: number; c: number };
-function sum({ a, b, c }: ABC) {
-  console.log(a + b + c);
+typeABC = { a: number; b: number; c: number };
+functionsum({ a, b, c }: ABC) {
+console.log(a + b + c);
 }
 ```
 
@@ -915,15 +915,15 @@ Thus, the following implementations of the type `() => void` are valid:
 
 ```ts
 type voidFunc = () => void;
- 
-const f1: voidFunc = () => {
-  return true;
+
+constf1: voidFunc = () => {
+returntrue;
 };
- 
-const f2: voidFunc = () => true;
- 
-const f3: voidFunc = function () {
-  return true;
+
+constf2: voidFunc = () =>true;
+
+constf3: voidFunc = function () {
+returntrue;
 };
 ```
 
@@ -933,10 +933,10 @@ And when the return value of one of these functions is assigned to another varia
 
 ```ts
 const v1 = f1();
- 
-const v2 = f2();
- 
-const v3 = f3();
+
+constv2 = f2();
+
+constv3 = f3();
 ```
 
 This behavior exists so that the following code is valid even though `Array.prototype.push` returns a number and the `Array.prototype.forEach` method expects a function with a return type of `void`.
@@ -945,9 +945,9 @@ This behavior exists so that the following code is valid even though `Array.prot
 
 ```ts
 const src = [1, 2, 3];
-const dst = [0];
- 
-src.forEach((el) => dst.push(el));
+constdst = [0];
+
+src.forEach((el) =>dst.push(el));
 ```
 
 There is one other special case to be aware of, when a literal function definition has a `void` return type, that function must **not** return anything.
@@ -956,17 +956,17 @@ There is one other special case to be aware of, when a literal function definiti
 
 ```ts
 function f2(): void {
-  // @ts-expect-error
-  return true;
+// @ts-expect-error
+returntrue;
 }
- 
-const f3 = function (): void {
-  // @ts-expect-error
-  return true;
+
+constf3 = function (): void {
+// @ts-expect-error
+returntrue;
 };
 ```
 
 For more on `void` please refer to these other documentation entries:
 
-- [v2 handbook ↗](https://www.typescriptlang.org/docs/handbook/2/functions.html#void)
-- [FAQ - “Why are functions returning non-void assignable to function returning void?”](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-are-functions-returning-non-void-assignable-to-function-returning-void)
+- [v2 handbook](/typescript/5.1/handbook/functions#void)
+- [FAQ - “Why are functions returning non-void assignable to function returning void?” ↗](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-are-functions-returning-non-void-assignable-to-function-returning-void)

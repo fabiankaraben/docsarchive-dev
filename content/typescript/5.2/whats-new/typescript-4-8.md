@@ -18,8 +18,8 @@ TypeScript now recognizes this, and allows assignments from `unknown` to `{} | n
 
 ```ts
 function f(x: unknown, y: {} | null | undefined) {
-    x = y; // always worked
-    y = x; // used to error, now works
+x = y; // always worked
+y = x; // used to error, now works
 }
 ```
 
@@ -36,8 +36,8 @@ So `NonNullable<NonNullable<T>>` now simplifies at least to `NonNullable<T>`, wh
 
 ```ts
 function foo<T>(x: NonNullable<T>, y: NonNullable<NonNullable<T>>) {
-    x = y; // always worked
-    y = x; // used to error, now works
+x = y; // always worked
+y = x; // used to error, now works
 }
 ```
 
@@ -46,20 +46,20 @@ For example, `unknown` is now narrowed just like `{} | null | undefined` in trut
 
 ```ts
 function narrowUnknownishUnion(x: {} | null | undefined) {
-    if (x) {
-        x;  // {}
+if (x) {
+x;  // {}
     }
-    else {
-        x;  // {} | null | undefined
+else {
+x;  // {} | null | undefined
     }
 }
 
-function narrowUnknown(x: unknown) {
-    if (x) {
-        x;  // used to be 'unknown', now '{}'
+functionnarrowUnknown(x: unknown) {
+if (x) {
+x;  // used to be 'unknown', now '{}'
     }
-    else {
-        x;  // unknown
+else {
+x;  // unknown
     }
 }
 ```
@@ -70,13 +70,13 @@ Putting many of the changes here together, we can now define the following funct
 
 ```ts
 function throwIfNullable<T>(value: T): NonNullable<T> {
-    if (value === undefined || value === null) {
-        throw Error("Nullable value!");
+if (value === undefined || value === null) {
+throwError("Nullable value!");
     }
 
-    // Used to fail because 'T' was not assignable to 'NonNullable<T>'.
-    // Now narrows to 'T & {}' and succeeds because that's just 'NonNullable<T>'.
-    return value;
+// Used to fail because 'T' was not assignable to 'NonNullable<T>'.
+// Now narrows to 'T & {}' and succeeds because that's just 'NonNullable<T>'.
+returnvalue;
 }
 ```
 
@@ -84,7 +84,7 @@ function throwIfNullable<T>(value: T): NonNullable<T> {
 
 On their own, these changes may appear small - but they represent fixes for many many paper cuts that have been reported over several years.
 
-For more specifics on these improvements, you can [read more here](https://github.com/microsoft/TypeScript/pull/49119).
+For more specifics on these improvements, you can [read more here ↗](https://github.com/microsoft/TypeScript/pull/49119).
 
 ## Improved Inference for `infer` Types in Template String Types {#improved-inference-for-infer-types-in-template-string-types}
 
@@ -93,21 +93,21 @@ TypeScript recently introduced a way to add `extends` constraints to `infer` typ
 ```ts
 // Grabs the first element of a tuple if it's assignable to 'number',
 // and returns 'never' if it can't find one.
-type TryGetNumberIfFirst<T> =
-    T extends [infer U extends number, ...unknown[]] ? U : never;
+typeTryGetNumberIfFirst<T> =
+Textends [inferUextendsnumber, ...unknown[]] ? U : never;
 ```
 
 If these `infer` types appear in a template string type and are constrained to a primitive type, TypeScript will now try to parse out a literal type.
 
 ```ts
 // SomeNum used to be 'number'; now it's '100'.
-type SomeNum = "100" extends `${infer U extends number}` ? U : never;
+typeSomeNum = "100"extends`${inferUextendsnumber}` ? U : never;
 
 // SomeBigInt used to be 'bigint'; now it's '100n'.
-type SomeBigInt = "100" extends `${infer U extends bigint}` ? U : never;
+type SomeBigInt = "100" extends `${inferUextendsbigint}` ? U : never;
 
 // SomeBool used to be 'boolean'; now it's 'true'.
-type SomeBool = "true" extends `${infer U extends boolean}` ? U : never;
+type SomeBool = "true" extends `${inferUextendsboolean}` ? U : never;
 ```
 
 This can now better convey what a library will do at runtime, and give more precise types.
@@ -119,10 +119,10 @@ If it doesn’t see that the string can be “round-tripped”, then it will fal
 
 ```ts
 // JustNumber is `number` here because TypeScript parses out `"1.0"`, but `String(Number("1.0"))` is `"1"` and doesn't match.
-type JustNumber = "1.0" extends `${infer T extends number}` ? T : never; 
+typeJustNumber = "1.0"extends`${inferTextendsnumber}` ? T : never; 
 ```
 
-You can [see more about this feature here](https://github.com/microsoft/TypeScript/pull/48094).
+You can [see more about this feature here ↗](https://github.com/microsoft/TypeScript/pull/48094).
 
 ## `--build`, `--watch`, and `--incremental` Performance Improvements {#--build---watch-and---incremental-performance-improvements}
 
@@ -134,7 +134,7 @@ How big are these improvements?
 Well, on a fairly large internal codebase, we’ve seen time reductions on the order of 10%-25% on many simple common operations, with around 40% time reductions in no-change scenarios.
 We’ve seen similar results on the TypeScript codebase as well.
 
-You can see [the changes, along with the performance results on GitHub](https://github.com/microsoft/TypeScript/pull/48784).
+You can see [the changes, along with the performance results on GitHub ↗](https://github.com/microsoft/TypeScript/pull/48784).
 
 ## Errors When Comparing Object and Array Literals {#errors-when-comparing-object-and-array-literals}
 
@@ -143,7 +143,7 @@ For example, in Python it’s valid to check whether a list is empty by checking
 
 ```py
 if people_at_home == []:
-    print("here's where I lie, broken inside. </3")
+print("here's where I lie, broken inside. </3")
     adopt_animals()
 ```
 
@@ -155,13 +155,13 @@ That’s why TypeScript now disallows code like the following.
 if (peopleAtHome === []) {
 //  ~~~~~~~~~~~~~~~~~~~
 // This condition will always return 'false' since JavaScript compares objects by reference, not value.
-    console.log("here's where I lie, broken inside. </3")
-    adoptAnimals();
+console.log("here's where I lie, broken inside. </3")
+adoptAnimals();
 }
 ```
 
-We’d like to extend our gratitude to [Jack Works](https://github.com/Jack-Works) who contributed this check.
-You can [view the changes involved here](https://github.com/microsoft/TypeScript/pull/45978).
+We’d like to extend our gratitude to [Jack Works ↗](https://github.com/Jack-Works) who contributed this check.
+You can [view the changes involved here ↗](https://github.com/microsoft/TypeScript/pull/45978).
 
 ## Improved Inference from Binding Patterns {#improved-inference-from-binding-patterns}
 
@@ -203,7 +203,7 @@ In TypeScript 4.8, these binding patterns are never used as candidates for type 
 Instead, they’re just consulted in case a parameter needs a more specific type like in our `chooseRandomly` example.
 If you need to revert to the old behavior, you can always provide explicit type arguments.
 
-You can [look at the change on GitHub](https://github.com/microsoft/TypeScript/pull/49086) if you’re curious to learn more.
+You can [look at the change on GitHub ↗](https://github.com/microsoft/TypeScript/pull/49086) if you’re curious to learn more.
 
 ## File-Watching Fixes (Especially Across `git checkout`s) {#file-watching-fixes-especially-across-git-checkouts}
 
@@ -212,23 +212,23 @@ Sometimes the symptoms are stale or inaccurate errors that might show up that re
 Frequently these occur on Unix systems, and you might have seen these after saving a file with vim or swapping branches in git.
 
 This was caused by assumptions of how Node.js handles rename events across file systems.
-File systems used by Linux and macOS utilize [inodes](https://en.wikipedia.org/wiki/Inode), and [Node.js will attach file watchers to inodes rather than file paths](https://nodejs.org/api/fs.html#inodes).
-So when Node.js returns [a watcher object](https://nodejs.org/api/fs.html#class-fsfswatcher), it might be watching a path or an inode depending on the platform and file system.
+File systems used by Linux and macOS utilize [inodes ↗](https://en.wikipedia.org/wiki/Inode), and [Node.js will attach file watchers to inodes rather than file paths ↗](https://nodejs.org/api/fs.html#inodes).
+So when Node.js returns [a watcher object ↗](https://nodejs.org/api/fs.html#class-fsfswatcher), it might be watching a path or an inode depending on the platform and file system.
 
 To be a bit more efficient, TypeScript tries to reuse the same watcher objects if it detects a path still exists on disk.
 This is where things went wrong, because even if a file still exists at that path, a distinct file might have been created, and that file will have a different inode.
 So TypeScript would end up reusing the watcher object instead of installing a new watcher at the original location, and watch for changes at what might be a totally irrelevant file.
 So TypeScript 4.8 now handles these cases on inode systems and properly installs a new watcher and fixes this.
 
-We’d like to extend our thanks to [Marc Celani](https://github.com/MarcCelani-at) and his team at Airtable who invested lots of time in investigating the issues they were experiencing and pointing out the root cause.
-You can view [the specific fixes around file-watching here](https://github.com/microsoft/TypeScript/pull/48997).
+We’d like to extend our thanks to [Marc Celani ↗](https://github.com/MarcCelani-at) and his team at Airtable who invested lots of time in investigating the issues they were experiencing and pointing out the root cause.
+You can view [the specific fixes around file-watching here ↗](https://github.com/microsoft/TypeScript/pull/48997).
 
 ## Find-All-References Performance Improvements {#find-all-references-performance-improvements}
 
 When running find-all-references in your editor, TypeScript is now able to act a little smarter as it aggregates references.
 This reduced the amount of time TypeScript took to search a widely-used identifier in its own codebase by about 20%.
 
-[You can read up more on the improvement here](https://github.com/microsoft/TypeScript/pull/49581).
+[You can read up more on the improvement here ↗](https://github.com/microsoft/TypeScript/pull/49581).
 
 ## Exclude Specific Files from Auto-Imports {#exclude-specific-files-from-auto-imports}
 
@@ -237,9 +237,9 @@ In Visual Studio Code, file names or globs can be added under “Auto Import Fil
 
 ```jsonc
 {
-    // Note that `javascript.preferences.autoImportFileExcludePatterns` can be specified for JavaScript too.
-    "typescript.preferences.autoImportFileExcludePatterns": [
-      "**/node_modules/@types/node"
+// Note that `javascript.preferences.autoImportFileExcludePatterns` can be specified for JavaScript too.
+"typescript.preferences.autoImportFileExcludePatterns": [
+"**/node_modules/@types/node"
     ]
 }
 ```
@@ -247,7 +247,7 @@ In Visual Studio Code, file names or globs can be added under “Auto Import Fil
 This can be useful in cases where you can’t avoid having certain modules or libraries in your compilation but you rarely want to import from them.
 These modules might have lots of exports that can pollute the auto-imports list and make it harder to navigate, and this option can help in those situations.
 
-You can [see more specifics about the implementation here](https://github.com/microsoft/TypeScript/pull/49578).
+You can [see more specifics about the implementation here ↗](https://github.com/microsoft/TypeScript/pull/49578).
 
 ## Correctness Fixes and Breaking Changes {#correctness-fixes-and-breaking-changes}
 
@@ -268,15 +268,15 @@ A simple example can be seen in the following.
 
 ```ts
 // Accepts any non-null non-undefined value
-function bar(value: {}) {
-  Object.keys(value); // This call throws on null/undefined at runtime.
+functionbar(value: {}) {
+Object.keys(value); // This call throws on null/undefined at runtime.
 }
 
 // Unconstrained type parameter T...
-function foo<T>(x: T) {
-    bar(x); // Used to be allowed, now is an error in 4.8.
-    //  ~
-    // error: Argument of type 'T' is not assignable to parameter of type '{}'.
+functionfoo<T>(x: T) {
+bar(x); // Used to be allowed, now is an error in 4.8.
+//  ~
+// error: Argument of type 'T' is not assignable to parameter of type '{}'.
 }
 
 foo(undefined);
@@ -288,10 +288,10 @@ This behavior will also be visible in type positions. One example would be:
 
 ```ts
 interface Foo<T> {
-  x: Bar<T>;
+x: Bar<T>;
 }
 
-interface Bar<T extends {}> { }
+interfaceBar<Textends {}> { }
 ```
 
 Existing code that didn’t want to handle `null` and `undefined` can be fixed by propagating the appropriate constraints through.
@@ -322,7 +322,7 @@ And if you know that for some reason, your generic value can’t be `null` or `u
 
 When it comes to types, you’ll often either need to propagate constraints, or intersect your types with `{}`.
 
-For more information, you can [see the change that introduced this](https://github.com/microsoft/TypeScript/pull/49119) along with [the specific discussion issue regarding how unconstrained generics now work](https://github.com/microsoft/TypeScript/issues/49489).
+For more information, you can [see the change that introduced this ↗](https://github.com/microsoft/TypeScript/pull/49119) along with [the specific discussion issue regarding how unconstrained generics now work ↗](https://github.com/microsoft/TypeScript/issues/49489).
 
 ### Decorators are placed on `modifiers` on TypeScript’s Syntax Trees {#decorators-are-placed-on-modifiers-on-typescripts-syntax-trees}
 
@@ -332,8 +332,8 @@ For example
 
 ```ts
 @decorator
-export class Foo {
-  // ...
+exportclassFoo {
+// ...
 }
 ```
 
@@ -342,7 +342,7 @@ Instead, the `export` keyword must precede the decorator.
 
 ```ts
 export @decorator class Foo {
-  // ...
+// ...
 }
 ```
 
@@ -387,10 +387,10 @@ There are individual predicates for testing whether a node has support modifiers
 
 ```ts
 function canHaveModifiers(node: Node): node is HasModifiers;
-function getModifiers(node: HasModifiers): readonly Modifier[] | undefined;
+functiongetModifiers(node: HasModifiers): readonlyModifier[] | undefined;
 
-function canHaveDecorators(node: Node): node is HasDecorators;
-function getDecorators(node: HasDecorators): readonly Decorator[] | undefined;
+functioncanHaveDecorators(node: Node): nodeisHasDecorators;
+functiongetDecorators(node: HasDecorators): readonlyDecorator[] | undefined;
 ```
 
 As an example of how to access modifiers off of a node, you can write
@@ -403,9 +403,9 @@ With the note that each call to `getModifiers` and `getDecorators` may allocate 
 
 For more information, see changes around
 
-- [the restructuring of our tree nodes](https://github.com/microsoft/TypeScript/pull/49089)
-- [the deprecations](https://github.com/microsoft/TypeScript/pull/50343)
-- [exposing the predicate functions](https://github.com/microsoft/TypeScript/pull/50399)
+- [the restructuring of our tree nodes ↗](https://github.com/microsoft/TypeScript/pull/49089)
+- [the deprecations ↗](https://github.com/microsoft/TypeScript/pull/50343)
+- [exposing the predicate functions ↗](https://github.com/microsoft/TypeScript/pull/50399)
 
 ### Types Cannot Be Imported/Exported in JavaScript Files {#types-cannot-be-importedexported-in-javascript-files}
 
@@ -417,19 +417,19 @@ When a JavaScript file is type-checked under `--checkJs` or through a `// @ts-ch
 // @ts-check
 
 // Will fail at runtime because 'SomeType' is not a value.
-import { someValue, SomeType } from "some-module";
+import { someValue, SomeType } from"some-module";
 
 /**
- * @type {SomeType}
+ * @type{SomeType}
  */
-export const myValue = someValue;
+exportconstmyValue = someValue;
 
 /**
- * @typedef {string | number} MyType
+ * @typedef{string | number}MyType
  */
 
 // Will fail at runtime because 'MyType' is not a value.
-export { MyType as MyExportedType };
+export { MyTypeasMyExportedType };
 ```
 
 To reference a type from another module, you can instead directly qualify the import.
@@ -437,7 +437,7 @@ To reference a type from another module, you can instead directly qualify the im
 ```diff
 - import { someValue, SomeType } from "some-module";
 + import { someValue } from "some-module";
-  
+
   /**
 -  * @type {SomeType}
 +  * @type {import("some-module").SomeType}
@@ -459,12 +459,12 @@ To export a type, you can just use a `/** @typedef */` comment in JSDoc.
 - export { MyType as MyExportedType };
 ```
 
-You can [read more about the change here](https://github.com/microsoft/TypeScript/pull/49580).
+You can [read more about the change here ↗](https://github.com/microsoft/TypeScript/pull/49580).
 
 ### Binding Patterns Do Not Directly Contribute to Inference Candidates {#binding-patterns-do-not-directly-contribute-to-inference-candidates}
 
 As mentioned above, binding patterns no longer change the type of inference results in function calls.
-You can [read more about the original change here](https://github.com/microsoft/TypeScript/pull/49086).
+You can [read more about the original change here ↗](https://github.com/microsoft/TypeScript/pull/49086).
 
 ### Unused Renames in Binding Patterns are Now Errors in Type Signatures {#unused-renames-in-binding-patterns-are-now-errors-in-type-signatures}
 
@@ -489,9 +489,9 @@ declare function makePerson(options: { name: string, age: number }): Person;
 
 // or
 
-declare function makePerson({ name, age }: { name: string, age: number }): Person;
+declarefunctionmakePerson({ name, age }: { name: string, age: number }): Person;
 ```
 
 This change can catch bugs in declarations, and has been helpful for improving existing code.
-We’d like to extend our thanks to [GitHub user uhyo](https://github.com/uhyo) for providing this check.
-[You can read up on the change here](https://github.com/microsoft/TypeScript/pull/41044).
+We’d like to extend our thanks to [GitHub user uhyo ↗](https://github.com/uhyo) for providing this check.
+[You can read up on the change here ↗](https://github.com/microsoft/TypeScript/pull/41044).

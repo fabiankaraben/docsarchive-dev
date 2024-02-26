@@ -20,9 +20,9 @@ For example, we can write something like
 
 ```ts
 function foo(arg: unknown) {
-  if (typeof arg === "string") {
-    console.log(arg.toUpperCase());
-                
+if (typeofarg === "string") {
+console.log(arg.toUpperCase());
+
 (parameter) arg: string
   }
 }
@@ -37,12 +37,12 @@ However, what would happen if we moved the condition out to a constant called `a
 ```ts
 // In TS 4.3 and below
 
-function foo(arg: unknown) {
-  const argIsString = typeof arg === "string";
-  if (argIsString) {
-    console.log(arg.toUpperCase());
-    //              ~~~~~~~~~~~
-    // Error! Property 'toUpperCase' does not exist on type 'unknown'.
+functionfoo(arg: unknown) {
+constargIsString = typeofarg === "string";
+if (argIsString) {
+console.log(arg.toUpperCase());
+//              ~~~~~~~~~~~
+// Error! Property 'toUpperCase' does not exist on type 'unknown'.
   }
 }
 ```
@@ -65,15 +65,15 @@ For example, checks on discriminated unions work like a charm.
 type Shape =
   | { kind: "circle"; radius: number }
   | { kind: "square"; sideLength: number };
- 
-function area(shape: Shape): number {
-  const isCircle = shape.kind === "circle";
-  if (isCircle) {
-    // We know we have a circle here!
-    return Math.PI * shape.radius ** 2;
+
+functionarea(shape: Shape): number {
+constisCircle = shape.kind === "circle";
+if (isCircle) {
+// We know we have a circle here!
+returnMath.PI * shape.radius ** 2;
   } else {
-    // We know we're left with a square here!
-    return shape.sideLength ** 2;
+// We know we're left with a square here!
+returnshape.sideLength ** 2;
   }
 }
 ```
@@ -86,17 +86,17 @@ Analysis on discriminants in 4.4 also goes a little bit deeper - we can now extr
 type Shape =
   | { kind: "circle"; radius: number }
   | { kind: "square"; sideLength: number };
- 
-function area(shape: Shape): number {
-  // Extract out the 'kind' field first.
-  const { kind } = shape;
- 
-  if (kind === "circle") {
-    // We know we have a circle here!
-    return Math.PI * shape.radius ** 2;
+
+functionarea(shape: Shape): number {
+// Extract out the 'kind' field first.
+const { kind } = shape;
+
+if (kind === "circle") {
+// We know we have a circle here!
+returnMath.PI * shape.radius ** 2;
   } else {
-    // We know we're left with a square here!
-    return shape.sideLength ** 2;
+// We know we're left with a square here!
+returnshape.sideLength ** 2;
   }
 }
 ```
@@ -107,16 +107,16 @@ As another example, here’s a function that checks whether two of its inputs ha
 
 ```ts
 function doSomeChecks(
-  inputA: string | undefined,
-  inputB: string | undefined,
-  shouldDoExtraWork: boolean
+inputA: string | undefined,
+inputB: string | undefined,
+shouldDoExtraWork: boolean
 ) {
-  const mustDoWork = inputA && inputB && shouldDoExtraWork;
-  if (mustDoWork) {
-    // We can access 'string' properties on both 'inputA' and 'inputB'!
-    const upperA = inputA.toUpperCase();
-    const upperB = inputB.toUpperCase();
-    // ...
+constmustDoWork = inputA && inputB && shouldDoExtraWork;
+if (mustDoWork) {
+// We can access 'string' properties on both 'inputA' and 'inputB'!
+constupperA = inputA.toUpperCase();
+constupperB = inputB.toUpperCase();
+// ...
   }
 }
 ```
@@ -131,16 +131,16 @@ TypeScript will hop through constants to understand what sorts of checks you’v
 
 ```ts
 function f(x: string | number | boolean) {
-  const isString = typeof x === "string";
-  const isNumber = typeof x === "number";
-  const isStringOrNumber = isString || isNumber;
-  if (isStringOrNumber) {
-    x;
-   
+constisString = typeofx === "string";
+constisNumber = typeofx === "number";
+constisStringOrNumber = isString || isNumber;
+if (isStringOrNumber) {
+x;
+
 (parameter) x: string | number
   } else {
-    x;
-   
+x;
+
 (parameter) x: boolean
   }
 }
@@ -149,7 +149,7 @@ function f(x: string | number | boolean) {
 Note that there’s a cutoff - TypeScript doesn’t go arbitrarily deep when checking these conditions, but its analysis is deep enough for most checks.
 
 This feature should make a lot of intuitive JavaScript code “just work” in TypeScript without it getting in your way.
-For more details, [check out the implementation on GitHub](https://github.com/microsoft/TypeScript/pull/44730)!
+For more details, [check out the implementation on GitHub ↗](https://github.com/microsoft/TypeScript/pull/44730)!
 
 ## Symbol and Template String Pattern Index Signatures {#symbol-and-template-string-pattern-index-signatures}
 
@@ -165,13 +165,13 @@ If we try to assign anything other than a `boolean` value, we’ll get an error.
 interface BooleanDictionary {
   [key: string]: boolean;
 }
- 
-declare let myDict: BooleanDictionary;
- 
+
+declareletmyDict: BooleanDictionary;
+
 // Valid to assign boolean values
 myDict["foo"] = true;
 myDict["bar"] = false;
- 
+
 // Error, "oops" isn't a boolean
 myDict["baz"] = "oops";
 ```
@@ -180,20 +180,20 @@ myDict["baz"] = "oops";
 Type 'string' is not assignable to type 'boolean'.
 ```
 
-While [a `Map` might be a better data structure here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) (specifically, a `Map<string, boolean>`), JavaScript objects are often more convenient to use or just happen to be what we’re given to work with.
+While [a `Map` might be a better data structure here ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) (specifically, a `Map<string, boolean>`), JavaScript objects are often more convenient to use or just happen to be what we’re given to work with.
 
 Similarly, `Array<T>` already defines a `number` index signature that lets us insert/retrieve values of type `T`.
 
 ```ts
 // @errors: 2322 2375
 // This is part of TypeScript's definition of the built-in Array type.
-interface Array<T> {
+interfaceArray<T> {
   [index: number]: T;
 
-  // ...
+// ...
 }
 
-let arr = new Array<string>();
+letarr = newArray<string>();
 
 // Valid
 arr[0] = "hello!";
@@ -217,19 +217,19 @@ For example, TypeScript now allows us to declare a type that can be keyed on arb
 interface Colors {
   [sym: symbol]: number;
 }
- 
-const red = Symbol("red");
-const green = Symbol("green");
-const blue = Symbol("blue");
- 
-let colors: Colors = {};
- 
+
+constred = Symbol("red");
+constgreen = Symbol("green");
+constblue = Symbol("blue");
+
+letcolors: Colors = {};
+
 // Assignment of a number is allowed
 colors[red] = 255;
-let redVal = colors[red];
-      
+letredVal = colors[red];
+
 let redVal: number
- 
+
 colors[blue] = "da ba dee";
 ```
 
@@ -243,31 +243,31 @@ When we pass an object literal to something with an expected type, TypeScript wi
 
 ```ts
 // @errors: 2322 2375
-interface Options {
-    width?: number;
-    height?: number;
+interfaceOptions {
+width?: number;
+height?: number;
 }
 
-let a: Options = {
-    width: 100,
-    height: 100,
+leta: Options = {
+width:100,
+height:100,
 
-    "data-blah": true,
+"data-blah":true,
 };
 
-interface OptionsWithDataProps extends Options {
-    // Permit any property starting with 'data-'.
+interfaceOptionsWithDataPropsextendsOptions {
+// Permit any property starting with 'data-'.
     [optName: `data-${string}`]: unknown;
 }
 
-let b: OptionsWithDataProps = {
-    width: 100,
-    height: 100,
-    "data-blah": true,
+letb: OptionsWithDataProps = {
+width:100,
+height:100,
+"data-blah":true,
 
-    // Fails for a property which is not known, nor
-    // starts with 'data-'
-    "unknown-property": true,
+// Fails for a property which is not known, nor
+// starts with 'data-'
+"unknown-property":true,
 };
 ```
 
@@ -287,13 +287,13 @@ interface Data {
 
 // Equivalent to
 
-interface Data {
+interfaceData {
   [optName: string]: any;
   [optName: symbol]: any;
 }
 ```
 
-For more details, [read up on the pull request](https://github.com/microsoft/TypeScript/pull/44512)
+For more details, [read up on the pull request ↗](https://github.com/microsoft/TypeScript/pull/44512)
 
 ## Defaulting to the `unknown` Type in Catch Variables (`--useUnknownInCatchVariables`) {#defaulting-to-the-unknown-type-in-catch-variables---useunknownincatchvariables}
 
@@ -302,12 +302,12 @@ Because of this, TypeScript historically typed catch clause variables as `any`, 
 
 ```ts
 try {
-  // Who knows what this might throw...
-  executeSomeThirdPartyCode();
+// Who knows what this might throw...
+executeSomeThirdPartyCode();
 } catch (err) {
-  // err: any
-  console.error(err.message); // Allowed, because 'any'
-  err.thisWillProbablyFail(); // Allowed, because 'any' :(
+// err: any
+console.error(err.message); // Allowed, because 'any'
+err.thisWillProbablyFail(); // Allowed, because 'any' :(
 }
 ```
 
@@ -322,16 +322,16 @@ This flag changes the default type of `catch` clause variables from `any` to `un
 
 ```ts
 try {
-  executeSomeThirdPartyCode();
+executeSomeThirdPartyCode();
 } catch (err) {
-  // err: unknown
- 
-  // Error! Property 'message' does not exist on type 'unknown'.
-  console.error(err.message);
- 
-  // Works! We can narrow 'err' from 'unknown' to 'Error'.
-  if (err instanceof Error) {
-    console.error(err.message);
+// err: unknown
+
+// Error! Property 'message' does not exist on type 'unknown'.
+console.error(err.message);
+
+// Works! We can narrow 'err' from 'unknown' to 'Error'.
+if (errinstanceofError) {
+console.error(err.message);
   }
 }
 ```
@@ -356,13 +356,13 @@ In cases where we don’t want to deal with an `unknown` variable in a `catch` c
 
 ```ts
 try {
-  executeSomeThirdPartyCode();
+executeSomeThirdPartyCode();
 } catch (err: any) {
-  console.error(err.message); // Works again!
+console.error(err.message); // Works again!
 }
 ```
 
-For more information, take a look at [the implementing pull request](https://github.com/microsoft/TypeScript/pull/41013).
+For more information, take a look at [the implementing pull request ↗](https://github.com/microsoft/TypeScript/pull/41013).
 
 ## Exact Optional Property Types (`--exactOptionalPropertyTypes`) {#exact-optional-property-types---exactoptionalpropertytypes}
 
@@ -373,8 +373,8 @@ For example,
 
 ```ts
 interface Person {
-  name: string;
-  age?: number;
+name: string;
+age?: number;
 }
 ```
 
@@ -382,8 +382,8 @@ was considered equivalent to
 
 ```ts
 interface Person {
-  name: string;
-  age?: number | undefined;
+name: string;
+age?: number | undefined;
 }
 ```
 
@@ -391,8 +391,8 @@ What this meant is that a user could explicitly write `undefined` in place of `a
 
 ```ts
 const p: Person = {
-  name: "Daniel",
-  age: undefined, // This is okay by default.
+name:"Daniel",
+age:undefined, // This is okay by default.
 };
 ```
 
@@ -407,9 +407,9 @@ In TypeScript 4.4, the new flag [`exactOptionalPropertyTypes` ↗](https://www.t
 
 ```ts
 // With 'exactOptionalPropertyTypes' on:
-const p: Person = {
-  name: "Daniel",
-  age: undefined, // Error! undefined isn't a number
+constp: Person = {
+name:"Daniel",
+age:undefined, // Error! undefined isn't a number
 };
 ```
 
@@ -423,22 +423,22 @@ This flag is **not** part of the [`strict` ↗](https://www.typescriptlang.org/t
 It also requires [`strictNullChecks` ↗](https://www.typescriptlang.org/tsconfig.html#strictNullChecks) to be enabled as well.
 We’ve been making updates to DefinitelyTyped and other definitions to try to make the transition as straightforward as possible, but you may encounter some friction with this depending on how your code is structured.
 
-For more information, you can [take a look at the implementing pull request here](https://github.com/microsoft/TypeScript/pull/43947).
+For more information, you can [take a look at the implementing pull request here ↗](https://github.com/microsoft/TypeScript/pull/43947).
 
 ## `static` Blocks in Classes {#static-blocks-in-classes}
 
-TypeScript 4.4 brings support for [`static` blocks in classes](https://github.com/tc39/proposal-class-static-block#ecmascript-class-static-initialization-blocks), an upcoming ECMAScript feature that can help you write more-complex initialization code for static members.
+TypeScript 4.4 brings support for [`static` blocks in classes ↗](https://github.com/tc39/proposal-class-static-block#ecmascript-class-static-initialization-blocks), an upcoming ECMAScript feature that can help you write more-complex initialization code for static members.
 
 [Try this code ↗](https://www.typescriptlang.org/play#code/CYUwxgNghgTiAEAzArgOzAFwJYHtXwGccBbEAYT2C2zwAoBKALngCMccIQpUAoAej7wAtCLDIMIoT0hQCBeADF28AN494GwhijYw8MDjQZ4AXngAGANw91mgfAAqACyzzX8KFp1Y9LCDjAAa0ZbDQJtXVVQzQ0sRHhaIlIKVCoaVAZ6KJiczSUcADoDIwBqEutcjQBfaJqqoA)
 
 ```ts
 class Foo {
-    static count = 0;
- 
-    // This is a static block:
-    static {
-        if (someCondition()) {
-            Foo.count++;
+staticcount = 0;
+
+// This is a static block:
+static {
+if (someCondition()) {
+Foo.count++;
         }
     }
 }
@@ -451,18 +451,18 @@ That means that we can write initialization code with all the capabilities of wr
 
 ```ts
 class Foo {
-    static #count = 0;
- 
-    get count() {
-        return Foo.#count;
+static#count = 0;
+
+getcount() {
+returnFoo.#count;
     }
- 
-    static {
-        try {
-            const lastInstances = loadLastInstances();
-            Foo.#count += lastInstances.length;
+
+static {
+try {
+constlastInstances = loadLastInstances();
+Foo.#count += lastInstances.length;
         }
-        catch {}
+catch {}
     }
 }
 ```
@@ -478,27 +478,27 @@ Note that a class can have multiple `static` blocks, and they’re run in the sa
 //    1
 //    2
 //    3
-class Foo {
-    static prop = 1
-    static {
-        console.log(Foo.prop++);
+classFoo {
+staticprop = 1
+static {
+console.log(Foo.prop++);
     }
-    static {
-        console.log(Foo.prop++);
+static {
+console.log(Foo.prop++);
     }
-    static {
-        console.log(Foo.prop++);
+static {
+console.log(Foo.prop++);
     }
 }
 ```
 
-We’d like to extend our thanks to [Wenlu Wang](https://github.com/Kingwl) for TypeScript’s implementation of this feature.
-For more details, you can [see that pull request here](https://github.com/microsoft/TypeScript/pull/43370).
+We’d like to extend our thanks to [Wenlu Wang ↗](https://github.com/Kingwl) for TypeScript’s implementation of this feature.
+For more details, you can [see that pull request here ↗](https://github.com/microsoft/TypeScript/pull/43370).
 
 ## `tsc --help` Updates and Improvements {#tsc---help-updates-and-improvements}
 
 TypeScript’s `--help` option has gotten a refresh!
-Thanks to work in part by [Song Gao](https://github.com/ShuiRuTian), we’ve brought in changes to [update the descriptions of our compiler options](https://github.com/microsoft/TypeScript/pull/44409) and [restyle the `--help` menu](https://github.com/microsoft/TypeScript/pull/44157) with colors and other visual separation.
+Thanks to work in part by [Song Gao ↗](https://github.com/ShuiRuTian), we’ve brought in changes to [update the descriptions of our compiler options ↗](https://github.com/microsoft/TypeScript/pull/44409) and [restyle the `--help` menu ↗](https://github.com/microsoft/TypeScript/pull/44157) with colors and other visual separation.
 
 ![The new TypeScript --help menu where the output is bucketed into several different areas](/assets/typescript/5.1/external/devblogs.microsoft.com/typescript/wp-content/uploads/sites/11/2021/08/tsc-help-ps-wt-4-4.png)
 
@@ -608,9 +608,9 @@ Specifically, in the following example, when calling `fooModule.foo()`, the `foo
 
 ```ts
 // Imagine this is our imported module, and it has an export named 'foo'.
-let fooModule = {
-  foo() {
-    console.log(this);
+letfooModule = {
+foo() {
+console.log(this);
   },
 };
 
@@ -622,9 +622,9 @@ That’s why TypeScript 4.4 intentionally discards the `this` value when calling
 
 ```ts
 // Imagine this is our imported module, and it has an export named 'foo'.
-let fooModule = {
-  foo() {
-    console.log(this);
+letfooModule = {
+foo() {
+console.log(this);
   },
 };
 
@@ -656,16 +656,16 @@ That meant that while this code would correctly receive an error…
 
 ```ts
 async function foo(): Promise<boolean> {
-  return false;
+returnfalse;
 }
 
-async function bar(): Promise<string> {
-  const fooResult = foo();
-  if (fooResult) {
-    // <- error! :D
-    return "true";
+asyncfunctionbar(): Promise<string> {
+constfooResult = foo();
+if (fooResult) {
+// <- error! :D
+return"true";
   }
-  return "false";
+return"false";
 }
 ```
 
@@ -673,15 +673,15 @@ async function bar(): Promise<string> {
 
 ```ts
 async function foo(): Promise<boolean> {
-  return false;
+returnfalse;
 }
 
-async function bar(): Promise<string> {
-  if (foo()) {
-    // <- no error :(
-    return "true";
+asyncfunctionbar(): Promise<string> {
+if (foo()) {
+// <- no error :(
+return"true";
   }
-  return "false";
+return"false";
 }
 ```
 
@@ -694,9 +694,9 @@ The following code is now an error because abstract properties may not have init
 
 ```ts
 abstract class C {
-  abstract prop = 1;
-  //       ~~~~
-  // Property 'prop' cannot have an initializer because it is marked abstract.
+abstractprop = 1;
+//       ~~~~
+// Property 'prop' cannot have an initializer because it is marked abstract.
 }
 ```
 
@@ -704,6 +704,6 @@ Instead, you may only specify a type for the property:
 
 ```ts
 abstract class C {
-  abstract prop: number;
+abstractprop: number;
 }
 ```

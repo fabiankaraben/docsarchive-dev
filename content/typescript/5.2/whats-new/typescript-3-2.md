@@ -14,13 +14,13 @@ TypeScript 3.2 introduces a new [`strictBindCallApply` ↗](https://www.typescri
 
 ```ts
 function foo(a: number, b: string): string {
-  return a + b;
+returna + b;
 }
 
-let a = foo.apply(undefined, [10]); // error: too few arguments
-let b = foo.apply(undefined, [10, 20]); // error: 2nd argument is a number
-let c = foo.apply(undefined, [10, "hello", 30]); // error: too many arguments
-let d = foo.apply(undefined, [10, "hello"]); // okay! returns a string
+leta = foo.apply(undefined, [10]); // error: too few arguments
+letb = foo.apply(undefined, [10, 20]); // error: 2nd argument is a number
+letc = foo.apply(undefined, [10, "hello", 30]); // error: too many arguments
+letd = foo.apply(undefined, [10, "hello"]); // okay! returns a string
 ```
 
 This is achieved by introducing two new types, `CallableFunction` and `NewableFunction`, in `lib.d.ts`. These types contain specialized generic method declarations for `bind`, `call`, and `apply` for regular functions and constructor functions, respectively. The declarations use generic rest parameters (see #24897) to capture and reflect parameter lists in a strongly typed manner. In [`strictBindCallApply` ↗](https://www.typescriptlang.org/tsconfig.html#strictBindCallApply) mode these declarations are used in place of the (very permissive) declarations provided by type `Function`.
@@ -29,7 +29,7 @@ This is achieved by introducing two new types, `CallableFunction` and `NewableFu
 
 Since the stricter checks may uncover previously unreported errors, this is a breaking change in [`strict` ↗](https://www.typescriptlang.org/tsconfig.html#strict) mode.
 
-Additionally, [another caveat](https://github.com/Microsoft/TypeScript/pull/27028#issuecomment-429334450) of this new functionality is that due to certain limitations, `bind`, `call`, and `apply` can’t yet fully model generic functions or functions that have overloads.
+Additionally, [another caveat ↗](https://github.com/Microsoft/TypeScript/pull/27028#issuecomment-429334450) of this new functionality is that due to certain limitations, `bind`, `call`, and `apply` can’t yet fully model generic functions or functions that have overloads.
 When using these methods on a generic function, type parameters will be substituted with the empty object type (`{}`), and when used on a function with overloads, only the last overload will ever be modeled.
 
 ## Generic spread expressions in object literals {#generic-spread-expressions-in-object-literals}
@@ -38,17 +38,17 @@ In TypeScript 3.2, object literals now allow generic spread expressions which no
 
 ```ts
 function taggedObject<T, U extends string>(obj: T, tag: U) {
-  return { ...obj, tag }; // T & { tag: U }
+return { ...obj, tag }; // T & { tag: U }
 }
 
-let x = taggedObject({ x: 10, y: 20 }, "point"); // { x: number, y: number } & { tag: "point" }
+letx = taggedObject({ x:10, y:20 }, "point"); // { x: number, y: number } & { tag: "point" }
 ```
 
 Property assignments and non-generic spread expressions are merged to the greatest extent possible on either side of a generic spread expression. For example:
 
 ```ts
 function foo1<T>(t: T, obj1: { a: string }, obj2: { b: string }) {
-  return { ...obj1, x: 1, ...t, ...obj2, y: 2 }; // { a: string, x: number } & T & { b: string, y: number }
+return { ...obj1, x:1, ...t, ...obj2, y:2 }; // { a: string, x: number } & T & { b: string, y: number }
 }
 ```
 
@@ -56,16 +56,16 @@ Non-generic spread expressions continue to be processed as before: Call and cons
 
 ```ts
 function spread<T, U>(t: T, u: U) {
-  return { ...t, ...u }; // T & U
+return { ...t, ...u }; // T & U
 }
 
-declare let x: { a: string; b: number };
-declare let y: { b: string; c: boolean };
+declareletx: { a: string; b: number };
+declarelety: { b: string; c: boolean };
 
-let s1 = { ...x, ...y }; // { a: string, b: string, c: boolean }
-let s2 = spread(x, y); // { a: string, b: number } & { b: string, c: boolean }
-let b1 = s1.b; // string
-let b2 = s2.b; // number & string
+lets1 = { ...x, ...y }; // { a: string, b: string, c: boolean }
+lets2 = spread(x, y); // { a: string, b: number } & { b: string, c: boolean }
+letb1 = s1.b; // string
+letb2 = s2.b; // number & string
 ```
 
 ## Generic object rest variables and parameters {#generic-object-rest-variables-and-parameters}
@@ -74,12 +74,12 @@ TypeScript 3.2 also allows destructuring a rest binding from a generic variable.
 
 ```ts
 function excludeTag<T extends { tag: string }>(obj: T) {
-  let { tag, ...rest } = obj;
-  return rest; // Pick<T, Exclude<keyof T, "tag">>
+let { tag, ...rest } = obj;
+returnrest; // Pick<T, Exclude<keyof T, "tag">>
 }
 
-const taggedPoint = { x: 10, y: 20, tag: "point" };
-const point = excludeTag(taggedPoint); // { x: number, y: number }
+consttaggedPoint = { x:10, y:20, tag:"point" };
+constpoint = excludeTag(taggedPoint); // { x: number, y: number }
 ```
 
 ## BigInt {#bigint}
@@ -92,18 +92,18 @@ You can get a `bigint` by calling the `BigInt()` function or by writing out a Bi
 
 ```ts
 let foo: bigint = BigInt(100); // the BigInt function
-let bar: bigint = 100n; // a BigInt literal
+letbar: bigint = 100n; // a BigInt literal
 
 // *Slaps roof of fibonacci function*
 // This bad boy returns ints that can get *so* big!
-function fibonacci(n: bigint) {
-  let result = 1n;
-  for (let last = 0n, i = 0n; i < n; i++) {
-    const current = result;
-    result += last;
-    last = current;
+functionfibonacci(n: bigint) {
+letresult = 1n;
+for (letlast = 0n, i = 0n; i < n; i++) {
+constcurrent = result;
+result += last;
+last = current;
   }
-  return result;
+returnresult;
 }
 
 fibonacci(10000n);
@@ -113,7 +113,7 @@ While you might imagine close interaction between `number` and `bigint`, the two
 
 ```ts
 declare let foo: number;
-declare let bar: bigint;
+declareletbar: bigint;
 
 foo = bar; // error: Type 'bigint' is not assignable to type 'number'.
 bar = foo; // error: Type 'number' is not assignable to type 'bigint'.
@@ -133,15 +133,15 @@ Thus, TypeScript correctly narrows using `typeof` as you’d expect.
 
 ```ts
 function whatKindOfNumberIsIt(x: number | bigint) {
-  if (typeof x === "bigint") {
-    console.log("'x' is a bigint!");
+if (typeofx === "bigint") {
+console.log("'x' is a bigint!");
   } else {
-    console.log("'x' is a floating-point number");
+console.log("'x' is a floating-point number");
   }
 }
 ```
 
-We’d like to extend a huge thanks to [Caleb Sander](https://github.com/calebsander) for all the work on this feature.
+We’d like to extend a huge thanks to [Caleb Sander ↗](https://github.com/calebsander) for all the work on this feature.
 We’re grateful for the contribution, and we’re sure our users are too!
 
 ## Caveats {#caveats-1}
@@ -167,14 +167,14 @@ Thanks to this, narrowing works correctly in the body of the `unwrap` function.
 ```ts
 type Result<T> = { error: Error; data: null } | { error: null; data: T };
 
-function unwrap<T>(result: Result<T>) {
-  if (result.error) {
-    // Here 'error' is non-null
-    throw result.error;
+functionunwrap<T>(result: Result<T>) {
+if (result.error) {
+// Here 'error' is non-null
+throwresult.error;
   }
 
-  // Now 'data' is non-null
-  return result.data;
+// Now 'data' is non-null
+returnresult.data;
 }
 ```
 
@@ -184,11 +184,11 @@ TypeScript 3.2 now resolves `tsconfig.json`s from `node_modules`. When using a b
 
 ```
 {
-  "[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "@my-team/tsconfig-base",
-  "[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["./**/*"],
-  "[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
-    // Override certain options on a project-by-project basis.
-    "[strictBindCallApply ↗](https://www.typescriptlang.org/tsconfig.html#strictBindCallApply)": false
+"[extends ↗](https://www.typescriptlang.org/tsconfig.html#extends)": "@my-team/tsconfig-base",
+"[include ↗](https://www.typescriptlang.org/tsconfig.html#include)": ["./**/*"],
+"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
+// Override certain options on a project-by-project basis.
+"[strictBindCallApply ↗](https://www.typescriptlang.org/tsconfig.html#strictBindCallApply)": false
   }
 }
 ```
@@ -211,8 +211,8 @@ This means you’ll get better completions, and stronger type-checking when enab
 ```js
 // @ts-check
 
-let obj = {};
-Object.defineProperty(obj, "x", { value: "hello", writable: false });
+letobj = {};
+Object.defineProperty(obj, "x", { value:"hello", writable:false });
 
 obj.x.toLowercase();
 //    ~~~~~~~~~~~

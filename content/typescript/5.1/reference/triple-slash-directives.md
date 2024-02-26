@@ -63,7 +63,7 @@ For declaration files generated during compilation, the compiler will automatica
 A `/// <reference types="..." />` in a generated declaration file is added *if and only if* the resulting file uses any declarations from the referenced package.
 
 For declaring a dependency on an `@types` package in a `.ts` file, use [`types` ↗](https://www.typescriptlang.org/tsconfig.html#types) on the command line or in your `tsconfig.json` instead.
-See [using `@types`, `typeRoots` and `types` in `tsconfig.json` files ↗](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#types-typeroots-and-types) for more details.
+See [using `@types`, `typeRoots` and `types` in `tsconfig.json` files](/typescript/5.1/project-configuration/tsconfig-json#types-typeroots-and-types) for more details.
 
 ## `/// <reference lib="..." />` {#-reference-lib-}
 
@@ -102,7 +102,7 @@ The `amd-module` directive allows passing an optional module name to the compile
 
 ```ts
 ///<amd-module name="NamedModule"/>
-export class C {}
+exportclassC {}
 ```
 
 Will result in assigning the name `NamedModule` to the module as part of calling the AMD `define`:
@@ -111,11 +111,11 @@ Will result in assigning the name `NamedModule` to the module as part of calling
 
 ```js
 define("NamedModule", ["require", "exports"], function (require, exports) {
-  var C = (function () {
-    function C() {}
-    return C;
+varC = (function () {
+functionC() {}
+returnC;
   })();
-  exports.C = C;
+exports.C = C;
 });
 ```
 
@@ -130,7 +130,7 @@ The `amd-dependency` directive can also have an optional `name` property; this a
 
 ```ts
 /// <amd-dependency path="legacy/moduleA" name="moduleA"/>
-declare var moduleA: MyType;
+declarevarmoduleA: MyType;
 moduleA.callStuff();
 ```
 
@@ -138,10 +138,10 @@ Generated JS code:
 
 ```js
 define(["require", "exports", "legacy/moduleA"], function (
-  require,
-  exports,
-  moduleA
+require,
+exports,
+moduleA
 ) {
-  moduleA.callStuff();
+moduleA.callStuff();
 });
 ```
