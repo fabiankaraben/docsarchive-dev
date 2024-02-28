@@ -62,7 +62,11 @@ menu:
     - identifier: typescript
       name: TypeScript
       pageRef: /typescript
-      weight: 2
+      weight: 3
+    - identifier: nextjs
+      name: Next.js
+      pageRef: /nextjs
+      weight: 4
     - identifier: contact
       name: Contact
       url: mailto:hola.esdocu@gmail.com

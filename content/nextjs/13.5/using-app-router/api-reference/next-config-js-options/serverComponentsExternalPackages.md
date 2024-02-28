@@ -1,0 +1,76 @@
+---
+linkTitle: "serverComponentsExternalPackages"
+title: "next.config.js Options: serverComponentsExternalPackages | Next.js"
+description: "Opt-out specific dependencies from the Server Components bundling and use native Node.js `require`."
+weight: 26
+type: docs
+---
+
+# serverComponentsExternalPackages
+
+Dependencies used inside [Server Components ↗](https://nextjs.org/docs/app/building-your-application/rendering/server-components.html) and [Route Handlers](/nextjs/13.5/using-app-router/building-your-application/routing/route-handlers) will automatically be bundled by Next.js.
+
+If a dependency is using Node.js specific features, you can choose to opt-out specific dependencies from the Server Components bundling and use native Node.js `require`.
+
+
+next.config.js
+```
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ['@acme/ui'],
+  },
+}
+ 
+module.exports = nextConfig
+```
+
+Next.js includes a [short list of popular packages ↗](https://github.com/vercel/next.js/blob/canary/packages/next/src/lib/server-external-packages.json) that currently are working on compatibility and automatically opt-ed out:
+
+- `@aws-sdk/client-s3`
+- `@aws-sdk/s3-presigned-post`
+- `@blockfrost/blockfrost-js`
+- `@libsql/client`
+- `@jpg-store/lucid-cardano`
+- `@mikro-orm/core`
+- `@mikro-orm/knex`
+- `@prisma/client`
+- `@sentry/nextjs`
+- `@sentry/node`
+- `@swc/core`
+- `argon2`
+- `autoprefixer`
+- `aws-crt`
+- `bcrypt`
+- `better-sqlite3`
+- `canvas`
+- `cpu-features`
+- `cypress`
+- `eslint`
+- `express`
+- `firebase-admin`
+- `jest`
+- `jsdom`
+- `libsql`
+- `lodash`
+- `mdx-bundler`
+- `mongodb`
+- `mongoose`
+- `next-mdx-remote`
+- `next-seo`
+- `payload`
+- `pg`
+- `playwright`
+- `postcss`
+- `prettier`
+- `prisma`
+- `puppeteer`
+- `rimraf`
+- `sharp`
+- `shiki`
+- `sqlite3`
+- `tailwindcss`
+- `ts-node`
+- `typescript`
+- `vscode-oniguruma`
+- `webpack`
