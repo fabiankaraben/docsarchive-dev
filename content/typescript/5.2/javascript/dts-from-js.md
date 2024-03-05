@@ -9,7 +9,8 @@ next: /typescript/5.2/project-configuration/tsconfig-json
 
 # Creating .d.ts Files from .js files
 
-[With TypeScript 3.7](/typescript/5.2/whats-new/typescript-3-7#--declaration-and---allowjs),
+#--declaration-and---allowjs),
+
 TypeScript added support for generating .d.ts files from JavaScript using JSDoc syntax.
 
 This set up means you can own the editor experience of TypeScript-powered editors without porting your project to TypeScript, or having to maintain .d.ts files in your codebase.

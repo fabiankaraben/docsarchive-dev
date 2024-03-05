@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Typeof Type Operator"
 description: "Using the typeof operator in type contexts."
 weight: 4
 type: docs
+canonical: /typescript/5.2/handbook/type-manipulation/typeof-types
 ---
 
 # Typeof Type Operator

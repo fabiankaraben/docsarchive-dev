@@ -239,6 +239,7 @@ Under the covers, these auto-accessors “de-sugar” to a `get` and `set` acces
 
 ```ts
 class Person {
+
 #__name: string;
 
 getname() {

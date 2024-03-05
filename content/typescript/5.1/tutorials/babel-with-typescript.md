@@ -5,6 +5,7 @@ description: "How to create a hybrid Babel + TypeScript project"
 weight: 5
 type: docs
 next: /typescript/5.1/whats-new/typescript-5-1
+canonical: /typescript/5.2/tutorials/babel-with-typescript
 ---
 
 # Using Babel with TypeScript

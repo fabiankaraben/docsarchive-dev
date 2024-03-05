@@ -5,11 +5,10 @@ description: "Types which are globally included in TypeScript"
 weight: 1
 type: docs
 prev: /typescript/5.1/handbook/modules
+canonical: /typescript/5.2/reference/utility-types
 ---
 
 # Utility Types
-
-TypeScript provides several utility types to facilitate common type transformations. These utilities are available globally.
 
 ## `Awaited<Type>` {#awaitedtype}
 

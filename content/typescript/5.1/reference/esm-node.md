@@ -8,17 +8,8 @@ type: docs
 
 # ECMAScript Modules in Node.js
 
-For the last few years, Node.js has been working to support running ECMAScript modules (ESM).
-This has been a very difficult feature to support, since the foundation of the Node.js ecosystem is built on a different module system called CommonJS (CJS).
+#compilerOptions)": {
 
-Interoperating between the two module systems brings large challenges, with many new features to juggle;
-however, support for ESM in Node.js is now implemented in Node.js, and the dust has begun to settle.
-
-That’s why TypeScript brings two new `module` and `moduleResolution` settings: `Node16` and `NodeNext`.
-
-```
-{
-"[compilerOptions ↗](https://www.typescriptlang.org/tsconfig.html#compilerOptions)": {
 "[module ↗](https://www.typescriptlang.org/tsconfig.html#module)": "NodeNext",
     }
 }
@@ -32,6 +23,7 @@ Node.js supports [a new setting in `package.json` ↗](https://nodejs.org/api/pa
 `"type"` can be set to either `"module"` or `"commonjs"`.
 
 ```
+
 {
 "name": "my-package",
 "type": "module",
@@ -66,6 +58,7 @@ This also means paths resolve differently between `.ts` files that are ES module
 For example, let’s say you have the following code today:
 
 ```ts
+
 // ./foo.ts
 exportfunctionhelper() {
 // ...
@@ -81,6 +74,7 @@ This code works in CommonJS modules, but will fail in ES modules because relativ
 As a result, it will have to be rewritten to use the extension of the *output* of `foo.ts` - so `bar.ts` will instead have to import from `./foo.js`.
 
 ```ts
+
 // ./bar.ts
 import { helper } from"./foo.js"; // works in ESM & CJS
 
@@ -116,6 +110,7 @@ Node.js allows ES modules to import CommonJS modules as if they were ES modules 
 [Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFsHsBMFcA2BTAXKAdnZHkA8AXAKBAgDMBLFDAQ0jVAAtlEAHZAJwDoBjAgZyL5W0DgVBl4GPhWgYmLdhwAUASlABvIqB2gec-tBRdE0AObKARM0SnQAd1GJYAQkuqA3EQC+REmHBKajoGCgxYfC5IASIKSBExCWhoCQ5oSFBLLmAbJV4AK35LL39QVg4wgUybO0cOZzciMmSuXM41DyA)
 
 ```ts
+
 // @filename: helper.cts
 exportfunctionhelper() {
 console.log("hello world!");
@@ -134,6 +129,7 @@ In these cases, ES modules can use a “namespace-style” import (i.e. `import 
 [Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFsHsBMFcA2BTAXKAdnZHkA8AXAKBAgDMBLFDAQ0jVAAtlEAHZAJwDoBjAgZyL5W0DgVBl4GPhWgYmLdhwAUASlABvIqB2gec-tBRdE0AObKARM0SnQAd1GJYAQkuqA3EQC+REmHBKajoGCgxYfC5IASIKSBExTQU2TlBvCQ5oSFBLLmAbJV4AK35LL39QVg4wgRybO0cOZzciAs41DyA)
 
 ```ts
+
 // @filename: helper.cts
 exportfunctionhelper() {
 console.log("hello world!");
@@ -151,6 +147,7 @@ There isn’t always a way for TypeScript to know whether these named imports wi
 One TypeScript-specific note about interop is the following syntax:
 
 ```ts
+
 import foo = require("foo");
 ```
 
@@ -161,6 +158,7 @@ In turn, you can write the above example using this syntax as follows:
 [Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFsHsBMFcA2BTAXKAdnZHkA8AXAKBAgDMBLFDAQ0jVDOmgDoBjAgZyPwAdoATgUbwMHCtAygAFskS9kAgBQBKUAG8iobaDaTO0FC0TQA5koBEsxCdAB3QYlgBCCyoDcRAL5ESYcJTUdAwUGLD4LJBcRBSQ-EKMzKAAvKACyACO8BTplizATKxsAFacbp5EhSzWCsoqQA)
 
 ```ts
+
 // @filename: foo.cts
 exportfunctionhelper() {
 console.log("hello world!");
@@ -185,6 +183,7 @@ This field is a more powerful alternative to defining `"main"` in `package.json`
 Here’s a `package.json` that supports separate entry-points for CommonJS and ESM:
 
 ```json
+
 // package.json
 {
 "name": "my-package",
@@ -217,6 +216,7 @@ If it finds them, it will look for a co-located declaration file.
 If you need to point to a different location for your type declarations, you can add a `"types"` import condition.
 
 ```json
+
 // package.json
 {
 "name": "my-package",

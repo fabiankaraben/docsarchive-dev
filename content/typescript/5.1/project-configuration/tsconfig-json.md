@@ -5,6 +5,7 @@ description: "Learn about how a TSConfig works"
 weight: 1
 type: docs
 prev: /typescript/5.1/javascript/dts-from-js
+canonical: /typescript/5.2/project-configuration/tsconfig-json
 ---
 
 # What is a tsconfig.json
@@ -107,4 +108,4 @@ To learn more about the hundreds of configuration options in the [TSConfig Refer
 
 ## Schema {#schema}
 
-The `tsconfig.json` Schema can be found at [the JSON Schema Store ↗](http://json.schemastore.org/tsconfig).
+The `tsconfig.json` Schema can be found at [the JSON Schema Store ↗](https://web.archive.org/web/20230907160727/http://json.schemastore.org/tsconfig).

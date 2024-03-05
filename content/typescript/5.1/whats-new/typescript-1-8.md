@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 1.8"
 description: "TypeScript 1.8 Release Notes"
 weight: 33
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-1-8
 ---
 
 # TypeScript 1.8
@@ -518,7 +519,7 @@ Stable packages are available here:
 - [Microsoft.TypeScript.Compiler](https://www.nuget.org/packages/Microsoft.TypeScript.Compiler/)
 - [Microsoft.TypeScript.MSBuild](https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild/)
 
-Also, a nightly NuGet package to match the [nightly npm package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx) is available on [myget](https://myget.org/):
+Also, a nightly NuGet package to match the [nightly npm package](https://web.archive.org/web/20230609112438/http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx) is available on [myget](https://myget.org/):
 
 - [TypeScript-Preview](https://www.myget.org/gallery/typescript-preview)
 

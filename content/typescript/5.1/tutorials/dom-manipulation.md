@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - DOM Manipulation"
 description: "Using the DOM with TypeScript"
 weight: 3
 type: docs
+canonical: /typescript/5.2/tutorials/dom-manipulation
 ---
 
 # DOM Manipulation
@@ -203,5 +204,5 @@ The best part about the *lib.dom.d.ts* type definitions is that they are reflect
 
 Sources:
 
-- [ECMA-262 Standard ↗](http://www.ecma-international.org/ecma-262/10.0/index.html)
+- [ECMA-262 Standard ↗](https://web.archive.org/web/20231017122438/http://www.ecma-international.org/ecma-262/10.0/index.html)
 - [Introduction to the DOM ↗](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)

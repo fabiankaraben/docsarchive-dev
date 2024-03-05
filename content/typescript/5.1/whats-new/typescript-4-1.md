@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 4.1"
 description: "TypeScript 4.1 Release Notes"
 weight: 11
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-4-1
 ---
 
 # TypeScript 4.1

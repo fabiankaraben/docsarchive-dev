@@ -5,6 +5,7 @@ description: "An overview of the ways in which you can create more types from ex
 weight: 1
 type: docs
 prev: /typescript/5.1/handbook/objects
+canonical: /typescript/5.2/handbook/type-manipulation/types-from-types
 ---
 
 # Creating Types from Types

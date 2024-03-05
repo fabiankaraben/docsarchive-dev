@@ -8,9 +8,6 @@ type: docs
 
 # Nightly Builds
 
-A nightly build from the [TypeScript’s `main` ↗](https://github.com/Microsoft/TypeScript/tree/main) branch is published by midnight PST to npm.
-Here is how you can get it and use it with your tools.
-
 ## Using npm {#using-npm}
 
 ```shell

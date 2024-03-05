@@ -8,12 +8,6 @@ type: docs
 
 # Project References
 
-Project references are a new feature in TypeScript 3.0 that allow you to structure your TypeScript programs into smaller pieces.
-
-By doing this, you can greatly improve build times, enforce logical separation between components, and organize your code in new and better ways.
-
-We’re also introducing a new mode for `tsc`, the `--build` flag, that works hand in hand with project references to enable faster TypeScript builds.
-
 ## An Example Project {#an-example-project}
 
 Let’s look at a fairly normal program and see how project references can help us better organize it.

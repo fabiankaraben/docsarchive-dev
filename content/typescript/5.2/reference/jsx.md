@@ -8,11 +8,6 @@ type: docs
 
 # JSX
 
-[JSX ↗](https://facebook.github.io/jsx/) is an embeddable XML-like syntax.
-It is meant to be transformed into valid JavaScript, though the semantics of that transformation are implementation-specific.
-JSX rose to popularity with the [React ↗](https://reactjs.org/) framework, but has since seen other implementations as well.
-TypeScript supports embedding, type checking, and compiling JSX directly to JavaScript.
-
 ## Basic usage {#basic-usage}
 
 In order to use JSX you must do two things.
@@ -71,7 +66,7 @@ This is important for two reasons:
 2. The types of the attributes being passed in the JSX element should be looked up differently.
   Intrinsic element attributes should be known *intrinsically* whereas components will likely want to specify their own set of attributes.
 
-TypeScript uses the [same convention that React does ↗](http://facebook.github.io/react/docs/jsx-in-depth.html#html-tags-vs.-react-components) for distinguishing between these.
+TypeScript uses the [same convention that React does ↗](https://web.archive.org/web/20231119064733/http://facebook.github.io/react/docs/jsx-in-depth.html#html-tags-vs.-react-components) for distinguishing between these.
 An intrinsic element always begins with a lowercase letter, and a value-based element always begins with an uppercase letter.
 
 ### Intrinsic elements {#intrinsic-elements}

@@ -4,25 +4,10 @@ title: "TypeScript: Documentation - TypeScript for Functional Programmers"
 description: "Learn TypeScript if you have a background in functional programming"
 weight: 4
 type: docs
+canonical: /typescript/5.2/get-started/typescript-in-5-minutes-func
 ---
 
 # TypeScript for Functional Programmers
-
-TypeScript began its life as an attempt to bring traditional object-oriented types
-to JavaScript so that the programmers at Microsoft could bring
-traditional object-oriented programs to the web. As it has developed, TypeScript’s type
-system has evolved to model code written by native JavaScripters. The
-resulting system is powerful, interesting and messy.
-
-This introduction is designed for working Haskell or ML programmers
-who want to learn TypeScript. It describes how the type system of
-TypeScript differs from Haskell’s type system. It also describes
-unique features of TypeScript’s type system that arise from its
-modelling of JavaScript code.
-
-This introduction does not cover object-oriented programming. In
-practice, object-oriented programs in TypeScript are similar to those
-in other popular languages with OO features.
 
 ## Prerequisites {#prerequisites}
 
@@ -38,7 +23,7 @@ a call-by-value lexically scoped language with lots of mutability and
 not much else.
 [RRS Scheme ↗](https://people.csail.mit.edu/jaffer/r4rs.pdf) is a good example.
 
-[The C++ Programming Language ↗](http://www.stroustrup.com/4th.html) is
+[The C++ Programming Language ↗](https://web.archive.org/web/20230824073922/http://www.stroustrup.com/4th.html) is
 a good place to learn about C-style type syntax. Unlike C++,
 TypeScript uses postfix types, like so: `x: string` instead of `string x`.
 

@@ -8,14 +8,6 @@ type: docs
 
 # Namespaces and Modules
 
-This post outlines the various ways to organize your code using modules and namespaces in TypeScript.
-We’ll also go over some advanced topics of how to use namespaces and modules, and address some common pitfalls when using them in TypeScript.
-
-See the [Modules ↗](https://www.typescriptlang.org/docs/handbook/modules.html) documentation for more information about ES Modules.
-See the [Namespaces](/typescript/5.2/reference/namespaces) documentation for more information about TypeScript namespaces.
-
-Note: In *very* old versions of TypeScript namespaces were called ‘Internal Modules’, these pre-date JavaScript module systems.
-
 ## Using Modules {#using-modules}
 
 Modules can contain both code and declarations.

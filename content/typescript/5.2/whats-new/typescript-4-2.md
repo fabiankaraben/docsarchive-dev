@@ -263,6 +263,7 @@ abstractgetArea(): number;
 newShape();
 
 classSquareextendsShape {
+
 #sideLength: number;
 
 constructor(sideLength: number) {
@@ -402,10 +403,13 @@ When using this option, the TypeScript compiler will give some very verbose outp
 To read it more easily, you can forward the output to a file, or pipe it to a program that can easily view it.
 
 ```sh
+
 # Forward output to a text file
+
 tsc --explainFiles > explanation.txt
 
 # Pipe output to a utility program like `less`, or an editor like VS Code
+
 tsc --explainFiles | less
 
 tsc --explainFiles | code -

@@ -4,11 +4,12 @@ title: "TypeScript: Documentation - TypeScript for Java/C# Programmers"
 description: "Learn TypeScript if you have a background in object-oriented languages"
 weight: 3
 type: docs
+canonical: /typescript/5.2/get-started/typescript-in-5-minutes-oop
 ---
 
 # TypeScript for Java/C# Programmers
 
-TypeScript is a popular choice for programmers accustomed to other languages with static typing, such as C# and Java.
+# and Java.
 
 TypeScript’s type system offers many of the same benefits, such as better code completion, earlier detection of errors, and clearer communication between parts of your program.
 While TypeScript provides many familiar features for these developers, it’s worth stepping back to see how JavaScript (and therefore TypeScript) differ from traditional OOP languages.

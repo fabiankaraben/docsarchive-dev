@@ -8,11 +8,6 @@ type: docs
 
 # Gulp
 
-This quick start guide will teach you how to build TypeScript with [gulp ↗](https://gulpjs.com/) and then add [Browserify ↗](https://browserify.org/), [terser ↗](https://terser.org/), or [Watchify ↗](https://github.com/substack/watchify) to the gulp pipeline.
-This guide also shows how to add [Babel ↗](https://babeljs.io/) functionality using [Babelify ↗](https://github.com/babel/babelify).
-
-We assume that you’re already using [Node.js ↗](https://nodejs.org/) with [npm ↗](https://www.npmjs.com/).
-
 ## Minimal project {#minimal-project}
 
 Let’s start out with a new directory.

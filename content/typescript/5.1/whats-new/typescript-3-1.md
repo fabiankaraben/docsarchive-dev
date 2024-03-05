@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 3.1"
 description: "TypeScript 3.1 Release Notes"
 weight: 21
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-3-1
 ---
 
 # TypeScript 3.1

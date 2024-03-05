@@ -8,8 +8,6 @@ type: docs
 
 # Type Checking JavaScript Files
 
-Here are some notable differences on how checking works in `.js` files compared to `.ts` files.
-
 ## Properties are inferred from assignments in class bodies {#properties-are-inferred-from-assignments-in-class-bodies}
 
 ES2015 does not have a means for declaring properties on classes. Properties are dynamically assigned, just like object literals.

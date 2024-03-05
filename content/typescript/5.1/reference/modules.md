@@ -8,16 +8,15 @@ type: docs
 
 # Modules
 
-Starting with ECMAScript 2015, JavaScript has a concept of modules. TypeScript shares this concept.
+#export).
 
-Modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc. declared in a module are not visible outside the module unless they are explicitly exported using one of the [`export` forms](/typescript/5.1/reference/modules#export).
 Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the [`import` forms](/typescript/5.1/reference/modules#import).
 
 Modules are declarative; the relationships between modules are specified in terms of imports and exports at the file level.
 
 Modules import one another using a module loader.
 At runtime the module loader is responsible for locating and executing all dependencies of a module before executing it.
-Well-known module loaders used in JavaScript are Node.js’s loader for [CommonJS ↗](https://wikipedia.org/wiki/CommonJS) modules and the [RequireJS ↗](http://requirejs.org/) loader for [AMD ↗](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) modules in Web applications.
+Well-known module loaders used in JavaScript are Node.js’s loader for [CommonJS ↗](https://wikipedia.org/wiki/CommonJS) modules and the [RequireJS ↗](https://web.archive.org/web/20230825151643/http://requirejs.org/) loader for [AMD ↗](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) modules in Web applications.
 
 In TypeScript, just as in ECMAScript 2015, any file containing a top-level `import` or `export` is considered a module.
 Conversely, a file without any top-level `import` or `export` declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well).
@@ -302,7 +301,7 @@ console.log(
 
 ## Code Generation for Modules {#code-generation-for-modules}
 
-Depending on the module target specified during compilation, the compiler will generate appropriate code for Node.js ([CommonJS ↗](http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD ↗](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD ↗](https://github.com/umdjs/umd), [SystemJS ↗](https://github.com/systemjs/systemjs), or [ECMAScript 2015 native modules ↗](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) module-loading systems.
+Depending on the module target specified during compilation, the compiler will generate appropriate code for Node.js ([CommonJS ↗](https://web.archive.org/web/20230825151643/http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD ↗](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD ↗](https://github.com/umdjs/umd), [SystemJS ↗](https://github.com/systemjs/systemjs), or [ECMAScript 2015 native modules ↗](https://web.archive.org/web/20230825151643/http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) module-loading systems.
 For more information on what the `define`, `require` and `register` calls in the generated code do, consult the documentation for each module loader.
 
 This simple example shows how the names used during importing and exporting get translated into the module loading code.

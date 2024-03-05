@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Global .d.ts"
 description: ""
 weight: 5
 type: docs
+canonical: /typescript/5.2/declaration-files/d-ts-templates/global-d-ts
 ---
 
 # Global .d.ts

@@ -4,12 +4,10 @@ title: "TypeScript: Documentation - Nightly Builds"
 description: "How to use a nightly build of TypeScript"
 weight: 8
 type: docs
+canonical: /typescript/5.2/project-configuration/nightly-builds
 ---
 
 # Nightly Builds
-
-A nightly build from the [TypeScript’s `main` ↗](https://github.com/Microsoft/TypeScript/tree/main) branch is published by midnight PST to npm.
-Here is how you can get it and use it with your tools.
 
 ## Using npm {#using-npm}
 
@@ -81,4 +79,4 @@ Go to `Preferences` > `Languages & Frameworks` > `TypeScript`:
 Go to `File` > `Settings` > `Languages & Frameworks` > `TypeScript`:
 
 > TypeScript Version: If you installed with npm: `C:\Users\USERNAME\AppData\Roaming\npm\node_modules\typescript\lib`
-> 
+>

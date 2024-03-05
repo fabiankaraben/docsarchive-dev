@@ -10,68 +10,7 @@ next: /typescript/5.2/tutorials/asp-net-core
 
 # Modules - ESM/CJS Interoperability
 
-It’s 2015, and you’re writing an ESM-to-CJS transpiler. There’s no specification for how to do this; all you have is a specification of how ES modules are supposed to interact with each other, knowledge of how CommonJS modules interact with each other, and a knack for figuring things out. Consider an exporting ES module:
-
-```ts
-export const A = {};
-exportconstB = {};
-exportdefault"Hello, world!";
-```
-
-How would you turn this into a CommonJS module? Recalling that default exports are just named exports with special syntax, there seems to be only one choice:
-
-```ts
-exports.A = {};
-exports.B = {};
-exports.default = "Hello, world!";
-```
-
-This is a nice analog, and it lets you implement a similar on the importing side:
-
-```ts
-import hello, { A, B } from "./module";
-console.log(hello, A, B);
-
-// transpiles to:
-
-constmodule_1 = require("./module");
-console.log(module_1.default, module_1.A, module_1.B);
-```
-
-So far, everything in CJS-world matches up one-to-one with everything in ESM-world. Extending the equivalence above one step further, we can see that we also have:
-
-```ts
-import * as mod from "./module";
-console.log(mod.default, mod.A, mod.B);
-
-// transpiles to:
-
-constmod = require("./module");
-console.log(mod.default, mod.A, mod.B);
-```
-
-You might notice that in this scheme, there’s no way to write an ESM export that produces an output where `exports` is assigned a function, class, or primitive:
-
-```ts
-// @Filename: exports-function.js
-module.exports = functionhello() {
-console.log("Hello, world!");
-};
-```
-
-But existing CommonJS modules frequently take this form. How might an ESM import, processed with our transpiler, access this module? We just established that a namespace import (`import *`) transpiles to a plain `require` call, so we can support an input like:
-
-```ts
-import * as hello from "./exports-function";
-hello();
-
-// transpiles to:
-
-consthello = require("./exports-function");
-hello();
-```
-
-Our output works at runtime, but we have a compliance problem: according to the JavaScript specification, a namespace import always resolves to a [*Module Namespace Object* ↗](https://tc39.es/ecma262/#sec-module-namespace-objects), that is, an object whose members are the exports of the module. In this case, `require` would return the function `hello`, but `import *` can never return a function. The correspondence we assumed appears invalid.
+#sec-module-namespace-objects), that is, an object whose members are the exports of the module. In this case, `require` would return the function `hello`, but `import *` can never return a function. The correspondence we assumed appears invalid.
 
 It’s worth taking a step back here and clarifying what the *goal* is. As soon as modules landed in the ES2015 specification, transpilers emerged with support for downleveling ESM to CJS, allowing users to adopt the new syntax long before runtimes implemented support for it. There was even a sense that writing ESM code was a good way to “future-proof” new projects. For this to be true, there needed to be a seamless migration path from executing the transpilers’ CJS output to executing the ESM input natively once runtimes developed support for it. The goal was to find a way to downlevel ESM to CJS that would allow any or all of those transpiled outputs to be replaced by their true ESM inputs in a future runtime, with no observable change in behavior.
 

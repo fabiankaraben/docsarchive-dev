@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 2.1"
 description: "TypeScript 2.1 Release Notes"
 weight: 31
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-2-1
 ---
 
 # TypeScript 2.1

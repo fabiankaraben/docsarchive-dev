@@ -4,13 +4,12 @@ title: "TypeScript: Documentation - Narrowing"
 description: "Understand how TypeScript uses JavaScript knowledge to reduce the amount of type syntax in your projects."
 weight: 4
 type: docs
+canonical: /typescript/5.2/handbook/narrowing
 ---
 
 # Narrowing
 
-Imagine we have a function called `padLeft`.
-
-[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABABwIYBMAyBTYUAUa66MYA5gFyJggC2ARtgE6IA+iAzlE6WQDSJSyEFCpce5AJRjuvRAG8AUIkRQAFkzgB3ath0BRJpqb4ARADk4UQbWQAbbLWxgo2dIgCe2KAEJTkgG5FAF8gA)
+#code/GYVwdgxgLglg9mABABwIYBMAyBTYUAUa66MYA5gFyJggC2ARtgE6IA+iAzlE6WQDSJSyEFCpce5AJRjuvRAG8AUIkRQAFkzgB3ath0BRJpqb4ARADk4UQbWQAbbLWxgo2dIgCe2KAEJTkgG5FAF8gA)
 
 ```ts
 function padLeft(padding: number | string, input: string): string {

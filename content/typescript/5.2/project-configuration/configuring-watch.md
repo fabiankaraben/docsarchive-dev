@@ -8,8 +8,6 @@ type: docs
 
 # Configuring Watch
 
-As of TypeScript 3.8 and onward, the Typescript compiler exposes configuration which controls how it watches files and directories. Prior to this version, configuration required the use of environment variables which are still available.
-
 ## Background {#background}
 
 The `--watch` implementation of the compiler relies on Node’s `fs.watch` and `fs.watchFile`. Each of these methods has pros and cons.

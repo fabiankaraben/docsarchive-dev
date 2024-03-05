@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 2.8"
 description: "TypeScript 2.8 Release Notes"
 weight: 24
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-2-8
 ---
 
 # TypeScript 2.8

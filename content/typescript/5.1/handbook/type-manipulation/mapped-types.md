@@ -4,15 +4,12 @@ title: "TypeScript: Documentation - Mapped Types"
 description: "Generating types by re-using an existing type."
 weight: 7
 type: docs
+canonical: /typescript/5.2/handbook/type-manipulation/mapped-types
 ---
 
 # Mapped Types
 
-When you don’t want to repeat yourself, sometimes a type needs to be based on another type.
-
-Mapped types build on the syntax for index signatures, which are used to declare the types of properties which have not been declared ahead of time:
-
-[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAEg9gJwM7QLxQN4F8DcAoAegKgFoyBjAV2DJL1EigHkA7AGxACE442kBBFgBN4yCEijoMeKFADaAawggAXFCTAEASxYBzALpqARjzYQAhiygAfWIhT5cePOTgsNUVywBmiALZIaqwc3LwCwqIoElIyUEIQbGqalBAANLEIcEIsymre5nxpeLhAA)
+#code/C4TwDgpgBAEg9gJwM7QLxQN4F8DcAoAegKgFoyBjAV2DJL1EigHkA7AGxACE442kBBFgBN4yCEijoMeKFADaAawggAXFCTAEASxYBzALpqARjzYQAhiygAfWIhT5cePOTgsNUVywBmiALZIaqwc3LwCwqIoElIyUEIQbGqalBAANLEIcEIsymre5nxpeLhAA)
 
 ```ts
 type OnlyBoolsAndHorses = {

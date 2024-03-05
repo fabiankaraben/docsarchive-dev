@@ -5,6 +5,7 @@ description: ""
 weight: 1
 type: docs
 prev: /typescript/5.1/declaration-files/library-structures
+canonical: /typescript/5.2/declaration-files/d-ts-templates/module-d-ts
 ---
 
 # Modules .d.ts
@@ -315,4 +316,4 @@ Otherwise
 > 1. Create a new file in the root of your source tree: `[libname].d.ts`
 > 2. Add `declare module "[libname]" {  }`
 > 3. Add the template inside the braces of the declare module, and see where your usage breaks
-> 
+>

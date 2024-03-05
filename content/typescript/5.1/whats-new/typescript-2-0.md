@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 2.0"
 description: "TypeScript 2.0 Release Notes"
 weight: 32
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-2-0
 ---
 
 # TypeScript 2.0
@@ -521,7 +522,7 @@ The [`exclude` ↗](https://www.typescriptlang.org/tsconfig.html#exclude) proper
 
 TypeScript 2.0 provides a set of additional module resolution knops to *inform* the compiler where to find declarations for a given module.
 
-See [Module Resolution ↗](http://www.typescriptlang.org/docs/handbook/module-resolution.html) documentation for more details.
+See [Module Resolution ↗](https://web.archive.org/web/20230908160926/http://www.typescriptlang.org/docs/handbook/module-resolution.html) documentation for more details.
 
 ## Base URL {#base-url}
 
@@ -547,7 +548,7 @@ import A from "moduleA";
 ## Path mapping {#path-mapping}
 
 Sometimes modules are not directly located under *baseUrl*.
-Loaders use a mapping configuration to map module names to files at run-time, see [RequireJs documentation ↗](http://requirejs.org/docs/api.html#config-paths) and [SystemJS documentation ↗](https://github.com/systemjs/systemjs/blob/main/docs/import-maps.md).
+Loaders use a mapping configuration to map module names to files at run-time, see [RequireJs documentation ↗](https://web.archive.org/web/20230908160926/http://requirejs.org/docs/api.html#config-paths) and [SystemJS documentation ↗](https://github.com/systemjs/systemjs/blob/main/docs/import-maps.md).
 
 The TypeScript compiler supports the declaration of such mappings using [`paths` ↗](https://www.typescriptlang.org/tsconfig.html#paths) property in `tsconfig.json` files.
 

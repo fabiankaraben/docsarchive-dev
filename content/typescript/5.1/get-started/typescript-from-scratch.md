@@ -4,14 +4,10 @@ title: "TypeScript: Documentation - TypeScript for the New Programmer"
 description: "Learn TypeScript from scratch"
 weight: 1
 type: docs
+canonical: /typescript/5.2/get-started/typescript-from-scratch
 ---
 
 # TypeScript for the New Programmer
-
-Congratulations on choosing TypeScript as one of your first languages — you’re already making good decisions!
-
-You’ve probably already heard that TypeScript is a “flavor” or “variant” of JavaScript.
-The relationship between TypeScript (TS) and JavaScript (JS) is rather unique among modern programming languages, so learning more about this relationship will help you understand how TypeScript adds to JavaScript.
 
 ## What is JavaScript? A Brief History {#what-is-javascript-a-brief-history}
 

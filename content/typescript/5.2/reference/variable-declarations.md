@@ -9,8 +9,7 @@ next: /typescript/5.2/modules-reference/introduction
 
 # Variable Declaration
 
-`let` and `const` are two relatively new concepts for variable declarations in JavaScript.
-[As we mentioned earlier ↗](https://www.typescriptlang.org/docs/handbook/basic-types.html#a-note-about-let), `let` is similar to `var` in some respects, but allows users to avoid some of the common “gotchas” that users run into in JavaScript.
+#a-note-about-let), `let` is similar to `var` in some respects, but allows users to avoid some of the common “gotchas” that users run into in JavaScript.
 
 `const` is an augmentation of `let` in that it prevents re-assignment to a variable.
 

@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Declaration Merging"
 description: "How merging namespaces and interfaces works"
 weight: 4
 type: docs
+canonical: /typescript/5.2/reference/declaration-merging
 ---
 
 # Declaration Merging

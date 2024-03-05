@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 3.8"
 description: "TypeScript 3.8 Release Notes"
 weight: 14
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-3-8
 ---
 
 # TypeScript 3.8
@@ -68,6 +69,7 @@ TypeScript 3.8 brings support for ECMAScript’s private fields, part of the [st
 
 ```ts
 class Person {
+
 #name: string;
 
 constructor(name: string) {
@@ -125,6 +127,7 @@ With private fields, you’ll never have to worry about this, since each field n
 
 ```ts
 class C {
+
 #foo = 10;
 
 cHelper() {
@@ -133,6 +136,7 @@ returnthis.#foo;
 }
 
 classDextendsC {
+
 #foo = 20;
 
 dHelper() {
@@ -150,6 +154,7 @@ Another thing worth noting is that accessing a private field on any other type w
 
 ```ts
 class Square {
+
 #sideLength: number;
 
 constructor(sideLength: number) {
@@ -191,6 +196,7 @@ With private fields, declarations are always needed regardless of whether we’r
 ```js
 class C {
 /** @type{number} */
+
 #foo;
 
 constructor(foo: number) {
@@ -232,7 +238,9 @@ On the other hand, ECMAScript’s `#` privates are completely inaccessible outsi
 
 ```ts
 class C {
+
 #foo = 10;
+
 }
 
 console.log(newC().#foo); // SyntaxError

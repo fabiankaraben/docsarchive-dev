@@ -203,5 +203,5 @@ The best part about the *lib.dom.d.ts* type definitions is that they are reflect
 
 Sources:
 
-- [ECMA-262 Standard ↗](http://www.ecma-international.org/ecma-262/10.0/index.html)
+- [ECMA-262 Standard ↗](https://web.archive.org/web/20231123104251/http://www.ecma-international.org/ecma-262/10.0/index.html)
 - [Introduction to the DOM ↗](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction)

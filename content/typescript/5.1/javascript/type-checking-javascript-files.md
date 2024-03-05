@@ -4,11 +4,10 @@ title: "TypeScript: Documentation - Type Checking JavaScript Files"
 description: "How to add type checking to JavaScript files using TypeScript"
 weight: 2
 type: docs
+canonical: /typescript/5.2/javascript/type-checking-javascript-files
 ---
 
 # Type Checking JavaScript Files
-
-Here are some notable differences on how checking works in `.js` files compared to `.ts` files.
 
 ## Properties are inferred from assignments in class bodies {#properties-are-inferred-from-assignments-in-class-bodies}
 

@@ -9,8 +9,6 @@ prev: /typescript/5.2/handbook/modules
 
 # Utility Types
 
-TypeScript provides several utility types to facilitate common type transformations. These utilities are available globally.
-
 ## `Awaited<Type>` {#awaitedtype}
 
 > Released:

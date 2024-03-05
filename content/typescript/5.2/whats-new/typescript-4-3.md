@@ -18,6 +18,7 @@ For example, let’s imagine we’ve got a class with a setter that always conve
 
 ```js
 class Thing {
+
 #size = 0;
 
 getsize() {
@@ -61,6 +62,7 @@ That’s why TypeScript 4.3 allows you to specify types for reading and writing 
 
 ```ts
 class Thing {
+
 #size = 0;
 
 getsize(): number {
@@ -369,7 +371,9 @@ In addition to properties, methods and accessors can also be given private names
 
 ```ts
 class Foo {
+
   #someMethod() {
+
 //...
   }
 

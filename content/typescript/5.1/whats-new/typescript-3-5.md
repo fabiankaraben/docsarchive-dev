@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 3.5"
 description: "TypeScript 3.5 Release Notes"
 weight: 17
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-3-5
 ---
 
 # TypeScript 3.5

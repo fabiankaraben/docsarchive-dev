@@ -92,7 +92,10 @@ For convenience, TypeScript defines a new global type called `Disposable` which 
 
 ```ts
 class TempFile implements Disposable {
+
 #path: string;
+
+
 #handle: number;
 
 constructor(path: string) {
@@ -305,7 +308,10 @@ For example, take our `TempFile` example again.
 
 ```ts
 class TempFile implements Disposable {
+
 #path: string;
+
+
 #handle: number;
 
 constructor(path: string) {

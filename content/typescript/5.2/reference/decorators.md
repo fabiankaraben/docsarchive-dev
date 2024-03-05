@@ -8,8 +8,8 @@ type: docs
 
 # Decorators
 
-> NOTE  This document refers to an experimental stage 2 decorators implementation. Stage 3 decorator support is available since Typescript 5.0.
-> See: [Decorators in Typescript 5.0 ↗](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators)
+#decorators)
+
 > 
 
 ## Introduction {#introduction}

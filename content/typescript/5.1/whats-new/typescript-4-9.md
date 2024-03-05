@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 4.9"
 description: "TypeScript 4.9 Release Notes"
 weight: 3
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-4-9
 ---
 
 # TypeScript 4.9
@@ -239,6 +240,7 @@ Under the covers, these auto-accessors “de-sugar” to a `get` and `set` acces
 
 ```ts
 class Person {
+
 #__name: string;
 
 getname() {

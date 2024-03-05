@@ -155,17 +155,20 @@ Let’s examine why we picked each of these settings:
   ```ts
   export * from "./utils";
   ```
+
   Assuming `./utils.ts` (or `./utils/index.ts`) exists, a bundler would be fine with this code, so `"moduleResolution": "bundler"` doesn’t complain. Compiled with `"module": "esnext"`, the output JavaScript for this export statement will look exactly the same as the input. If that JavaScript were published to npm, it would be usable by projects that use a bundler, but it would cause an error when run in Node.js:
 
   ```
   Error [ERR_MODULE_NOT_FOUND]: Cannot find module '.../node_modules/dependency/utils' imported from .../node_modules/dependency/index.js
   Did you mean to import ./utils.js?
   ```
+
   On the other hand, if we had written:
 
   ```ts
   export * from "./utils.js";
   ```
+
   This would produce output that works both in Node.js *and* in bundlers.
   In short, `"moduleResolution": "bundler"` is infectious, allowing code that only works in bundlers to be produced. Likewise, `"moduleResolution": "nodenext"` is only checking that the output works in Node.js, but in most cases, module code that works in Node.js will work in other runtimes and in bundlers.
 
@@ -180,6 +183,7 @@ Let’s examine why we picked each of these settings:
   foo: string | undefined;
   }
   ```
+
   is only an error under `strictNullChecks`. On the other hand, it’s very difficult to write code that errors only when `strict` is *disabled*, so it’s highly recommended for libraries to compile with `strict`.
 
 - **`verbatimModuleSyntax: true`**. This setting protects against a few module-related pitfalls that can cause problems for library consumers. First, it prevents writing any import statements that could be interpreted ambiguously based on the user’s value of `esModuleInterop` or `allowSyntheticDefaultImports`. Previously, it was often suggested that libraries compile without `esModuleInterop`, since its use in libraries could force users to adopt it too. However, it’s also possible to write imports that only work *without*`esModuleInterop`, so neither value for the setting guarantees portability for libraries. `verbatimModuleSyntax` does provide such a guarantee. Second, it prevents the use of `export default` in modules that will be emitted as CommonJS, which can require bundler users and Node.js ESM users to consume the module differently. See the appendix on [ESM/CJS Interop](/typescript/5.2/modules-reference/appendices/esm-cjs-interop#library-code-needs-special-considerations) for more details.
@@ -196,6 +200,7 @@ If you’re using a bundler to emit your library, then all your (non-externalize
   ```ts
   import { Component } from "./extensionless-relative-import";
   ```
+
   will have its import erased by the JS bundler, but produce a declaration file with an identical import statement. That import statement, however, will contain an invalid module specifier in Node.js, since it’s missing a file extension. For Node.js users, TypeScript will error on the declaration file and infect types referencing `Component` with `any`, assuming the dependency will crash at runtime.
   If your TypeScript bundler does not produce bundled declaration files, use `"moduleResolution": "nodenext"` to ensure that the imports preserved in your declaration files will be compatible with end-users’ TypeScript settings. Even better, consider not bundling your library.
 

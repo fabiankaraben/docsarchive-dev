@@ -4,30 +4,12 @@ title: "TypeScript: Documentation - Type Compatibility"
 description: "How type-checking works in TypeScript"
 weight: 16
 type: docs
+canonical: /typescript/5.2/reference/type-compatibility
 ---
 
 # Type Compatibility
 
-Type compatibility in TypeScript is based on structural subtyping.
-Structural typing is a way of relating types based solely on their members.
-This is in contrast with nominal typing.
-Consider the following code:
-
-```ts
-interface Pet {
-name: string;
-}
-
-classDog {
-name: string;
-}
-
-letpet: Pet;
-// OK, because of structural typing
-pet = newDog();
-```
-
-In nominally-typed languages like C# or Java, the equivalent code would be an error because the `Dog` class does not explicitly describe itself as being an implementer of the `Pet` interface.
+# or Java, the equivalent code would be an error because the `Dog` class does not explicitly describe itself as being an implementer of the `Pet` interface.
 
 TypeScript’s structural type system was designed based on how JavaScript code is typically written.
 Because JavaScript widely uses anonymous objects like function expressions and object literals, it’s much more natural to represent the kinds of relationships found in JavaScript libraries with a structural type system instead of a nominal one.

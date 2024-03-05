@@ -4,15 +4,10 @@ title: "TypeScript: Documentation - Declaration Reference"
 description: "How to create a d.ts file for a module"
 weight: 2
 type: docs
+canonical: /typescript/5.2/declaration-files/by-example
 ---
 
 # Declaration Reference
-
-The purpose of this guide is to teach you how to write a high-quality definition file.
-This guide is structured by showing documentation for some API, along with sample usage of that API,
-and explaining how to write the corresponding declaration.
-
-These examples are ordered in approximately increasing order of complexity.
 
 ## Objects with Properties {#objects-with-properties}
 

@@ -5,6 +5,7 @@ description: "TypeScript 5.1 Release Notes"
 weight: 1
 type: docs
 prev: /typescript/5.1/tutorials/babel-with-typescript
+canonical: /typescript/5.2/whats-new/typescript-5-1
 ---
 
 # TypeScript 5.1
@@ -166,7 +167,9 @@ This also allows other patterns like requiring `set` accessors to accept only â€
 
 ```ts
 class SafeBox {
+
 #value: string | undefined;
+
 // Only accepts strings!
 setvalue(newValue: string) {
     }

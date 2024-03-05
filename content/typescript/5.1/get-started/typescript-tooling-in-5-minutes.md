@@ -5,11 +5,10 @@ description: "A tutorial to understand how to create a small website with TypeSc
 weight: 5
 type: docs
 next: /typescript/5.1/handbook/intro
+canonical: /typescript/5.2/get-started/typescript-tooling-in-5-minutes
 ---
 
 # TypeScript Tooling in 5 minutes
-
-Let’s get started by building a simple web application with TypeScript.
 
 ## Installing TypeScript {#installing-typescript}
 

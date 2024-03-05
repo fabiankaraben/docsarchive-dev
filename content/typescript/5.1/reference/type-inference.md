@@ -4,13 +4,12 @@ title: "TypeScript: Documentation - Type Inference"
 description: "How code flow analysis works in TypeScript"
 weight: 17
 type: docs
+canonical: /typescript/5.2/reference/type-inference
 ---
 
 # Type Inference
 
-In TypeScript, there are several places where type inference is used to provide type information when there is no explicit type annotation. For example, in this code
-
-[Try this code ↗](https://www.typescriptlang.org/play#code/DYUwLgBAHhC8EGYDcAoA9GiEB6B+IA)
+#code/DYUwLgBAHhC8EGYDcAoA9GiEB6B+IA)
 
 ```ts
 let x = 3;

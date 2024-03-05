@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 4.2"
 description: "TypeScript 4.2 Release Notes"
 weight: 10
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-4-2
 ---
 
 # TypeScript 4.2
@@ -263,6 +264,7 @@ abstractgetArea(): number;
 newShape();
 
 classSquareextendsShape {
+
 #sideLength: number;
 
 constructor(sideLength: number) {
@@ -402,10 +404,13 @@ When using this option, the TypeScript compiler will give some very verbose outp
 To read it more easily, you can forward the output to a file, or pipe it to a program that can easily view it.
 
 ```sh
+
 # Forward output to a text file
+
 tsc --explainFiles > explanation.txt
 
 # Pipe output to a utility program like `less`, or an editor like VS Code
+
 tsc --explainFiles | less
 
 tsc --explainFiles | code -

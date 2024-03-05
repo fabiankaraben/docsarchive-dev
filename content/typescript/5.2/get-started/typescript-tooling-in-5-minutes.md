@@ -9,8 +9,6 @@ next: /typescript/5.2/handbook/intro
 
 # TypeScript Tooling in 5 minutes
 
-Let’s get started by building a simple web application with TypeScript.
-
 ## Installing TypeScript {#installing-typescript}
 
 There are two main ways to add TypeScript to your project:

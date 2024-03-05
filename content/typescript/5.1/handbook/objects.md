@@ -4,16 +4,12 @@ title: "TypeScript: Documentation - Object Types"
 description: "How TypeScript describes the shapes of JavaScript objects."
 weight: 6
 type: docs
+canonical: /typescript/5.2/handbook/objects
 ---
 
 # Object Types
 
-In JavaScript, the fundamental way that we group and pass around data is through objects.
-In TypeScript, we represent those through *object types*.
-
-As we’ve seen, they can be anonymous:
-
-[Try this code ↗](https://www.typescriptlang.org/play#code/GYVwdgxgLglg9mABAcwE4FN1QBQAd2oDOCAXIgN6JgCGAtumYVKjGMgNyLXINUi0AjAogC+ASgoAoRIgD0smYqXLlAPXUbNW7TtXTEGKCFRIARAAl0AGytxEpxAGpE+IggB0Neu0kigA)
+#code/GYVwdgxgLglg9mABAcwE4FN1QBQAd2oDOCAXIgN6JgCGAtumYVKjGMgNyLXINUi0AjAogC+ASgoAoRIgD0smYqXLlAPXUbNW7TtXTEGKCFRIARAAl0AGytxEpxAGpE+IggB0Neu0kigA)
 
 ```ts
 function greet(person: { name: string; age: number }) {
@@ -269,6 +265,31 @@ Above, we have a `StringArray` interface which has an index signature.
 This index signature states that when a `StringArray` is indexed with a `number`, it will return a `string`.
 
 Only some types are allowed for index signature properties: `string`, `number`, `symbol`, template string patterns, and union types consisting only of these.
+
+{{% details title="It is possible to support both types of indexers..." closed="true" %}}
+It is possible to support both types of indexers, but the type returned from a numeric indexer must be a subtype of the type returned from the string indexer. This is because when indexing with a `number`, JavaScript will actually convert that to a `string` before indexing into an object. That means that indexing with `100` (a `number`) is the same thing as indexing with `"100"` (a `string`), so the two need to be consistent.
+[Try this code ↗](https://www.typescriptlang.org/play#code/PTAEAEFMCdoe2gZwFygEwBYCMBmAUCBIgC7QCWAxsQArwAOMxAngJIB2ZxZAhgDZkAvblzhtUAMz6JIeMm2IxJFSKACCHALZ9QAbzyhQbbhsioS5NgHMA3HgC+eWfMXdloACJxLoSAA8FbAAmiGqa2noGAEbQkJCBZqRyNvaOhACisAiocoF+SaAA7pwAFqDchgCuJuQUoOb5GmSWxcSglpCtTHAVZaAUcBp0vB2QvEx1kHTc0MIqzAygcOKhZFq8AIROCtBKKgBycMQA8gDW3OMRoADavqhsVZEwALqo6qt8tgY3CRaWLx5eWx2IA)
+
+```ts
+interface Animal {
+name: string;
+}
+
+interfaceDogextendsAnimal {
+breed: string;
+}
+
+// Error: indexing with a numeric string might get you a completely separate type of Animal!
+interfaceNotOkay {
+  [x: number]: Animal;
+  [x: string]: Dog;
+}
+```
+
+```text {filename="Generated error"}
+'number' index type 'Animal' is not assignable to 'string' index type 'Dog'.
+```
+{{% /details %}}
 
 While string index signatures are a powerful way to describe the “dictionary” pattern, they also enforce that all properties match their return type.
 This is because a string index declares that `obj.property` is also available as `obj["property"]`.

@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 1.3"
 description: "TypeScript 1.3 Release Notes"
 weight: 38
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-1-3
 ---
 
 # TypeScript 1.3

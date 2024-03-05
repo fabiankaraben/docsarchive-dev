@@ -5,6 +5,7 @@ description: "Your first step to learn TypeScript"
 weight: 1
 type: docs
 prev: /typescript/5.1/get-started/typescript-tooling-in-5-minutes
+canonical: /typescript/5.2/handbook/intro
 ---
 
 # The TypeScript Handbook

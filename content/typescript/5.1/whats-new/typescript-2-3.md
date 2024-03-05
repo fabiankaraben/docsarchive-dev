@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 2.3"
 description: "TypeScript 2.3 Release Notes"
 weight: 29
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-2-3
 ---
 
 # TypeScript 2.3
@@ -14,7 +15,7 @@ type: docs
 
 ##### Iterators {#iterators}
 
-[ES2015 introduced `Iterator` ↗](http://www.ecma-international.org/ecma-262/6.0/#sec-iteration), which is an object that exposes three methods, `next`, `return`, and `throw`, as per the following interface:
+[ES2015 introduced `Iterator` ↗](https://web.archive.org/web/20230609112410/http://www.ecma-international.org/ecma-262/6.0/#sec-iteration), which is an object that exposes three methods, `next`, `return`, and `throw`, as per the following interface:
 
 ```ts
 interface Iterator<T> {
@@ -31,7 +32,7 @@ The Iterator protocol also defines the target of some of the ES2015 features lik
 
 ##### Generators {#generators}
 
-[ES2015 also introduced “Generators” ↗](http://www.ecma-international.org/ecma-262/6.0/#sec-generatorfunction-objects), which are functions that can be used to yield partial computation results via the `Iterator` interface and the `yield` keyword.
+[ES2015 also introduced “Generators” ↗](https://web.archive.org/web/20230609112410/http://www.ecma-international.org/ecma-262/6.0/#sec-generatorfunction-objects), which are functions that can be used to yield partial computation results via the `Iterator` interface and the `yield` keyword.
 Generators can also internally delegate calls to another iterable through `yield *`. For example:
 
 ```ts

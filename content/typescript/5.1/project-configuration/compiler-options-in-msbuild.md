@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Compiler Options in MSBuild"
 description: "Which compiler options are available in MSBuild projects."
 weight: 2
 type: docs
+canonical: /typescript/5.2/project-configuration/compiler-options-in-msbuild
 ---
 
 # Compiler Options in MSBuild

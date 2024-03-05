@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Integrating with Build Tools"
 description: "How to use TypeScript with other build tools"
 weight: 6
 type: docs
+canonical: /typescript/5.2/project-configuration/integrating-with-build-tools
 ---
 
 # Integrating with Build Tools
@@ -178,7 +179,7 @@ More details about defining MSBuild compiler options: [Setting Compiler Options 
 - Hit `Install`
 - When install is complete, rebuild!
 
-More details can be found at [Package Manager Dialog ↗](http://docs.nuget.org/Consume/Package-Manager-Dialog) and [using nightly builds with NuGet ↗](https://github.com/Microsoft/TypeScript/wiki/Nightly-drops#using-nuget-with-msbuild)
+More details can be found at [Package Manager Dialog ↗](https://web.archive.org/web/20230614143250/http://docs.nuget.org/Consume/Package-Manager-Dialog) and [using nightly builds with NuGet ↗](https://github.com/Microsoft/TypeScript/wiki/Nightly-drops#using-nuget-with-msbuild)
 
 ## Rollup {#rollup}
 

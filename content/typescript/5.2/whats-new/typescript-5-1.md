@@ -165,7 +165,9 @@ This also allows other patterns like requiring `set` accessors to accept only â€
 
 ```ts
 class SafeBox {
+
 #value: string | undefined;
+
 // Only accepts strings!
 setvalue(newValue: string) {
     }

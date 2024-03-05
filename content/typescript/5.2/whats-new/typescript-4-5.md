@@ -299,7 +299,9 @@ You can now write a class with a `#private` field member and see whether another
 
 ```ts
 class Person {
+
 #name: string;
+
 constructor(name: string) {
 this.#name = name;
     }
@@ -307,7 +309,9 @@ this.#name = name;
 equals(other: unknown) {
 returnother &&
 typeofother === "object" &&
+
             #nameinother && // <- this is new!
+
 this.#name === other.#name;
     }
 }

@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 4.7"
 description: "TypeScript 4.7 Release Notes"
 weight: 5
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-4-7
 ---
 
 # TypeScript 4.7

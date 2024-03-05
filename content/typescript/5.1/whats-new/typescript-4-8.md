@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 4.8"
 description: "TypeScript 4.8 Release Notes"
 weight: 4
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-4-8
 ---
 
 # TypeScript 4.8

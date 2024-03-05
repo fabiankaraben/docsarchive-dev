@@ -8,52 +8,6 @@ type: docs
 
 # Symbols
 
-Starting with ECMAScript 2015, `symbol` is a primitive data type, just like `number` and `string`.
-
-`symbol` values are created by calling the `Symbol` constructor.
-
-```ts
-let sym1 = Symbol();
-
-letsym2 = Symbol("key"); // optional string key
-```
-
-Symbols are immutable, and unique.
-
-```ts
-let sym2 = Symbol("key");
-letsym3 = Symbol("key");
-
-sym2 === sym3; // false, symbols are unique
-```
-
-Just like strings, symbols can be used as keys for object properties.
-
-```ts
-const sym = Symbol();
-
-letobj = {
-[sym]:"value",
-};
-
-console.log(obj[sym]); // "value"
-```
-
-Symbols can also be combined with computed property declarations to declare object properties and class members.
-
-```ts
-const getClassNameSymbol = Symbol();
-
-classC {
-  [getClassNameSymbol ↗](https://www.typescriptlang.org) {
-return"C";
-  }
-}
-
-letc = newC();
-letclassName = c[getClassNameSymbol ↗](https://www.typescriptlang.org); // "C"
-```
-
 ## `unique symbol` {#unique-symbol}
 
 To enable treating symbols as unique literals a special type `unique symbol` is available. `unique symbol` is a subtype of `symbol`, and are produced only from calling `Symbol()` or `Symbol.for()`, or from explicit type annotations. This type is only allowed on `const` declarations and `readonly static` properties, and in order to reference a specific unique symbol, you’ll have to use the `typeof` operator. Each reference to a unique symbol implies a completely unique identity that’s tied to a given declaration.

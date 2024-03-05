@@ -4,11 +4,10 @@ title: "TypeScript: Documentation - Configuring Watch"
 description: "How to configure the watch mode of TypeScript"
 weight: 7
 type: docs
+canonical: /typescript/5.2/project-configuration/configuring-watch
 ---
 
 # Configuring Watch
-
-As of TypeScript 3.8 and onward, the Typescript compiler exposes configuration which controls how it watches files and directories. Prior to this version, configuration required the use of environment variables which are still available.
 
 ## Background {#background}
 
@@ -77,4 +76,3 @@ For directory watches on platforms which don’t natively allow recursive direct
 |`RecursiveDirectoryUsingFsWatchFile`|Use `fs.watchFile` to watch included directories and child directories.|
 |`RecursiveDirectoryUsingDynamicPriorityPolling`|Use a dynamic polling queue to poll changes to included directories and child directories.|
 |default (no value specified)|Use `fs.watch` to watch included directories and child directories.|
-

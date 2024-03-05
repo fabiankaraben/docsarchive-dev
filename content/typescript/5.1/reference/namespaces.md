@@ -4,20 +4,10 @@ title: "TypeScript: Documentation - Namespaces"
 description: "How TypeScript namespaces work"
 weight: 12
 type: docs
+canonical: /typescript/5.2/reference/namespaces
 ---
 
 # Namespaces
-
-> **A note about terminology:**
-> It’s important to note that in TypeScript 1.5, the nomenclature has changed.
-> “Internal modules” are now “namespaces”.
-> “External modules” are now simply “modules”, as to align with [ECMAScript 2015 ↗](https://www.ecma-international.org/ecma-262/6.0/)’s terminology, (namely that `module X {` is equivalent to the now-preferred `namespace X {`).
-> 
-
-This post outlines the various ways to organize your code using namespaces (previously “internal modules”) in TypeScript.
-As we alluded in our note about terminology, “internal modules” are now referred to as “namespaces”.
-Additionally, anywhere the `module` keyword was used when declaring an internal module, the `namespace` keyword can and should be used instead.
-This avoids confusing new users by overloading them with similarly named terms.
 
 ## First steps {#first-steps}
 

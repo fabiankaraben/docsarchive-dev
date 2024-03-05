@@ -8,12 +8,6 @@ type: docs
 
 # Declaration Reference
 
-The purpose of this guide is to teach you how to write a high-quality definition file.
-This guide is structured by showing documentation for some API, along with sample usage of that API,
-and explaining how to write the corresponding declaration.
-
-These examples are ordered in approximately increasing order of complexity.
-
 ## Objects with Properties {#objects-with-properties}
 
 *Documentation*

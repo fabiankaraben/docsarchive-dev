@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - TypeScript 4.0"
 description: "TypeScript 4.0 Release Notes"
 weight: 12
 type: docs
+canonical: /typescript/5.2/whats-new/typescript-4-0
 ---
 
 # TypeScript 4.0
@@ -654,7 +655,7 @@ As an example, in the following video, you can see two side-by-side editors with
 When restarting both editors on a particularly large codebase, the one with TypeScript 3.9 can’t provide completions or quick info at all.
 On the other hand, the editor with TypeScript 4.0 can *immediately* give us a rich experience in the current file we’re editing, despite loading the full project in the background.
 
-Currently the only editor that supports this mode is [Visual Studio Code](http://code.visualstudio.com/) which has some UX improvements coming up in [Visual Studio Code Insiders](http://code.visualstudio.com/insiders).
+Currently the only editor that supports this mode is [Visual Studio Code](https://web.archive.org/web/20231025162314/http://code.visualstudio.com/) which has some UX improvements coming up in [Visual Studio Code Insiders](https://web.archive.org/web/20231025162314/http://code.visualstudio.com/insiders).
 We recognize that this experience may still have room for polish in UX and functionality, and we have [a list of improvements](https://github.com/microsoft/TypeScript/issues/39035) in mind.
 We’re looking for more feedback on what you think might be useful.
 

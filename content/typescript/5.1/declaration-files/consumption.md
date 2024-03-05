@@ -5,6 +5,7 @@ description: "How to download d.ts files for your project"
 weight: 8
 type: docs
 next: /typescript/5.1/javascript/intro-to-js-ts
+canonical: /typescript/5.2/declaration-files/consumption
 ---
 
 # Consumption
@@ -46,4 +47,4 @@ but if you need, you can use the [Yarn package search ↗](https://yarnpkg.com/)
 
 > Note: if the declaration file you are searching for is not present, you can always contribute one back and help out the next developer looking for it.
 > Please see the DefinitelyTyped [contribution guidelines page ↗](https://definitelytyped.org/guides/contributing.html) for details.
-> 
+>

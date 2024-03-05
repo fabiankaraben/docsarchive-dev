@@ -4,16 +4,10 @@ title: "TypeScript: Documentation - Triple-Slash Directives"
 description: "How to use triple slash directives in TypeScript"
 weight: 15
 type: docs
+canonical: /typescript/5.2/reference/triple-slash-directives
 ---
 
 # Triple-Slash Directives
-
-Triple-slash directives are single-line comments containing a single XML tag.
-The contents of the comment are used as compiler directives.
-
-Triple-slash directives are **only** valid at the top of their containing file.
-A triple-slash directive can only be preceded by single or multi-line comments, including other triple-slash directives.
-If they are encountered following a statement or a declaration they are treated as regular single-line comments, and hold no special meaning.
 
 ## `/// <reference path="..." />` {#-reference-path-}
 

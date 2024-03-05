@@ -4,13 +4,12 @@ title: "TypeScript: Documentation - Indexed Access Types"
 description: "Using Type['a'] syntax to access a subset of a type."
 weight: 5
 type: docs
+canonical: /typescript/5.2/handbook/type-manipulation/indexed-access-types
 ---
 
 # Indexed Access Types
 
-We can use an *indexed access type* to look up a specific property on another type:
-
-[Try this code ↗](https://www.typescriptlang.org/play#code/C4TwDgpgBAChBOBnA9gOygXigbygQwHMIAuKVAVwFsAjBAbjL0pKkWHgEtUCG8AbDgDcW1ZMj4Q86AL50AUKEhQAgkUywEKVAG0ARIQi6AuvID0pqJYB6AfiA)
+#code/C4TwDgpgBAChBOBnA9gOygXigbygQwHMIAuKVAVwFsAjBAbjL0pKkWHgEtUCG8AbDgDcW1ZMj4Q86AL50AUKEhQAgkUywEKVAG0ARIQi6AuvID0pqJYB6AfiA)
 
 ```ts
 type Person = { age: number; name: string; alive: boolean };

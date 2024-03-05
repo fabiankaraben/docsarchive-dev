@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Iterators and Generators"
 description: "How Iterators and Generators work in TypeScript"
 weight: 6
 type: docs
+canonical: /typescript/5.2/reference/iterators-and-generators
 ---
 
 # Iterators and Generators

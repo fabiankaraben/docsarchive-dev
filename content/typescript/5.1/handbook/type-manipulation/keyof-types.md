@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Keyof Type Operator"
 description: "Using the keyof operator in type contexts."
 weight: 3
 type: docs
+canonical: /typescript/5.2/handbook/type-manipulation/keyof-types
 ---
 
 # Keyof Type Operator

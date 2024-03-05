@@ -8,15 +8,6 @@ type: docs
 
 # Everyday Types
 
-In this chapter, we’ll cover some of the most common types of values you’ll find in JavaScript code, and explain the corresponding ways to describe those types in TypeScript.
-This isn’t an exhaustive list, and future chapters will describe more ways to name and use other types.
-
-Types can also appear in many more *places* than just type annotations.
-As we learn about the types themselves, we’ll also learn about the places where we can refer to these types to form new constructs.
-
-We’ll start by reviewing the most basic and common types you might encounter when writing JavaScript or TypeScript code.
-These will later form the core building blocks of more complex types.
-
 ## The primitives: `string`, `number`, and `boolean` {#the-primitives-string-number-and-boolean}
 
 JavaScript has three very commonly used [primitives ↗](https://developer.mozilla.org/en-US/docs/Glossary/Primitive): `string`, `number`, and `boolean`.
@@ -649,6 +640,7 @@ There are two ways to work around this.
   // Change 2
   handleRequest(req.url, req.methodas"GET");
   ```
+
   Change 1 means “I intend for `req.method` to always have the *literal type*`"GET"`”, preventing the possible assignment of `"GUESS"` to that field after.
   Change 2 means “I know for other reasons that `req.method` has the value `"GET"`“.
 

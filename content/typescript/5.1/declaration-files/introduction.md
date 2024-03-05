@@ -5,19 +5,10 @@ description: "How to write a high-quality TypeScript Declaration (d.ts) file"
 weight: 1
 type: docs
 prev: /typescript/5.1/whats-new/typescript-1-1
+canonical: /typescript/5.2/declaration-files/introduction
 ---
 
 # Introduction
-
-The Declaration Files section is designed to teach you how to write a high-quality TypeScript Declaration File. We need to assume basic familiarity with the TypeScript language in order to get started.
-
-If you haven’t already, you should read the [TypeScript Handbook](/typescript/5.1/handbook/basic-types)
-to familiarize yourself with basic concepts, especially types and modules.
-
-The most common case for learning how .d.ts files work is that you’re typing an npm package with no types.
-In that case, you can jump straight to [Modules .d.ts](/typescript/5.1/declaration-files/d-ts-templates/module-d-ts).
-
-The Declaration Files section is broken down into the following sections.
 
 ## [Declaration Reference](/typescript/5.1/declaration-files/by-example) {#declaration-reference}
 

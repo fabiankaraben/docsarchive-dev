@@ -4,16 +4,10 @@ title: "TypeScript: Documentation - Library Structures"
 description: "How to structure your d.ts files"
 weight: 3
 type: docs
+canonical: /typescript/5.2/declaration-files/library-structures
 ---
 
 # Library Structures
-
-Broadly speaking, the way you *structure* your declaration file depends on how the library is consumed.
-There are many ways of offering a library for consumption in JavaScript, and you’ll need to write your declaration file to match it.
-This guide covers how to identify common library patterns, and how to write declaration files which correspond to that pattern.
-
-Each type of major library structuring pattern has a corresponding file in the [Templates ↗](https://www.typescriptlang.org/docs/handbook/declaration-files/templates.html) section.
-You can start with these templates to help you get going faster.
 
 ## Identifying Kinds of Libraries {#identifying-kinds-of-libraries}
 

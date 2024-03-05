@@ -8,11 +8,6 @@ type: docs
 
 # JSDoc Reference
 
-The list below outlines which constructs are currently supported
-when using JSDoc annotations to provide type information in JavaScript files.
-
-Note any tags which are not explicitly listed below (such as `@async`) are not yet supported.
-
 #### Types {#types}
 
 - [`@type`](/typescript/5.2/javascript/jsdoc-supported-types#type)

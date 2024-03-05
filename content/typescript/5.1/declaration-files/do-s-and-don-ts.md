@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Do's and Don'ts"
 description: "Recommendations for writing d.ts files"
 weight: 5
 type: docs
+canonical: /typescript/5.2/declaration-files/do-s-and-don-ts
 ---
 
 # Do's and Don'ts

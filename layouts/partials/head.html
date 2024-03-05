@@ -17,6 +17,10 @@
     <meta http-equiv="refresh" content="0; url={{ .Params.redirect }}">
   {{ end -}}
 
+  {{ if .Params.canonical -}}
+    <link rel="canonical" href="{{ absURL .Params.canonical }}">
+  {{ end -}}
+
   {{ partial "opengraph.html" . }}
   {{ template "_internal/schema.html" . -}}
   {{ template "_internal/twitter_cards.html" . -}}

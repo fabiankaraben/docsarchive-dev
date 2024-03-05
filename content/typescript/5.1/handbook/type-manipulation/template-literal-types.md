@@ -5,11 +5,12 @@ description: "Generating mapping types which change properties via template lite
 weight: 8
 type: docs
 next: /typescript/5.1/handbook/classes
+canonical: /typescript/5.2/handbook/type-manipulation/template-literal-types
 ---
 
 # Template Literal Types
 
-Template literal types build on [string literal types](/typescript/5.1/handbook/everyday-types#literal-types), and have the ability to expand into many strings via unions.
+#literal-types), and have the ability to expand into many strings via unions.
 
 They have the same syntax as [template literal strings in JavaScript ↗](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), but are used in type positions.
 When used with concrete literal types, a template literal produces a new string literal type by concatenating the contents.
@@ -262,3 +263,18 @@ typeUncomfortableGreeting = Uncapitalize<UppercaseGreeting>;
 
 type UncomfortableGreeting = "hELLO WORLD"
 ```
+
+{{% details title="Technical details on the intrinsic string manipulation types" closed="true" %}}
+The code, as of TypeScript 4.1, for these intrinsic functions uses the JavaScript string runtime functions directly for manipulation and are not locale aware.
+```
+function applyStringMapping(symbol: Symbol, str: string) {
+    switch (intrinsicTypeKinds.get(symbol.escapedName as string)) {
+        case IntrinsicTypeKind.Uppercase: return str.toUpperCase();
+        case IntrinsicTypeKind.Lowercase: return str.toLowerCase();
+        case IntrinsicTypeKind.Capitalize: return str.charAt(0).toUpperCase() + str.slice(1);
+        case IntrinsicTypeKind.Uncapitalize: return str.charAt(0).toLowerCase() + str.slice(1);
+    }
+    return str;
+}
+```
+{{% /details %}}

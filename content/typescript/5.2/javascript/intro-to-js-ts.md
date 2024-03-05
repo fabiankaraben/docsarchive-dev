@@ -9,13 +9,7 @@ prev: /typescript/5.2/declaration-files/consumption
 
 # JS Projects Utilizing TypeScript
 
-The type system in TypeScript has different levels of strictness when working with a codebase:
-
-- A type-system based only on inference with JavaScript code
-- Incremental typing in JavaScript [via JSDoc](/typescript/5.2/javascript/jsdoc-supported-types)
-- Using `// @ts-check` in a JavaScript file
-- TypeScript code
-- TypeScript with [`strict` ↗](https://www.typescriptlang.org/tsconfig.html#strict) enabled
+#strict) enabled
 
 Each step represents a move towards a safer type-system, but not every project needs that level of verification.
 

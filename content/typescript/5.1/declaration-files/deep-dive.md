@@ -4,6 +4,7 @@ title: "TypeScript: Documentation - Deep Dive"
 description: "How do d.ts files work, a deep dive"
 weight: 6
 type: docs
+canonical: /typescript/5.2/declaration-files/deep-dive
 ---
 
 # Deep Dive

@@ -8,11 +8,6 @@ type: docs
 
 # TypeScript for the New Programmer
 
-Congratulations on choosing TypeScript as one of your first languages — you’re already making good decisions!
-
-You’ve probably already heard that TypeScript is a “flavor” or “variant” of JavaScript.
-The relationship between TypeScript (TS) and JavaScript (JS) is rather unique among modern programming languages, so learning more about this relationship will help you understand how TypeScript adds to JavaScript.
-
 ## What is JavaScript? A Brief History {#what-is-javascript-a-brief-history}
 
 JavaScript (also known as ECMAScript) started its life as a simple scripting language for browsers.

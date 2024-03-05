@@ -210,7 +210,7 @@ More details about defining MSBuild compiler options: [Setting Compiler Options 
 - Hit `Install`
 - When install is complete, rebuild!
 
-More details can be found at [Package Manager Dialog ↗](http://docs.nuget.org/Consume/Package-Manager-Dialog) and [using nightly builds with NuGet ↗](https://github.com/Microsoft/TypeScript/wiki/Nightly-drops#using-nuget-with-msbuild)
+More details can be found at [Package Manager Dialog ↗](https://web.archive.org/web/20231127174411/http://docs.nuget.org/Consume/Package-Manager-Dialog) and [using nightly builds with NuGet ↗](https://github.com/Microsoft/TypeScript/wiki/Nightly-drops#using-nuget-with-msbuild)
 
 ## Rollup {#rollup}
 

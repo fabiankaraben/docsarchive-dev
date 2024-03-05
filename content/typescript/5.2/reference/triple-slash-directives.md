@@ -8,13 +8,6 @@ type: docs
 
 # Triple-Slash Directives
 
-Triple-slash directives are single-line comments containing a single XML tag.
-The contents of the comment are used as compiler directives.
-
-Triple-slash directives are **only** valid at the top of their containing file.
-A triple-slash directive can only be preceded by single or multi-line comments, including other triple-slash directives.
-If they are encountered following a statement or a declaration they are treated as regular single-line comments, and hold no special meaning.
-
 ## `/// <reference path="..." />` {#-reference-path-}
 
 The `/// <reference path="..." />` directive is the most common of this group.
